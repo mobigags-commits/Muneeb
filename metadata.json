@@ -1,0 +1,6 @@
+{
+  "name": "Shaheen Al Zaitoon Online Quran Academy",
+  "description": "Enterprise-grade digital Islamic education ecosystem founded by Muneeb Ur Rehman as Sadaqah Jariyah for Zaitoon Bibi, featuring 20+ pages, student/parent/teacher portals, live support desk, EasyPaisa fee payment system, and global branch management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
