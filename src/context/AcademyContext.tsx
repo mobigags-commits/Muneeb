@@ -97,7 +97,27 @@ interface AcademyContextType {
 const AcademyContext = createContext<AcademyContextType | undefined>(undefined);
 
 export const AcademyProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [activePage, setActivePage] = useState<PageId>('home');
+  const [activePage, setActivePageState] = useState<PageId>(() => {
+    if (typeof window !== 'undefined' && window.location.hash) {
+      const hash = window.location.hash.replace('#', '') as PageId;
+      if (hash) return hash;
+    }
+    return 'home';
+  });
+
+  const setActivePage = (page: PageId) => {
+    setActivePageState(page);
+    if (typeof window !== 'undefined') {
+      if (page === 'home') {
+        if (window.location.hash) {
+          history.pushState(null, '', window.location.pathname + window.location.search);
+        }
+      } else {
+        window.location.hash = page;
+      }
+    }
+  };
+
   const [language, setLanguage] = useState<Language>('en');
   const [role, setRole] = useState<UserRole>('guest');
   const [searchQuery, setSearchQuery] = useState<string>('');

@@ -168,6 +168,39 @@ Respond ONLY with valid JSON.`;
     }
   });
 
+  // AI Chat & Marketing Copy Generator Route
+  app.post('/api/ai-chat', async (req, res) => {
+    try {
+      const { message, prompt, language } = req.body;
+      const userPrompt = message || prompt;
+
+      if (!userPrompt) {
+        return res.status(400).json({ error: 'Prompt or message is required' });
+      }
+
+      if (!aiClient) {
+        return res.json({
+          response: `✨ *Shaheen Al Zaitoon Online Quran Academy* ✨\n📖 1-on-1 Quran Nazra, Tajweed & Hifz Classes\n✅ 3-Day Free Trial\n✅ Certified Qaris & Qarias from Rawalpindi\n📲 WhatsApp: 03447956085`,
+        });
+      }
+
+      const response = await aiClient.models.generateContent({
+        model: 'gemini-3.6-flash',
+        contents: userPrompt,
+        config: {
+          systemInstruction: `You are an expert Islamic copywriter and communications advisor for Shaheen Al Zaitoon Online Quran Academy & Ecosystem (Rawalpindi, Pakistan). Provide respectful, engaging, well-formatted Islamic text with WhatsApp contact (03447956085) and EasyPaisa payment info when relevant.`,
+          temperature: 0.7,
+        },
+      });
+
+      res.json({ response: response.text || 'Assalamu Alaikum! Shaheen Al Zaitoon Academy is at your service.' });
+    } catch (error) {
+      res.json({
+        response: `✨ *Shaheen Al Zaitoon Online Quran Academy* ✨\n📖 1-on-1 Quran Nazra, Tajweed & Hifz Classes\n✅ 3-Day Free Trial\n✅ Certified Qaris & Qarias from Rawalpindi\n📲 WhatsApp: 03447956085`,
+      });
+    }
+  });
+
   // Vite Middleware handling frontend app
   if (process.env.NODE_ENV !== 'production') {
     const vite = await createViteServer({
@@ -177,7 +210,17 @@ Respond ONLY with valid JSON.`;
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), 'dist');
-    app.use(express.static(distPath));
+    app.use(
+      express.static(distPath, {
+        maxAge: '1y',
+        etag: true,
+        setHeaders: (res, filePath) => {
+          if (filePath.endsWith('.html')) {
+            res.setHeader('Cache-Control', 'no-cache, must-revalidate');
+          }
+        },
+      })
+    );
     app.get('*', (req, res) => {
       res.sendFile(path.join(distPath, 'index.html'));
     });

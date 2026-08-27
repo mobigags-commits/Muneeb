@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AcademyProvider, useAcademy } from './context/AcademyContext';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { EnrollmentModal } from './components/EnrollmentModal';
 import { AIChatAssistant } from './components/AIChatAssistant';
 import { WhatsAppWidget } from './components/WhatsAppWidget';
+import { updatePageSeo } from './utils/seo';
+import { PageId } from './types';
 
 // Pages
 import { HomePage } from './pages/HomePage';
@@ -35,7 +37,58 @@ import { AdManagerPage } from './pages/AdManagerPage';
 import { CommunityPage } from './pages/CommunityPage';
 
 const AppContent: React.FC = () => {
-  const { activePage } = useAcademy();
+  const { activePage, setActivePage, language } = useAcademy();
+
+  // Dynamic SEO & Title Update
+  useEffect(() => {
+    updatePageSeo(activePage, language);
+    // Smooth scroll to top on page change
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [activePage, language]);
+
+  // Sync hash routing on initial load and popstate
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '') as PageId;
+      if (hash && hash !== activePage) {
+        const validPages: PageId[] = [
+          'home',
+          'about',
+          'courses',
+          'teachers',
+          'student-portal',
+          'parent-portal',
+          'admissions',
+          'fee-payment',
+          'live-classes',
+          'certificates',
+          'gallery',
+          'blog',
+          'testimonials',
+          'faq',
+          'contact',
+          'careers',
+          'privacy',
+          'terms',
+          'donations',
+          'help-support',
+          'admin-portal',
+          'growth-hub',
+          'zaitoon-traders',
+          'marriage-bureau',
+          'ad-manager',
+          'community',
+        ];
+        if (validPages.includes(hash)) {
+          setActivePage(hash);
+        }
+      }
+    };
+
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, [setActivePage]);
 
   const renderPage = () => {
     switch (activePage) {

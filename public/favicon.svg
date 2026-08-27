@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="16" fill="#450a0a" />
+  <circle cx="32" cy="32" r="28" stroke="#f59e0b" stroke-width="2" stroke-dasharray="2 3" opacity="0.6"/>
+  <!-- Open Quran Symbol in Gold -->
+  <path d="M32 46C26 42 18 42 14 44V22C18 20 26 20 32 24C38 20 46 20 50 22V44C46 42 38 42 32 46Z" fill="#fbbf24" stroke="#d97706" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M32 24V46" stroke="#92400e" stroke-width="2" stroke-linecap="round"/>
+  <!-- Islamic Crescent & Star Accent -->
+  <path d="M32 12C30 12 28.5 13.5 28.5 15.5C28.5 17.5 30 19 32 19C31 18.5 30.5 17 30.5 15.5C30.5 14 31 12.5 32 12Z" fill="#fef3c7"/>
+  <circle cx="34.5" cy="15.5" r="1" fill="#fef3c7"/>
+</svg>

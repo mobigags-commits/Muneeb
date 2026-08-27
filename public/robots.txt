@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Shaheen Al Zaitoon Online Quran Academy Sitemap
+Sitemap: https://shaheen-zaitoon.vercel.app/sitemap.xml
