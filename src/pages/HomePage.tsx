@@ -102,7 +102,11 @@ export const HomePage: React.FC = () => {
               </div>
 
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-extrabold tracking-tight text-amber-100 leading-tight">
-                {siteSettings.heroHeadline || 'Shaheen Al Zaitoon Online Quran Academy'}
+                <span className="text-amber-400">Online Quran Academy</span>{' '}
+                <span className="text-white">— Shaheen Al Zaitoon</span>
+                <span className="block text-lg sm:text-2xl lg:text-3xl font-medium text-amber-200/90 mt-3">
+                  {siteSettings.heroHeadline || 'Spreading the Light of Holy Quran Worldwide'}
+                </span>
               </h1>
 
               <p className="text-base sm:text-lg text-red-100/90 leading-relaxed max-w-2xl mx-auto lg:mx-0">

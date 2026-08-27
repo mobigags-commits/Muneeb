@@ -196,7 +196,7 @@ export function updatePageSeo(page: PageId, lang: Language) {
   // Update canonical URL with hash
   let canonicalTag = document.querySelector('link[rel="canonical"]');
   if (canonicalTag) {
-    const url = page === 'home' ? 'https://shaheen-zaitoon.vercel.app/' : `https://shaheen-zaitoon.vercel.app/#${page}`;
+    const url = page === 'home' ? 'https://muneeb-lime.vercel.app/' : `https://muneeb-lime.vercel.app/#${page}`;
     canonicalTag.setAttribute('href', url);
   }
 
