@@ -17,7 +17,25 @@ export const FeePaymentPage: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
 
   const copyToClipboard = (text: string, type: 'ep' | 'iban') => {
-    navigator.clipboard.writeText(text);
+    if (navigator?.clipboard?.writeText) {
+      navigator.clipboard.writeText(text).catch(() => {
+        // Fallback for iframe restrictions
+        const el = document.createElement('textarea');
+        el.value = text;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+      });
+    } else {
+      const el = document.createElement('textarea');
+      el.value = text;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+    }
+
     if (type === 'ep') {
       setCopiedEP(true);
       setTimeout(() => setCopiedEP(false), 3000);
