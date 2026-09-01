@@ -124,13 +124,32 @@ export const AcademyProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   // Local storage persisted state
   const [siteSettings, setSiteSettings] = useState<SiteSettings>(() => {
-    const saved = localStorage.getItem('sz_site_settings');
-    return saved ? JSON.parse(saved) : initialSiteSettings;
+    const saved = localStorage.getItem('sz_site_settings_v2');
+    if (saved) {
+      try {
+        return { ...initialSiteSettings, ...JSON.parse(saved) };
+      } catch (e) {
+        return initialSiteSettings;
+      }
+    }
+    return initialSiteSettings;
   });
 
   const [courses, setCourses] = useState<Course[]>(() => {
-    const saved = localStorage.getItem('sz_courses');
-    return saved ? JSON.parse(saved) : initialCourses;
+    const saved = localStorage.getItem('sz_courses_v2');
+    if (saved) {
+      try {
+        const parsed: Course[] = JSON.parse(saved);
+        // Ensure new pricing and syllabus are present
+        return parsed.map((c) => {
+          const init = initialCourses.find((ic) => ic.id === c.id);
+          return init ? { ...init, ...c, feeUSD: init.feeUSD, feePKR: init.feePKR } : c;
+        });
+      } catch (e) {
+        return initialCourses;
+      }
+    }
+    return initialCourses;
   });
 
   const [teachers, setTeachers] = useState<Teacher[]>(() => {

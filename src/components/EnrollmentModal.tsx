@@ -228,37 +228,31 @@ export const EnrollmentModal: React.FC = () => {
               {/* Fee Payment Method Selection */}
               <div className="pt-2">
                 <label className="block text-xs font-medium text-amber-200 mb-1">
-                  Select Fee Payment Mode
+                  Select Preferred Payment Method
                 </label>
-                <div className="grid grid-cols-2 gap-3">
-                  <button
-                    type="button"
-                    onClick={() => setPaymentMethod('EasyPaisa')}
-                    className={`p-3 rounded-xl border text-xs text-left transition-all ${
-                      paymentMethod === 'EasyPaisa'
-                        ? 'bg-emerald-950 border-emerald-400 text-emerald-300 font-bold'
-                        : 'bg-red-900/50 border-red-800 text-red-200'
-                    }`}
-                  >
-                    <div className="font-bold flex items-center justify-between">
-                      <span>EasyPaisa (Pakistan)</span>
-                      <span className="text-[10px] bg-emerald-500 text-white px-1.5 py-0.5 rounded">03447956085</span>
-                    </div>
-                    <div className="text-[11px] text-red-300 mt-1">Title: {siteSettings.easyPaisaAccountTitle}</div>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setPaymentMethod('Bank Transfer')}
-                    className={`p-3 rounded-xl border text-xs text-left transition-all ${
-                      paymentMethod === 'Bank Transfer'
-                        ? 'bg-amber-950 border-amber-400 text-amber-300 font-bold'
-                        : 'bg-red-900/50 border-red-800 text-red-200'
-                    }`}
-                  >
-                    <div className="font-bold">Meezan Bank / Wire</div>
-                    <div className="text-[11px] text-red-300 mt-1">IBAN / Overseas Transfer</div>
-                  </button>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                  {[
+                    { id: 'EasyPaisa', name: 'EasyPaisa', note: '03447956085' },
+                    { id: 'JazzCash', name: 'JazzCash', note: '03447956085' },
+                    { id: 'Bank Transfer', name: 'Meezan Bank', note: 'IBAN Wire' },
+                    { id: 'SadaPay', name: 'SadaPay', note: '03447956085' },
+                    { id: 'International Wire', name: 'SWIFT (Overseas)', note: 'UK/USA/UAE' },
+                    { id: 'Card / Stripe', name: 'Debit/Credit Card', note: 'Visa/MasterCard' },
+                  ].map((pm) => (
+                    <button
+                      key={pm.id}
+                      type="button"
+                      onClick={() => setPaymentMethod(pm.id as any)}
+                      className={`p-2 rounded-xl border text-left transition-all flex flex-col justify-between ${
+                        paymentMethod === pm.id
+                          ? 'bg-amber-500 border-amber-300 text-red-950 font-extrabold shadow'
+                          : 'bg-red-900/50 border-red-800 text-red-200 hover:bg-red-900'
+                      }`}
+                    >
+                      <span className="font-bold text-xs">{pm.name}</span>
+                      <span className={`text-[10px] ${paymentMethod === pm.id ? 'text-red-950 font-bold' : 'text-amber-300'}`}>{pm.note}</span>
+                    </button>
+                  ))}
                 </div>
               </div>
 

@@ -128,12 +128,27 @@ export interface PaymentReceipt {
   courseTitle: string;
   amountPKR: number;
   amountUSD: number;
-  paymentMethod: 'EasyPaisa' | 'Bank Transfer' | 'Card / Stripe' | 'Other';
+  paymentMethod:
+    | 'EasyPaisa'
+    | 'JazzCash'
+    | 'Meezan Bank'
+    | 'Bank Alfalah'
+    | 'HBL'
+    | 'SadaPay'
+    | 'NayaPay'
+    | 'International Wire'
+    | 'Card / Stripe'
+    | 'Remittance (Western Union/MoneyGram)'
+    | 'Bank Transfer'
+    | 'Other';
   senderAccountOrPhone: string;
   transactionId: string;
   date: string;
   status: 'Approved' | 'Pending Verification' | 'Rejected';
   notes?: string;
+  slipImageUrl?: string;
+  senderBankOrWallet?: string;
+  currency?: 'PKR' | 'USD' | 'GBP' | 'EUR' | 'SAR' | 'AED' | 'CAD' | 'AUD';
 }
 
 export interface AdCampaign {
@@ -252,12 +267,46 @@ export interface SiteSettings {
   contactNumber: string;
   whatsappNumber: string;
   emailAddress: string;
+  
+  // EasyPaisa
   easyPaisaAccountTitle: string;
   easyPaisaAccountNumber: string;
+  
+  // JazzCash
+  jazzCashAccountTitle?: string;
+  jazzCashAccountNumber?: string;
+  
+  // Meezan Bank (Primary)
   bankAccountTitle: string;
   bankAccountNumber: string;
   bankName: string;
   ibanNumber: string;
+  swiftCode?: string;
+  branchName?: string;
+  branchCode?: string;
+  
+  // Bank Alfalah
+  alfalahAccountTitle?: string;
+  alfalahAccountNumber?: string;
+  alfalahIban?: string;
+  
+  // HBL
+  hblAccountTitle?: string;
+  hblAccountNumber?: string;
+  hblIban?: string;
+  
+  // SadaPay & NayaPay
+  sadaPayAccountTitle?: string;
+  sadaPayNumber?: string;
+  sadaPayIban?: string;
+  nayaPayId?: string;
+  nayaPayNumber?: string;
+  
+  // Remittance
+  remittanceReceiverName?: string;
+  remittanceCity?: string;
+  remittanceCountry?: string;
+  
   motherMemorialName: string;
   motherMemorialUrdu: string;
   heroHeadline: string;
