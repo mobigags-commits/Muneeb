@@ -24,7 +24,22 @@ export type PageId =
   | 'zaitoon-traders'
   | 'marriage-bureau'
   | 'ad-manager'
-  | 'community';
+  | 'community'
+  // 2026 Global SEO Master Course & Audience Pages
+  | 'online-quran-classes'
+  | 'noorani-qaida'
+  | 'quran-reading'
+  | 'online-tajweed-classes'
+  | 'online-hifz-quran-classes'
+  | 'quran-translation'
+  | 'quran-tafseer'
+  | 'quran-classes-for-kids'
+  | 'quran-for-beginners'
+  | 'quran-classes-for-adults'
+  | 'quran-classes-for-ladies'
+  | 'online-islamic-studies'
+  | 'quranic-arabic'
+  | 'salah-and-duas';
 
 export type UserRole = 'guest' | 'student' | 'parent' | 'teacher' | 'admin' | 'owner';
 

@@ -35,6 +35,8 @@ import { ZaitoonTradersPage } from './pages/ZaitoonTradersPage';
 import { MarriageBureauPage } from './pages/MarriageBureauPage';
 import { AdManagerPage } from './pages/AdManagerPage';
 import { CommunityPage } from './pages/CommunityPage';
+import { SeoCoursePage } from './pages/SeoCoursePage';
+import { seoCoursesList } from './data/seoCoursesData';
 
 const AppContent: React.FC = () => {
   const { activePage, setActivePage, language } = useAcademy();
@@ -78,6 +80,20 @@ const AppContent: React.FC = () => {
           'marriage-bureau',
           'ad-manager',
           'community',
+          'online-quran-classes',
+          'noorani-qaida',
+          'quran-reading',
+          'online-tajweed-classes',
+          'online-hifz-quran-classes',
+          'quran-translation',
+          'quran-tafseer',
+          'quran-classes-for-kids',
+          'quran-for-beginners',
+          'quran-classes-for-adults',
+          'quran-classes-for-ladies',
+          'online-islamic-studies',
+          'quranic-arabic',
+          'salah-and-duas',
         ];
         if (validPages.includes(hash)) {
           setActivePage(hash);
@@ -91,6 +107,11 @@ const AppContent: React.FC = () => {
   }, [setActivePage]);
 
   const renderPage = () => {
+    // Check if the page is one of the SEO course landing pages
+    if (seoCoursesList[activePage]) {
+      return <SeoCoursePage courseData={seoCoursesList[activePage]} />;
+    }
+
     switch (activePage) {
       case 'home':
         return <HomePage />;

@@ -34,13 +34,30 @@ export const Footer: React.FC = () => {
     }
   };
 
+  const quranCourseLinks: { id: PageId; label: string }[] = [
+    { id: 'online-quran-classes', label: 'Online Quran Classes' },
+    { id: 'noorani-qaida', label: 'Learn Noorani Qaida Online' },
+    { id: 'quran-reading', label: 'Learn Quran Reading (Nazra)' },
+    { id: 'online-tajweed-classes', label: 'Online Tajweed Classes' },
+    { id: 'online-hifz-quran-classes', label: 'Online Hifz Quran Classes' },
+    { id: 'quran-classes-for-kids', label: 'Quran Classes for Kids' },
+    { id: 'quran-classes-for-ladies', label: 'Quran Classes for Ladies' },
+    { id: 'quran-for-beginners', label: 'Quran for Beginners' },
+    { id: 'quran-classes-for-adults', label: 'Quran Classes for Adults' },
+    { id: 'quran-translation', label: 'Quran Translation Course' },
+    { id: 'quran-tafseer', label: 'Quran Tafseer Course' },
+    { id: 'online-islamic-studies', label: 'Online Islamic Studies' },
+    { id: 'quranic-arabic', label: 'Quranic Arabic Classes' },
+    { id: 'salah-and-duas', label: 'Salah & Daily Duas Course' },
+  ];
+
   const quickLinks: { id: PageId; label: string }[] = [
     { id: 'home', label: 'Home Page' },
     { id: 'about', label: 'About Us & Mission' },
-    { id: 'courses', label: 'All Quran Courses' },
-    { id: 'teachers', label: 'Certified Qaris' },
-    { id: 'admissions', label: 'Online Admissions' },
-    { id: 'fee-payment', label: 'Fee & EasyPaisa' },
+    { id: 'courses', label: 'All Courses Catalog' },
+    { id: 'teachers', label: 'Certified Qaris & Qarias' },
+    { id: 'admissions', label: 'Online Admissions & Trial' },
+    { id: 'fee-payment', label: 'Fee & EasyPaisa (03447956085)' },
     { id: 'live-classes', label: 'Live Virtual Classroom' },
     { id: 'certificates', label: 'Certificate Verification' },
   ];
@@ -48,12 +65,12 @@ export const Footer: React.FC = () => {
   const secondaryLinks: { id: PageId; label: string }[] = [
     { id: 'student-portal', label: 'Student Portal' },
     { id: 'parent-portal', label: 'Parent Portal' },
-    { id: 'gallery', label: 'Photo & Video Gallery' },
-    { id: 'blog', label: 'Islamic Articles & Tips' },
+    { id: 'zaitoon-traders', label: 'Zaitoon Traders Store' },
+    { id: 'marriage-bureau', label: 'Marriage Bureau' },
+    { id: 'growth-hub', label: 'Growth Hub & Referral' },
+    { id: 'blog', label: 'Islamic Articles & Blog' },
     { id: 'faq', label: 'Frequently Asked Questions' },
-    { id: 'careers', label: 'Teacher Careers' },
-    { id: 'donations', label: 'Sadaqah & Donations' },
-    { id: 'help-support', label: 'Help & Support Desk' },
+    { id: 'contact', label: 'Contact Us (Rawalpindi HQ)' },
   ];
 
   return (
@@ -131,10 +148,10 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* 4-Column Footer Navigation */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* 5-Column / Responsive Footer Navigation */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 border-b border-red-800 pb-10">
           {/* Column 1: Academy Overview & Memorial */}
-          <div className="space-y-4">
+          <div className="lg:col-span-4 space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-amber-500 text-red-950 flex items-center justify-center font-bold">
                 <BookOpen className="w-6 h-6" />
@@ -144,7 +161,7 @@ export const Footer: React.FC = () => {
               </span>
             </div>
             <p className="text-xs text-red-200/90 leading-relaxed">
-              A world-class digital Islamic education ecosystem spreading Tajweed, Hifz, and Quran comprehension globally.
+              A premier global online Quran learning academy providing 1-on-1 personalized Tajweed, Hifz, and Quran comprehension classes for students across USA, UK, Canada, Australia, UAE, Pakistan, and worldwide.
             </p>
             <div className="p-3 rounded-xl bg-red-900/60 border border-amber-500/30 text-xs space-y-1">
               <div className="text-amber-300 font-bold flex items-center gap-1">
@@ -157,40 +174,60 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Column 2: Quick Links */}
-          <div className="space-y-3">
+          {/* Column 2: Quran Programs (SEO Links) */}
+          <div className="lg:col-span-3 space-y-3">
             <h4 className="text-sm font-bold text-amber-300 uppercase tracking-wider font-serif border-b border-red-800 pb-2">
-              Main Navigation
+              Quran Programs & Tracks
             </h4>
             <ul className="space-y-1.5 text-xs">
-              {quickLinks.map((item) => (
+              {quranCourseLinks.slice(0, 7).map((item) => (
                 <li key={item.id}>
                   <button
                     onClick={() => setActivePage(item.id)}
                     className="hover:text-amber-300 transition-colors flex items-center gap-1.5 text-red-200"
                   >
-                    <ArrowRight className="w-3 h-3 text-amber-400" />
-                    <span>{item.label}</span>
+                    <ArrowRight className="w-3 h-3 text-amber-400 shrink-0" />
+                    <span className="truncate">{item.label}</span>
                   </button>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Column 3: Secondary Links & Legal */}
-          <div className="space-y-3">
+          {/* Column 3: Advanced & Audience Tracks */}
+          <div className="lg:col-span-3 space-y-3">
             <h4 className="text-sm font-bold text-amber-300 uppercase tracking-wider font-serif border-b border-red-800 pb-2">
-              Portals & Legal
+              Specialized Courses
             </h4>
             <ul className="space-y-1.5 text-xs">
-              {secondaryLinks.map((item) => (
+              {quranCourseLinks.slice(7).map((item) => (
                 <li key={item.id}>
                   <button
                     onClick={() => setActivePage(item.id)}
                     className="hover:text-amber-300 transition-colors flex items-center gap-1.5 text-red-200"
                   >
-                    <ArrowRight className="w-3 h-3 text-amber-400" />
-                    <span>{item.label}</span>
+                    <ArrowRight className="w-3 h-3 text-amber-400 shrink-0" />
+                    <span className="truncate">{item.label}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 4: Quick Links & Legal */}
+          <div className="lg:col-span-2 space-y-3">
+            <h4 className="text-sm font-bold text-amber-300 uppercase tracking-wider font-serif border-b border-red-800 pb-2">
+              Quick Links
+            </h4>
+            <ul className="space-y-1.5 text-xs">
+              {quickLinks.slice(0, 5).map((item) => (
+                <li key={item.id}>
+                  <button
+                    onClick={() => setActivePage(item.id)}
+                    className="hover:text-amber-300 transition-colors flex items-center gap-1.5 text-red-200"
+                  >
+                    <ArrowRight className="w-3 h-3 text-amber-400 shrink-0" />
+                    <span className="truncate">{item.label}</span>
                   </button>
                 </li>
               ))}
@@ -199,7 +236,7 @@ export const Footer: React.FC = () => {
                   onClick={() => setActivePage('privacy')}
                   className="hover:text-amber-300 transition-colors flex items-center gap-1.5 text-red-200"
                 >
-                  <ArrowRight className="w-3 h-3 text-amber-400" />
+                  <ArrowRight className="w-3 h-3 text-amber-400 shrink-0" />
                   <span>Privacy Policy</span>
                 </button>
               </li>
@@ -208,21 +245,23 @@ export const Footer: React.FC = () => {
                   onClick={() => setActivePage('terms')}
                   className="hover:text-amber-300 transition-colors flex items-center gap-1.5 text-red-200"
                 >
-                  <ArrowRight className="w-3 h-3 text-amber-400" />
-                  <span>Terms & Conditions</span>
+                  <ArrowRight className="w-3 h-3 text-amber-400 shrink-0" />
+                  <span>Terms of Service</span>
                 </button>
               </li>
             </ul>
           </div>
 
-          {/* Column 4: Newsletter & Direct Contact */}
-          <div className="space-y-4">
-            <h4 className="text-sm font-bold text-amber-300 uppercase tracking-wider font-serif border-b border-red-800 pb-2">
-              Stay Connected
-            </h4>
-            <p className="text-xs text-red-200">
-              Subscribe for weekly Quranic insights, Tajweed lessons, and academy updates.
-            </p>
+          {/* Column 5: Stay Connected & Official Socials */}
+          <div className="lg:col-span-12 xl:col-span-12 pt-6 border-t border-red-800/80 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-center">
+            <div>
+              <h4 className="text-sm font-bold text-amber-300 uppercase tracking-wider font-serif mb-1">
+                Stay Connected & Updates
+              </h4>
+              <p className="text-xs text-red-200">
+                Subscribe for weekly Quranic insights, Tajweed lessons, and academy updates.
+              </p>
+            </div>
 
             <form onSubmit={handleSubscribe} className="space-y-2">
               <div className="relative">
@@ -249,19 +288,8 @@ export const Footer: React.FC = () => {
               )}
             </form>
 
-            <div className="pt-2 text-xs space-y-2 text-red-200">
-              <div className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                <span>{siteSettings.headOfficeAddress}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span>Call/WhatsApp: {siteSettings.contactNumber}</span>
-              </div>
-            </div>
-
             {/* Prominent Facebook Group CTA Card in Footer */}
-            <div className="bg-slate-900 border-2 border-[#1877F2]/60 rounded-xl p-3.5 text-left space-y-2 shadow-lg">
+            <div className="bg-slate-900 border-2 border-[#1877F2]/60 rounded-xl p-3 text-left space-y-1.5 shadow-lg">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-1.5 text-xs text-[#1877F2] font-extrabold">
                   <Facebook className="w-4 h-4 fill-[#1877F2] text-white" />
@@ -271,14 +299,11 @@ export const Footer: React.FC = () => {
                   92.4k+
                 </span>
               </div>
-              <p className="text-[11px] text-slate-300 line-clamp-2">
-                Join our Facebook group for daily Quran lessons & Qari Q&A.
-              </p>
               <a
                 href={siteSettings.facebookGroupUrl || 'https://www.facebook.com/groups/REPLACE_WITH_MY_GROUP_LINK'}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full bg-[#1877F2] hover:bg-[#166fe5] text-white font-bold text-[11px] py-2 px-3 rounded-lg flex items-center justify-center gap-1.5 transition-transform hover:scale-102 shadow-md"
+                className="w-full bg-[#1877F2] hover:bg-[#166fe5] text-white font-bold text-[11px] py-1.5 px-3 rounded-lg flex items-center justify-center gap-1.5 transition-transform hover:scale-102 shadow-md"
                 id="footer-join-fb-btn"
               >
                 <Facebook className="w-3.5 h-3.5 fill-white" />

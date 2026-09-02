@@ -6,6 +6,76 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://muneeb-lime.vercel.app/#online-quran-classes</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://muneeb-lime.vercel.app/#noorani-qaida</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://muneeb-lime.vercel.app/#quran-reading</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://muneeb-lime.vercel.app/#online-tajweed-classes</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://muneeb-lime.vercel.app/#online-hifz-quran-classes</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://muneeb-lime.vercel.app/#quran-classes-for-kids</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://muneeb-lime.vercel.app/#quran-classes-for-ladies</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://muneeb-lime.vercel.app/#quran-for-beginners</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://muneeb-lime.vercel.app/#quran-classes-for-adults</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://muneeb-lime.vercel.app/#quran-translation</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://muneeb-lime.vercel.app/#quran-tafseer</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://muneeb-lime.vercel.app/#online-islamic-studies</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://muneeb-lime.vercel.app/#quranic-arabic</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://muneeb-lime.vercel.app/#salah-and-duas</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://muneeb-lime.vercel.app/#courses</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
