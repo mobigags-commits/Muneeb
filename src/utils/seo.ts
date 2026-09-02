@@ -1,4 +1,5 @@
 import { PageId, Language } from '../types';
+import { seoCoursesList } from '../data/seoCoursesData';
 
 interface PageMetadata {
   titleEn: string;
@@ -288,7 +289,7 @@ export function updatePageSeo(page: PageId, lang: Language) {
   document.documentElement.lang = lang;
   document.documentElement.dir = lang === 'ur' || lang === 'ar' ? 'rtl' : 'ltr';
 
-  // Inject or update Page-Specific Schema.org JSON-LD
+  // Inject or update Page-Specific Schema.org JSON-LD Graph
   let dynamicScript = document.getElementById('dynamic-page-schema');
   if (!dynamicScript) {
     dynamicScript = document.createElement('script');
@@ -297,24 +298,107 @@ export function updatePageSeo(page: PageId, lang: Language) {
     document.head.appendChild(dynamicScript);
   }
 
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: 'https://muneeb-lime.vercel.app/',
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: title,
-        item: page === 'home' ? 'https://muneeb-lime.vercel.app/' : `https://muneeb-lime.vercel.app/#${page}`,
-      },
-    ],
-  };
+  const currentUrl = page === 'home' ? 'https://muneeb-lime.vercel.app/' : `https://muneeb-lime.vercel.app/#${page}`;
 
-  dynamicScript.textContent = JSON.stringify(breadcrumbSchema);
+  const schemaGraph: any[] = [
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${currentUrl}#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://muneeb-lime.vercel.app/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: title,
+          item: currentUrl,
+        },
+      ],
+    },
+  ];
+
+  // If this is a specialized SEO course page, attach Course & FAQPage schemas
+  const courseData = seoCoursesList[page];
+  if (courseData) {
+    schemaGraph.push({
+      '@type': 'Course',
+      '@id': `${currentUrl}#course`,
+      name: courseData.h1,
+      description: courseData.shortIntro,
+      provider: {
+        '@type': 'EducationalOrganization',
+        name: 'Shaheen Al Zaitoon Online Quran Academy',
+        url: 'https://muneeb-lime.vercel.app/',
+      },
+      offers: {
+        '@type': 'Offer',
+        price: courseData.feePKR.toString(),
+        priceCurrency: 'PKR',
+        category: 'Monthly Quran Tuition',
+        availability: 'https://schema.org/InStock',
+        validFrom: '2026-01-01',
+      },
+      hasCourseInstance: {
+        '@type': 'CourseInstance',
+        courseMode: 'Online',
+        courseWorkload: `${courseData.classFormat.duration}, ${courseData.classFormat.frequency}`,
+        inLanguage: ['en', 'ur', 'ar'],
+      },
+    });
+
+    if (courseData.faqs && courseData.faqs.length > 0) {
+      schemaGraph.push({
+        '@type': 'FAQPage',
+        '@id': `${currentUrl}#faq`,
+        mainEntity: courseData.faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: f.answer,
+          },
+        })),
+      });
+    }
+  } else if (page === 'contact') {
+    schemaGraph.push({
+      '@type': 'ContactPage',
+      '@id': `${currentUrl}#contactpage`,
+      name: title,
+      description: description,
+      mainEntity: {
+        '@type': 'LocalBusiness',
+        name: 'Shaheen Al Zaitoon Online Quran Academy HQ',
+        telephone: '+92-344-7956085',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Rawalpindi',
+          addressRegion: 'Punjab',
+          addressCountry: 'PK',
+        },
+      },
+    });
+  } else if (page === 'about') {
+    schemaGraph.push({
+      '@type': 'AboutPage',
+      '@id': `${currentUrl}#aboutpage`,
+      name: title,
+      description: description,
+      mainEntity: {
+        '@type': 'Person',
+        name: 'Muneeb Ur Rehman',
+        jobTitle: 'Founder',
+        description: 'Founder of Shaheen Al Zaitoon Online Quran Academy, dedicated as Sadaqah Jariyah for Zaitoon Bibi.',
+      },
+    });
+  }
+
+  dynamicScript.textContent = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': schemaGraph,
+  });
 }

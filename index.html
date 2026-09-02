@@ -49,84 +49,232 @@
     <meta name="geo.position" content="33.5651;73.0169" />
     <meta name="ICBM" content="33.5651, 73.0169" />
 
-    <!-- Schema.org JSON-LD Structured Data -->
+    <!-- Schema.org JSON-LD Structured Data: Multi-Schema Graph (EducationalOrganization, LocalBusiness, WebSite, FAQPage) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "EducationalOrganization",
-        "name": "Shaheen Al Zaitoon Online Quran Academy",
-        "alternateName": "شاہین الزیتون آن لائن قرآن اکیڈمی",
-        "url": "https://muneeb-lime.vercel.app/",
-        "logo": "https://muneeb-lime.vercel.app/favicon.svg",
-        "description": "Global Online Quran Academy founded by Muneeb Ur Rehman in Rawalpindi, Pakistan as Sadaqah Jariyah for Zaitoon Bibi. Providing 1-on-1 Tajweed, Noorani Qaida, Hifz, and Islamic courses worldwide.",
-        "founder": {
-          "@type": "Person",
-          "name": "Muneeb Ur Rehman"
-        },
-        "telephone": "+92-344-7956085",
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "telephone": "+92-344-7956085",
-          "contactType": "customer service",
-          "areaServed": ["PK", "GB", "AE", "US", "CA", "SA"],
-          "availableLanguage": ["English", "Urdu", "Arabic"]
-        },
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Rawalpindi",
-          "addressRegion": "Punjab",
-          "addressCountry": "PK"
-        },
-        "priceRange": "$$",
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "Quran & Islamic Courses",
-          "itemListElement": [
-            {
-              "@type": "Course",
-              "name": "Noorani Qaida & Tajweed Foundations",
-              "description": "Foundational course for children & beginners to read Arabic letters with authentic pronunciation (Makharij)."
-            },
-            {
-              "@type": "Course",
-              "name": "Nazra Quran with Advanced Tajweed Rules",
-              "description": "Complete recitation of Holy Quran with Ghunnah, Ikhfa, Idgham, and Qalqalah rules."
-            },
-            {
-              "@type": "Course",
-              "name": "Hifz-ul-Quran (Memorization Program)",
-              "description": "Structured daily memorization and revision with certified Huffaz teachers."
-            },
-            {
-              "@type": "Course",
-              "name": "Ladies Special Quran & Islamic Studies",
-              "description": "Exclusive 1-on-1 private online sessions taught by certified female Qaria teachers."
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://muneeb-lime.vercel.app/#website",
+            "url": "https://muneeb-lime.vercel.app/",
+            "name": "Shaheen Al Zaitoon Online Quran Academy",
+            "alternateName": ["شاهین الزیتون آن لائن قرآن اکیڈمی", "Shaheen Quran Academy", "Zaitoon Quran Academy"],
+            "description": "Global Online Quran Academy offering 1-on-1 live classes for kids, ladies, and adults worldwide with certified Qaris and Tajweed teachers.",
+            "inLanguage": ["en-US", "ur-PK", "ar-SA"],
+            "publisher": {
+              "@id": "https://muneeb-lime.vercel.app/#organization"
             }
-          ]
-        }
+          },
+          {
+            "@type": ["EducationalOrganization", "LocalBusiness"],
+            "@id": "https://muneeb-lime.vercel.app/#organization",
+            "name": "Shaheen Al Zaitoon Online Quran Academy",
+            "alternateName": "شاهین الزیتون آن لائن قرآن اکیڈمی",
+            "url": "https://muneeb-lime.vercel.app/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://muneeb-lime.vercel.app/favicon.svg",
+              "width": "512",
+              "height": "512"
+            },
+            "image": "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=1200&h=630&q=80",
+            "description": "Premier global online Quran academy founded by Muneeb Ur Rehman in Rawalpindi, Pakistan as Sadaqah Jariyah for Zaitoon Bibi. Providing 1-on-1 personalized Tajweed, Noorani Qaida, Hifz, and Islamic studies with flexible timings worldwide.",
+            "founder": {
+              "@type": "Person",
+              "name": "Muneeb Ur Rehman",
+              "jobTitle": "Founder & Executive Director",
+              "telephone": "+92-344-7956085"
+            },
+            "telephone": "+92-344-7956085",
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "telephone": "+92-344-7956085",
+                "contactType": "admissions & customer support",
+                "areaServed": ["PK", "GB", "US", "CA", "AE", "SA", "AU", "DE"],
+                "availableLanguage": ["English", "Urdu", "Arabic"],
+                "contactOption": "HearingImpairedSupported"
+              }
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Head Office, Rawalpindi",
+              "addressLocality": "Rawalpindi",
+              "addressRegion": "Punjab",
+              "postalCode": "46000",
+              "addressCountry": "PK"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 33.5651,
+              "longitude": 73.0169
+            },
+            "openingHoursSpecification": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+              "opens": "00:00",
+              "closes": "23:59"
+            },
+            "priceRange": "$$",
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Quran & Islamic Educational Programs",
+              "itemListElement": [
+                {
+                  "@type": "Course",
+                  "name": "Learn Noorani Qaida Online",
+                  "description": "Foundational course for children & beginners to master Arabic alphabet and Makharij with correct Tajweed.",
+                  "provider": { "@id": "https://muneeb-lime.vercel.app/#organization" },
+                  "url": "https://muneeb-lime.vercel.app/#noorani-qaida"
+                },
+                {
+                  "@type": "Course",
+                  "name": "Online Quran Reading (Nazra) Course",
+                  "description": "Learn fluent Nazra recitation of the complete Holy Quran with authentic Tajweed rules and certified Qaris.",
+                  "provider": { "@id": "https://muneeb-lime.vercel.app/#organization" },
+                  "url": "https://muneeb-lime.vercel.app/#quran-reading"
+                },
+                {
+                  "@type": "Course",
+                  "name": "Online Quran Classes with Tajweed",
+                  "description": "Master Makharij, Sifaat, and advanced Tajweed rules with 1-on-1 practical recitation exercises.",
+                  "provider": { "@id": "https://muneeb-lime.vercel.app/#organization" },
+                  "url": "https://muneeb-lime.vercel.app/#online-tajweed-classes"
+                },
+                {
+                  "@type": "Course",
+                  "name": "Online Hifz Quran Classes & Memorization",
+                  "description": "Systematic 1-on-1 memorization program with daily Sabaq, Sabaqi, and Manzil revision guided by certified Huffaz.",
+                  "provider": { "@id": "https://muneeb-lime.vercel.app/#organization" },
+                  "url": "https://muneeb-lime.vercel.app/#online-hifz-quran-classes"
+                },
+                {
+                  "@type": "Course",
+                  "name": "Online Quran Classes for Kids",
+                  "description": "Child-friendly 1-on-1 lessons designed for children with patient certified tutors, interactive games, and daily Duas.",
+                  "provider": { "@id": "https://muneeb-lime.vercel.app/#organization" },
+                  "url": "https://muneeb-lime.vercel.app/#quran-classes-for-kids"
+                },
+                {
+                  "@type": "Course",
+                  "name": "Online Quran Classes for Ladies",
+                  "description": "Private, comfortable 1-on-1 online classes taught exclusively by certified female Qarias and Alimahs.",
+                  "provider": { "@id": "https://muneeb-lime.vercel.app/#organization" },
+                  "url": "https://muneeb-lime.vercel.app/#quran-classes-for-ladies"
+                }
+              ]
+            }
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://muneeb-lime.vercel.app/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How does the 3-day free trial Quran class work?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "You can register for a 3-day free trial with zero upfront payment or credit card required. A certified teacher is assigned based on your schedule, allowing you or your child to experience our 1-on-1 personalized teaching before deciding to enroll."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Are female Quran teachers available for sisters and young girls?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, Shaheen Al Zaitoon Academy has certified female Qarias and Alimahs dedicated exclusively to teaching sisters, adult ladies, and young children in a completely private and respectful environment."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How can I pay my monthly fees via EasyPaisa or bank transfer?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Students in Pakistan can pay directly via EasyPaisa to account number 03447956085 (Account Title: Muneeb Ur Rehman). International students can pay via bank transfer, Western Union, or remittance channels."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What time zones do you cater to for international students?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Our teachers operate 24 hours a day, 7 days a week, offering flexible schedules matching students in the United States, United Kingdom, Canada, Australia, UAE, Saudi Arabia, Europe, and Pakistan."
+                }
+              }
+            ]
+          }
+        ]
       }
     </script>
   </head>
   <body>
     <div id="root">
-      <!-- Accessible Search Engine Crawlable Content (Hydrated by React on load) -->
+      <!-- Search Engine Crawlable Content (Indexed by Web Spiders before JS Hydration) -->
       <noscript>
         <header>
           <h1>Shaheen Al Zaitoon Online Quran Academy</h1>
-          <p>Learn Quran online with certified Tajweed teachers. 3-Day Free Trial. Founded by Muneeb Ur Rehman in Rawalpindi, Pakistan in loving memory of Zaitoon Bibi.</p>
+          <p>Global Online Quran Learning Center with 1-on-1 Live Classes for Kids, Adults &amp; Ladies. Founded by Muneeb Ur Rehman in Rawalpindi, Pakistan in loving memory of Zaitoon Bibi (Sadaqah Jariyah).</p>
+          <nav aria-label="Main Navigation">
+            <ul>
+              <li><a href="https://muneeb-lime.vercel.app/">Home</a></li>
+              <li><a href="https://muneeb-lime.vercel.app/#online-quran-classes">Online Quran Classes</a></li>
+              <li><a href="https://muneeb-lime.vercel.app/#noorani-qaida">Learn Noorani Qaida Online</a></li>
+              <li><a href="https://muneeb-lime.vercel.app/#quran-reading">Learn Quran Reading (Nazra)</a></li>
+              <li><a href="https://muneeb-lime.vercel.app/#online-tajweed-classes">Online Tajweed Classes</a></li>
+              <li><a href="https://muneeb-lime.vercel.app/#online-hifz-quran-classes">Online Hifz Quran Classes</a></li>
+              <li><a href="https://muneeb-lime.vercel.app/#quran-classes-for-kids">Quran Classes for Kids</a></li>
+              <li><a href="https://muneeb-lime.vercel.app/#quran-classes-for-ladies">Quran Classes for Ladies</a></li>
+              <li><a href="https://muneeb-lime.vercel.app/#quran-for-beginners">Quran for Beginners</a></li>
+              <li><a href="https://muneeb-lime.vercel.app/#quran-classes-for-adults">Quran Classes for Adults</a></li>
+              <li><a href="https://muneeb-lime.vercel.app/#quran-translation">Quran Translation Course</a></li>
+              <li><a href="https://muneeb-lime.vercel.app/#quran-tafseer">Quran Tafseer Course</a></li>
+              <li><a href="https://muneeb-lime.vercel.app/#online-islamic-studies">Online Islamic Studies</a></li>
+              <li><a href="https://muneeb-lime.vercel.app/#quranic-arabic">Quranic Arabic Classes</a></li>
+              <li><a href="https://muneeb-lime.vercel.app/#salah-and-duas">Salah &amp; Daily Duas Course</a></li>
+              <li><a href="https://muneeb-lime.vercel.app/#courses">All Courses Catalog</a></li>
+              <li><a href="https://muneeb-lime.vercel.app/#admissions">Online Admissions &amp; 3-Day Free Trial</a></li>
+              <li><a href="https://muneeb-lime.vercel.app/#fee-payment">Fee &amp; EasyPaisa (03447956085)</a></li>
+              <li><a href="https://muneeb-lime.vercel.app/#teachers">Certified Qaris &amp; Faculty</a></li>
+              <li><a href="https://muneeb-lime.vercel.app/#about">About Academy &amp; Founder</a></li>
+              <li><a href="https://muneeb-lime.vercel.app/#faq">Frequently Asked Questions</a></li>
+              <li><a href="https://muneeb-lime.vercel.app/#contact">Contact Rawalpindi Head Office</a></li>
+            </ul>
+          </nav>
         </header>
+
         <main>
-          <h2>Our Core Quranic Programs</h2>
-          <ul>
-            <li><strong>Noorani Qaida &amp; Tajweed Foundations</strong>: Arabic alphabet, pronunciation, Makharij for kids and beginners.</li>
-            <li><strong>Nazra Quran with Tajweed</strong>: Complete Quran recitation with authentic Tajweed rules.</li>
-            <li><strong>Hifz-ul-Quran (Memorization)</strong>: Systematic memorization with certified Huffaz.</li>
-            <li><strong>Tafseer &amp; Translation</strong>: Understanding Quranic meanings in Urdu and English.</li>
-            <li><strong>Ladies Special Quran Classes</strong>: 1-on-1 private classes with female Qaria teachers.</li>
-          </ul>
-          <h2>Contact &amp; Admissions</h2>
-          <p>Head Office: Rawalpindi, Pakistan | WhatsApp: 03447956085 | EasyPaisa: 03447956085 (Muneeb Ur Rehman)</p>
+          <article>
+            <h2>Why Choose Shaheen Al Zaitoon Quran Academy?</h2>
+            <p>Shaheen Al Zaitoon Online Quran Academy provides personalized, 1-on-1 virtual Quran education to Muslim families across the United States, United Kingdom, Canada, Australia, UAE, Saudi Arabia, Europe, and Pakistan. Our experienced male and female tutors are certified in Tajweed and Qira’at, offering patient guidance tailored to each student's pace.</p>
+            
+            <section>
+              <h3>Core Quranic Learning Programs</h3>
+              <ul>
+                <li><strong>Noorani Qaida for Kids &amp; Beginners</strong>: Master Arabic alphabets, basic Makharij, and introductory phonetics.</li>
+                <li><strong>Nazra Quran with Tajweed</strong>: Complete recitation of the 30 Paras with Ghunnah, Ikhfa, Idgham, and Qalqalah rules.</li>
+                <li><strong>Hifz-ul-Quran (Memorization Program)</strong>: Rigorous daily Sabaq, Sabaqi, and Manzil revisions with certified Huffaz.</li>
+                <li><strong>Quran Classes for Ladies</strong>: 100% private virtual sessions taught exclusively by certified female Qarias.</li>
+                <li><strong>Quran Translation &amp; Tafseer</strong>: Deepen spiritual understanding through word-by-word and contextual translation in English and Urdu.</li>
+                <li><strong>Islamic Studies &amp; Daily Duas</strong>: Essential beliefs (Aqeedah), Salah method, Wudu, 40 Masnoon Duas, and Sunnah manners.</li>
+              </ul>
+            </section>
+
+            <section>
+              <h3>Fee Payment &amp; Free Trial</h3>
+              <p>We believe sacred Quranic education should be accessible to all. Every new student is welcome to a <strong>3-Day Free Trial Class</strong> with no obligation. Monthly tuition can be paid via <strong>EasyPaisa to 03447956085 (Muneeb Ur Rehman)</strong> or via international bank wire.</p>
+            </section>
+
+            <section>
+              <h3>Head Office &amp; Contact Details</h3>
+              <p>Headquarters: Rawalpindi, Punjab, Pakistan | Telephone/WhatsApp: +92-344-7956085 | Founder: Muneeb Ur Rehman</p>
+            </section>
+          </article>
         </main>
+
+        <footer>
+          <p>&copy; 2026 Shaheen Al Zaitoon Online Quran Academy. Dedicated in memory of Zaitoon Bibi. All Rights Reserved.</p>
+        </footer>
       </noscript>
     </div>
     <script type="module" src="/src/main.tsx"></script>
