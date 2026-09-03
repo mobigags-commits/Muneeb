@@ -1,3 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /#admin-portal
+
+# Disallow private management or admin endpoints
+Disallow: /admin
+Disallow: /admin-portal
+
 Sitemap: https://muneeb-lime.vercel.app/sitemap.xml
