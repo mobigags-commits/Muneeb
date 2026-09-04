@@ -6,44 +6,58 @@ interface PageMetadata {
   titleUr: string;
   descriptionEn: string;
   descriptionUr: string;
+  keywordsEn?: string;
+  keywordsUr?: string;
 }
 
 export const pageSeoData: Record<PageId, PageMetadata> = {
   home: {
-    titleEn: 'Shaheen Al Zaitoon Online Quran Academy | Global Islamic Education',
-    titleUr: 'شاہین الزیتون آن لائن قرآن اکیڈمی | عالمی اسلامی تعلیمی نیٹ ورک',
-    descriptionEn: 'Learn Quran online with certified Tajweed teachers. 3-Day free trial, personalized 1-on-1 classes, dedicated in memory of Zaitoon Bibi.',
-    descriptionUr: 'گھر بیٹھے مستند قراء سے قرآن پاک ناظرہ، تجوید اور حفظ سیکھیں۔ 3 دن کی مفت آزمائشی کلاسز۔',
+    titleEn: 'Online Quran Classes | Shaheen Al Zaitoon Online Quran Academy',
+    titleUr: 'آن لائن قرآن اکیڈمی | شاہین الزیتون آن لائن قرآن اکیڈمی',
+    descriptionEn: 'Learn Quran online with certified Tajweed teachers. 1-on-1 classes for kids, ladies & adults across USA, UK, Canada, Australia & Pakistan. 3-Day free trial.',
+    descriptionUr: 'گھر بیٹھے مستند قراء سے قرآن پاک ناظرہ، تجوید اور حفظ سیکھیں۔ بچوں، خواتین اور بڑوں کے لیے 3 دن کی مفت آزمائشی کلاسز۔',
+    keywordsEn: 'online Quran classes, learn Quran online, online Quran academy, Quran classes online, online Quran teacher, online Quran classes with Tajweed, online Noorani Qaida classes, online Hifz Quran classes, online Quran classes for kids, online Quran classes for ladies, 1 on 1 online Quran classes, learn Quran USA, learn Quran UK, learn Quran Canada, learn Quran Australia, Shaheen Al Zaitoon Quran Academy, Muneeb Ur Rehman',
+    keywordsUr: 'آن لائن قرآن کلاسز, آن لائن قرآن اکیڈمی, گھر بیٹھے قرآن سیکھیں, آن لائن قاری, تجوید کے ساتھ قرآن, بچوں کے لیے قرآن کلاسز, خواتین کے لیے قرآن کلاسز, شاہین الزیتون قرآن اکیڈمی, منیب الرحمن',
   },
   courses: {
-    titleEn: 'Online Quran Courses & Syllabus | Shaheen Al Zaitoon Academy',
-    titleUr: 'آن لائن قرآنی کورسز اور نصاب | شاہین الزیتون اکیڈمی',
-    descriptionEn: 'Explore courses: Noorani Qaida, Nazra with Tajweed, Hifz-ul-Quran, Translation & Tafseer, and Arabic language for kids, adults and ladies.',
-    descriptionUr: 'نورانی قاعدہ، ناظرہ مع تجوید، حفظ القرآن، ترجمہ و تفسیر اور عربی زبان کے کورسز۔',
+    titleEn: 'Online Quran Courses & Pricing 2026 | Shaheen Al Zaitoon Academy',
+    titleUr: 'آن لائن قرآنی کورسز اور فیس شیڈول 2026 | شاہین الزیتون اکیڈمی',
+    descriptionEn: 'Browse structured online Quran courses: Noorani Qaida, Tajweed, Hifz, Translation & Tafseer. 1-on-1 classes with certified Qaris. Free 3-day trial.',
+    descriptionUr: 'نورانی قاعدہ، ناظرہ مع تجوید، حفظ القرآن، ترجمہ و تفسیر اور عربی زبان کے کورسز۔ مستند قراء سے 1-on-1 کلاسز اور 3 روزہ مفت آزمائش۔',
+    keywordsEn: 'online Quran courses, Quran syllabus online, learn Noorani Qaida, online Tajweed course, online Hifz course, Quran translation online, Quran Tafseer course, online Islamic studies, Shaheen Al Zaitoon courses',
+    keywordsUr: 'آن لائن قرآن کورسز, قرآنی نصاب, نورانی قاعدہ آن لائن, تجوید کورس, حفظ قرآن کورس, ترجمہ قرآن, تفسیر قرآن, اسلامی تعلیمات',
   },
   about: {
     titleEn: 'About Academy & Founder Muneeb Ur Rehman | Shaheen Al Zaitoon',
     titleUr: 'اکیڈمی اور بانی منیب الرحمن کا تعارف | شاہین الزیتون',
     descriptionEn: 'Founded by Muneeb Ur Rehman in Rawalpindi, Pakistan as Sadaqah Jariyah for Zaitoon Bibi. Serving students worldwide across UK, USA, UAE & Canada.',
     descriptionUr: 'راولپنڈی سے بانی منیب الرحمن کی زیرِ نگرانی زیتون بی بی کی ایصالِ ثواب کے لیے قائم کردہ اکیڈمی۔',
+    keywordsEn: 'about Shaheen Al Zaitoon, Muneeb Ur Rehman founder, Zaitoon Bibi Sadaqah Jariyah, online Quran academy Rawalpindi Pakistan, Islamic charity education',
+    keywordsUr: 'شاہین الزیتون اکیڈمی تعارف, بانی منیب الرحمن, زیتون بی بی ایصال ثواب, راولپنڈی قرآن اکیڈمی',
   },
   teachers: {
     titleEn: 'Certified Qari & Qaria Faculty | Shaheen Al Zaitoon Academy',
     titleUr: 'مستند قراء اور اساتذہ کرام | شاہین الزیتون اکیڈمی',
     descriptionEn: 'Meet certified Egyptian, Pakistani and international Quran teachers, Huffaz and female Qaria teachers for sisters.',
     descriptionUr: 'مستند اور تجربہ کار قراء، حفاظ اور خواتین کے لیے معلمات۔',
+    keywordsEn: 'online Quran teachers, certified Qari online, female Quran teacher, hire Quran tutor, Qaria online, Huffaz online teachers',
+    keywordsUr: 'مستند قاری آن لائن, آن لائن قاریہ, خواتین اساتذہ, حافظ قرآن اساتذہ',
   },
   admissions: {
     titleEn: 'Admissions & 3-Day Free Trial Class | Shaheen Quran Academy',
     titleUr: 'داخلہ فارم اور 3 روزہ مفت ٹرائل کلاس | شاہین قرآن اکیڈمی',
     descriptionEn: 'Register today for your 3-day free trial Quran recitation class with no upfront payment required.',
     descriptionUr: 'بغیر کسی پیشگی فیس کے 3 دن کی مفت آزمائشی کلاس کے لیے ابھی اندراج کریں۔',
+    keywordsEn: 'online Quran admission, free Quran trial class, 3 day Quran trial, register online Quran classes, Quran classes without advance fee',
+    keywordsUr: 'قرآن کلاس داخلہ, مفت ٹرائل کلاس, 3 روزہ ٹرائل, آن لائن رجسٹریشن قرآن',
   },
   'fee-payment': {
     titleEn: 'EasyPaisa & Bank Fee Payment | Shaheen Al Zaitoon Academy',
     titleUr: 'ایزی پیسہ اور فیس ادائیگی کا نظام | شاہین الزیتون اکیڈمی',
     descriptionEn: 'Pay monthly academy fees securely via EasyPaisa (03447956085) or direct bank transfer. Upload receipt for instant verification.',
     descriptionUr: 'ایزی پیسہ (03447956085) کے ذریعے باآسانی ماہانہ فیس ادا کریں اور رسید اپلوڈ کریں۔',
+    keywordsEn: 'online Quran fee payment, EasyPaisa 03447956085, pay Quran tuition, monthly Quran fees, bank transfer tuition payment',
+    keywordsUr: 'فیس ادائیگی ایزی پیسہ, 03447956085, ماہانہ فیس قرآن, رسید اپلوڈ',
   },
   'live-classes': {
     titleEn: 'Live Quran Classrooms & Schedule | Shaheen Al Zaitoon',
@@ -170,84 +184,112 @@ export const pageSeoData: Record<PageId, PageMetadata> = {
     titleUr: 'آن لائن قرآن کلاسز برائے بچے اور بڑے | شاہین الزیتون اکیڈمی',
     descriptionEn: 'Join 1-on-1 online Quran classes for kids, beginners, ladies, and adults with certified Qaris. Flexible scheduling worldwide with a free 3-day trial.',
     descriptionUr: 'گھر بیٹھے مستند اساتذہ سے آن لائن قرآن کلاسز لیں۔ بچوں اور بڑوں کے لیے 3 دن کی مفت آزمائشی کلاسز۔',
+    keywordsEn: 'online Quran classes, online Quran academy, learn Quran online, Quran classes online, online Quran tutor, 1 on 1 Quran lessons, best online Quran classes, online Quran classes USA UK, Shaheen Al Zaitoon',
+    keywordsUr: 'آن لائن قرآن کلاسز, آن لائن قرآن اکیڈمی, انٹرنیٹ پر قرآن سیکھیں, ون آن ون قرآن کلاس, مستند قاری آن لائن',
   },
   'noorani-qaida': {
     titleEn: 'Learn Noorani Qaida Online | Shaheen Al Zaitoon',
     titleUr: 'آن لائن نورانی قاعدہ کورس | شاہین الزیتون اکیڈمی',
     descriptionEn: 'Master Arabic alphabet, Makharij, and basic Tajweed rules with 1-on-1 online Noorani Qaida classes for beginners and kids. Book your 3-day free trial.',
     descriptionUr: 'بچوں اور ابتدائی طلباء کے لیے نورانی قاعدہ مع درست مخارج اور تجوید۔ مفت آزمائشی کلاس میں شامل ہوں۔',
+    keywordsEn: 'online Noorani Qaida classes, learn Noorani Qaida online, Noorani Qaida for kids, Arabic alphabet online, basic Quran reading, Noorani Qaida tutor, Noorani Qaida with Tajweed',
+    keywordsUr: 'آن لائن نورانی قاعدہ, نورانی قاعدہ بچوں کے لیے, بنیادی عربی حروف, مخارج کے ساتھ نورانی قاعدہ',
   },
   'quran-reading': {
     titleEn: 'Learn Quran Reading Online (Nazra) | Shaheen Al Zaitoon',
     titleUr: 'آن لائن ناظرہ قرآن کلاسز | شاہین الزیتون اکیڈمی',
     descriptionEn: 'Learn fluent Nazra Quran reading online with certified tutors. 1-on-1 personalized recitation classes for kids and adults. Start your 3-day free trial.',
     descriptionUr: 'مکمل قرآن مجید ناظرہ روانی اور تجوید کے ساتھ پڑھنا سیکھیں۔ مستند قراء کی زیرِ نگرانی 1-on-1 کلاسز۔',
+    keywordsEn: 'online Nazra Quran classes, learn Quran reading online, Nazra Quran with Tajweed, fluent Quran recitation, 1-on-1 Nazra tutor, online Quran reading for beginners',
+    keywordsUr: 'آن لائن ناظرہ قرآن, ناظرہ قرآن کلاسز, روانی سے قرآن پڑھنا, ناظرہ مع تجوید',
   },
   'online-tajweed-classes': {
     titleEn: 'Online Quran Classes with Tajweed | Shaheen Al Zaitoon',
     titleUr: 'آن لائن تجوید و قرآن کلاسز | شاہین الزیتون اکیڈمی',
     descriptionEn: 'Master Makharij, Sifaat, and Tajweed rules with certified Qaris. 1-on-1 interactive online Tajweed classes for beginners and advanced students. Free 3-day trial.',
     descriptionUr: 'مستند قراء سے تجوید کے قواعد، مخارج اور صفات کی مکمل تربیت لیں۔ مفت 3 روزہ ٹرائل کلاس۔',
+    keywordsEn: 'online Tajweed classes, online Quran classes with Tajweed, learn Tajweed online, Tajweed rules course, master Arabic Makharij, certified Tajweed teacher, Tajweed lessons online',
+    keywordsUr: 'آن لائن تجوید کلاسز, علم التجوید, مخارج الحروف, تجوید کے قواعد, مستند قاری تجوید',
   },
   'online-hifz-quran-classes': {
     titleEn: 'Online Hifz Quran Classes & Memorization | Shaheen Al Zaitoon',
     titleUr: 'آن لائن حفظ القرآن کورس | شاہین الزیتون اکیڈمی',
     descriptionEn: 'Structured 1-on-1 online Hifz Quran program for kids and adults. Systematic daily Sabaq, Sabaqi, and Manzil revision guided by certified Huffaz. Free trial.',
     descriptionUr: 'مستند حفاظ کرام کی زیرِ نگرانی روزانہ سبق، سبقی اور منزل کا باقاعدہ نظام۔ آن لائن حفظ قرآن مکمل کریں۔',
+    keywordsEn: 'online Hifz Quran classes, Quran memorization online, learn Hifz online, become Hafiz online, online Hifz tutor, daily Sabaq Manzil revision, Hifz program for kids',
+    keywordsUr: 'آن لائن حفظ قرآن, حفظ القرآن کورس, حافظ بنیں آن لائن, روزانہ سبق سبقی منزل, مستند حفاظ',
   },
   'quran-translation': {
     titleEn: 'Learn Quran Translation Online | Shaheen Al Zaitoon',
     titleUr: 'آن لائن فہم و ترجمہ قرآن کلاسز | شاہین الزیتون اکیڈمی',
     descriptionEn: 'Understand the words of Allah with word-by-word and contextual Quran translation classes online. 1-on-1 personalized lessons in English and Urdu. Free trial.',
     descriptionUr: 'قرآن مجید کا لفظی و با محاورہ ترجمہ سیکھیں اور اللہ کے کلام کو گہرائی سے سمجھیں۔ 3 روزہ مفت ٹرائل۔',
+    keywordsEn: 'online Quran translation classes, learn Quran translation online, word by word Quran translation, Urdu Quran translation, English Quran translation, understand Quran meaning',
+    keywordsUr: 'آن لائن ترجمہ قرآن, لفظی ترجمہ قرآن, با محاورہ ترجمہ قرآن, فہم القرآن کورس',
   },
   'quran-tafseer': {
     titleEn: 'Online Quran Tafseer Classes | Shaheen Al Zaitoon',
     titleUr: 'آن لائن تفسیر قرآن کورس | شاہین الزیتون اکیڈمی',
     descriptionEn: 'Deepen your connection with Allah through online Quran Tafseer classes. Learn historical contexts, Asbab an-Nuzul, and practical wisdom. Book a free trial.',
     descriptionUr: 'مستند علماء کرام سے قرآن پاک کی مفصل تفسیر، اسباب النزول اور عملی رہنمائی حاصل کریں۔',
+    keywordsEn: 'online Quran Tafseer classes, learn Tafseer online, Quran explanation course, Asbab an Nuzul, comprehensive Tafseer ul Quran, Islamic scholarship online',
+    keywordsUr: 'آن لائن تفسیر قرآن, تفسیر کورس, اسباب النزول, مفصل تفسیر القرآن, مستند علمائے کرام',
   },
   'quran-classes-for-kids': {
     titleEn: 'Online Quran Classes for Kids | Shaheen Al Zaitoon',
     titleUr: 'بچوں کے لیے آن لائن قرآن کلاسز | شاہین الزیتون اکیڈمی',
     descriptionEn: 'Engaging, child-friendly 1-on-1 online Quran classes for kids with patient certified tutors. Interactive lessons, Tajweed, and daily Duas. Start free 3-day trial.',
     descriptionUr: 'بچوں کے لیے دلچسپ اور دوستانہ ماحول میں نورانی قاعدہ، ناظرہ اور اسلامی اخلاقیات۔ 3 روزہ مفت آزمائش۔',
+    keywordsEn: 'online Quran classes for kids, kids Quran learning, Quran tutor for children, interactive Quran lessons, Quran lessons for toddlers, Noorani Qaida for children',
+    keywordsUr: 'بچوں کے لیے آن لائن قرآن, بچوں کی قرآنی تعلیم, بچوں کے لیے نورانی قاعدہ, صبر و پیار سے قرآنی تدریس',
   },
   'quran-for-beginners': {
     titleEn: 'Learn Quran Online for Beginners | Shaheen Al Zaitoon',
     titleUr: 'ابتدائی افراد کے لیے آن لائن قرآن کورس | شاہین الزیتون اکیڈمی',
     descriptionEn: 'Step-by-step 1-on-1 Quran classes for beginners of all ages. Start from zero Arabic knowledge with patient certified tutors. Book a free 3-day trial.',
     descriptionUr: 'بالکل صفر سے قرآن پاک سیکھنا شروع کریں۔ بغیر کسی جھجک کے 1-on-1 کلاسز میں شامل ہوں۔ 3 روزہ مفت ٹرائل۔',
+    keywordsEn: 'Quran for beginners, learn Quran from zero, beginner Quran classes online, step by step Quran learning, easy Quran reading, start reading Quran',
+    keywordsUr: 'ابتدائی افراد کے لیے قرآن, صفر سے قرآن سیکھیں, بنیادی قرآنی کلاسز, آسان طریقہ قرآن خوانی',
   },
   'quran-classes-for-adults': {
     titleEn: 'Online Quran Classes for Adults | Shaheen Al Zaitoon',
     titleUr: 'بڑوں کے لیے آن لائن قرآن کلاسز | شاہین الزیتون اکیڈمی',
     descriptionEn: 'Flexible, private 1-on-1 online Quran classes for busy adults and professionals. Learn Tajweed, recitation, translation, and Tafseer. Free 3-day trial.',
     descriptionUr: 'مصروف زندگی کے ساتھ گھر بیٹھے قرآن پاک تجوید، ناظرہ، ترجمہ اور تفسیر سیکھیں۔ 3 روزہ مفت آزمائش۔',
+    keywordsEn: 'online Quran classes for adults, adult Quran lessons, Quran for professionals, flexible Quran classes online, private adult Quran tutor',
+    keywordsUr: 'بڑوں کے لیے قرآن کلاسز, پیشہ ور افراد کے لیے قرآن, لچکدار اوقات میں قرآن سیکھیں, بالغوں کی قرآنی تعلیم',
   },
   'quran-classes-for-ladies': {
     titleEn: 'Online Quran Classes for Ladies | Shaheen Al Zaitoon',
     titleUr: 'خواتین کے لیے آن لائن قرآن کلاسز | شاہین الزیتون اکیڈمی',
     descriptionEn: 'Private 1-on-1 online Quran classes for ladies and sisters taught exclusively by certified female Qarias and Alimahs. Complete privacy & flexible hours. Free trial.',
     descriptionUr: 'مستند اور باحجاب معلمات اور قاریہ صاحبان سے مکمل پردے کے ساتھ آن لائن قرآن پاک سیکھیں۔ 3 روزہ مفت ٹرائل۔',
+    keywordsEn: 'online Quran classes for ladies, female Quran teacher online, Quran classes for women, private sisters Quran classes, certified female Qaria, Islamic education for sisters',
+    keywordsUr: 'خواتین کے لیے آن لائن قرآن, باحجاب خواتین اساتذہ, قاریہ آن لائن, بہنوں کے لیے قرآنی کلاسز, پردے کے ساتھ تدریس',
   },
   'online-islamic-studies': {
     titleEn: 'Online Islamic Studies Classes | Shaheen Al Zaitoon',
     titleUr: 'آن لائن اسلامک اسٹڈیز کورس | شاہین الزیتون اکیڈمی',
     descriptionEn: 'Comprehensive online Islamic studies course covering Aqeedah, Fiqh, Seerah, Hadith, and Islamic manners for kids and adults. Start your free trial today.',
     descriptionUr: 'عقائد، فقہ، سیرت النبی ﷺ، احادیث اور اسلامی اخلاقیات پر مبنی جامع تعلیمی کورس۔',
+    keywordsEn: 'online Islamic studies classes, Islamic education online, learn Fiqh Aqeedah Hadith, Islamic courses for kids, Seerah of Prophet Muhammad online',
+    keywordsUr: 'آن لائن اسلامک اسٹڈیز, اسلامی تعلیمات, عقائد و فقہ, سیرت النبی کورس, احادیث نبوی کورس',
   },
   'quranic-arabic': {
     titleEn: 'Online Quranic Arabic Classes | Shaheen Al Zaitoon',
     titleUr: 'آن لائن لسان القرآن و عربی گرامر کورس | شاہین الزیتون اکیڈمی',
     descriptionEn: 'Master Quranic Arabic grammar (Nahw & Sarf) to comprehend the Holy Quran directly in Arabic without translation. 1-on-1 online classes. Free trial.',
     descriptionUr: 'نحو و صرف کے آسان قواعد کے ذریعے قرآن مجید کو براہِ راست عربی زبان میں سمجھیں۔',
+    keywordsEn: 'online Quranic Arabic classes, learn Arabic grammar online, Nahw and Sarf course, comprehend Quran Arabic, Arabic language for Quran understanding',
+    keywordsUr: 'لسان القرآن کورس, قرآنی عربی گرامر, نحو و صرف, عربی زبان آن لائن, براہِ راست قرآن فہمی',
   },
   'salah-and-duas': {
     titleEn: 'Online Salah & Daily Duas Classes | Shaheen Al Zaitoon',
     titleUr: 'آن لائن نماز و مسنون دعائیں کورس | شاہین الزیتون اکیڈمی',
     descriptionEn: 'Learn the practical method of Salah (Namaz), Wudu, and essential Masnoon Duas with correct pronunciation and meanings. 1-on-1 online classes. Free trial.',
     descriptionUr: 'وضو، مکمل طریقہ نماز، مسنون دعائیں اور چھ کلمے درست تلفظ اور ترجمے کے ساتھ سیکھیں۔',
+    keywordsEn: 'online Salah classes, learn Namaz online, daily Masnoon Duas course, learn Wudu method, Six Kalimas with translation, Islamic prayer training online',
+    keywordsUr: 'طریقہ نماز آن لائن, مسنون دعائیں سیکھیں, طریقہ وضو, چھ کلمے ترجمہ کے ساتھ, نماز کورس',
   },
 };
 
@@ -258,10 +300,31 @@ export function updatePageSeo(page: PageId, lang: Language) {
 
   document.title = title;
 
+  // Update meta title
+  let titleTag = document.querySelector('meta[name="title"]');
+  if (!titleTag) {
+    titleTag = document.createElement('meta');
+    titleTag.setAttribute('name', 'title');
+    document.head.appendChild(titleTag);
+  }
+  titleTag.setAttribute('content', title);
+
   // Update meta description
   let descTag = document.querySelector('meta[name="description"]');
   if (descTag) {
     descTag.setAttribute('content', description);
+  }
+
+  // Update meta keywords (2026 Semantic Search & Intent Clusters)
+  const keywords = lang === 'ur' ? (meta.keywordsUr || meta.keywordsEn) : (meta.keywordsEn || meta.keywordsUr);
+  if (keywords) {
+    let kwTag = document.querySelector('meta[name="keywords"]');
+    if (!kwTag) {
+      kwTag = document.createElement('meta');
+      kwTag.setAttribute('name', 'keywords');
+      document.head.appendChild(kwTag);
+    }
+    kwTag.setAttribute('content', keywords);
   }
 
   // Update og:title & og:description
@@ -334,14 +397,24 @@ export function updatePageSeo(page: PageId, lang: Language) {
         name: 'Shaheen Al Zaitoon Online Quran Academy',
         url: 'https://muneeb-lime.vercel.app/',
       },
-      offers: {
-        '@type': 'Offer',
-        price: courseData.feePKR.toString(),
-        priceCurrency: 'PKR',
-        category: 'Monthly Quran Tuition',
-        availability: 'https://schema.org/InStock',
-        validFrom: '2026-01-01',
-      },
+      offers: [
+        {
+          '@type': 'Offer',
+          price: courseData.feePKR.toString(),
+          priceCurrency: 'PKR',
+          category: 'Monthly Quran Tuition (Pakistan)',
+          availability: 'https://schema.org/InStock',
+          validFrom: '2026-01-01',
+        },
+        {
+          '@type': 'Offer',
+          price: courseData.feeUSD.toString(),
+          priceCurrency: 'USD',
+          category: 'Monthly Quran Tuition (Global - USA, UK, Canada, Australia, UAE)',
+          availability: 'https://schema.org/InStock',
+          validFrom: '2026-01-01',
+        },
+      ],
       hasCourseInstance: {
         '@type': 'CourseInstance',
         courseMode: 'Online',

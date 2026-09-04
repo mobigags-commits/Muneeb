@@ -245,7 +245,7 @@ export const seoCoursesList: Record<string, SeoCourseData> = {
       },
     ],
     feePKR: 4500,
-    feeUSD: 30,
+    feeUSD: 70,
     featuredImage: 'https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=1200&q=80',
   },
 
@@ -419,7 +419,7 @@ export const seoCoursesList: Record<string, SeoCourseData> = {
       },
     ],
     feePKR: 4500,
-    feeUSD: 30,
+    feeUSD: 70,
     featuredImage: 'https://images.unsplash.com/photo-1584286595398-a59f21d313f5?auto=format&fit=crop&w=1200&q=80',
   },
 
@@ -584,7 +584,7 @@ export const seoCoursesList: Record<string, SeoCourseData> = {
       },
     ],
     feePKR: 5500,
-    feeUSD: 40,
+    feeUSD: 80,
     featuredImage: 'https://images.unsplash.com/photo-1542816417-0983cbe33577?auto=format&fit=crop&w=1200&q=80',
   },
 
@@ -760,7 +760,7 @@ export const seoCoursesList: Record<string, SeoCourseData> = {
       },
     ],
     feePKR: 5500,
-    feeUSD: 40,
+    feeUSD: 80,
     featuredImage: 'https://images.unsplash.com/photo-1585036156171-384164a8c675?auto=format&fit=crop&w=1200&q=80',
   },
 
@@ -925,7 +925,7 @@ export const seoCoursesList: Record<string, SeoCourseData> = {
       },
     ],
     feePKR: 7000,
-    feeUSD: 55,
+    feeUSD: 95,
     featuredImage: 'https://images.unsplash.com/photo-1542816417-0983cbe33577?auto=format&fit=crop&w=1200&q=80',
   },
 
@@ -1070,7 +1070,7 @@ export const seoCoursesList: Record<string, SeoCourseData> = {
       },
     ],
     feePKR: 6000,
-    feeUSD: 45,
+    feeUSD: 85,
     featuredImage: 'https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=1200&q=80',
   },
 
@@ -1215,7 +1215,7 @@ export const seoCoursesList: Record<string, SeoCourseData> = {
       },
     ],
     feePKR: 6000,
-    feeUSD: 45,
+    feeUSD: 85,
     featuredImage: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1200&q=80',
   },
 
@@ -1381,7 +1381,7 @@ export const seoCoursesList: Record<string, SeoCourseData> = {
       },
     ],
     feePKR: 4500,
-    feeUSD: 30,
+    feeUSD: 70,
     featuredImage: 'https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=1200&q=80',
   },
 
@@ -1532,7 +1532,7 @@ export const seoCoursesList: Record<string, SeoCourseData> = {
       },
     ],
     feePKR: 4500,
-    feeUSD: 30,
+    feeUSD: 70,
     featuredImage: 'https://images.unsplash.com/photo-1584286595398-a59f21d313f5?auto=format&fit=crop&w=1200&q=80',
   },
 
@@ -1687,7 +1687,7 @@ export const seoCoursesList: Record<string, SeoCourseData> = {
       },
     ],
     feePKR: 5500,
-    feeUSD: 40,
+    feeUSD: 80,
     featuredImage: 'https://images.unsplash.com/photo-1542816417-0983cbe82752?auto=format&fit=crop&w=1200&q=80',
   },
 
@@ -1853,7 +1853,7 @@ export const seoCoursesList: Record<string, SeoCourseData> = {
       },
     ],
     feePKR: 5500,
-    feeUSD: 40,
+    feeUSD: 80,
     featuredImage: 'https://images.unsplash.com/photo-1564121211835-e88c852648ab?auto=format&fit=crop&w=1200&q=80',
   },
 
@@ -1998,7 +1998,7 @@ export const seoCoursesList: Record<string, SeoCourseData> = {
       },
     ],
     feePKR: 4000,
-    feeUSD: 25,
+    feeUSD: 65,
     featuredImage: 'https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=1200&q=80',
   },
 
@@ -2145,7 +2145,7 @@ export const seoCoursesList: Record<string, SeoCourseData> = {
       },
     ],
     feePKR: 6000,
-    feeUSD: 45,
+    feeUSD: 85,
     featuredImage: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1200&q=80',
   },
 
@@ -2292,7 +2292,7 @@ export const seoCoursesList: Record<string, SeoCourseData> = {
       },
     ],
     feePKR: 4000,
-    feeUSD: 25,
+    feeUSD: 65,
     featuredImage: 'https://images.unsplash.com/photo-1564121211835-e88c852648ab?auto=format&fit=crop&w=1200&q=80',
   },
 };
