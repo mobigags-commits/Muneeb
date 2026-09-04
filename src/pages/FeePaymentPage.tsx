@@ -91,7 +91,7 @@ export const FeePaymentPage: React.FC = () => {
     return { totalPKR, totalUSD, discountPercent: Math.round(discount * 100) };
   };
 
-  const currentCalc = selectedCourseObj ? getCalculatedFee(selectedCourseObj, billingCycle) : { totalPKR: 4500, totalUSD: 70, discountPercent: 0 };
+  const currentCalc = selectedCourseObj ? getCalculatedFee(selectedCourseObj, billingCycle) : { totalPKR: 19600, totalUSD: 70, discountPercent: 0 };
 
   const copyToClipboard = (text: string, key: string) => {
     if (navigator?.clipboard?.writeText) {

@@ -136,7 +136,7 @@ export const AcademyProvider: React.FC<{ children: React.ReactNode }> = ({ child
   });
 
   const [courses, setCourses] = useState<Course[]>(() => {
-    const saved = localStorage.getItem('sz_courses_v4');
+    const saved = localStorage.getItem('sz_courses_v5');
     if (saved) {
       try {
         const parsed: Course[] = JSON.parse(saved);
