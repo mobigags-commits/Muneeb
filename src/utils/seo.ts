@@ -341,11 +341,22 @@ export function updatePageSeo(page: PageId, lang: Language) {
   let twDesc = document.querySelector('meta[name="twitter:description"]');
   if (twDesc) twDesc.setAttribute('content', description);
 
-  // Update canonical URL
+  // Update canonical URL & social URLs
+  const cleanUrl = page === 'home' ? 'https://muneeb-lime.vercel.app/' : `https://muneeb-lime.vercel.app/${page}`;
+  
   let canonicalTag = document.querySelector('link[rel="canonical"]');
   if (canonicalTag) {
-    const url = page === 'home' ? 'https://muneeb-lime.vercel.app/' : `https://muneeb-lime.vercel.app/#${page}`;
-    canonicalTag.setAttribute('href', url);
+    canonicalTag.setAttribute('href', cleanUrl);
+  }
+
+  let ogUrl = document.querySelector('meta[property="og:url"]');
+  if (ogUrl) {
+    ogUrl.setAttribute('content', cleanUrl);
+  }
+
+  let twUrl = document.querySelector('meta[name="twitter:url"]');
+  if (twUrl) {
+    twUrl.setAttribute('content', cleanUrl);
   }
 
   // Update HTML lang and dir
@@ -361,7 +372,7 @@ export function updatePageSeo(page: PageId, lang: Language) {
     document.head.appendChild(dynamicScript);
   }
 
-  const currentUrl = page === 'home' ? 'https://muneeb-lime.vercel.app/' : `https://muneeb-lime.vercel.app/#${page}`;
+  const currentUrl = cleanUrl;
 
   const schemaGraph: any[] = [
     {

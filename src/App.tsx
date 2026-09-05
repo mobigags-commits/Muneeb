@@ -41,70 +41,89 @@ import { seoCoursesList } from './data/seoCoursesData';
 const AppContent: React.FC = () => {
   const { activePage, setActivePage, language } = useAcademy();
 
+  // Valid routes list for SEO & Navigation
+  const validPages: PageId[] = [
+    'home',
+    'about',
+    'courses',
+    'teachers',
+    'student-portal',
+    'parent-portal',
+    'admissions',
+    'fee-payment',
+    'live-classes',
+    'certificates',
+    'gallery',
+    'blog',
+    'testimonials',
+    'faq',
+    'contact',
+    'careers',
+    'privacy',
+    'terms',
+    'donations',
+    'help-support',
+    'admin-portal',
+    'growth-hub',
+    'zaitoon-traders',
+    'marriage-bureau',
+    'ad-manager',
+    'community',
+    'online-quran-classes',
+    'noorani-qaida',
+    'quran-reading',
+    'online-tajweed-classes',
+    'online-hifz-quran-classes',
+    'quran-translation',
+    'quran-tafseer',
+    'quran-classes-for-kids',
+    'quran-for-beginners',
+    'quran-classes-for-adults',
+    'quran-classes-for-ladies',
+    'online-islamic-studies',
+    'quranic-arabic',
+    'salah-and-duas',
+  ];
+
   // Dynamic SEO & Title Update
   useEffect(() => {
     updatePageSeo(activePage, language);
     // Smooth scroll to top on page change
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Sync address bar URL cleanly without page reload
+    const currentPath = window.location.pathname.replace(/^\/+/, '').replace(/\/+$/, '');
+    const targetPath = activePage === 'home' ? '/' : `/${activePage}`;
+    if (currentPath !== (activePage === 'home' ? '' : activePage)) {
+      window.history.replaceState(null, '', targetPath);
+    }
   }, [activePage, language]);
 
-  // Sync hash routing on initial load and popstate
+  // Sync pathname and hash routing on initial load and navigation
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.replace('#', '') as PageId;
-      if (hash && hash !== activePage) {
-        const validPages: PageId[] = [
-          'home',
-          'about',
-          'courses',
-          'teachers',
-          'student-portal',
-          'parent-portal',
-          'admissions',
-          'fee-payment',
-          'live-classes',
-          'certificates',
-          'gallery',
-          'blog',
-          'testimonials',
-          'faq',
-          'contact',
-          'careers',
-          'privacy',
-          'terms',
-          'donations',
-          'help-support',
-          'admin-portal',
-          'growth-hub',
-          'zaitoon-traders',
-          'marriage-bureau',
-          'ad-manager',
-          'community',
-          'online-quran-classes',
-          'noorani-qaida',
-          'quran-reading',
-          'online-tajweed-classes',
-          'online-hifz-quran-classes',
-          'quran-translation',
-          'quran-tafseer',
-          'quran-classes-for-kids',
-          'quran-for-beginners',
-          'quran-classes-for-adults',
-          'quran-classes-for-ladies',
-          'online-islamic-studies',
-          'quranic-arabic',
-          'salah-and-duas',
-        ];
-        if (validPages.includes(hash)) {
-          setActivePage(hash);
-        }
+    const handleLocationChange = () => {
+      // 1. Check clean pathname first (e.g. /noorani-qaida)
+      const pathname = window.location.pathname.replace(/^\/+/, '').replace(/\/+$/, '') as PageId;
+      if (pathname && validPages.includes(pathname)) {
+        if (pathname !== activePage) setActivePage(pathname);
+        return;
+      }
+      // 2. Check hash fallback (e.g. #noorani-qaida)
+      const hash = window.location.hash.replace(/^#+/, '') as PageId;
+      if (hash && validPages.includes(hash)) {
+        if (hash !== activePage) setActivePage(hash);
+        return;
       }
     };
 
-    handleHashChange();
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, [setActivePage]);
+    handleLocationChange();
+    window.addEventListener('hashchange', handleLocationChange);
+    window.addEventListener('popstate', handleLocationChange);
+    return () => {
+      window.removeEventListener('hashchange', handleLocationChange);
+      window.removeEventListener('popstate', handleLocationChange);
+    };
+  }, [setActivePage, activePage]);
 
   const renderPage = () => {
     // Check if the page is one of the SEO course landing pages
