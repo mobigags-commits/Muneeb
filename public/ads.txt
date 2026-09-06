@@ -1,0 +1,12 @@
+# =========================================================================
+# ads.txt - Authorized Digital Sellers
+# Shaheen Al Zaitoon Digital Ecosystem & 9-Websites Network
+# Standardized according to IAB Tech Lab Ads.txt Specification
+# =========================================================================
+# Syntax: <Field #1>, <Field #2>, <Field #3>, <Field #4>
+# Field 1: Domain name of the advertising system
+# Field 2: Exchange publisher account ID (Replace pub-XXXXXXXXXXXXXXXX with your actual AdSense ID)
+# Field 3: Type of Account / Relationship (DIRECT or RESELLER)
+# Field 4: Certification Authority ID (f08c47fec0942fa0 for Google AdSense)
+
+google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0

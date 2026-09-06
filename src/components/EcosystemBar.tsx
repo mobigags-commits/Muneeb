@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, ShoppingBag, Heart, TrendingUp, Phone, ShieldCheck, Megaphone, Facebook } from 'lucide-react';
+import { BookOpen, ShoppingBag, Heart, TrendingUp, Phone, ShieldCheck, Megaphone, Facebook, Globe } from 'lucide-react';
 import { useAcademy } from '../context/AcademyContext';
 
 export const EcosystemBar: React.FC = () => {
@@ -89,6 +89,19 @@ export const EcosystemBar: React.FC = () => {
             <Facebook className="w-3.5 h-3.5 fill-[#1877F2] text-white" />
             <span>FB Group</span>
             <span className="bg-[#1877F2] text-white text-[9px] px-1 rounded font-extrabold">92.4k</span>
+          </button>
+
+          <button
+            onClick={() => setActivePage('google-ecosystem')}
+            className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium transition-all ${
+              activePage === 'google-ecosystem'
+                ? 'bg-amber-400 text-red-950 font-bold shadow-sm'
+                : 'bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 border border-emerald-500/40'
+            }`}
+          >
+            <Globe className="w-3.5 h-3.5 text-amber-300" />
+            <span>9 Sites Google AdSense</span>
+            <span className="bg-amber-400 text-red-950 text-[9px] px-1 rounded font-extrabold">9 Sites</span>
           </button>
         </div>
 

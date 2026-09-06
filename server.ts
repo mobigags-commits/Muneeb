@@ -30,6 +30,22 @@ async function startServer() {
     res.json({ status: 'ok', academy: 'Shaheen Al Zaitoon Online Quran Academy' });
   });
 
+  // Google AdSense ads.txt Dedicated Endpoint
+  app.get('/ads.txt', (req, res) => {
+    const pubId = process.env.VITE_GOOGLE_ADSENSE_PUB_ID || 'pub-XXXXXXXXXXXXXXXX';
+    const sanitizedPub = pubId.replace(/^ca-/, '');
+    const adsTxtContent = [
+      '# ads.txt - Google AdSense Authorized Digital Sellers',
+      '# Ecosystem: Shaheen Al Zaitoon 9-Website Network',
+      `google.com, ${sanitizedPub}, DIRECT, f08c47fec0942fa0`,
+      '',
+    ].join('\n');
+
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    res.setHeader('Cache-Control', 'public, max-age=86400');
+    res.send(adsTxtContent);
+  });
+
   // AI Quran Learning Assistant & Tajweed Helper
   app.post('/api/gemini/quran-assistant', async (req, res) => {
     try {

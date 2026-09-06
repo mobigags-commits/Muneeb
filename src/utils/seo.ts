@@ -291,6 +291,14 @@ export const pageSeoData: Record<PageId, PageMetadata> = {
     keywordsEn: 'online Salah classes, learn Namaz online, daily Masnoon Duas course, learn Wudu method, Six Kalimas with translation, Islamic prayer training online',
     keywordsUr: 'طریقہ نماز آن لائن, مسنون دعائیں سیکھیں, طریقہ وضو, چھ کلمے ترجمہ کے ساتھ, نماز کورس',
   },
+  'google-ecosystem': {
+    titleEn: '9 Websites Google Ecosystem & AdSense Setup | Shaheen Al Zaitoon',
+    titleUr: '9 ویب سائٹس گوگل ایڈسینس اور ایکو سسٹم سیٹ اپ | شاہین الزیتون',
+    descriptionEn: 'Official Google AdSense monetization, ads.txt verification, and Google Ads conversion tracking hub for the 9 Shaheen Al Zaitoon network websites.',
+    descriptionUr: 'شاہین الزیتون کی 9 ویب سائٹس کا گوگل ایڈسینس، ads.txt اور گوگل ایڈز ٹریکنگ کا مکمل سیٹ اپ پورٹل۔',
+    keywordsEn: 'Google AdSense setup, 9 websites monetization, ads.txt verification, Google Ads tracking, Shaheen ecosystem',
+    keywordsUr: 'گوگل ایڈسینس, 9 ویب سائٹس سیٹ اپ, اشتہارات کی تصدیق, گوگل ایڈز ٹریکنگ',
+  },
 };
 
 export function updatePageSeo(page: PageId, lang: Language) {

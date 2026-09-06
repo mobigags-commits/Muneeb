@@ -35,6 +35,8 @@ import { ZaitoonTradersPage } from './pages/ZaitoonTradersPage';
 import { MarriageBureauPage } from './pages/MarriageBureauPage';
 import { AdManagerPage } from './pages/AdManagerPage';
 import { CommunityPage } from './pages/CommunityPage';
+import { GoogleEcosystemPage } from './pages/GoogleEcosystemPage';
+import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { SeoCoursePage } from './pages/SeoCoursePage';
 import { seoCoursesList } from './data/seoCoursesData';
 
@@ -69,6 +71,7 @@ const AppContent: React.FC = () => {
     'marriage-bureau',
     'ad-manager',
     'community',
+    'google-ecosystem',
     'online-quran-classes',
     'noorani-qaida',
     'quran-reading',
@@ -150,6 +153,8 @@ const AppContent: React.FC = () => {
         return <AdManagerPage />;
       case 'community':
         return <CommunityPage />;
+      case 'google-ecosystem':
+        return <GoogleEcosystemPage />;
       case 'student-portal':
         return <StudentPortalPage />;
       case 'parent-portal':
@@ -197,6 +202,7 @@ const AppContent: React.FC = () => {
       <EnrollmentModal />
       <AIChatAssistant />
       <WhatsAppWidget />
+      <CookieConsentBanner />
     </div>
   );
 };

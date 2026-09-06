@@ -150,6 +150,13 @@ export const AdminPortalPage: React.FC = () => {
           >
             Marriage Proposals ({matrimonialProfiles.length})
           </button>
+          <button
+            onClick={() => setActivePage('google-ecosystem')}
+            className="px-4 py-2 rounded-xl text-xs font-bold transition-all bg-emerald-700 hover:bg-emerald-600 text-white ml-auto flex items-center gap-1.5 shadow-md"
+          >
+            <span>9 Websites Google AdSense Hub</span>
+            <span className="bg-amber-400 text-red-950 px-1.5 py-0.5 rounded text-[10px] font-extrabold">9 Sites</span>
+          </button>
         </div>
 
         {/* Tab 1: Settings CMS */}

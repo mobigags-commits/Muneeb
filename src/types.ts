@@ -25,6 +25,7 @@ export type PageId =
   | 'marriage-bureau'
   | 'ad-manager'
   | 'community'
+  | 'google-ecosystem'
   // 2026 Global SEO Master Course & Audience Pages
   | 'online-quran-classes'
   | 'noorani-qaida'
@@ -335,3 +336,66 @@ export interface SiteSettings {
   facebookGroupMembers: number;
   facebookGroupCoverImage: string;
 }
+
+export interface WebsiteAuditChecklist {
+  domainConnected: boolean;
+  httpsActive: boolean;
+  adSenseTechnicalReady: boolean;
+  publisherIdReady: boolean;
+  adsTxtReady: boolean;
+  verificationReady: boolean;
+  responsiveAdPlacementsReady: boolean;
+  googleAdsTrackingReady: boolean;
+  seoStructureChecked: boolean;
+  privacyTermsCookiesChecked: boolean;
+  mobileResponsivenessChecked: boolean;
+  performanceChecked: boolean;
+  securityChecked: boolean;
+  deploymentChecked: boolean;
+}
+
+export interface AdSlotConfig {
+  slotId: string;
+  name: string;
+  nameUrdu: string;
+  format: 'responsive' | 'horizontal-banner' | 'in-article' | 'in-feed' | 'sidebar';
+  dimensions: string;
+  accidentalClickProtected: boolean;
+  labeledAdvertisement: boolean;
+  recommendedPosition: string;
+}
+
+export interface GoogleAdsConversionGoal {
+  name: string;
+  category: 'Lead' | 'Contact' | 'Purchase' | 'Engagement';
+  eventName: string;
+  sendTo: string; // e.g. AW-XXXXXXXXXX/YYYYYYYYYYYYYY
+  status: 'Active' | 'Ready for Setup';
+  trigger: string;
+}
+
+export interface GoogleEcosystemWebsite {
+  id: number;
+  domainPlaceholder: string; // e.g. "[DOMAIN 1]"
+  activeDomain: string; // e.g. "shaheenedu.com" or "muneeb-lime.vercel.app"
+  siteName: string;
+  siteNameUrdu: string;
+  tagline: string;
+  category: string;
+  description: string;
+  publisherId: string; // ca-pub-XXXXXXXXXXXXXXXX
+  googleTagId: string; // AW-XXXXXXXXXX or G-XXXXXXXXXX
+  adsTxtContent: string;
+  verificationMetaTag: string;
+  adsEnabled: boolean;
+  adSenseStatus: 'Ready for Review' | 'Configured' | 'Approved' | 'Pending Verification';
+  googleAdsStatus: 'Active Tracking' | 'Configured' | 'Not Required';
+  adSlots: AdSlotConfig[];
+  conversionGoals: GoogleAdsConversionGoal[];
+  checklist: WebsiteAuditChecklist;
+  missingRequirements: string[];
+  requiredGoogleAction: string;
+  requiredAIStudioAction: string;
+  deploymentStatus: 'Deployed & Active' | 'DNS Ready' | 'Verified';
+}
+
