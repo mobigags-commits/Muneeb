@@ -45,6 +45,8 @@ export type UserRole = 'guest' | 'student' | 'parent' | 'teacher' | 'admin' | 'o
 
 export type Language = 'en' | 'ur' | 'ar';
 
+export type WeeklyClassFrequency = 1 | 2 | 3 | 4 | 5 | 6;
+
 export interface Course {
   id: string;
   title: string;

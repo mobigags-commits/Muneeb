@@ -27,6 +27,7 @@ import { useAcademy } from '../context/AcademyContext';
 import { PageId } from '../types';
 import { SeoCourseData } from '../data/seoCoursesData';
 import { EasyPaisaPaymentModal } from '../components/EasyPaisaPaymentModal';
+import { WeeklyPricingGrid } from '../components/WeeklyPricingGrid';
 
 interface SeoCoursePageProps {
   courseData: SeoCourseData;
@@ -417,7 +418,19 @@ export const SeoCoursePage: React.FC<SeoCoursePageProps> = ({ courseData }) => {
           </div>
         </section>
 
-        {/* 8. FAQ SECTION */}
+        {/* 8. FLEXIBLE WEEKLY CLASS SCHEDULES & FEE PLANS (1 to 6 DAYS/WEEK) */}
+        <section className="space-y-4">
+          <WeeklyPricingGrid
+            baseFeePKR={courseData.feePKR}
+            baseFeeUSD={courseData.feeUSD}
+            courseTitle={courseData.h1}
+            onSelectPlan={(_plan) => {
+              handleEnrollClick();
+            }}
+          />
+        </section>
+
+        {/* 9. FAQ SECTION */}
         <section className="space-y-6">
           <div className="text-center space-y-2 max-w-2xl mx-auto">
             <div className="text-xs font-bold uppercase tracking-widest text-amber-400 font-serif">

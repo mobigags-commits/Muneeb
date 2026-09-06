@@ -26,6 +26,12 @@ import {
 } from 'lucide-react';
 import { useAcademy } from '../context/AcademyContext';
 import { Course } from '../types';
+import {
+  WeeklyClassFrequency,
+  WEEKLY_CLASS_PLANS,
+  calculateWeeklyFee,
+  getAllWeeklyPlansForCourse,
+} from '../utils/weeklyPlanPricing';
 
 type PaymentTab = 'easypaisa' | 'jazzcash' | 'meezan' | 'other_banks' | 'digital_wallets' | 'international' | 'remittance' | 'card';
 
@@ -49,6 +55,7 @@ export const FeePaymentPage: React.FC = () => {
   const [trxId, setTrxId] = useState('');
   const [slipImage, setSlipImage] = useState<string | null>(null);
   const [userNotes, setUserNotes] = useState('');
+  const [weeklyDays, setWeeklyDays] = useState<WeeklyClassFrequency>(5);
   const [submittedReceipt, setSubmittedReceipt] = useState<any | null>(null);
   const [searchTrxQuery, setSearchTrxQuery] = useState('');
 
@@ -66,10 +73,15 @@ export const FeePaymentPage: React.FC = () => {
 
   const selectedCourseObj = courses.find((c) => c.id === selectedCourseId) || courses[0];
 
-  // Calculate fees based on billing cycle
-  const getCalculatedFee = (course: Course, cycle: 'monthly' | 'quarterly' | 'biannual' | 'annual') => {
-    const basePKR = course.feePKR;
-    const baseUSD = course.feeUSD;
+  // Calculate fees based on weekly frequency and billing cycle
+  const getCalculatedFee = (
+    course: Course,
+    days: WeeklyClassFrequency,
+    cycle: 'monthly' | 'quarterly' | 'biannual' | 'annual'
+  ) => {
+    const weeklyPricing = calculateWeeklyFee(course.feePKR, course.feeUSD, days);
+    const basePKR = weeklyPricing.feePKR;
+    const baseUSD = weeklyPricing.feeUSD;
 
     let multiplier = 1;
     let discount = 0;
@@ -88,10 +100,21 @@ export const FeePaymentPage: React.FC = () => {
     const totalPKR = Math.round(basePKR * multiplier * (1 - discount));
     const totalUSD = Math.round(baseUSD * multiplier * (1 - discount));
 
-    return { totalPKR, totalUSD, discountPercent: Math.round(discount * 100) };
+    return {
+      days,
+      classesPerMonth: weeklyPricing.classesPerMonth,
+      totalClasses: weeklyPricing.classesPerMonth * multiplier,
+      totalPKR,
+      totalUSD,
+      perClassPKR: Math.round(totalPKR / (weeklyPricing.classesPerMonth * multiplier)),
+      perClassUSD: Number((totalUSD / (weeklyPricing.classesPerMonth * multiplier)).toFixed(2)),
+      discountPercent: Math.round(discount * 100),
+    };
   };
 
-  const currentCalc = selectedCourseObj ? getCalculatedFee(selectedCourseObj, billingCycle) : { totalPKR: 19600, totalUSD: 70, discountPercent: 0 };
+  const currentCalc = selectedCourseObj
+    ? getCalculatedFee(selectedCourseObj, weeklyDays, billingCycle)
+    : { days: 5, classesPerMonth: 20, totalClasses: 20, totalPKR: 19600, totalUSD: 70, perClassPKR: 980, perClassUSD: 3.5, discountPercent: 0 };
 
   const copyToClipboard = (text: string, key: string) => {
     if (navigator?.clipboard?.writeText) {
@@ -236,7 +259,7 @@ export const FeePaymentPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-start">
             {/* Step 1: Select Course */}
             <div className="space-y-2">
               <label className="block text-xs font-bold text-amber-200 uppercase tracking-wider">
@@ -249,18 +272,50 @@ export const FeePaymentPage: React.FC = () => {
               >
                 {courses.map((c) => (
                   <option key={c.id} value={c.id}>
-                    {c.title} — Rs. {c.feePKR.toLocaleString()} / ${c.feeUSD}
+                    {c.title}
                   </option>
                 ))}
               </select>
+              <div className="text-[11px] text-red-300">
+                Base: Rs. {selectedCourseObj.feePKR.toLocaleString()} PKR / ${selectedCourseObj.feeUSD} USD (5-day standard)
+              </div>
             </div>
 
-            {/* Step 2: Select Billing Duration */}
+            {/* Step 2: Select Weekly Frequency (1-6 Days/Wk) */}
             <div className="space-y-2">
               <label className="block text-xs font-bold text-amber-200 uppercase tracking-wider">
-                2. Select Plan Duration
+                2. Weekly Classes (ہفتہ وار کلاسز)
               </label>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-3 gap-1.5">
+                {WEEKLY_CLASS_PLANS.map((plan) => {
+                  const isSelected = weeklyDays === plan.daysPerWeek;
+                  return (
+                    <button
+                      key={plan.daysPerWeek}
+                      type="button"
+                      onClick={() => setWeeklyDays(plan.daysPerWeek)}
+                      className={`p-2 rounded-xl text-center transition-all border flex flex-col justify-between ${
+                        isSelected
+                          ? 'bg-amber-500 text-red-950 border-amber-400 font-extrabold shadow-md scale-102 ring-1 ring-amber-300'
+                          : 'bg-red-950/60 text-red-200 border-red-800 hover:bg-red-900'
+                      }`}
+                    >
+                      <span className="text-xs font-bold">{plan.daysPerWeek} {plan.daysPerWeek === 1 ? 'Day' : 'Days'}/wk</span>
+                      <span className={`text-[10px] ${isSelected ? 'text-red-900 font-bold' : 'text-red-300'}`}>
+                        {plan.classesPerMonth} cls/mo
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Step 3: Select Billing Duration */}
+            <div className="space-y-2">
+              <label className="block text-xs font-bold text-amber-200 uppercase tracking-wider">
+                3. Select Plan Duration
+              </label>
+              <div className="grid grid-cols-2 gap-1.5">
                 {[
                   { id: 'monthly', label: '1 Month', badge: 'Standard' },
                   { id: 'quarterly', label: '3 Months', badge: '5% OFF' },
@@ -286,12 +341,12 @@ export const FeePaymentPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Step 3: Total Fee Display */}
-            <div className="bg-red-950/90 border-2 border-emerald-500/60 rounded-2xl p-5 text-center space-y-2 shadow-xl">
-              <div className="text-[11px] text-emerald-400 uppercase font-extrabold tracking-widest">
-                Total Payable Tuition Fee
+            {/* Step 4: Total Fee Display */}
+            <div className="bg-red-950/90 border-2 border-emerald-500/60 rounded-2xl p-4 text-center space-y-2 shadow-xl">
+              <div className="text-[10px] text-emerald-400 uppercase font-extrabold tracking-widest">
+                Payable Fee ({weeklyDays} Days/Wk • {currentCalc.totalClasses} Classes)
               </div>
-              <div className="text-3xl sm:text-4xl font-serif font-black text-amber-200">
+              <div className="text-2xl sm:text-3xl font-serif font-black text-amber-200">
                 {selectedCurrency === 'PKR' ? (
                   <>Rs. {currentCalc.totalPKR.toLocaleString()}</>
                 ) : (
@@ -301,14 +356,68 @@ export const FeePaymentPage: React.FC = () => {
                   </>
                 )}
               </div>
-              <div className="text-xs text-red-200 flex items-center justify-center gap-2">
-                <span>Equivalent: <strong className="text-emerald-300">${currentCalc.totalUSD} USD</strong></span>
+              <div className="text-xs text-red-200 flex flex-col items-center justify-center gap-0.5">
+                <div>
+                  Equivalent: <strong className="text-emerald-300 font-bold">${currentCalc.totalUSD} USD</strong>
+                </div>
+                <div className="text-[10px] text-amber-300 font-mono">
+                  ~Rs. {currentCalc.perClassPKR.toLocaleString()} / class (${currentCalc.perClassUSD})
+                </div>
                 {currentCalc.discountPercent > 0 && (
-                  <span className="bg-emerald-500/20 text-emerald-300 text-[10px] px-2 py-0.5 rounded-full border border-emerald-400/40">
+                  <span className="bg-emerald-500/20 text-emerald-300 text-[10px] px-2 py-0.5 rounded-full border border-emerald-400/40 mt-1">
                     Saved {currentCalc.discountPercent}%
                   </span>
                 )}
               </div>
+            </div>
+          </div>
+
+          {/* 1 to 6 Classes/Week Full Distribution Grid */}
+          <div className="mt-6 pt-5 border-t border-amber-500/30 space-y-3">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs">
+              <div className="font-serif font-bold text-amber-200 text-sm">
+                Complete Weekly Frequency Fee Breakdown (1 تا 6 کلاسز فی ہفتہ کی مکمل تقسیم):
+              </div>
+              <span className="text-[11px] text-red-200">
+                For: <strong className="text-white">{selectedCourseObj.title}</strong>
+              </span>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+              {getAllWeeklyPlansForCourse(selectedCourseObj.feePKR, selectedCourseObj.feeUSD).map((plan) => {
+                const isSelected = weeklyDays === plan.daysPerWeek;
+                return (
+                  <button
+                    key={plan.daysPerWeek}
+                    type="button"
+                    onClick={() => setWeeklyDays(plan.daysPerWeek)}
+                    className={`p-3 rounded-xl border text-left transition-all flex flex-col justify-between ${
+                      isSelected
+                        ? 'bg-amber-500 text-red-950 border-amber-300 font-extrabold shadow-lg ring-2 ring-amber-300 scale-102'
+                        : 'bg-red-950/70 border-red-800 text-red-100 hover:bg-red-900/60 hover:border-amber-500/50'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between w-full">
+                      <span className="text-xs font-black">{plan.daysPerWeek} {plan.daysPerWeek === 1 ? 'Class' : 'Classes'}/Wk</span>
+                      <span className={`text-[9px] px-1.5 py-0.5 rounded ${isSelected ? 'bg-red-950 text-amber-300' : 'bg-red-900 text-red-300'}`}>
+                        {plan.classesPerMonth} cls
+                      </span>
+                    </div>
+
+                    <div className="mt-2 pt-1 border-t border-current/20 w-full space-y-0.5">
+                      <div className={`text-xs font-black ${isSelected ? 'text-red-950' : 'text-amber-200'}`}>
+                        Rs. {plan.feePKR.toLocaleString()} PKR
+                      </div>
+                      <div className={`text-[11px] font-bold ${isSelected ? 'text-red-900' : 'text-emerald-400'}`}>
+                        ${plan.feeUSD} USD / mo
+                      </div>
+                      <div className={`text-[9px] ${isSelected ? 'text-red-900' : 'text-red-300'}`}>
+                        Rs. {plan.perClassPKR.toLocaleString()} / cls
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>

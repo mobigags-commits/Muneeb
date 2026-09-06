@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
-import { X, CheckCircle, CreditCard, Send, Sparkles, BookOpen, User } from 'lucide-react';
+import { X, CheckCircle, CreditCard, Send, Sparkles, BookOpen, User, Calendar } from 'lucide-react';
 import { useAcademy } from '../context/AcademyContext';
 import { Course } from '../types';
+import {
+  WeeklyClassFrequency,
+  WEEKLY_CLASS_PLANS,
+  calculateWeeklyFee,
+} from '../utils/weeklyPlanPricing';
 
 export const EnrollmentModal: React.FC = () => {
-  const { selectedCourseForEnroll, setSelectedCourseForEnroll, siteSettings, addStudent, addPayment } = useAcademy();
+  const { selectedCourseForEnroll, setSelectedCourseForEnroll, siteSettings, addStudent } = useAcademy();
 
   const [studentName, setStudentName] = useState('');
   const [guardianName, setGuardianName] = useState('');
@@ -12,6 +17,7 @@ export const EnrollmentModal: React.FC = () => {
   const [gender, setGender] = useState<'male' | 'female'>('male');
   const [phone, setPhone] = useState('');
   const [cityCountry, setCityCountry] = useState('');
+  const [weeklyDays, setWeeklyDays] = useState<WeeklyClassFrequency>(5);
   const [preferredTime, setPreferredTime] = useState('Morning (8 AM - 12 PM)');
   const [paymentMethod, setPaymentMethod] = useState<'EasyPaisa' | 'Bank Transfer'>('EasyPaisa');
   const [submitted, setSubmitted] = useState(false);
@@ -19,6 +25,7 @@ export const EnrollmentModal: React.FC = () => {
   if (!selectedCourseForEnroll) return null;
 
   const course: Course = selectedCourseForEnroll;
+  const currentPricing = calculateWeeklyFee(course.feePKR, course.feeUSD, weeklyDays);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -88,9 +95,12 @@ export const EnrollmentModal: React.FC = () => {
                   <CreditCard className="w-5 h-5 text-emerald-400" />
                   <span>EasyPaisa Fee Payment Instructions</span>
                 </div>
-                <div className="text-xs space-y-1 text-red-100">
+                <div className="text-xs space-y-1.5 text-red-100">
                   <p>
-                    • Course Monthly Fee: <strong className="text-amber-300">Rs. {course.feePKR.toLocaleString()} PKR</strong> (or <strong className="text-amber-300">${course.feeUSD} USD</strong> for international)
+                    • Selected Schedule: <strong className="text-amber-300 font-bold">{weeklyDays} {weeklyDays === 1 ? 'Class' : 'Classes'} / Week ({currentPricing.classesPerMonth} Classes / Month)</strong>
+                  </p>
+                  <p>
+                    • Course Monthly Fee: <strong className="text-emerald-400 font-bold text-sm">Rs. {currentPricing.feePKR.toLocaleString()} PKR</strong> (or <strong className="text-amber-300 font-bold">${currentPricing.feeUSD} USD</strong> for overseas)
                   </p>
                   <p>
                     • EasyPaisa Account Title: <strong className="text-white font-bold">{siteSettings.easyPaisaAccountTitle}</strong>
@@ -116,14 +126,68 @@ export const EnrollmentModal: React.FC = () => {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="bg-red-900/40 p-3 rounded-xl border border-amber-500/20 flex items-center justify-between text-xs">
+              <div className="bg-red-900/40 p-3 rounded-xl border border-amber-500/20 flex flex-col sm:flex-row sm:items-center justify-between text-xs gap-1">
                 <div>
                   <span className="text-red-300">Selected Course:</span>{' '}
                   <strong className="text-amber-200">{course.title}</strong>
                 </div>
                 <div>
-                  <span className="text-red-300">Fee:</span>{' '}
-                  <strong className="text-emerald-400">Rs. {course.feePKR.toLocaleString()} PKR / ${course.feeUSD} USD</strong>
+                  <span className="text-red-300">Monthly Fee:</span>{' '}
+                  <strong className="text-emerald-400">Rs. {currentPricing.feePKR.toLocaleString()} PKR / ${currentPricing.feeUSD} USD</strong>
+                </div>
+              </div>
+
+              {/* Weekly Class Frequency (1 to 6 Classes per Week) */}
+              <div className="bg-red-900/40 p-3.5 rounded-xl border border-amber-500/30 space-y-2">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs">
+                  <div className="flex items-center gap-1.5 font-bold text-amber-300">
+                    <Calendar className="w-4 h-4 text-emerald-400" />
+                    <span>Weekly Class Frequency (ہفتہ وار کلاسز):</span>
+                  </div>
+                  <span className="text-[11px] text-red-200">
+                    {weeklyDays} {weeklyDays === 1 ? 'Class' : 'Classes'} / Week ({currentPricing.classesPerMonth} Classes / Month)
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5">
+                  {WEEKLY_CLASS_PLANS.map((plan) => {
+                    const isSelected = weeklyDays === plan.daysPerWeek;
+                    const planFee = calculateWeeklyFee(course.feePKR, course.feeUSD, plan.daysPerWeek);
+                    return (
+                      <button
+                        key={plan.daysPerWeek}
+                        type="button"
+                        onClick={() => setWeeklyDays(plan.daysPerWeek)}
+                        className={`p-2 rounded-xl border text-center transition-all flex flex-col justify-between ${
+                          isSelected
+                            ? 'bg-amber-500 text-red-950 border-amber-300 font-extrabold shadow-lg ring-2 ring-amber-300/60 scale-102'
+                            : 'bg-red-950/80 border-red-800/80 text-red-100 hover:border-amber-500/60 hover:bg-red-900/50'
+                        }`}
+                      >
+                        <div className="text-[11px] font-bold">
+                          {plan.daysPerWeek} {plan.daysPerWeek === 1 ? 'Day' : 'Days'}/wk
+                        </div>
+                        <div className={`text-[9px] ${isSelected ? 'text-red-950 font-semibold' : 'text-red-300'}`}>
+                          {plan.classesPerMonth} classes
+                        </div>
+                        <div className="mt-1 pt-1 border-t border-red-800/30 w-full">
+                          <div className={`text-[11px] font-extrabold ${isSelected ? 'text-red-950' : 'text-emerald-400'}`}>
+                            Rs. {planFee.feePKR.toLocaleString()}
+                          </div>
+                          <div className={`text-[10px] font-bold ${isSelected ? 'text-red-900' : 'text-amber-300'}`}>
+                            ${planFee.feeUSD} USD
+                          </div>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <div className="flex items-center justify-between text-xs pt-1 border-t border-red-800/50 text-red-200">
+                  <span>Selected Schedule Fee:</span>
+                  <span className="font-extrabold text-amber-300 text-sm">
+                    Rs. {currentPricing.feePKR.toLocaleString()} PKR / ${currentPricing.feeUSD} USD ({currentPricing.classesPerMonth} Classes/mo)
+                  </span>
                 </div>
               </div>
 
