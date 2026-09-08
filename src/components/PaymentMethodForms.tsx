@@ -29,6 +29,7 @@ import {
   calculateWeeklyFee,
 } from '../utils/weeklyPlanPricing';
 import { trackPaymentReceiptSubmission } from '../utils/googleAdsTracking';
+import { AcademyLogo } from './AcademyLogo';
 
 export type SupportedPaymentMethod =
   | 'easypaisa'
@@ -359,16 +360,19 @@ export const PaymentMethodForms: React.FC<PaymentMethodFormsProps> = ({
             className="bg-white text-slate-900 rounded-2xl p-6 sm:p-8 space-y-6 shadow-2xl border-4 border-amber-500/50"
           >
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
-              <div>
-                <span className="text-[10px] uppercase font-bold tracking-widest text-amber-800 bg-amber-100 px-2 py-0.5 rounded">
-                  Official Academy Fee Voucher
-                </span>
-                <h4 className="text-xl sm:text-2xl font-serif font-extrabold text-red-950 mt-1">
-                  {siteSettings.academyName}
-                </h4>
-                <p className="text-xs text-slate-600">
-                  Head Office: {siteSettings.headOfficeCity}, Pakistan • Official WhatsApp: {siteSettings.whatsappNumber}
-                </p>
+              <div className="flex items-center gap-3">
+                <AcademyLogo size="md" shape="rounded" glowEffect={false} />
+                <div>
+                  <span className="text-[10px] uppercase font-bold tracking-widest text-amber-800 bg-amber-100 px-2 py-0.5 rounded">
+                    Official Academy Fee Voucher
+                  </span>
+                  <h4 className="text-xl sm:text-2xl font-serif font-extrabold text-red-950 mt-1">
+                    {siteSettings.academyName}
+                  </h4>
+                  <p className="text-xs text-slate-600">
+                    Head Office: {siteSettings.headOfficeCity}, Pakistan • Official WhatsApp: {siteSettings.whatsappNumber}
+                  </p>
+                </div>
               </div>
 
               <div className="text-right">

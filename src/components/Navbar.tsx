@@ -32,6 +32,7 @@ import { useAcademy } from '../context/AcademyContext';
 import { PageId, UserRole } from '../types';
 import { MemorialBanner } from './MemorialBanner';
 import { EcosystemBar } from './EcosystemBar';
+import { AcademyLogo } from './AcademyLogo';
 
 export const Navbar: React.FC = () => {
   const {
@@ -187,22 +188,15 @@ export const Navbar: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo & Brand Title */}
-            <button
-              onClick={() => setActivePage('home')}
-              className="flex items-center gap-3 text-left group focus:outline-none"
-            >
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-amber-500 to-amber-300 flex items-center justify-center text-red-950 shadow-lg group-hover:scale-105 transition-transform border border-amber-200">
-                <BookOpen className="w-7 h-7 font-bold" />
-              </div>
-              <div>
-                <div className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-amber-200 tracking-tight leading-tight group-hover:text-white transition-colors">
-                  Shaheen Al Zaitoon
-                </div>
-                <div className="text-xs text-amber-300/90 tracking-wide font-serif">
-                  Online Quran Academy • Rawalpindi
-                </div>
-              </div>
-            </button>
+            <div className="flex items-center">
+              <AcademyLogo
+                size="md"
+                showText={true}
+                textTone="gold"
+                subtext="Online Quran Academy • Rawalpindi"
+                onClick={() => setActivePage('home')}
+              />
+            </div>
 
             {/* Search Bar (Desktop) */}
             <div className="hidden lg:flex items-center relative max-w-xs w-full">

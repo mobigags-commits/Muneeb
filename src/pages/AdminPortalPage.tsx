@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Sparkles, Save, CheckCircle, CreditCard, Users, BookOpen, MapPin, FileText, Plus, ShieldCheck, DollarSign, ArrowRight } from 'lucide-react';
 import { useAcademy } from '../context/AcademyContext';
+import { AcademyLogo } from '../components/AcademyLogo';
 
 export const AdminPortalPage: React.FC = () => {
   const {
@@ -62,9 +63,7 @@ export const AdminPortalPage: React.FC = () => {
         {/* Header */}
         <div className="bg-gradient-to-r from-red-900 via-amber-950 to-red-900 border-2 border-amber-500/50 rounded-2xl p-6 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-amber-500 text-red-950 font-bold flex items-center justify-center text-xl">
-              <Sparkles className="w-6 h-6" />
-            </div>
+            <AcademyLogo size="lg" shape="rounded" glowEffect={true} />
             <div>
               <div className="text-xs uppercase font-extrabold text-amber-300">
                 Super Admin & Owner Control Center

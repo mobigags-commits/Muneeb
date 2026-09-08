@@ -1,6 +1,7 @@
 import React from 'react';
 import { BookOpen, ShoppingBag, Heart, TrendingUp, Phone, ShieldCheck, Megaphone, Facebook, Globe } from 'lucide-react';
 import { useAcademy } from '../context/AcademyContext';
+import { AcademyLogo } from './AcademyLogo';
 
 export const EcosystemBar: React.FC = () => {
   const { activePage, setActivePage, siteSettings } = useAcademy();
@@ -16,13 +17,13 @@ export const EcosystemBar: React.FC = () => {
 
           <button
             onClick={() => setActivePage('home')}
-            className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium transition-all ${
+            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium transition-all ${
               activePage === 'home' || activePage === 'courses' || activePage === 'teachers'
                 ? 'bg-amber-500 text-red-950 font-bold shadow-sm'
                 : 'bg-red-900/60 hover:bg-red-800 text-amber-100 border border-amber-500/20'
             }`}
           >
-            <BookOpen className="w-3.5 h-3.5 text-amber-300 group-hover:text-amber-200" />
+            <AcademyLogo size="xs" shape="circle" glowEffect={false} />
             <span>Shaheen Quran Academy</span>
           </button>
 

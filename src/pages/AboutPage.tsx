@@ -2,6 +2,7 @@ import React from 'react';
 import { Heart, Award, Shield, Globe, MapPin, BookOpen, Sparkles, CheckCircle } from 'lucide-react';
 import { useAcademy } from '../context/AcademyContext';
 import { MemorialBanner } from '../components/MemorialBanner';
+import { AcademyLogo } from '../components/AcademyLogo';
 
 export const AboutPage: React.FC = () => {
   const { siteSettings, branches, setActivePage } = useAcademy();
@@ -10,7 +11,10 @@ export const AboutPage: React.FC = () => {
     <div className="bg-red-950 text-white min-h-screen py-10 px-4 sm:px-6 lg:px-8 space-y-12">
       <div className="max-w-5xl mx-auto space-y-10">
         {/* Header Title */}
-        <div className="text-center space-y-3">
+        <div className="text-center space-y-4">
+          <div className="flex justify-center">
+            <AcademyLogo size="xl" shape="circle" glowEffect={true} />
+          </div>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold uppercase tracking-wider border border-amber-400/30">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Islamic Education Ecosystem</span>

@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { useAcademy } from '../context/AcademyContext';
 import { PageId } from '../types';
+import { AcademyLogo } from './AcademyLogo';
 
 export const Footer: React.FC = () => {
   const { siteSettings, setActivePage } = useAcademy();
@@ -152,14 +153,13 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 border-b border-red-800 pb-10">
           {/* Column 1: Academy Overview & Memorial */}
           <div className="lg:col-span-4 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-500 text-red-950 flex items-center justify-center font-bold">
-                <BookOpen className="w-6 h-6" />
-              </div>
-              <span className="font-serif font-bold text-lg text-amber-200">
-                Shaheen Al Zaitoon
-              </span>
-            </div>
+            <AcademyLogo
+              size="lg"
+              showText={true}
+              textTone="gold"
+              subtext="Online Quran Academy • Rawalpindi"
+              onClick={() => setActivePage('home')}
+            />
             <p className="text-xs text-red-200/90 leading-relaxed">
               A premier global online Quran learning academy providing 1-on-1 personalized Tajweed, Hifz, and Quran comprehension classes for students across USA, UK, Canada, Australia, UAE, Pakistan, and worldwide.
             </p>

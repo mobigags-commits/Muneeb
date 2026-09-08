@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Award, CheckCircle, Search, Printer, ShieldCheck, Sparkles } from 'lucide-react';
 import { useAcademy } from '../context/AcademyContext';
+import { AcademyLogo } from '../components/AcademyLogo';
 
 export const CertificatesPage: React.FC = () => {
   const { certificates, siteSettings } = useAcademy();
@@ -63,6 +64,12 @@ export const CertificatesPage: React.FC = () => {
               <div className="text-amber-800 text-sm font-serif font-bold tracking-widest uppercase">
                 بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
               </div>
+
+              {/* Official Academy Emblem Crest */}
+              <div className="flex justify-center">
+                <AcademyLogo size="xl" shape="circle" glowEffect={true} />
+              </div>
+
               <div className="text-2xl sm:text-4xl font-serif font-extrabold text-red-950">
                 {siteSettings.academyName}
               </div>

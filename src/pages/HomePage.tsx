@@ -26,6 +26,7 @@ import { MemorialBanner } from '../components/MemorialBanner';
 import { AIChatAssistant } from '../components/AIChatAssistant';
 import { EasyPaisaPaymentModal } from '../components/EasyPaisaPaymentModal';
 import { FacebookGroupWidget } from '../components/FacebookGroupWidget';
+import { AcademyLogo } from '../components/AcademyLogo';
 
 export const HomePage: React.FC = () => {
   const {
@@ -159,13 +160,31 @@ export const HomePage: React.FC = () => {
 
             {/* Right Card Hero Preview Box */}
             <div className="lg:col-span-5">
-              <div className="relative rounded-2xl bg-gradient-to-b from-red-900 via-amber-950 to-red-950 border-2 border-amber-500/50 p-6 shadow-2xl space-y-6">
-                <div className="flex items-center justify-between border-b border-red-800 pb-3">
-                  <div className="text-amber-200 font-serif font-bold text-lg">
-                    Official Academy Overview
+              <div className="relative rounded-3xl bg-gradient-to-b from-red-900 via-amber-950 to-red-950 border-2 border-amber-500/60 p-6 sm:p-7 shadow-2xl space-y-6">
+                {/* Official Crest Header */}
+                <div className="text-center space-y-3 pb-2 border-b border-red-800">
+                  <div className="flex justify-center">
+                    <AcademyLogo size="2xl" shape="circle" glowEffect={true} />
+                  </div>
+                  <div>
+                    <div className="text-amber-200 font-serif font-black text-xl tracking-wide">
+                      {siteSettings.academyName}
+                    </div>
+                    <div className="text-xs text-amber-300 font-serif">
+                      شاہین الزیتون آن لائن قرآن اکیڈمی • راولپنڈی
+                    </div>
+                    <div className="text-[11px] text-emerald-300 font-semibold mt-0.5">
+                      Founder & Owner: {siteSettings.ownerName}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div className="text-amber-200 font-serif font-bold text-sm">
+                    Verified Global Institutional Hub
                   </div>
                   <span className="text-xs bg-emerald-500/20 text-emerald-300 font-bold px-2.5 py-1 rounded-full border border-emerald-400/30">
-                    Live Admissions Open
+                    Admissions Active
                   </span>
                 </div>
 
