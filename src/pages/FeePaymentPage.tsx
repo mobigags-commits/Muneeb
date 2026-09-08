@@ -32,6 +32,7 @@ import {
   calculateWeeklyFee,
   getAllWeeklyPlansForCourse,
 } from '../utils/weeklyPlanPricing';
+import { PaymentMethodForms, SupportedPaymentMethod } from '../components/PaymentMethodForms';
 
 type PaymentTab = 'easypaisa' | 'jazzcash' | 'meezan' | 'other_banks' | 'digital_wallets' | 'international' | 'remittance' | 'card';
 
@@ -1038,263 +1039,28 @@ export const FeePaymentPage: React.FC = () => {
           </div>
         </div>
 
-        {/* PAYMENT SUBMISSION FORM BOX */}
-        <div id="payment-submission-box" className="bg-gradient-to-b from-red-900 via-red-900 to-red-950 border-2 border-amber-500/50 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
-          <div className="flex items-center justify-between border-b border-red-800 pb-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center font-bold">
-                <Upload className="w-5 h-5" />
-              </div>
-              <div>
-                <h2 className="text-xl font-serif font-bold text-amber-200">
-                  Submit Payment Slip / Transaction ID for Instant Verification
-                </h2>
-                <p className="text-xs text-red-200">
-                  Once submitted, an official digital invoice is automatically generated for your student records.
-                </p>
-              </div>
+        {/* DEDICATED ALL PAYMENT METHODS FORMS HUB */}
+        <div id="payment-submission-box" className="space-y-6 scroll-mt-24">
+          <div className="text-center space-y-2 max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold uppercase tracking-wider border border-amber-400/30">
+              <Sparkles className="w-4 h-4 text-amber-400" />
+              <span>Dedicated Method Forms • تمام 8 پیمنٹ فارمز</span>
             </div>
+            <h2 className="text-2xl sm:text-4xl font-serif font-extrabold text-amber-100">
+              Dedicated Payment Forms For Every Channel
+            </h2>
+            <p className="text-xs sm:text-sm text-red-200 leading-relaxed">
+              Select any of the 8 payment channels below to access its dedicated form with specific inputs, live multi-currency fee calculation, instant official tuition voucher generation, and direct 24/7 WhatsApp verification with Founder Muneeb Ur Rehman.
+            </p>
           </div>
 
-          {submittedReceipt ? (
-            <div className="bg-red-950/90 border-2 border-emerald-500/60 rounded-2xl p-6 space-y-6">
-              <div className="text-center space-y-2">
-                <div className="w-14 h-14 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto border-2 border-emerald-400">
-                  <CheckCircle2 className="w-8 h-8" />
-                </div>
-                <h3 className="text-2xl font-serif font-bold text-amber-200">
-                  Payment Receipt Logged Successfully!
-                </h3>
-                <p className="text-xs text-red-200 max-w-lg mx-auto">
-                  Receipt No: <strong className="text-amber-300 font-mono">{submittedReceipt.id}</strong>. Your transaction ID (<strong>{submittedReceipt.transactionId}</strong>) has been queued for verification.
-                </p>
-              </div>
-
-              {/* Printable Official Digital Invoice Voucher */}
-              <div className="bg-white text-slate-900 rounded-2xl p-6 sm:p-8 space-y-6 shadow-2xl border-4 border-amber-500/40 relative overflow-hidden" id="printable-invoice">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
-                  <div>
-                    <span className="text-[10px] uppercase font-bold tracking-widest text-amber-700 bg-amber-100 px-2 py-0.5 rounded">
-                      Official Academy Tuition Voucher
-                    </span>
-                    <h4 className="text-xl sm:text-2xl font-serif font-extrabold text-red-950 mt-1">
-                      {siteSettings.academyName}
-                    </h4>
-                    <p className="text-xs text-slate-600">
-                      Head Office: {siteSettings.headOfficeCity}, Pakistan • WhatsApp: {siteSettings.whatsappNumber}
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-xs font-bold text-slate-500">VOUCHER #</div>
-                    <div className="text-lg font-mono font-black text-red-900">{submittedReceipt.id}</div>
-                    <div className="text-[11px] text-slate-500 font-medium">Date: {submittedReceipt.date}</div>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs bg-slate-50 p-4 rounded-xl border border-slate-200">
-                  <div>
-                    <span className="text-slate-500 text-[11px] block">Student Name:</span>
-                    <strong className="text-slate-900 text-sm font-serif">{submittedReceipt.studentName}</strong>
-                  </div>
-                  <div>
-                    <span className="text-slate-500 text-[11px] block">Quran Course:</span>
-                    <strong className="text-slate-900">{submittedReceipt.courseTitle}</strong>
-                  </div>
-                  <div>
-                    <span className="text-slate-500 text-[11px] block">Payment Method:</span>
-                    <strong className="text-emerald-700">{submittedReceipt.senderBankOrWallet || submittedReceipt.paymentMethod}</strong>
-                  </div>
-                  <div>
-                    <span className="text-slate-500 text-[11px] block">Transaction ID:</span>
-                    <strong className="text-red-800 font-mono text-sm">{submittedReceipt.transactionId}</strong>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between border-t border-slate-200 pt-4">
-                  <div>
-                    <div className="text-xs text-slate-500">Total Amount Received:</div>
-                    <div className="text-2xl sm:text-3xl font-serif font-black text-red-950">
-                      Rs. {submittedReceipt.amountPKR.toLocaleString()} PKR <span className="text-sm font-sans font-bold text-slate-600">(${submittedReceipt.amountUSD} USD)</span>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <span className="inline-flex items-center gap-1 bg-emerald-100 text-emerald-800 text-xs font-extrabold px-3 py-1 rounded-full border border-emerald-300">
-                      <CheckCircle2 className="w-3.5 h-3.5" />
-                      <span>{submittedReceipt.status}</span>
-                    </span>
-                    <div className="text-[10px] text-slate-400 mt-1">Authorized by Founder {siteSettings.ownerName}</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center justify-center gap-4">
-                <button
-                  onClick={() => handleWhatsAppShareReceipt(submittedReceipt)}
-                  className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-6 py-3 rounded-xl shadow flex items-center gap-2"
-                >
-                  <Share2 className="w-4 h-4" />
-                  <span>Send Voucher to Founder on WhatsApp</span>
-                </button>
-                <button
-                  onClick={() => window.print()}
-                  className="bg-red-900 hover:bg-red-800 text-amber-200 font-bold text-xs px-6 py-3 rounded-xl border border-amber-500/40 flex items-center gap-2"
-                >
-                  <Printer className="w-4 h-4" />
-                  <span>Print Invoice Receipt</span>
-                </button>
-                <button
-                  onClick={() => setSubmittedReceipt(null)}
-                  className="bg-amber-500 hover:bg-amber-400 text-red-950 font-bold text-xs px-6 py-3 rounded-xl"
-                >
-                  Submit Another Payment
-                </button>
-              </div>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmitPayment} className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div>
-                  <label className="block text-xs font-bold text-amber-200 mb-1">
-                    Student Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Zayd Rehman"
-                    value={studentName}
-                    onChange={(e) => setStudentName(e.target.value)}
-                    className="w-full bg-red-950/90 border border-red-700 text-white rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-amber-400"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-amber-200 mb-1">
-                    Father / Guardian Name
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="e.g. Muneeb Rehman"
-                    value={guardianName}
-                    onChange={(e) => setGuardianName(e.target.value)}
-                    className="w-full bg-red-950/90 border border-red-700 text-white rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-amber-400"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-amber-200 mb-1">
-                    Student / Parent WhatsApp Phone *
-                  </label>
-                  <input
-                    type="tel"
-                    required
-                    placeholder="e.g. 03447956085"
-                    value={studentPhone}
-                    onChange={(e) => setStudentPhone(e.target.value)}
-                    className="w-full bg-red-950/90 border border-red-700 text-white rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-amber-400"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-amber-200 mb-1">
-                    Payment Method Used *
-                  </label>
-                  <select
-                    value={senderBankOrWallet}
-                    onChange={(e) => setSenderBankOrWallet(e.target.value)}
-                    className="w-full bg-red-950/90 border border-red-700 text-amber-200 rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-amber-400"
-                  >
-                    <option value="EasyPaisa">EasyPaisa Mobile Wallet</option>
-                    <option value="JazzCash">JazzCash Mobile Wallet</option>
-                    <option value="Meezan Bank">Meezan Islamic Bank</option>
-                    <option value="Bank Alfalah">Bank Alfalah</option>
-                    <option value="HBL">Habib Bank Limited (HBL)</option>
-                    <option value="SadaPay">SadaPay Digital Wallet</option>
-                    <option value="NayaPay">NayaPay Digital Wallet</option>
-                    <option value="International Wire">International Wire Transfer (SWIFT)</option>
-                    <option value="Remittance">Remittance (Western Union / Wise / Remitly)</option>
-                    <option value="Debit / Credit Card">Debit / Credit Card</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-amber-200 mb-1">
-                    Sender Account / Mobile Number
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="e.g. 03001234567 or IBAN"
-                    value={senderAccountOrPhone}
-                    onChange={(e) => setSenderAccountOrPhone(e.target.value)}
-                    className="w-full bg-red-950/90 border border-red-700 text-white rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-amber-400"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-amber-200 mb-1">
-                    Transaction ID (TID) / Reference No *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. EP-998823104 or MZ-448201"
-                    value={trxId}
-                    onChange={(e) => setTrxId(e.target.value)}
-                    className="w-full bg-red-950/90 border border-red-700 text-amber-300 font-mono font-bold rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-amber-400"
-                  />
-                </div>
-              </div>
-
-              {/* Slip Upload & Notes */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                <div>
-                  <label className="block text-xs font-bold text-amber-200 mb-1">
-                    Attach Payment Slip Screenshot (Optional)
-                  </label>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    className="w-full bg-red-950/90 border border-red-700 text-red-200 text-xs rounded-xl p-2 focus:outline-none"
-                  />
-                  {slipImage && (
-                    <div className="mt-2 flex items-center gap-2">
-                      <img src={slipImage} alt="Preview" className="w-12 h-12 object-cover rounded-lg border border-amber-400" />
-                      <span className="text-[11px] text-emerald-400 font-bold">Screenshot Attached</span>
-                    </div>
-                  )}
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-amber-200 mb-1">
-                    Additional Instructions / Notes
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="e.g. Paid for 3 months Noorani Qaida bundle"
-                    value={userNotes}
-                    onChange={(e) => setUserNotes(e.target.value)}
-                    className="w-full bg-red-950/90 border border-red-700 text-white rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-amber-400"
-                  />
-                </div>
-              </div>
-
-              <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-red-800">
-                <div className="text-xs text-red-200">
-                  Total Payable Amount: <strong className="text-emerald-400 text-sm">Rs. {currentCalc.totalPKR.toLocaleString()} PKR (${currentCalc.totalUSD} USD)</strong>
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs px-8 py-3.5 rounded-xl shadow-xl flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5"
-                >
-                  <Send className="w-4 h-4" />
-                  <span>Submit Payment Receipt & Generate Voucher</span>
-                </button>
-              </div>
-            </form>
-          )}
+          <PaymentMethodForms
+            initialMethod={activeTab as SupportedPaymentMethod}
+            defaultCourseId={selectedCourseId}
+            showSelectorTabs={true}
+          />
         </div>
+
 
         {/* RECENT PAYMENTS & VERIFICATION LOG SEARCH */}
         <div className="bg-red-900/60 border border-amber-500/30 rounded-3xl p-6 space-y-4">

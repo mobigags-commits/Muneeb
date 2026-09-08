@@ -35,3 +35,24 @@ export const trackGoogleConversion = (eventName: string, params?: ConversionPayl
     console.warn('[Google Tracking] Failed to dispatch event:', err);
   }
 };
+
+/**
+ * Dispatches a conversion event specifically for tuition fee payment receipts
+ */
+export const trackPaymentReceiptSubmission = (payload: {
+  transactionId: string;
+  amountPKR: number;
+  currency: string;
+  method: string;
+  courseTitle: string;
+}): void => {
+  trackGoogleConversion('purchase', {
+    transaction_id: payload.transactionId,
+    value: payload.amountPKR,
+    currency: payload.currency || 'PKR',
+    event_category: 'Tuition Payment',
+    event_label: `${payload.method} - ${payload.courseTitle}`,
+    payment_type: payload.method,
+  });
+};
+
