@@ -7,10 +7,12 @@ export const CertificatesPage: React.FC = () => {
   const { certificates, siteSettings } = useAcademy();
   const [searchCode, setSearchCode] = useState('');
   const [selectedCert, setSelectedCert] = useState<any | null>(certificates[0]);
+  const [searchError, setSearchError] = useState<string | null>(null);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (!searchCode.trim()) return;
+    setSearchError(null);
     const found = certificates.find(
       (c) =>
         c.verificationCode.toLowerCase() === searchCode.trim().toLowerCase() ||
@@ -19,7 +21,7 @@ export const CertificatesPage: React.FC = () => {
     if (found) {
       setSelectedCert(found);
     } else {
-      alert('Certificate not found. Try search code: SZ-2026-8891');
+      setSearchError(`No certificate found for "${searchCode.trim()}". Please enter an official code like "SZ-2026-8891" or contact Admissions.`);
     }
   };
 
@@ -56,6 +58,12 @@ export const CertificatesPage: React.FC = () => {
             <span>Verify</span>
           </button>
         </form>
+
+        {searchError && (
+          <div className="bg-red-900/80 border border-red-500 text-red-200 text-xs p-3 rounded-xl text-center">
+            {searchError}
+          </div>
+        )}
 
         {/* Display Verified Certificate */}
         {selectedCert && (

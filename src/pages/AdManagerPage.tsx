@@ -92,6 +92,7 @@ export const AdManagerPage: React.FC = () => {
   // Selected Campaign for Modal View/Edit
   const [selectedCampaign, setSelectedCampaign] = useState<AdCampaign | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [statusBanner, setStatusBanner] = useState<string | null>(null);
 
   // New Social Account Modal State
   const [showAddSocialModal, setShowAddSocialModal] = useState(false);
@@ -187,7 +188,8 @@ export const AdManagerPage: React.FC = () => {
 
     addAdCampaign(newAd);
     setActiveTab('dashboard');
-    alert(`🎉 Campaign "${adTitle}" published successfully across selected platforms!`);
+    setStatusBanner(`Campaign "${adTitle}" published successfully across selected platforms!`);
+    setTimeout(() => setStatusBanner(null), 5000);
   };
 
   const togglePlatform = (p: string) => {
@@ -262,6 +264,21 @@ export const AdManagerPage: React.FC = () => {
               </button>
             </div>
           </div>
+
+          {statusBanner && (
+            <div className="mt-4 bg-emerald-950/80 border border-emerald-500/60 p-4 rounded-xl text-emerald-200 text-xs flex items-center justify-between shadow-lg">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                <span>{statusBanner}</span>
+              </div>
+              <button
+                onClick={() => setStatusBanner(null)}
+                className="text-emerald-400 hover:text-white text-xs font-bold px-2 py-0.5"
+              >
+                ✕
+              </button>
+            </div>
+          )}
 
           {/* Key KPI Metrics Cards */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mt-8">
@@ -549,15 +566,24 @@ export const AdManagerPage: React.FC = () => {
                       <div className="flex items-center gap-1">
                         <button
                           onClick={() => {
-                            recordAdClick(ad.id);
-                            recordAdLead(ad.id);
-                            alert(`Simulated 1 click & 1 lead for campaign "${ad.title}"!`);
+                            navigator.clipboard.writeText(ad.linkUrl || window.location.origin);
+                            setCopiedId(`link_${ad.id}`);
+                            setTimeout(() => setCopiedId(null), 2500);
                           }}
                           className="px-2.5 py-1.5 bg-emerald-500/20 text-emerald-300 rounded-lg text-[10px] font-bold hover:bg-emerald-500/30 transition-all flex items-center gap-1"
-                          title="Simulate Lead"
+                          title="Copy Campaign Link"
                         >
-                          <Zap className="w-3 h-3" />
-                          <span>+ Lead</span>
+                          {copiedId === `link_${ad.id}` ? (
+                            <>
+                              <Check className="w-3 h-3 text-emerald-400" />
+                              <span>Copied!</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-3 h-3" />
+                              <span>Copy Link</span>
+                            </>
+                          )}
                         </button>
 
                         <button
@@ -1170,14 +1196,16 @@ export const AdManagerPage: React.FC = () => {
                     </div>
 
                     <button
-                      onClick={() => alert(`Selected ${plan.name}! Proceeding to EasyPaisa payment (03447956085).`)}
+                      onClick={() => {
+                        setActivePage('fee-payment');
+                      }}
                       className={`w-full py-3.5 rounded-xl text-xs font-bold transition-all mt-8 ${
                         plan.isPopular
                           ? 'bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-lg shadow-amber-500/20'
                           : 'bg-slate-800 hover:bg-slate-700 text-white'
                       }`}
                     >
-                      Subscribe to {plan.name}
+                      Subscribe to {plan.name} (Pay via EasyPaisa / Bank)
                     </button>
                   </div>
                 ))}

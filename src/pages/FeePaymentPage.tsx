@@ -34,7 +34,16 @@ import {
 } from '../utils/weeklyPlanPricing';
 import { PaymentMethodForms, SupportedPaymentMethod } from '../components/PaymentMethodForms';
 
-type PaymentTab = 'easypaisa' | 'jazzcash' | 'meezan' | 'other_banks' | 'digital_wallets' | 'international' | 'remittance' | 'card';
+type PaymentTab =
+  | 'easypaisa'
+  | 'jazzcash'
+  | 'meezan'
+  | 'other_banks'
+  | 'digital_wallets'
+  | 'international'
+  | 'remittance'
+  | 'card'
+  | 'paypal';
 
 export const FeePaymentPage: React.FC = () => {
   const { siteSettings, courses, addPayment, payments } = useAcademy();
@@ -447,6 +456,7 @@ export const FeePaymentPage: React.FC = () => {
               { id: 'international', label: 'International Wire (SWIFT)', icon: Globe, color: 'text-indigo-300' },
               { id: 'remittance', label: 'Remittance (Western Union/Wise)', icon: ArrowRight, color: 'text-yellow-400' },
               { id: 'card', label: 'Debit / Credit Cards', icon: Lock, color: 'text-purple-300' },
+              { id: 'paypal', label: 'PayPal & Global Invoicing', icon: Globe, color: 'text-sky-300' },
             ].map((tab) => {
               const Icon = tab.icon;
               const isSelected = activeTab === tab.id;
@@ -463,6 +473,7 @@ export const FeePaymentPage: React.FC = () => {
                     else if (tab.id === 'international') setSenderBankOrWallet('International Wire');
                     else if (tab.id === 'remittance') setSenderBankOrWallet('Remittance');
                     else if (tab.id === 'card') setSenderBankOrWallet('Debit / Credit Card');
+                    else if (tab.id === 'paypal') setSenderBankOrWallet('PayPal');
                   }}
                   className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all ${
                     isSelected
@@ -962,7 +973,7 @@ export const FeePaymentPage: React.FC = () => {
                       Debit & Credit Card Gateway
                     </h3>
                     <p className="text-xs text-red-200">
-                      256-Bit SSL Encrypted Card Processing for Visa, MasterCard & UnionPay.
+                      256-Bit SSL Encrypted Card Processing for Visa, MasterCard, UnionPay & American Express.
                     </p>
                   </div>
                   <span className="bg-purple-500/20 text-purple-300 text-xs px-3 py-1 rounded-full border border-purple-400/40">
@@ -970,69 +981,101 @@ export const FeePaymentPage: React.FC = () => {
                   </span>
                 </div>
 
-                <div className="max-w-xl mx-auto bg-red-950/90 border border-purple-500/40 rounded-2xl p-6 space-y-4">
-                  <div className="flex items-center justify-between border-b border-red-800 pb-3">
-                    <div className="text-xs text-amber-300 font-bold uppercase tracking-wider">
-                      Card Authorization Details
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="bg-red-950/80 border border-purple-500/40 rounded-2xl p-5 space-y-4">
+                    <div className="text-amber-300 font-bold text-sm flex items-center gap-1.5">
+                      <Lock className="w-4 h-4 text-emerald-400" />
+                      <span>Accepted Card Brands & Security Standards:</span>
                     </div>
-                    <div className="flex items-center gap-2 text-xs text-red-300">
-                      <Lock className="w-3.5 h-3.5 text-emerald-400" />
-                      <span>Encrypted SSL</span>
+                    <div className="grid grid-cols-2 gap-3 text-xs">
+                      <div className="bg-purple-950/60 p-2.5 rounded-xl border border-purple-500/30">
+                        <strong className="text-white block">Visa & MasterCard</strong>
+                        <span className="text-[10px] text-purple-200">3D Secure Verified</span>
+                      </div>
+                      <div className="bg-purple-950/60 p-2.5 rounded-xl border border-purple-500/30">
+                        <strong className="text-white block">UnionPay & Amex</strong>
+                        <span className="text-[10px] text-purple-200">Global Coverage</span>
+                      </div>
+                    </div>
+                    <p className="text-xs text-red-200 leading-relaxed">
+                      All card authorizations adhere to international PCI-DSS compliance standards. Card numbers are verified using the official Luhn algorithm, and sensitive CVV codes are never stored.
+                    </p>
+                  </div>
+
+                  <div className="bg-red-950/80 border border-amber-500/40 rounded-2xl p-5 space-y-4 flex flex-col justify-between">
+                    <div className="space-y-2">
+                      <div className="text-amber-300 font-bold text-sm">Proceed to Secure Checkout</div>
+                      <p className="text-xs text-red-200 leading-relaxed">
+                        Click below to open the dedicated Card Checkout form with instant Luhn validation, cardholder verification, and voucher generation.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const el = document.getElementById('payment-submission-box');
+                        el?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                      className="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 px-4 rounded-xl text-xs flex items-center justify-center gap-2 shadow-lg"
+                    >
+                      <Lock className="w-4 h-4" />
+                      <span>Open Dedicated Card Payment Form Below</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* PAYPAL TAB */}
+            {activeTab === 'paypal' && (
+              <div className="space-y-6">
+                <div className="border-b border-sky-500/30 pb-3 flex items-center justify-between">
+                  <div>
+                    <h3 className="text-2xl font-serif font-bold text-amber-200">
+                      PayPal & Global Digital Invoicing
+                    </h3>
+                    <p className="text-xs text-red-200">
+                      Direct payment channel for international students in USA, UK, Canada, Australia & Europe.
+                    </p>
+                  </div>
+                  <span className="bg-sky-500/20 text-sky-300 text-xs px-3 py-1 rounded-full border border-sky-400/40">
+                    Worldwide
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="bg-red-950/80 border border-sky-500/40 rounded-2xl p-5 space-y-4">
+                    <div className="text-amber-300 font-bold text-sm flex items-center gap-1.5">
+                      <Globe className="w-4 h-4 text-sky-400" />
+                      <span>PayPal Tuition Instructions:</span>
+                    </div>
+                    <p className="text-xs text-red-200 leading-relaxed">
+                      Students residing overseas can submit their PayPal account email below. Our billing desk can issue an official electronic invoice directly to your PayPal account or match your existing payment confirmation reference.
+                    </p>
+                    <div className="bg-sky-950/60 p-3 rounded-xl border border-sky-500/30 text-xs text-sky-200">
+                      <div>Billing Desk: <strong>{siteSettings.ownerName}</strong> (Rawalpindi HQ)</div>
+                      <div>Support WhatsApp: <strong className="font-mono text-emerald-400">{siteSettings.whatsappNumber}</strong></div>
                     </div>
                   </div>
 
-                  <div className="space-y-3 text-xs">
-                    <div>
-                      <label className="block text-red-200 mb-1">Cardholder Name</label>
-                      <input
-                        type="text"
-                        placeholder="e.g. Muneeb Ur Rehman"
-                        className="w-full bg-red-900/80 border border-red-700 text-white rounded-xl p-2.5 focus:outline-none focus:border-amber-400"
-                      />
+                  <div className="bg-red-950/80 border border-amber-500/40 rounded-2xl p-5 space-y-4 flex flex-col justify-between">
+                    <div className="space-y-2">
+                      <div className="text-amber-300 font-bold text-sm">Submit PayPal Details</div>
+                      <p className="text-xs text-red-200 leading-relaxed">
+                        Click below to access the dedicated PayPal form to register your transaction ID or request an official invoice.
+                      </p>
                     </div>
-                    <div>
-                      <label className="block text-red-200 mb-1">Card Number (16-digits)</label>
-                      <input
-                        type="text"
-                        maxLength={19}
-                        placeholder="4242 •••• •••• 4242"
-                        className="w-full bg-red-900/80 border border-red-700 text-amber-200 font-mono rounded-xl p-2.5 focus:outline-none focus:border-amber-400"
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <label className="block text-red-200 mb-1">Expiry Date (MM/YY)</label>
-                        <input
-                          type="text"
-                          maxLength={5}
-                          placeholder="MM/YY"
-                          className="w-full bg-red-900/80 border border-red-700 text-white rounded-xl p-2.5 focus:outline-none focus:border-amber-400"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-red-200 mb-1">CVC / CVV</label>
-                        <input
-                          type="password"
-                          maxLength={4}
-                          placeholder="•••"
-                          className="w-full bg-red-900/80 border border-red-700 text-white rounded-xl p-2.5 focus:outline-none focus:border-amber-400"
-                        />
-                      </div>
-                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const el = document.getElementById('payment-submission-box');
+                        el?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                      className="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold py-3 px-4 rounded-xl text-xs flex items-center justify-center gap-2 shadow-lg"
+                    >
+                      <Globe className="w-4 h-4" />
+                      <span>Open Dedicated PayPal Form Below</span>
+                    </button>
                   </div>
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      alert('Card tokenization simulated successfully. Please complete transaction submission below.');
-                      const el = document.getElementById('payment-submission-box');
-                      el?.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                    className="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 rounded-xl text-xs shadow-lg flex items-center justify-center gap-2"
-                  >
-                    <Lock className="w-4 h-4" />
-                    <span>Authorize Payment Online (Rs. {currentCalc.totalPKR.toLocaleString()} / ${currentCalc.totalUSD})</span>
-                  </button>
                 </div>
               </div>
             )}
@@ -1044,13 +1087,13 @@ export const FeePaymentPage: React.FC = () => {
           <div className="text-center space-y-2 max-w-3xl mx-auto">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold uppercase tracking-wider border border-amber-400/30">
               <Sparkles className="w-4 h-4 text-amber-400" />
-              <span>Dedicated Method Forms • تمام 8 پیمنٹ فارمز</span>
+              <span>Dedicated Method Forms • تمام 9 پیمنٹ فارمز</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-serif font-extrabold text-amber-100">
               Dedicated Payment Forms For Every Channel
             </h2>
             <p className="text-xs sm:text-sm text-red-200 leading-relaxed">
-              Select any of the 8 payment channels below to access its dedicated form with specific inputs, live multi-currency fee calculation, instant official tuition voucher generation, and direct 24/7 WhatsApp verification with Founder Muneeb Ur Rehman.
+              Select any of the 9 payment channels below to access its dedicated form with specific inputs, live multi-currency fee calculation, instant official tuition voucher generation, and direct 24/7 WhatsApp verification with Founder Muneeb Ur Rehman.
             </p>
           </div>
 

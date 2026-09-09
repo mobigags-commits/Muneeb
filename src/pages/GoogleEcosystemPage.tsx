@@ -104,7 +104,7 @@ export const GoogleEcosystemPage: React.FC = () => {
       `# Date: ${new Date().toLocaleDateString()} | Compliance Standards: Google AdSense 2026`,
       '# =========================================================================',
       '',
-      '| # | Website & Domain | Category | Setup Status | Missing Requirements | Required Google Action | Required AI Studio Action | Deployment Status |',
+      '| # | Website & Domain | Category | Setup Status | Missing Requirements | Required Google Action | Technical & Web Architecture Action | Deployment Status |',
       '|---|---|---|---|---|---|---|---|',
       ...websites.map(
         (w) =>
@@ -818,7 +818,7 @@ export const GoogleEcosystemPage: React.FC = () => {
                     <th className="p-3">Setup Status</th>
                     <th className="p-3">Missing Requirements</th>
                     <th className="p-3">Required Google Action</th>
-                    <th className="p-3">Required AI Studio Action</th>
+                    <th className="p-3">Technical & Web Action</th>
                     <th className="p-3">Deployment Status</th>
                   </tr>
                 </thead>
@@ -930,7 +930,7 @@ export const GoogleEcosystemPage: React.FC = () => {
                         <div className="text-red-200">{w.requiredGoogleAction}</div>
                       </div>
                       <div>
-                        <span className="text-amber-300 font-semibold">Required AI Studio Action:</span>
+                        <span className="text-amber-300 font-semibold">Technical & Web Action:</span>
                         <div className="text-emerald-200">{w.requiredAIStudioAction}</div>
                       </div>
                     </div>

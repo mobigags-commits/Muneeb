@@ -156,6 +156,7 @@ export interface PaymentReceipt {
     | 'NayaPay'
     | 'International Wire'
     | 'Card / Stripe'
+    | 'PayPal'
     | 'Remittance (Western Union/MoneyGram)'
     | 'Bank Transfer'
     | 'Other';
