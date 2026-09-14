@@ -21,6 +21,7 @@ export const MarriageBureauPage: React.FC = () => {
   const [qualification, setQualification] = useState('BS Computer Science');
   const [sectSilsila, setSectSilsila] = useState('Sunni / Hanafi');
   const [description, setDescription] = useState('Practicing Muslim seeking pious spouse.');
+  const [isSaving, setIsSaving] = useState(false);
 
   const filteredProfiles = matrimonialProfiles.filter((p) => {
     const matchesGender = filterGender === 'All' || p.gender === filterGender;
@@ -38,9 +39,10 @@ export const MarriageBureauPage: React.FC = () => {
     window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(text)}`, '_blank');
   };
 
-  const handleAddProfile = (e: React.FormEvent) => {
+  const handleAddProfile = async (e: React.FormEvent) => {
     e.preventDefault();
-    addMatrimonialProfile({
+    setIsSaving(true);
+    await addMatrimonialProfile({
       id: `mat-${Date.now()}`,
       code,
       gender,
@@ -55,6 +57,7 @@ export const MarriageBureauPage: React.FC = () => {
       description,
       contactPerson: 'Family / Shaheen Bureau Representative',
     });
+    setIsSaving(false);
     setShowAddModal(false);
   };
 
@@ -311,9 +314,11 @@ export const MarriageBureauPage: React.FC = () => {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 bg-amber-500 text-red-950 font-bold py-2 rounded-xl text-xs"
+                  disabled={isSaving}
+                  className="flex-1 bg-amber-500 hover:bg-amber-400 text-red-950 font-bold py-2 rounded-xl text-xs flex items-center justify-center gap-1.5 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
                 >
-                  Save Profile
+                  {isSaving && <div className="w-3.5 h-3.5 border-2 border-red-950 border-t-transparent rounded-full animate-spin" />}
+                  <span>{isSaving ? 'Saving...' : 'Save Profile'}</span>
                 </button>
               </div>
             </form>

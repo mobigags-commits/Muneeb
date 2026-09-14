@@ -9,6 +9,7 @@ export const DonationsPage: React.FC = () => {
   const [selectedMethod, setSelectedMethod] = useState<'EasyPaisa' | 'JazzCash' | 'Meezan Bank' | 'SadaPay'>('EasyPaisa');
   const [trxId, setTrxId] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   const handleCopy = (text: string, key: string) => {
@@ -33,13 +34,14 @@ export const DonationsPage: React.FC = () => {
     setTimeout(() => setCopiedKey(null), 3000);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!trxId) return;
+    if (!trxId.trim()) return;
 
-    addPayment({
+    setIsSubmitting(true);
+    await addPayment({
       id: `don-${Date.now()}`,
-      studentName: donorName || 'Anonymous Sadaqah Donor',
+      studentName: donorName.trim() || 'Anonymous Sadaqah Donor',
       courseTitle: 'Sadaqah Jariyah & Orphan Scholarship Fund',
       amountPKR: Number(amount),
       amountUSD: Math.round(Number(amount) / 280),
@@ -47,11 +49,12 @@ export const DonationsPage: React.FC = () => {
       senderAccountOrPhone: '03447956085',
       transactionId: trxId.trim().toUpperCase(),
       date: new Date().toISOString().split('T')[0],
-      status: 'Approved',
+      status: 'Pending Verification',
       senderBankOrWallet: selectedMethod,
       currency: 'PKR',
     });
 
+    setIsSubmitting(false);
     setSubmitted(true);
   };
 
@@ -212,10 +215,15 @@ export const DonationsPage: React.FC = () => {
               <div className="pt-2 flex justify-end">
                 <button
                   type="submit"
-                  className="bg-amber-500 hover:bg-amber-400 text-red-950 font-bold text-xs px-8 py-3 rounded-xl shadow flex items-center gap-1.5"
+                  disabled={isSubmitting}
+                  className="bg-amber-500 hover:bg-amber-400 text-red-950 font-bold text-xs px-8 py-3 rounded-xl shadow flex items-center gap-2 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
                 >
-                  <Send className="w-4 h-4" />
-                  <span>Submit Sadaqah Receipt</span>
+                  {isSubmitting ? (
+                    <div className="w-4 h-4 border-2 border-red-950 border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    <Send className="w-4 h-4" />
+                  )}
+                  <span>{isSubmitting ? 'Recording Sadaqah to Cloud DB...' : 'Submit Sadaqah Receipt'}</span>
                 </button>
               </div>
             </form>

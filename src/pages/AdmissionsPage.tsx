@@ -13,17 +13,20 @@ export const AdmissionsPage: React.FC = () => {
   const [selectedCourseId, setSelectedCourseId] = useState(courses[0]?.id || '');
   const [timeSlot, setTimeSlot] = useState('Evening (4 PM - 8 PM PKT)');
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const selectedCourse = courses.find((c) => c.id === selectedCourseId) || courses[0];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!studentName || !phone) return;
+    if (!studentName.trim() || !phone.trim()) return;
 
-    addStudent({
-      id: `s-${Date.now()}`,
-      name: studentName,
-      guardianName: guardianName || studentName,
+    setIsSubmitting(true);
+    const newStudentId = `s-${Date.now()}`;
+    await addStudent({
+      id: newStudentId,
+      name: studentName.trim(),
+      guardianName: guardianName.trim() || studentName.trim(),
       courseId: selectedCourseId,
       teacherId: 't1',
       attendanceRate: 100,
@@ -34,6 +37,7 @@ export const AdmissionsPage: React.FC = () => {
       joinDate: new Date().toISOString().split('T')[0],
     });
 
+    setIsSubmitting(false);
     setSubmitted(true);
   };
 
@@ -164,16 +168,21 @@ export const AdmissionsPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="pt-4 flex items-center justify-between">
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="text-xs text-emerald-300">
                 Course Monthly Fee: <strong className="text-amber-300 text-sm">Rs. {selectedCourse.feePKR.toLocaleString()} PKR</strong> (${selectedCourse.feeUSD} USD)
               </div>
               <button
                 type="submit"
-                className="bg-amber-500 hover:bg-amber-400 text-red-950 font-extrabold text-xs px-8 py-3.5 rounded-xl shadow-lg flex items-center gap-2"
+                disabled={isSubmitting}
+                className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-red-950 font-extrabold text-xs px-8 py-3.5 rounded-xl shadow-lg flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
               >
-                <Send className="w-4 h-4" />
-                <span>Submit Application</span>
+                {isSubmitting ? (
+                  <div className="w-4 h-4 border-2 border-red-950 border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  <Send className="w-4 h-4" />
+                )}
+                <span>{isSubmitting ? 'Saving Admission Record...' : 'Submit Admission Application'}</span>
               </button>
             </div>
           </form>

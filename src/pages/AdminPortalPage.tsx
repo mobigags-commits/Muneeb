@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, Save, CheckCircle, CreditCard, Users, BookOpen, MapPin, FileText, Plus, ShieldCheck, DollarSign, ArrowRight } from 'lucide-react';
+import { Sparkles, Save, CheckCircle, CreditCard, Users, BookOpen, MapPin, FileText, Plus, ShieldCheck, DollarSign, ArrowRight, RefreshCw, Briefcase, MessageSquare, Database } from 'lucide-react';
 import { useAcademy } from '../context/AcademyContext';
 import { AcademyLogo } from '../components/AcademyLogo';
 
@@ -18,10 +18,14 @@ export const AdminPortalPage: React.FC = () => {
     adCampaigns,
     referrals,
     affiliatePartners,
+    applications,
+    contactMessages,
+    cloudSyncStatus,
+    refreshFromCloud,
     setActivePage,
   } = useAcademy();
 
-  const [activeTab, setActiveTab] = useState<'settings' | 'payments' | 'students' | 'courses' | 'branches' | 'ads' | 'zt' | 'matrimonial'>('settings');
+  const [activeTab, setActiveTab] = useState<'settings' | 'payments' | 'students' | 'courses' | 'branches' | 'ads' | 'zt' | 'matrimonial' | 'careers' | 'messages'>('settings');
 
   // Site Settings Form
   const [academyName, setAcademyName] = useState(siteSettings.academyName);
@@ -36,10 +40,19 @@ export const AdminPortalPage: React.FC = () => {
   const [facebookGroupName, setFacebookGroupName] = useState(siteSettings.facebookGroupName || 'Shaheen Al Zaitoon Official Facebook Community');
   const [facebookGroupMembers, setFacebookGroupMembers] = useState(siteSettings.facebookGroupMembers || 92400);
   const [saved, setSaved] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [isSyncing, setIsSyncing] = useState(false);
 
-  const handleSaveSettings = (e: React.FormEvent) => {
+  const handleManualSync = async () => {
+    setIsSyncing(true);
+    await refreshFromCloud();
+    setIsSyncing(false);
+  };
+
+  const handleSaveSettings = async (e: React.FormEvent) => {
     e.preventDefault();
-    updateSiteSettings({
+    setIsSaving(true);
+    await updateSiteSettings({
       academyName,
       ownerName,
       headOfficeCity,
@@ -53,6 +66,7 @@ export const AdminPortalPage: React.FC = () => {
       facebookGroupName,
       facebookGroupMembers: Number(facebookGroupMembers),
     });
+    setIsSaving(false);
     setSaved(true);
     setTimeout(() => setSaved(false), 4000);
   };
@@ -77,9 +91,32 @@ export const AdminPortalPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-2 bg-red-950 p-1.5 rounded-xl border border-amber-500/30 text-xs">
-            <span className="text-red-300">EasyPaisa Account:</span>
-            <span className="font-mono font-bold text-emerald-400">{siteSettings.easyPaisaAccountNumber}</span>
+          <div className="flex flex-wrap items-center gap-2.5">
+            <div className="flex items-center gap-2 bg-red-950 p-2 rounded-xl border border-amber-500/30 text-xs">
+              <span className="text-red-300">EasyPaisa:</span>
+              <span className="font-mono font-bold text-emerald-400">{siteSettings.easyPaisaAccountNumber}</span>
+            </div>
+
+            {/* Cloud Database Persistence Sync Badge & Button */}
+            <div className="flex items-center gap-2 bg-red-950/90 p-2 rounded-xl border border-emerald-500/40 text-xs">
+              <Database className="w-4 h-4 text-emerald-400" />
+              <div className="flex flex-col text-[11px] leading-tight">
+                <span className="text-emerald-300 font-bold">Cloud Database</span>
+                <span className="text-[10px] text-red-200 capitalize">
+                  {cloudSyncStatus === 'syncing' ? 'Syncing...' : cloudSyncStatus === 'synced' ? 'Live & Persistent' : 'Local Fallback'}
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={handleManualSync}
+                disabled={isSyncing}
+                title="Refresh latest data from cloud database"
+                className="bg-emerald-700 hover:bg-emerald-600 text-white p-1.5 rounded-lg text-xs flex items-center gap-1 disabled:opacity-50"
+              >
+                <RefreshCw className={`w-3.5 h-3.5 ${isSyncing ? 'animate-spin' : ''}`} />
+                <span className="text-[10px] font-bold">Sync</span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -99,7 +136,7 @@ export const AdminPortalPage: React.FC = () => {
               activeTab === 'payments' ? 'bg-amber-500 text-red-950 shadow-lg' : 'bg-red-900/60 text-red-200'
             }`}
           >
-            EasyPaisa Payment Receipts ({payments.length})
+            Payment Receipts ({payments.length})
           </button>
           <button
             onClick={() => setActiveTab('students')}
@@ -110,12 +147,28 @@ export const AdminPortalPage: React.FC = () => {
             Students Manager ({students.length})
           </button>
           <button
+            onClick={() => setActiveTab('careers')}
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+              activeTab === 'careers' ? 'bg-amber-500 text-red-950 shadow-lg' : 'bg-red-900/60 text-red-200'
+            }`}
+          >
+            Teacher Applications ({applications.length})
+          </button>
+          <button
+            onClick={() => setActiveTab('messages')}
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+              activeTab === 'messages' ? 'bg-amber-500 text-red-950 shadow-lg' : 'bg-red-900/60 text-red-200'
+            }`}
+          >
+            Inquiries ({contactMessages.length})
+          </button>
+          <button
             onClick={() => setActiveTab('courses')}
             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
               activeTab === 'courses' ? 'bg-amber-500 text-red-950 shadow-lg' : 'bg-red-900/60 text-red-200'
             }`}
           >
-            Courses Catalog ({courses.length})
+            Courses ({courses.length})
           </button>
           <button
             onClick={() => setActiveTab('branches')}
@@ -123,7 +176,7 @@ export const AdminPortalPage: React.FC = () => {
               activeTab === 'branches' ? 'bg-amber-500 text-red-950 shadow-lg' : 'bg-red-900/60 text-red-200'
             }`}
           >
-            Global Suboffices ({branches.length})
+            Suboffices ({branches.length})
           </button>
           <button
             onClick={() => setActiveTab('ads')}
@@ -131,7 +184,7 @@ export const AdminPortalPage: React.FC = () => {
               activeTab === 'ads' ? 'bg-amber-500 text-red-950 shadow-lg' : 'bg-red-900/60 text-red-200'
             }`}
           >
-            Ads & Monetization ({adCampaigns.length})
+            Ads ({adCampaigns.length})
           </button>
           <button
             onClick={() => setActiveTab('zt')}
@@ -147,13 +200,13 @@ export const AdminPortalPage: React.FC = () => {
               activeTab === 'matrimonial' ? 'bg-amber-500 text-red-950 shadow-lg' : 'bg-red-900/60 text-red-200'
             }`}
           >
-            Marriage Proposals ({matrimonialProfiles.length})
+            Nikah ({matrimonialProfiles.length})
           </button>
           <button
             onClick={() => setActivePage('google-ecosystem')}
             className="px-4 py-2 rounded-xl text-xs font-bold transition-all bg-emerald-700 hover:bg-emerald-600 text-white ml-auto flex items-center gap-1.5 shadow-md"
           >
-            <span>9 Websites Google AdSense Hub</span>
+            <span>Google AdSense Hub</span>
             <span className="bg-amber-400 text-red-950 px-1.5 py-0.5 rounded text-[10px] font-extrabold">9 Sites</span>
           </button>
         </div>
@@ -286,10 +339,15 @@ export const AdminPortalPage: React.FC = () => {
 
             <button
               type="submit"
-              className="bg-amber-500 hover:bg-amber-400 text-red-950 font-bold text-xs px-6 py-3 rounded-xl shadow flex items-center gap-1.5"
+              disabled={isSaving}
+              className="bg-amber-500 hover:bg-amber-400 text-red-950 font-bold text-xs px-6 py-3 rounded-xl shadow flex items-center gap-2 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
             >
-              <Save className="w-4 h-4" />
-              <span>Save & Publish Changes</span>
+              {isSaving ? (
+                <div className="w-4 h-4 border-2 border-red-950 border-t-transparent rounded-full animate-spin" />
+              ) : (
+                <Save className="w-4 h-4" />
+              )}
+              <span>{isSaving ? 'Saving to Cloud Database...' : 'Save & Publish Changes'}</span>
             </button>
           </form>
         )}
@@ -466,6 +524,122 @@ export const AdminPortalPage: React.FC = () => {
                 </div>
               ))}
             </div>
+          </div>
+        )}
+
+        {/* Tab: Teacher Applications */}
+        {activeTab === 'careers' && (
+          <div className="bg-red-900/60 border border-amber-500/30 rounded-3xl p-6 space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-serif font-bold text-amber-200 flex items-center gap-2">
+                <Briefcase className="w-5 h-5 text-amber-400" />
+                <span>Qari & Teacher Job Applications ({applications.length})</span>
+              </h2>
+              <span className="text-xs text-emerald-300 font-mono">Real-time Cloud Sync</span>
+            </div>
+
+            {applications.length === 0 ? (
+              <div className="text-center py-10 text-red-200 text-sm">
+                No teacher applications submitted yet.
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs">
+                  <thead className="bg-red-950 text-amber-300 uppercase border-b border-red-800">
+                    <tr>
+                      <th className="p-3">Ref ID</th>
+                      <th className="p-3">Name</th>
+                      <th className="p-3">Contact</th>
+                      <th className="p-3">Gender</th>
+                      <th className="p-3">Qualification</th>
+                      <th className="p-3">Experience</th>
+                      <th className="p-3">City</th>
+                      <th className="p-3">Date</th>
+                      <th className="p-3">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-red-800/80">
+                    {applications.map((app) => (
+                      <tr key={app.id} className="hover:bg-red-900/80">
+                        <td className="p-3 font-mono text-amber-300">{app.id}</td>
+                        <td className="p-3 font-bold text-white">{app.fullName}</td>
+                        <td className="p-3 font-mono text-emerald-400">
+                          <a href={`https://wa.me/92${app.phone.replace(/^0/, '')}`} target="_blank" rel="noreferrer" className="hover:underline">
+                            {app.phone}
+                          </a>
+                        </td>
+                        <td className="p-3">{app.gender}</td>
+                        <td className="p-3 text-amber-200 font-medium">{app.qualification}</td>
+                        <td className="p-3 text-red-200">{app.experienceYears}</td>
+                        <td className="p-3 text-red-200">{app.city}</td>
+                        <td className="p-3 text-red-300">{app.appliedDate}</td>
+                        <td className="p-3">
+                          <span className="bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded text-[10px] font-bold border border-amber-400/30">
+                            {app.status}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Tab: Inquiry Messages */}
+        {activeTab === 'messages' && (
+          <div className="bg-red-900/60 border border-amber-500/30 rounded-3xl p-6 space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-serif font-bold text-amber-200 flex items-center gap-2">
+                <MessageSquare className="w-5 h-5 text-amber-400" />
+                <span>Contact Messages & Inquiries ({contactMessages.length})</span>
+              </h2>
+              <span className="text-xs text-emerald-300 font-mono">Real-time Cloud Sync</span>
+            </div>
+
+            {contactMessages.length === 0 ? (
+              <div className="text-center py-10 text-red-200 text-sm">
+                No contact inquiry messages received yet.
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs">
+                  <thead className="bg-red-950 text-amber-300 uppercase border-b border-red-800">
+                    <tr>
+                      <th className="p-3">Ticket ID</th>
+                      <th className="p-3">Sender Name</th>
+                      <th className="p-3">WhatsApp</th>
+                      <th className="p-3">Subject</th>
+                      <th className="p-3">Message</th>
+                      <th className="p-3">Date</th>
+                      <th className="p-3">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-red-800/80">
+                    {contactMessages.map((msg) => (
+                      <tr key={msg.id} className="hover:bg-red-900/80">
+                        <td className="p-3 font-mono text-amber-300">{msg.id}</td>
+                        <td className="p-3 font-bold text-white">{msg.name}</td>
+                        <td className="p-3 font-mono text-emerald-400">
+                          <a href={`https://wa.me/92${msg.phone.replace(/^0/, '')}`} target="_blank" rel="noreferrer" className="hover:underline">
+                            {msg.phone}
+                          </a>
+                        </td>
+                        <td className="p-3 text-amber-200 font-semibold">{msg.subject}</td>
+                        <td className="p-3 text-red-100 max-w-xs truncate" title={msg.message}>{msg.message}</td>
+                        <td className="p-3 text-red-300">{msg.date}</td>
+                        <td className="p-3">
+                          <span className="bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded text-[10px] font-bold border border-emerald-400/30">
+                            {msg.status}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         )}
       </div>

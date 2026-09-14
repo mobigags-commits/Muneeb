@@ -149,6 +149,7 @@ export const PaymentMethodForms: React.FC<PaymentMethodFormsProps> = ({
   const [cardBillingCity, setCardBillingCity] = useState('');
   const [cardPostalCode, setCardPostalCode] = useState('');
   const [isProcessingCard, setIsProcessingCard] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Method 9: PayPal & Overseas Digital Invoicing
   const [paypalEmail, setPaypalEmail] = useState('');
@@ -363,8 +364,8 @@ export const PaymentMethodForms: React.FC<PaymentMethodFormsProps> = ({
 
     if (activeMethod === 'card') {
       setIsProcessingCard(true);
-      setTimeout(() => {
-        processSubmission();
+      setTimeout(async () => {
+        await processSubmission();
         setIsProcessingCard(false);
       }, 1200);
     } else {
@@ -372,7 +373,7 @@ export const PaymentMethodForms: React.FC<PaymentMethodFormsProps> = ({
     }
   };
 
-  const processSubmission = () => {
+  const processSubmission = async () => {
     let finalTrxId = '';
     const finalMethodName = getMethodNameDisplay(activeMethod);
     const finalSenderAccount = getSenderAccountIdentifier(activeMethod);
@@ -443,7 +444,9 @@ export const PaymentMethodForms: React.FC<PaymentMethodFormsProps> = ({
       currency: activeMethod === 'international' ? wireCurrency : 'PKR',
     };
 
-    addPayment(newReceipt);
+    setIsSubmitting(true);
+    await addPayment(newReceipt);
+    setIsSubmitting(false);
     setSubmittedReceipt(newReceipt);
 
     try {
@@ -1566,13 +1569,19 @@ export const PaymentMethodForms: React.FC<PaymentMethodFormsProps> = ({
           <div className="pt-2">
             <button
               type="submit"
-              disabled={isProcessingCard}
-              className="w-full bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-red-950 font-black text-sm py-4 rounded-2xl shadow-2xl flex items-center justify-center gap-2 transform active:scale-95 transition-all disabled:opacity-50"
+              disabled={isProcessingCard || isSubmitting}
+              className="w-full bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-red-950 font-black text-sm py-4 rounded-2xl shadow-2xl flex items-center justify-center gap-2 transform active:scale-95 transition-all disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
             >
-              <CheckCircle2 className="w-5 h-5 text-red-950" />
+              {isSubmitting ? (
+                <div className="w-5 h-5 border-2 border-red-950 border-t-transparent rounded-full animate-spin" />
+              ) : (
+                <CheckCircle2 className="w-5 h-5 text-red-950" />
+              )}
               <span>
                 {isProcessingCard
                   ? 'Authorizing Card Payment Securely...'
+                  : isSubmitting
+                  ? 'Saving Verification Record to Cloud Database...'
                   : `Submit ${getMethodNameDisplay(activeMethod)} Form (${getCurrencyAmountDisplay(feeCalculation.feePKR, feeCalculation.feeUSD, displayCurrency)})`}
               </span>
             </button>

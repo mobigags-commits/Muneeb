@@ -16,6 +16,7 @@ export const ZaitoonTradersPage: React.FC = () => {
   const [prodOrigPrice, setProdOrigPrice] = useState(3000);
   const [prodDesc, setProdDesc] = useState('');
   const [prodImg, setProdImg] = useState('https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80');
+  const [isSaving, setIsSaving] = useState(false);
 
   const categories = ['All', 'Dates & Honey', 'Ittar & Fragrances', 'Quran Pens & Rehal', 'Islamic Books', 'Modest Wear'];
 
@@ -30,23 +31,25 @@ export const ZaitoonTradersPage: React.FC = () => {
     window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(text)}`, '_blank');
   };
 
-  const handleAddProduct = (e: React.FormEvent) => {
+  const handleAddProduct = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!prodName) return;
+    if (!prodName.trim()) return;
 
-    addZTProduct({
+    setIsSaving(true);
+    await addZTProduct({
       id: `zt-${Date.now()}`,
-      name: prodName,
+      name: prodName.trim(),
       category: prodCategory,
       pricePKR: Number(prodPrice),
       originalPricePKR: Number(prodOrigPrice),
-      image: prodImg,
-      description: prodDesc,
+      image: prodImg.trim(),
+      description: prodDesc.trim(),
       inStock: true,
       isFeatured: true,
       rating: 5.0,
     });
 
+    setIsSaving(false);
     setShowAddModal(false);
     setProdName('');
     setProdDesc('');
@@ -261,9 +264,11 @@ export const ZaitoonTradersPage: React.FC = () => {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 bg-amber-500 text-red-950 font-bold py-2 rounded-xl text-xs"
+                  disabled={isSaving}
+                  className="flex-1 bg-amber-500 hover:bg-amber-400 text-red-950 font-bold py-2 rounded-xl text-xs flex items-center justify-center gap-1.5 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
                 >
-                  Save Product
+                  {isSaving && <div className="w-3.5 h-3.5 border-2 border-red-950 border-t-transparent rounded-full animate-spin" />}
+                  <span>{isSaving ? 'Saving...' : 'Save Product'}</span>
                 </button>
               </div>
             </form>

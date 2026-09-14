@@ -400,3 +400,71 @@ export interface GoogleEcosystemWebsite {
   deploymentStatus: 'Deployed & Active' | 'DNS Ready' | 'Verified';
 }
 
+export interface TeacherApplication {
+  id: string;
+  applicantName: string;
+  fullName?: string;
+  phone: string;
+  email?: string;
+  qualification: string;
+  experienceYears?: number | string;
+  gender: 'Male' | 'Female';
+  city: string;
+  bio?: string;
+  status: 'Pending Review' | 'Audition Scheduled' | 'Accepted' | 'Rejected';
+  date: string;
+  appliedDate?: string;
+}
+
+export interface ContactMessage {
+  id: string;
+  name: string;
+  email?: string;
+  phone?: string;
+  subject?: string;
+  message: string;
+  date: string;
+  status: 'Unread' | 'Replied';
+}
+
+export interface NewsletterSubscriber {
+  id: string;
+  email: string;
+  date: string;
+}
+
+export interface DonationRecord {
+  id: string;
+  donorName: string;
+  amountPKR: number;
+  amountUSD: number;
+  paymentMethod: string;
+  transactionId: string;
+  purpose?: string;
+  date: string;
+  status: 'Approved' | 'Pending Verification';
+}
+
+export interface AcademyDataPayload {
+  siteSettings: SiteSettings;
+  courses: Course[];
+  teachers: Teacher[];
+  branches: Branch[];
+  students: StudentRecord[];
+  payments: PaymentReceipt[];
+  announcements: Announcement[];
+  blogPosts: BlogPost[];
+  certificates: CertificateRecord[];
+  ztProducts: ZTProduct[];
+  matrimonialProfiles: MatrimonialProfile[];
+  adCampaigns: AdCampaign[];
+  referrals: ReferralRecord[];
+  affiliatePartners: AffiliatePartner[];
+  socialAccounts: SocialAccount[];
+  applications: TeacherApplication[];
+  contactMessages: ContactMessage[];
+  donations: DonationRecord[];
+  subscribers: NewsletterSubscriber[];
+  lastUpdated: string;
+}
+

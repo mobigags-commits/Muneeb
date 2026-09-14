@@ -21,22 +21,24 @@ export const EnrollmentModal: React.FC = () => {
   const [preferredTime, setPreferredTime] = useState('Morning (8 AM - 12 PM)');
   const [paymentMethod, setPaymentMethod] = useState<'EasyPaisa' | 'Bank Transfer'>('EasyPaisa');
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   if (!selectedCourseForEnroll) return null;
 
   const course: Course = selectedCourseForEnroll;
   const currentPricing = calculateWeeklyFee(course.feePKR, course.feeUSD, weeklyDays);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!studentName || !phone) return;
+    if (!studentName.trim() || !phone.trim()) return;
 
-    // Create student record
+    setIsSubmitting(true);
+    // Create student record in Cloud Database
     const newStudentId = `s-${Date.now()}`;
-    addStudent({
+    await addStudent({
       id: newStudentId,
-      name: studentName,
-      guardianName: guardianName || studentName,
+      name: studentName.trim(),
+      guardianName: guardianName.trim() || studentName.trim(),
       courseId: course.id,
       teacherId: 't1',
       attendanceRate: 100,
@@ -47,6 +49,7 @@ export const EnrollmentModal: React.FC = () => {
       joinDate: new Date().toISOString().split('T')[0],
     });
 
+    setIsSubmitting(false);
     setSubmitted(true);
   };
 
@@ -331,10 +334,15 @@ export const EnrollmentModal: React.FC = () => {
 
                 <button
                   type="submit"
-                  className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-500 text-red-950 font-extrabold text-xs px-6 py-2.5 rounded-xl shadow-lg border border-amber-200 flex items-center gap-1.5"
+                  disabled={isSubmitting}
+                  className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-500 text-red-950 font-extrabold text-xs px-6 py-2.5 rounded-xl shadow-lg border border-amber-200 flex items-center gap-1.5 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
                 >
-                  <Send className="w-4 h-4" />
-                  <span>Submit Admission & Get Free Trial</span>
+                  {isSubmitting ? (
+                    <div className="w-4 h-4 border-2 border-red-950 border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    <Send className="w-4 h-4" />
+                  )}
+                  <span>{isSubmitting ? 'Registering Admission...' : 'Submit Admission & Get Free Trial'}</span>
                 </button>
               </div>
             </form>
