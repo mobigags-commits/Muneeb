@@ -85,7 +85,7 @@ export const LiveClassesPage: React.FC = () => {
               <div className="flex items-center gap-3">
                 <img
                   src={teachers[0].image}
-                  alt="Teacher"
+                  alt={`${teachers[0].name} - Certified Qari at Shaheen Al Zaitoon Quran Academy`}
                   className="w-12 h-12 rounded-xl object-cover border-2 border-amber-400"
                 />
                 <div>

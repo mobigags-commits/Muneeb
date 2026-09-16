@@ -468,8 +468,10 @@ export function updatePageSeo(page: PageId, lang: Language) {
         telephone: '+92-344-7956085',
         address: {
           '@type': 'PostalAddress',
+          streetAddress: 'Head Office, Rawalpindi',
           addressLocality: 'Rawalpindi',
           addressRegion: 'Punjab',
+          postalCode: '46000',
           addressCountry: 'PK',
         },
       },
@@ -483,8 +485,75 @@ export function updatePageSeo(page: PageId, lang: Language) {
       mainEntity: {
         '@type': 'Person',
         name: 'Muneeb Ur Rehman',
-        jobTitle: 'Founder',
+        jobTitle: 'Founder & Executive Director',
         description: 'Founder of Shaheen Al Zaitoon Online Quran Academy, dedicated as Sadaqah Jariyah for Zaitoon Bibi.',
+      },
+    });
+  } else if (page === 'faq') {
+    schemaGraph.push({
+      '@type': 'FAQPage',
+      '@id': `${currentUrl}#faq`,
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'How do 1-on-1 online Quran classes work?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Classes are conducted 1-on-1 via live audio/video and interactive digital screens. Your certified teacher guides you or your child directly with screen sharing, tajweed correction, and daily progress feedback.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'How does the 3-day free trial Quran class work?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Students can attend 3 trial classes completely free without submitting credit card details or advance payments. After evaluating your assigned teacher, you can decide whether to register.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Who founded Shaheen Al Zaitoon Online Quran Academy and where is it located?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'The academy was founded by Muneeb Ur Rehman in Rawalpindi, Punjab, Pakistan as Sadaqah Jariyah in loving memory of Zaitoon Bibi. We teach students 100% online worldwide across Pakistan, USA, UK, Canada, Australia, UAE, Saudi Arabia, and Europe.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Are female Quran teachers available for sisters and young girls?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Yes, certified female Qarias and Alimahs are available exclusively for sisters, young girls, and adult female learners for complete privacy and comfort.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'How do I pay the monthly fees via EasyPaisa or bank transfer?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'In Pakistan, send monthly tuition directly via EasyPaisa to account 03447956085 (Account Title: Muneeb Ur Rehman). International students can pay through direct bank wire transfer, Western Union, or remittance services.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'What time zones and flexible hours are supported?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Our certified teachers operate 24 hours a day, 7 days a week, accommodating student time zones in the USA, UK, Canada, Australia, UAE, Saudi Arabia, Europe, and Pakistan.',
+          },
+        },
+      ],
+    });
+  } else if (page === 'courses') {
+    schemaGraph.push({
+      '@type': 'CollectionPage',
+      '@id': `${currentUrl}#catalog`,
+      name: title,
+      description: description,
+      provider: {
+        '@type': 'EducationalOrganization',
+        name: 'Shaheen Al Zaitoon Online Quran Academy',
+        url: 'https://muneeb-lime.vercel.app/',
       },
     });
   }

@@ -16,6 +16,9 @@ import {
   Shield,
   Clock,
   ChevronRight,
+  ChevronDown,
+  ChevronUp,
+  HelpCircle,
   GraduationCap,
   MapPin,
   Calendar,
@@ -41,6 +44,34 @@ export const HomePage: React.FC = () => {
   } = useAcademy();
 
   const [paymentModalOpen, setPaymentModalOpen] = useState(false);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+
+  const homeFaqs = [
+    {
+      q: 'How does the 3-day free trial Quran class work?',
+      a: 'You can register for a 3-day free trial with zero upfront fee or credit card details required. An experienced teacher is matched to your preferred timezone and schedule, allowing you or your child to experience our live 1-on-1 teaching before deciding to enroll.',
+    },
+    {
+      q: 'Who founded Shaheen Al Zaitoon Online Quran Academy and where is it based?',
+      a: 'Shaheen Al Zaitoon Online Quran Academy was founded by Muneeb Ur Rehman in Rawalpindi, Punjab, Pakistan, in loving memory of Zaitoon Bibi as Sadaqah Jariyah. We teach students 100% online worldwide across Pakistan, USA, UK, Canada, Australia, UAE, Saudi Arabia, and Europe with 24/7 flexible scheduling.',
+    },
+    {
+      q: 'Are female Quran teachers available for sisters and young girls?',
+      a: 'Yes! We have qualified, certified female Qarias and Alimahs dedicated exclusively to teaching sisters, adult women, and young children in a completely private, safe, and respectful environment.',
+    },
+    {
+      q: 'How do students pay monthly tuition fees via EasyPaisa or bank transfer?',
+      a: 'Students in Pakistan can send monthly course fees directly via EasyPaisa to 03447956085 (Account Title: Muneeb Ur Rehman) and upload their receipt on our portal for instant confirmation. International students pay conveniently via online bank transfer, Western Union, or remittance channels.',
+    },
+    {
+      q: 'What time zones and class timings do you cater to?',
+      a: 'Our teachers operate 24 hours a day, 7 days a week. We schedule customized 1-on-1 sessions matching individual student availability across North America (EST, CST, MST, PST), the United Kingdom (GMT), Europe (CET), the Gulf (GST/AST), Australia (AEST), and Pakistan (PKT).',
+    },
+    {
+      q: 'What Quran and Islamic courses are offered?',
+      a: 'We offer personalized 1-on-1 courses in Noorani Qaida for beginners, Online Quran Reading (Nazra), Tajweed Rules, Online Hifz Quran, Quran Classes for Kids, Quran Classes for Ladies, Quran Classes for Adults, Quran Translation, Quran Tafseer, Islamic Studies, Quranic Arabic, and Salah & Daily Duas.',
+    },
+  ];
 
   const stats = [
     { label: 'Enrolled Students', value: '5,000+', icon: Users },
@@ -465,6 +496,66 @@ export const HomePage: React.FC = () => {
                 <div className="text-[10px] text-amber-300 font-mono mt-2">{b.phone}</div>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Frequently Asked Questions (AEO & AI Search Readiness) */}
+        <section className="space-y-6">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <div className="text-xs font-bold uppercase tracking-widest text-amber-400 font-serif inline-flex items-center gap-1.5">
+              <HelpCircle className="w-4 h-4 text-amber-400" />
+              <span>Answers & Clarifications</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-amber-100">
+              Frequently Asked Questions (FAQs)
+            </h2>
+            <p className="text-xs text-red-200">
+              Everything you need to know about our online Quran classes, trial lessons, certified tutors, and flexible fee options.
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto space-y-3">
+            {homeFaqs.map((faq, index) => {
+              const isOpen = openFaqIndex === index;
+              return (
+                <div
+                  key={index}
+                  className="bg-red-900/60 border border-amber-500/30 rounded-2xl overflow-hidden transition-all duration-200 hover:border-amber-400/50"
+                >
+                  <button
+                    onClick={() => setOpenFaqIndex(isOpen ? null : index)}
+                    className="w-full text-left px-5 py-4 flex items-center justify-between gap-4 focus:outline-none"
+                    aria-expanded={isOpen}
+                  >
+                    <span className="font-serif font-bold text-sm sm:text-base text-amber-100">
+                      {faq.q}
+                    </span>
+                    <span className="text-amber-400 shrink-0">
+                      {isOpen ? (
+                        <ChevronUp className="w-5 h-5" />
+                      ) : (
+                        <ChevronDown className="w-5 h-5" />
+                      )}
+                    </span>
+                  </button>
+                  {isOpen && (
+                    <div className="px-5 pb-4 pt-1 text-xs sm:text-sm text-red-100 leading-relaxed border-t border-amber-500/20 bg-red-950/40">
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="text-center pt-2">
+            <button
+              onClick={() => setActivePage('faq')}
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-300 hover:text-amber-200 hover:underline"
+            >
+              <span>View all questions and answers on our comprehensive FAQ page</span>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </button>
           </div>
         </section>
 
