@@ -299,6 +299,14 @@ export const pageSeoData: Record<PageId, PageMetadata> = {
     keywordsEn: 'Google AdSense setup, 9 websites monetization, ads.txt verification, Google Ads tracking, Shaheen ecosystem',
     keywordsUr: 'گوگل ایڈسینس, 9 ویب سائٹس سیٹ اپ, اشتہارات کی تصدیق, گوگل ایڈز ٹریکنگ',
   },
+  '404': {
+    titleEn: '404: Page Not Found | Shaheen Al Zaitoon Online Quran Academy',
+    titleUr: '404: صفحہ دستیاب نہیں ہے | شاہین الزیتون آن لائن قرآن اکیڈمی',
+    descriptionEn: 'The requested page could not be found on Shaheen Al Zaitoon Online Quran Academy. Please explore our online Quran courses or return home.',
+    descriptionUr: 'درخواست کردہ صفحہ موجود نہیں ہے۔ برائے مہربانی قرآنی کورسز دیکھیں یا صفحہ اول پر واپس جائیں۔',
+    keywordsEn: '404, page not found, shaheen al zaitoon quran academy',
+    keywordsUr: 'صفحہ نہیں ملا, شاہین الزیتون قرآن اکیڈمی',
+  },
 };
 
 export function updatePageSeo(page: PageId, lang: Language) {
@@ -350,7 +358,11 @@ export function updatePageSeo(page: PageId, lang: Language) {
   if (twDesc) twDesc.setAttribute('content', description);
 
   // Update canonical URL & social URLs
-  const cleanUrl = page === 'home' ? 'https://muneeb-lime.vercel.app/' : `https://muneeb-lime.vercel.app/${page}`;
+  const cleanUrl = page === 'home'
+    ? 'https://muneeb-lime.vercel.app/'
+    : page === '404'
+    ? (typeof window !== 'undefined' ? window.location.href : 'https://muneeb-lime.vercel.app/404')
+    : `https://muneeb-lime.vercel.app/${page}`;
   
   let canonicalTag = document.querySelector('link[rel="canonical"]');
   if (canonicalTag) {
@@ -367,12 +379,33 @@ export function updatePageSeo(page: PageId, lang: Language) {
     twUrl.setAttribute('content', cleanUrl);
   }
 
+  // Manage robots meta tag: remove accidental noindex from valid pages; set noindex for 404 and admin
+  let robotsTag = document.querySelector('meta[name="robots"]');
+  if (!robotsTag) {
+    robotsTag = document.createElement('meta');
+    robotsTag.setAttribute('name', 'robots');
+    document.head.appendChild(robotsTag);
+  }
+  if (page === '404' || page === 'admin-portal' || page === 'ad-manager') {
+    robotsTag.setAttribute('content', 'noindex, nofollow');
+  } else {
+    robotsTag.setAttribute('content', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
+  }
+
   // Update HTML lang and dir
   document.documentElement.lang = lang;
   document.documentElement.dir = lang === 'ur' || lang === 'ar' ? 'rtl' : 'ltr';
 
-  // Inject or update Page-Specific Schema.org JSON-LD Graph
+  // For 404 pages, remove or skip structured data graph
   let dynamicScript = document.getElementById('dynamic-page-schema');
+  if (page === '404') {
+    if (dynamicScript) {
+      dynamicScript.textContent = '';
+    }
+    return;
+  }
+
+  // Inject or update Page-Specific Schema.org JSON-LD Graph
   if (!dynamicScript) {
     dynamicScript = document.createElement('script');
     dynamicScript.id = 'dynamic-page-schema';

@@ -42,6 +42,7 @@ import {
   DonationRecord,
   NewsletterSubscriber,
 } from '../types';
+import { getPageFromLocation, getPageUrl } from '../utils/routing';
 import * as api from '../utils/apiClient';
 
 export type CloudSyncStatus = 'syncing' | 'synced' | 'offline' | 'error';
@@ -153,25 +154,42 @@ const AcademyContext = createContext<AcademyContextType | undefined>(undefined);
 
 export const AcademyProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [activePage, setActivePageState] = useState<PageId>(() => {
-    if (typeof window !== 'undefined' && window.location.hash) {
-      const hash = window.location.hash.replace('#', '') as PageId;
-      if (hash) return hash;
+    if (typeof window !== 'undefined') {
+      return getPageFromLocation(window.location.pathname, window.location.hash);
     }
     return 'home';
   });
 
-  const setActivePage = (page: PageId) => {
+  const setActivePage = (page: PageId, replace: boolean = false) => {
     setActivePageState(page);
     if (typeof window !== 'undefined') {
-      if (page === 'home') {
-        if (window.location.hash) {
-          history.pushState(null, '', window.location.pathname + window.location.search);
+      const targetPath = getPageUrl(page);
+      if (window.location.pathname !== targetPath) {
+        if (replace) {
+          window.history.replaceState({ page }, '', targetPath);
+        } else {
+          window.history.pushState({ page }, '', targetPath);
         }
-      } else {
-        window.location.hash = page;
       }
     }
   };
+
+  // Keep activePage in sync with browser forward/back buttons and hash changes
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const handleBrowserLocationChange = () => {
+      const detectedPage = getPageFromLocation(window.location.pathname, window.location.hash);
+      setActivePageState(detectedPage);
+    };
+
+    window.addEventListener('popstate', handleBrowserLocationChange);
+    window.addEventListener('hashchange', handleBrowserLocationChange);
+    return () => {
+      window.removeEventListener('popstate', handleBrowserLocationChange);
+      window.removeEventListener('hashchange', handleBrowserLocationChange);
+    };
+  }, []);
 
   const [language, setLanguage] = useState<Language>('en');
   const [role, setRole] = useState<UserRole>('guest');

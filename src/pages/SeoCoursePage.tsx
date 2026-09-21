@@ -69,19 +69,27 @@ export const SeoCoursePage: React.FC<SeoCoursePageProps> = ({ courseData }) => {
         className="bg-red-900/60 border-b border-red-800 py-2.5 px-4 sm:px-6 lg:px-8 text-xs text-red-200"
       >
         <div className="max-w-7xl mx-auto flex items-center gap-2 flex-wrap">
-          <button
-            onClick={() => setActivePage('home')}
+          <a
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              setActivePage('home');
+            }}
             className="hover:text-amber-300 transition-colors flex items-center gap-1"
           >
             <span>Home</span>
-          </button>
+          </a>
           <ChevronRight className="w-3.5 h-3.5 text-amber-500/60" />
-          <button
-            onClick={() => setActivePage('courses')}
+          <a
+            href="/courses"
+            onClick={(e) => {
+              e.preventDefault();
+              setActivePage('courses');
+            }}
             className="hover:text-amber-300 transition-colors"
           >
             Courses
-          </button>
+          </a>
           <ChevronRight className="w-3.5 h-3.5 text-amber-500/60" />
           <span className="text-amber-300 font-semibold truncate max-w-xs sm:max-w-md">
             {courseData.h1}
@@ -490,9 +498,13 @@ export const SeoCoursePage: React.FC<SeoCoursePageProps> = ({ courseData }) => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {courseData.internalLinks.map((link, idx) => (
-              <button
+              <a
                 key={idx}
-                onClick={() => setActivePage(link.pageId)}
+                href={`/${link.pageId}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setActivePage(link.pageId);
+                }}
                 className="text-left bg-red-950/80 border border-amber-500/20 hover:border-amber-400 rounded-2xl p-4 transition-all hover:scale-102 flex flex-col justify-between group shadow"
               >
                 <div className="space-y-1.5">
@@ -507,7 +519,7 @@ export const SeoCoursePage: React.FC<SeoCoursePageProps> = ({ courseData }) => {
                 <div className="pt-2 text-[10px] text-amber-400 font-semibold uppercase tracking-wider">
                   View Program Details →
                 </div>
-              </button>
+              </a>
             ))}
           </div>
         </section>

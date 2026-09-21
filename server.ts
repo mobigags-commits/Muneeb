@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import path from 'path';
+import fs from 'fs';
 import { createServer as createViteServer } from 'vite';
 import { GoogleGenAI } from '@google/genai';
 import * as db from './server/database';
@@ -29,14 +30,18 @@ async function startServer() {
 
   // Search Engine & Crawler Static Direct Endpoints
   app.get('/robots.txt', (req, res) => {
-    const robotsPath = path.join(process.cwd(), 'public', 'robots.txt');
+    const robotsPath = fs.existsSync(path.join(process.cwd(), 'dist', 'robots.txt'))
+      ? path.join(process.cwd(), 'dist', 'robots.txt')
+      : path.join(process.cwd(), 'public', 'robots.txt');
     res.type('text/plain; charset=utf-8');
     res.setHeader('Cache-Control', 'public, max-age=86400');
     res.sendFile(robotsPath);
   });
 
   app.get('/sitemap.xml', (req, res) => {
-    const sitemapPath = path.join(process.cwd(), 'public', 'sitemap.xml');
+    const sitemapPath = fs.existsSync(path.join(process.cwd(), 'dist', 'sitemap.xml'))
+      ? path.join(process.cwd(), 'dist', 'sitemap.xml')
+      : path.join(process.cwd(), 'public', 'sitemap.xml');
     res.type('application/xml; charset=utf-8');
     res.setHeader('Cache-Control', 'public, max-age=86400');
     res.sendFile(sitemapPath);

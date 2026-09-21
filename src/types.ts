@@ -40,7 +40,8 @@ export type PageId =
   | 'quran-classes-for-ladies'
   | 'online-islamic-studies'
   | 'quranic-arabic'
-  | 'salah-and-duas';
+  | 'salah-and-duas'
+  | '404';
 
 export type UserRole = 'guest' | 'student' | 'parent' | 'teacher' | 'admin' | 'owner';
 

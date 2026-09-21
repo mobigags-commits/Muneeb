@@ -38,97 +38,33 @@ import { CommunityPage } from './pages/CommunityPage';
 import { GoogleEcosystemPage } from './pages/GoogleEcosystemPage';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { SeoCoursePage } from './pages/SeoCoursePage';
+import { NotFoundPage } from './pages/NotFoundPage';
 import { seoCoursesList } from './data/seoCoursesData';
+import { getPageUrl } from './utils/routing';
 
 const AppContent: React.FC = () => {
   const { activePage, setActivePage, language } = useAcademy();
 
-  // Valid routes list for SEO & Navigation
-  const validPages: PageId[] = [
-    'home',
-    'about',
-    'courses',
-    'teachers',
-    'student-portal',
-    'parent-portal',
-    'admissions',
-    'fee-payment',
-    'live-classes',
-    'certificates',
-    'gallery',
-    'blog',
-    'testimonials',
-    'faq',
-    'contact',
-    'careers',
-    'privacy',
-    'terms',
-    'donations',
-    'help-support',
-    'admin-portal',
-    'growth-hub',
-    'zaitoon-traders',
-    'marriage-bureau',
-    'ad-manager',
-    'community',
-    'google-ecosystem',
-    'online-quran-classes',
-    'noorani-qaida',
-    'quran-reading',
-    'online-tajweed-classes',
-    'online-hifz-quran-classes',
-    'quran-translation',
-    'quran-tafseer',
-    'quran-classes-for-kids',
-    'quran-for-beginners',
-    'quran-classes-for-adults',
-    'quran-classes-for-ladies',
-    'online-islamic-studies',
-    'quranic-arabic',
-    'salah-and-duas',
-  ];
-
-  // Dynamic SEO & Title Update
+  // Dynamic SEO & Title Update + Address bar synchronization
   useEffect(() => {
     updatePageSeo(activePage, language);
     // Smooth scroll to top on page change
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     // Sync address bar URL cleanly without page reload
-    const currentPath = window.location.pathname.replace(/^\/+/, '').replace(/\/+$/, '');
-    const targetPath = activePage === 'home' ? '/' : `/${activePage}`;
-    if (currentPath !== (activePage === 'home' ? '' : activePage)) {
-      window.history.replaceState(null, '', targetPath);
+    if (activePage !== '404') {
+      const targetPath = getPageUrl(activePage);
+      if (window.location.pathname !== targetPath) {
+        window.history.replaceState({ page: activePage }, '', targetPath);
+      }
     }
   }, [activePage, language]);
 
-  // Sync pathname and hash routing on initial load and navigation
-  useEffect(() => {
-    const handleLocationChange = () => {
-      // 1. Check clean pathname first (e.g. /noorani-qaida)
-      const pathname = window.location.pathname.replace(/^\/+/, '').replace(/\/+$/, '') as PageId;
-      if (pathname && validPages.includes(pathname)) {
-        if (pathname !== activePage) setActivePage(pathname);
-        return;
-      }
-      // 2. Check hash fallback (e.g. #noorani-qaida)
-      const hash = window.location.hash.replace(/^#+/, '') as PageId;
-      if (hash && validPages.includes(hash)) {
-        if (hash !== activePage) setActivePage(hash);
-        return;
-      }
-    };
-
-    handleLocationChange();
-    window.addEventListener('hashchange', handleLocationChange);
-    window.addEventListener('popstate', handleLocationChange);
-    return () => {
-      window.removeEventListener('hashchange', handleLocationChange);
-      window.removeEventListener('popstate', handleLocationChange);
-    };
-  }, [setActivePage, activePage]);
-
   const renderPage = () => {
+    if (activePage === '404') {
+      return <NotFoundPage />;
+    }
+
     // Check if the page is one of the SEO course landing pages
     if (seoCoursesList[activePage]) {
       return <SeoCoursePage courseData={seoCoursesList[activePage]} />;
@@ -190,7 +126,7 @@ const AppContent: React.FC = () => {
       case 'admin-portal':
         return <AdminPortalPage />;
       default:
-        return <HomePage />;
+        return <NotFoundPage />;
     }
   };
 
