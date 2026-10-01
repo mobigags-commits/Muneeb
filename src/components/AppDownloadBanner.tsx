@@ -1,0 +1,99 @@
+import React, { useState } from 'react';
+import {
+  Download,
+  Smartphone,
+  CheckCircle,
+  Apple,
+  Sparkles,
+  Zap,
+  ShieldCheck,
+  WifiOff
+} from 'lucide-react';
+import { usePWAInstall } from '../hooks/usePWAInstall';
+import { InstallAppModal } from './InstallAppModal';
+
+export const AppDownloadBanner: React.FC = () => {
+  const { isInstallable, isInstalled, install } = usePWAInstall();
+  const [modalOpen, setModalOpen] = useState(false);
+
+  if (isInstalled) {
+    return null;
+  }
+
+  const handleAction = async () => {
+    if (isInstallable) {
+      const outcome = await install();
+      if (!outcome) {
+        setModalOpen(true);
+      }
+    } else {
+      setModalOpen(true);
+    }
+  };
+
+  return (
+    <section className="bg-gradient-to-r from-red-950 via-red-900 to-stone-950 border-y-2 border-amber-500/40 py-8 px-4 text-white relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-6 relative z-10">
+        
+        {/* Left: App Logo & Details */}
+        <div className="flex items-center gap-4 text-left w-full lg:w-auto">
+          <img
+            src="/pwa-192x192.png"
+            alt="Shaheen Quran Academy App"
+            className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl shadow-xl border-2 border-amber-400/80 object-cover shrink-0"
+          />
+          <div>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[11px] font-bold uppercase tracking-wider mb-1">
+              <Sparkles className="w-3 h-3 text-amber-300" />
+              <span>Official Academy App (PWA)</span>
+            </div>
+            <h3 className="text-lg sm:text-xl font-black text-amber-100">
+              Download Shaheen Quran App
+            </h3>
+            <p className="text-xs sm:text-sm text-stone-300 font-urdu mt-0.5">
+              شاہین الزیتون اکیڈمی ایپ اپنے موبائل یا کمپیوٹر پر ڈاؤن لوڈ اور انسٹال کریں!
+            </p>
+            <div className="flex flex-wrap items-center gap-3 mt-2 text-[11px] text-amber-200/90 font-medium">
+              <span className="flex items-center gap-1">
+                <Zap className="w-3.5 h-3.5 text-amber-400" /> 1-Tap Home Screen
+              </span>
+              <span>•</span>
+              <span className="flex items-center gap-1">
+                <WifiOff className="w-3.5 h-3.5 text-emerald-400" /> Works Offline
+              </span>
+              <span>•</span>
+              <span className="flex items-center gap-1">
+                <ShieldCheck className="w-3.5 h-3.5 text-blue-400" /> No App Store Login Required
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Right: Actions */}
+        <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto justify-start lg:justify-end">
+          <button
+            onClick={handleAction}
+            className="flex items-center gap-2.5 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-500 text-red-950 font-black px-5 py-3 rounded-xl shadow-xl border border-amber-200 transition-all transform hover:scale-105 active:scale-95 text-xs sm:text-sm"
+          >
+            <Download className="w-4 h-4 text-red-950" />
+            <span>Install & Download App</span>
+            <span className="font-urdu text-xs font-bold text-red-900 border-l border-red-900/30 pl-2">
+              انسٹال کریں
+            </span>
+          </button>
+
+          <button
+            onClick={() => setModalOpen(true)}
+            className="flex items-center gap-2 bg-stone-900/80 hover:bg-stone-800 text-stone-200 border border-stone-700 px-4 py-3 rounded-xl text-xs font-bold transition-all"
+          >
+            <Smartphone className="w-4 h-4 text-amber-400" />
+            <span>How to Install Guide</span>
+          </button>
+        </div>
+      </div>
+
+      <InstallAppModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+    </section>
+  );
+};

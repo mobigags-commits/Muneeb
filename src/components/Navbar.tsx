@@ -33,6 +33,7 @@ import { PageId, UserRole } from '../types';
 import { MemorialBanner } from './MemorialBanner';
 import { EcosystemBar } from './EcosystemBar';
 import { AcademyLogo } from './AcademyLogo';
+import { PWAInstallButton } from './PWAInstallButton';
 
 export const Navbar: React.FC = () => {
   const {
@@ -286,6 +287,7 @@ export const Navbar: React.FC = () => {
 
             {/* Quick Action Button */}
             <div className="hidden lg:flex items-center gap-2">
+              <PWAInstallButton variant="navbar" />
               <button
                 onClick={() => setActivePage('admissions')}
                 className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-500 text-red-950 font-extrabold text-xs px-4 py-2.5 rounded-xl shadow-lg border border-amber-200 flex items-center gap-1.5 transition-all transform hover:scale-105"
@@ -297,6 +299,7 @@ export const Navbar: React.FC = () => {
 
             {/* Mobile menu button */}
             <div className="flex md:hidden items-center gap-2">
+              <PWAInstallButton variant="navbar" className="px-2 py-1 text-[11px]" />
               <button
                 onClick={() => setActivePage('admissions')}
                 className="bg-amber-400 text-red-950 font-bold text-xs px-2.5 py-1.5 rounded-lg"
@@ -315,8 +318,12 @@ export const Navbar: React.FC = () => {
 
         {/* Mobile menu slideout */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-red-950 border-t border-red-800 px-4 pt-3 pb-6 space-y-2">
-            <div className="mb-3">
+          <div className="md:hidden bg-red-950 border-t border-red-800 px-4 pt-3 pb-6 space-y-3">
+            <div className="pt-1">
+              <PWAInstallButton variant="mobile" />
+            </div>
+
+            <div>
               <input
                 type="text"
                 placeholder="Search Academy..."

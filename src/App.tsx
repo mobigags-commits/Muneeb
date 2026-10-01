@@ -37,6 +37,9 @@ import { AdManagerPage } from './pages/AdManagerPage';
 import { CommunityPage } from './pages/CommunityPage';
 import { GoogleEcosystemPage } from './pages/GoogleEcosystemPage';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
+import { AppDownloadBanner } from './components/AppDownloadBanner';
+import { OfflineIndicator } from './components/OfflineIndicator';
+import { PWAInstallButton } from './components/PWAInstallButton';
 import { SeoCoursePage } from './pages/SeoCoursePage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { seoCoursesList } from './data/seoCoursesData';
@@ -134,10 +137,13 @@ const AppContent: React.FC = () => {
     <div className="min-h-screen bg-red-950 text-white font-sans flex flex-col justify-between selection:bg-amber-400 selection:text-red-950">
       <Navbar />
       <main className="flex-1">{renderPage()}</main>
+      <AppDownloadBanner />
       <Footer />
       <EnrollmentModal />
       <AIChatAssistant />
       <WhatsAppWidget />
+      <PWAInstallButton variant="floating" />
+      <OfflineIndicator />
       <CookieConsentBanner />
     </div>
   );

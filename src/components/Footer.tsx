@@ -20,6 +20,7 @@ import {
 import { useAcademy } from '../context/AcademyContext';
 import { PageId } from '../types';
 import { AcademyLogo } from './AcademyLogo';
+import { PWAInstallButton } from './PWAInstallButton';
 
 export const Footer: React.FC = () => {
   const { siteSettings, setActivePage } = useAcademy();
@@ -346,6 +347,9 @@ export const Footer: React.FC = () => {
             >
               <span>Community Hub</span>
             </button>
+
+            {/* PWA Install Button */}
+            <PWAInstallButton variant="footer" className="text-[11px] py-1 px-3" />
           </div>
 
           <div className="text-xs text-slate-300">

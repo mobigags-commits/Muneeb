@@ -47,6 +47,28 @@ async function startServer() {
     res.sendFile(sitemapPath);
   });
 
+  // PWA Manifest and Service Worker Endpoints
+  app.get(['/site.webmanifest', '/manifest.webmanifest'], (req, res) => {
+    const manifestPath = fs.existsSync(path.join(process.cwd(), 'dist', 'site.webmanifest'))
+      ? path.join(process.cwd(), 'dist', 'site.webmanifest')
+      : fs.existsSync(path.join(process.cwd(), 'public', 'site.webmanifest'))
+      ? path.join(process.cwd(), 'public', 'site.webmanifest')
+      : path.join(process.cwd(), 'dist', 'manifest.webmanifest');
+    res.type('application/manifest+json; charset=utf-8');
+    res.setHeader('Cache-Control', 'public, max-age=3600');
+    res.sendFile(manifestPath);
+  });
+
+  app.get('/sw.js', (req, res, next) => {
+    const swPath = path.join(process.cwd(), 'dist', 'sw.js');
+    if (fs.existsSync(swPath)) {
+      res.type('application/javascript; charset=utf-8');
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      return res.sendFile(swPath);
+    }
+    next();
+  });
+
   // Initialize Gemini AI Client
   let aiClient: GoogleGenAI | null = null;
   if (process.env.GEMINI_API_KEY) {
@@ -693,8 +715,11 @@ Respond ONLY with valid JSON.`;
         maxAge: '1y',
         etag: true,
         setHeaders: (res, filePath) => {
-          if (filePath.endsWith('.html')) {
-            res.setHeader('Cache-Control', 'no-cache, must-revalidate');
+          if (filePath.endsWith('.html') || filePath.endsWith('sw.js')) {
+            res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+          } else if (filePath.endsWith('.webmanifest')) {
+            res.setHeader('Content-Type', 'application/manifest+json');
+            res.setHeader('Cache-Control', 'public, max-age=3600');
           }
         },
       })
