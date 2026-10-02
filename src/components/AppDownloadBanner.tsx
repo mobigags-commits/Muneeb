@@ -44,27 +44,27 @@ export const AppDownloadBanner: React.FC = () => {
             className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl shadow-xl border-2 border-amber-400/80 object-cover shrink-0"
           />
           <div>
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[11px] font-bold uppercase tracking-wider mb-1">
-              <Sparkles className="w-3 h-3 text-amber-300" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs sm:text-sm font-bold uppercase tracking-wider mb-1">
+              <Sparkles className="w-4 h-4 text-amber-300" />
               <span>Official Academy App (PWA)</span>
             </div>
-            <h3 className="text-lg sm:text-xl font-black text-amber-100">
+            <h3 className="text-xl sm:text-2xl font-black text-amber-100">
               Download Shaheen Quran App
             </h3>
-            <p className="text-xs sm:text-sm text-stone-300 font-urdu mt-0.5">
+            <p className="text-sm sm:text-base text-stone-200 font-urdu mt-0.5 leading-relaxed">
               شاہین الزیتون اکیڈمی ایپ اپنے موبائل یا کمپیوٹر پر ڈاؤن لوڈ اور انسٹال کریں!
             </p>
-            <div className="flex flex-wrap items-center gap-3 mt-2 text-[11px] text-amber-200/90 font-medium">
-              <span className="flex items-center gap-1">
-                <Zap className="w-3.5 h-3.5 text-amber-400" /> 1-Tap Home Screen
+            <div className="flex flex-wrap items-center gap-3 mt-2 text-xs sm:text-sm text-amber-200 font-medium">
+              <span className="flex items-center gap-1.5">
+                <Zap className="w-4 h-4 text-amber-400" /> 1-Tap Home Screen
               </span>
               <span>•</span>
-              <span className="flex items-center gap-1">
-                <WifiOff className="w-3.5 h-3.5 text-emerald-400" /> Works Offline
+              <span className="flex items-center gap-1.5">
+                <WifiOff className="w-4 h-4 text-emerald-400" /> Works Offline
               </span>
               <span>•</span>
-              <span className="flex items-center gap-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-blue-400" /> No App Store Login Required
+              <span className="flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-blue-400" /> No App Store Required
               </span>
             </div>
           </div>
@@ -74,18 +74,18 @@ export const AppDownloadBanner: React.FC = () => {
         <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto justify-start lg:justify-end">
           <button
             onClick={handleAction}
-            className="flex items-center gap-2.5 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-500 text-red-950 font-black px-5 py-3 rounded-xl shadow-xl border border-amber-200 transition-all transform hover:scale-105 active:scale-95 text-xs sm:text-sm"
+            className="flex items-center gap-2.5 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-500 text-red-950 font-black px-6 py-3.5 rounded-xl shadow-xl border border-amber-200 transition-all transform hover:scale-105 active:scale-95 text-sm sm:text-base"
           >
-            <Download className="w-4 h-4 text-red-950" />
+            <Download className="w-5 h-5 text-red-950" />
             <span>Install & Download App</span>
-            <span className="font-urdu text-xs font-bold text-red-900 border-l border-red-900/30 pl-2">
+            <span className="font-urdu text-sm font-bold text-red-900 border-l border-red-900/30 pl-2">
               انسٹال کریں
             </span>
           </button>
 
           <button
             onClick={() => setModalOpen(true)}
-            className="flex items-center gap-2 bg-stone-900/80 hover:bg-stone-800 text-stone-200 border border-stone-700 px-4 py-3 rounded-xl text-xs font-bold transition-all"
+            className="flex items-center gap-2 bg-stone-900/80 hover:bg-stone-800 text-stone-200 border border-stone-700 px-5 py-3.5 rounded-xl text-sm font-bold transition-all"
           >
             <Smartphone className="w-4 h-4 text-amber-400" />
             <span>How to Install Guide</span>

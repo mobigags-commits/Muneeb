@@ -23,14 +23,14 @@ export const AcademyLogo: React.FC<AcademyLogoProps> = ({
 }) => {
   const [imgError, setImgError] = useState(false);
 
-  // Size mappings
+  // Size mappings with balanced, responsive text sizes for the website name
   const dimensionClasses: Record<string, { box: string; px: number; titleSize: string; subtextSize: string }> = {
-    xs: { box: 'w-7 h-7 min-w-7', px: 28, titleSize: 'text-xs', subtextSize: 'text-[9px]' },
-    sm: { box: 'w-9 h-9 min-w-9', px: 36, titleSize: 'text-sm', subtextSize: 'text-[10px]' },
-    md: { box: 'w-12 h-12 min-w-12', px: 48, titleSize: 'text-lg sm:text-xl', subtextSize: 'text-[11px]' },
-    lg: { box: 'w-16 h-16 min-w-16', px: 64, titleSize: 'text-xl sm:text-2xl', subtextSize: 'text-xs' },
-    xl: { box: 'w-20 h-20 min-w-20', px: 80, titleSize: 'text-2xl sm:text-3xl', subtextSize: 'text-sm' },
-    '2xl': { box: 'w-28 h-28 min-w-28', px: 112, titleSize: 'text-3xl sm:text-4xl', subtextSize: 'text-base' },
+    xs: { box: 'w-7 h-7 min-w-7', px: 28, titleSize: 'text-xs', subtextSize: 'text-[10px]' },
+    sm: { box: 'w-8 h-8 sm:w-9 sm:h-9 min-w-8 sm:min-w-9', px: 36, titleSize: 'text-sm sm:text-base', subtextSize: 'text-[11px] sm:text-xs' },
+    md: { box: 'w-10 h-10 sm:w-12 sm:h-12 min-w-10 sm:min-w-12', px: 48, titleSize: 'text-base sm:text-lg md:text-xl lg:text-2xl', subtextSize: 'text-[11px] sm:text-xs md:text-sm' },
+    lg: { box: 'w-14 h-14 sm:w-16 sm:h-16 min-w-14 sm:min-w-16', px: 64, titleSize: 'text-xl sm:text-2xl md:text-3xl', subtextSize: 'text-xs sm:text-sm md:text-base' },
+    xl: { box: 'w-16 h-16 sm:w-20 sm:h-20 min-w-16 sm:min-w-20', px: 80, titleSize: 'text-2xl sm:text-3xl md:text-4xl', subtextSize: 'text-sm sm:text-base md:text-lg' },
+    '2xl': { box: 'w-24 h-24 sm:w-28 sm:h-28 min-w-24 sm:min-w-28', px: 112, titleSize: 'text-3xl sm:text-4xl md:text-5xl', subtextSize: 'text-base sm:text-lg md:text-xl' },
   };
 
   const currentSize = dimensionClasses[size] || dimensionClasses.md;
@@ -171,23 +171,23 @@ export const AcademyLogo: React.FC<AcademyLogoProps> = ({
 
   return (
     <div
-      className={`inline-flex items-center gap-3 text-left group select-none ${
+      className={`inline-flex items-center gap-2.5 sm:gap-3 text-left group select-none shrink-0 ${
         onClick ? 'cursor-pointer' : ''
       }`}
       onClick={onClick}
     >
       {logoElement}
-      <div className="flex flex-col justify-center">
-        <div className="flex items-center gap-2">
-          <span className={`font-serif font-extrabold ${currentSize.titleSize} tracking-tight leading-tight transition-colors ${titleColor}`}>
+      <div className="flex flex-col justify-center shrink-0">
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <span className={`font-serif font-black ${currentSize.titleSize} tracking-tight leading-tight transition-colors ${titleColor} whitespace-nowrap`}>
             Shaheen Al Zaitoon
           </span>
-          <span className="hidden sm:inline-block px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-400 text-red-950 shadow-sm uppercase tracking-wider">
+          <span className="hidden sm:inline-block px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-400 text-red-950 shadow-sm uppercase tracking-wider shrink-0">
             HQ
           </span>
         </div>
-        <div className={`text-xs ${currentSize.subtextSize} tracking-wide font-serif flex items-center gap-1.5 ${subtextColor}`}>
-          <span>{subtext}</span>
+        <div className={`tracking-wide font-serif flex items-center gap-1.5 ${currentSize.subtextSize} ${subtextColor} whitespace-nowrap`}>
+          <span className="font-semibold">{subtext}</span>
           <span className="text-emerald-400 font-bold hidden md:inline">• شاہین الزیتون</span>
         </div>
       </div>

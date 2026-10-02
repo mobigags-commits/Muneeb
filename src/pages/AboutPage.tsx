@@ -19,9 +19,12 @@ export const AboutPage: React.FC = () => {
             <Sparkles className="w-3.5 h-3.5" />
             <span>Islamic Education Ecosystem</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-serif font-extrabold text-amber-100">
-            About {siteSettings.academyName}
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-serif font-black text-amber-100 leading-tight">
+            About <span className="text-amber-400">Shaheen Al Zaitoon</span> Online Quran Academy
           </h1>
+          <div className="font-urdu text-lg sm:text-2xl text-amber-300 font-bold">
+            شاہین الزیتون آن لائن قرآنی اکیڈمی کا تعارف
+          </div>
           <p className="text-sm sm:text-base text-red-200 max-w-2xl mx-auto leading-relaxed">
             Founded by <strong>{siteSettings.ownerName}</strong> in Rawalpindi, Pakistan to deliver world-class Quranic education to Muslims globally.
           </p>

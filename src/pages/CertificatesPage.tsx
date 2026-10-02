@@ -78,8 +78,11 @@ export const CertificatesPage: React.FC = () => {
                 <AcademyLogo size="xl" shape="circle" glowEffect={true} />
               </div>
 
-              <div className="text-2xl sm:text-4xl font-serif font-extrabold text-red-950">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-serif font-black text-red-950 leading-tight">
                 {siteSettings.academyName}
+              </div>
+              <div className="font-urdu text-lg sm:text-2xl font-bold text-amber-900 mt-1">
+                شاہین الزیتون آن لائن قرآنی اکیڈمی
               </div>
               <div className="text-xs text-amber-800 font-serif">
                 Rawalpindi, Pakistan • Founder: {siteSettings.ownerName}

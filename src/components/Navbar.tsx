@@ -114,19 +114,19 @@ export const Navbar: React.FC = () => {
       <MemorialBanner compact />
 
       {/* Contact & Quick Info Header */}
-      <div className="bg-red-950 text-red-100 py-1.5 px-4 text-xs border-b border-red-900">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div className="bg-red-950 text-red-100 py-2 px-4 text-xs sm:text-sm border-b border-red-900">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2.5">
           <div className="flex items-center gap-4 flex-wrap">
-            <span className="flex items-center gap-1.5 text-amber-300 font-medium">
-              <MapPin className="w-3.5 h-3.5" />
+            <span className="flex items-center gap-1.5 text-amber-300 font-semibold">
+              <MapPin className="w-4 h-4" />
               <span>HQ: {siteSettings.headOfficeCity}, Pakistan</span>
             </span>
             <span className="hidden sm:inline text-red-400">•</span>
             <a
               href={`tel:${siteSettings.contactNumber}`}
-              className="flex items-center gap-1.5 hover:text-white transition-colors"
+              className="flex items-center gap-1.5 hover:text-white transition-colors font-medium"
             >
-              <Phone className="w-3.5 h-3.5 text-emerald-400" />
+              <Phone className="w-4 h-4 text-emerald-400" />
               <span>Call: {siteSettings.contactNumber}</span>
             </a>
             <span className="hidden sm:inline text-red-400">•</span>
@@ -134,44 +134,44 @@ export const Navbar: React.FC = () => {
               href={`https://wa.me/92${siteSettings.whatsappNumber.replace(/^0/, '')}`}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-1.5 text-emerald-300 font-semibold hover:text-emerald-200 transition-colors"
+              className="flex items-center gap-1.5 text-emerald-300 font-bold hover:text-emerald-200 transition-colors"
             >
-              <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
+              <MessageSquare className="w-4 h-4 text-emerald-400" />
               <span>WhatsApp: {siteSettings.whatsappNumber}</span>
             </a>
           </div>
 
           <div className="flex items-center gap-3">
             {/* Language Switcher */}
-            <div className="flex items-center gap-1 bg-red-900/80 px-2 py-0.5 rounded text-[11px] border border-red-800">
-              <Globe className="w-3 h-3 text-amber-300" />
+            <div className="flex items-center gap-1 bg-red-900/80 px-2.5 py-1 rounded text-xs font-semibold border border-red-800">
+              <Globe className="w-3.5 h-3.5 text-amber-300" />
               <button
                 onClick={() => setLanguage('en')}
-                className={`px-1 rounded ${language === 'en' ? 'bg-amber-500 text-red-950 font-bold' : 'hover:text-amber-200'}`}
+                className={`px-1.5 py-0.5 rounded ${language === 'en' ? 'bg-amber-500 text-red-950 font-bold' : 'hover:text-amber-200'}`}
               >
                 EN
               </button>
               <button
                 onClick={() => setLanguage('ur')}
-                className={`px-1 rounded ${language === 'ur' ? 'bg-amber-500 text-red-950 font-bold' : 'hover:text-amber-200'}`}
+                className={`px-1.5 py-0.5 rounded font-urdu ${language === 'ur' ? 'bg-amber-500 text-red-950 font-bold' : 'hover:text-amber-200'}`}
               >
                 اردو
               </button>
               <button
                 onClick={() => setLanguage('ar')}
-                className={`px-1 rounded ${language === 'ar' ? 'bg-amber-500 text-red-950 font-bold' : 'hover:text-amber-200'}`}
+                className={`px-1.5 py-0.5 rounded font-arabic ${language === 'ar' ? 'bg-amber-500 text-red-950 font-bold' : 'hover:text-amber-200'}`}
               >
                 عربي
               </button>
             </div>
 
             {/* Quick Role Switcher */}
-            <div className="flex items-center gap-1 text-[11px]">
-              <span className="text-red-300 hidden md:inline">View as:</span>
+            <div className="flex items-center gap-1.5 text-xs sm:text-sm">
+              <span className="text-red-300 hidden md:inline font-medium">View as:</span>
               <select
                 value={role}
                 onChange={(e) => setRole(e.target.value as UserRole)}
-                className="bg-red-900 text-amber-200 border border-red-800 rounded px-1.5 py-0.5 text-[11px] focus:outline-none font-semibold"
+                className="bg-red-900 text-amber-200 border border-red-800 rounded px-2 py-1 text-xs sm:text-sm focus:outline-none font-semibold cursor-pointer"
               >
                 <option value="guest">Guest</option>
                 <option value="student">Student</option>
@@ -188,27 +188,38 @@ export const Navbar: React.FC = () => {
       <nav className="bg-red-900 text-white border-b-2 border-amber-500/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            {/* Logo & Brand Title */}
-            <div className="flex items-center">
-              <AcademyLogo
-                size="md"
-                showText={true}
-                textTone="gold"
-                subtext="Online Quran Academy • Rawalpindi"
-                onClick={() => setActivePage('home')}
-              />
+            {/* Logo & Brand Title - Guaranteed 100% visible, never shrinking */}
+            <div
+              onClick={() => setActivePage('home')}
+              className="flex items-center gap-2.5 sm:gap-3 cursor-pointer shrink-0 py-1 group select-none"
+            >
+              <AcademyLogo size="md" showText={false} />
+              <div className="flex flex-col justify-center shrink-0">
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <span className="text-amber-200 group-hover:text-white font-serif font-black text-base sm:text-lg md:text-xl lg:text-2xl tracking-tight leading-tight whitespace-nowrap transition-colors drop-shadow-sm">
+                    Shaheen Al Zaitoon
+                  </span>
+                  <span className="hidden sm:inline-block px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-400 text-red-950 uppercase tracking-wider shadow-sm shrink-0">
+                    HQ
+                  </span>
+                </div>
+                <div className="flex items-center gap-1 text-[11px] sm:text-xs md:text-sm font-semibold text-amber-300/90 whitespace-nowrap leading-tight">
+                  <span>{language === 'ur' ? 'آن لائن قرآنی اکیڈمی' : 'Online Quran Academy'}</span>
+                  <span className="text-emerald-400 font-bold hidden md:inline">• شاہین الزیتون</span>
+                </div>
+              </div>
             </div>
 
             {/* Search Bar (Desktop) */}
-            <div className="hidden lg:flex items-center relative max-w-xs w-full">
+            <div className="hidden xl:flex items-center relative max-w-xs w-full shrink ml-2">
               <input
                 type="text"
                 placeholder="Search courses, Qaris, fees..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-red-950/80 text-amber-100 placeholder-red-300/60 pl-9 pr-3 py-1.5 rounded-full text-xs border border-red-700/80 focus:outline-none focus:border-amber-400"
+                className="w-full bg-red-950/80 text-amber-100 placeholder-red-300/70 pl-9 pr-3 py-2 rounded-full text-sm border border-red-700/80 focus:outline-none focus:border-amber-400"
               />
-              <Search className="w-4 h-4 text-amber-400 absolute left-3 top-2" />
+              <Search className="w-4 h-4 text-amber-400 absolute left-3 top-2.5" />
             </div>
 
             {/* Nav Menu Items (Desktop) */}
@@ -220,7 +231,7 @@ export const Navbar: React.FC = () => {
                   <button
                     key={item.id}
                     onClick={() => setActivePage(item.id)}
-                    className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
+                    className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-semibold transition-all ${
                       isActive
                         ? 'bg-amber-500 text-red-950 font-bold shadow-md'
                         : 'text-red-100 hover:bg-red-800 hover:text-amber-200'
@@ -236,25 +247,25 @@ export const Navbar: React.FC = () => {
               <div className="relative">
                 <button
                   onClick={() => setPagesMenuOpen(!pagesMenuOpen)}
-                  className={`flex items-center gap-1 px-3 py-2 rounded-lg text-xs font-bold transition-all ${
+                  className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-bold transition-all ${
                     pagesMenuOpen
                       ? 'bg-amber-400 text-red-950'
                       : 'bg-red-950 text-amber-300 border border-amber-500/40 hover:bg-red-800'
                   }`}
                 >
                   <Layers className="w-4 h-4 text-amber-300" />
-                  <span>All 20 Pages</span>
-                  <ChevronDown className="w-3.5 h-3.5" />
+                  <span>All Pages</span>
+                  <ChevronDown className="w-4 h-4" />
                 </button>
 
                 {pagesMenuOpen && (
                   <div
-                    className="absolute right-0 mt-2 w-80 bg-red-950 border-2 border-amber-500/50 rounded-xl shadow-2xl p-3 z-50 max-h-[80vh] overflow-y-auto"
+                    className="absolute right-0 mt-2 w-88 bg-red-950 border-2 border-amber-500/50 rounded-xl shadow-2xl p-3 z-50 max-h-[80vh] overflow-y-auto"
                     onMouseLeave={() => setPagesMenuOpen(false)}
                   >
-                    <div className="text-xs font-bold uppercase tracking-wider text-amber-300 px-2 py-1 mb-2 border-b border-red-800 flex items-center justify-between">
+                    <div className="text-xs font-bold uppercase tracking-wider text-amber-300 px-2 py-1.5 mb-2 border-b border-red-800 flex items-center justify-between">
                       <span>Academy Directory</span>
-                      <span className="text-[10px] text-red-300">20 Pages</span>
+                      <span className="text-xs text-red-300 font-semibold">41 Pages</span>
                     </div>
 
                     <div className="grid grid-cols-1 gap-1">
@@ -268,13 +279,13 @@ export const Navbar: React.FC = () => {
                               setActivePage(p.id);
                               setPagesMenuOpen(false);
                             }}
-                            className={`flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs text-left w-full transition-colors ${
+                            className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-left w-full transition-colors ${
                               isCurrent
                                 ? 'bg-amber-500 text-red-950 font-bold'
                                 : 'text-red-100 hover:bg-red-900 hover:text-amber-200'
                             }`}
                           >
-                            <Icon className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                            <Icon className="w-4 h-4 text-amber-400 shrink-0" />
                             <span className="truncate">{p.label}</span>
                           </button>
                         );
@@ -286,11 +297,11 @@ export const Navbar: React.FC = () => {
             </div>
 
             {/* Quick Action Button */}
-            <div className="hidden lg:flex items-center gap-2">
+            <div className="hidden lg:flex items-center gap-2.5">
               <PWAInstallButton variant="navbar" />
               <button
                 onClick={() => setActivePage('admissions')}
-                className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-500 text-red-950 font-extrabold text-xs px-4 py-2.5 rounded-xl shadow-lg border border-amber-200 flex items-center gap-1.5 transition-all transform hover:scale-105"
+                className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-500 text-red-950 font-extrabold text-sm px-5 py-2.5 rounded-xl shadow-lg border border-amber-200 flex items-center gap-2 transition-all transform hover:scale-105"
               >
                 <Sparkles className="w-4 h-4 text-red-950" />
                 <span>Apply / Free Trial</span>
@@ -298,17 +309,17 @@ export const Navbar: React.FC = () => {
             </div>
 
             {/* Mobile menu button */}
-            <div className="flex md:hidden items-center gap-2">
-              <PWAInstallButton variant="navbar" className="px-2 py-1 text-[11px]" />
+            <div className="flex md:hidden items-center gap-2 shrink-0">
               <button
                 onClick={() => setActivePage('admissions')}
-                className="bg-amber-400 text-red-950 font-bold text-xs px-2.5 py-1.5 rounded-lg"
+                className="bg-amber-400 hover:bg-amber-300 text-red-950 font-bold text-xs sm:text-sm px-2.5 sm:px-3 py-1.5 rounded-lg whitespace-nowrap shadow-md transition-colors"
               >
                 Free Trial
               </button>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 rounded-lg text-amber-300 hover:bg-red-800"
+                className="p-1.5 sm:p-2 rounded-lg text-amber-300 hover:bg-red-800 transition-colors"
+                aria-label="Toggle Menu"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
@@ -329,12 +340,12 @@ export const Navbar: React.FC = () => {
                 placeholder="Search Academy..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-red-900 text-amber-100 placeholder-red-300/60 px-3 py-2 rounded-lg text-xs border border-red-700"
+                className="w-full bg-red-900 text-amber-100 placeholder-red-300/60 px-3.5 py-2.5 rounded-lg text-sm border border-red-700"
               />
             </div>
 
             <div className="text-xs font-bold text-amber-300 uppercase tracking-wider mb-2">
-              Page Navigator (20 Pages)
+              Page Navigator
             </div>
 
             <div className="grid grid-cols-1 gap-1 max-h-80 overflow-y-auto pr-1">
@@ -348,7 +359,7 @@ export const Navbar: React.FC = () => {
                       setActivePage(p.id);
                       setMobileMenuOpen(false);
                     }}
-                    className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs text-left w-full ${
+                    className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-left w-full ${
                       isCurrent ? 'bg-amber-500 text-red-950 font-bold' : 'text-red-100 hover:bg-red-900'
                     }`}
                   >

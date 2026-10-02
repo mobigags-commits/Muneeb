@@ -1,16 +1,104 @@
 @import "tailwindcss";
 
-@layer utilities {
-  .font-arabic {
-    font-family: 'Amiri', 'Scheherazade New', 'Traditional Arabic', serif;
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-arabic: 'Amiri', 'Scheherazade New', 'Traditional Arabic', serif;
+    --font-urdu: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Urdu Typesetting', 'Amiri', serif;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #450a0a;
+    color: #ffffff;
+    font-size: 1rem;
+    line-height: 1.65;
+    letter-spacing: -0.01em;
+  }
+
+  /* Clear, bold, readable headings */
+  h1 {
+    font-size: clamp(2rem, 4vw + 1rem, 3.25rem);
+    line-height: 1.2;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-size: clamp(1.6rem, 3vw + 0.5rem, 2.35rem);
+    line-height: 1.25;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+  }
+
+  h3 {
+    font-size: clamp(1.25rem, 2vw + 0.25rem, 1.65rem);
+    line-height: 1.35;
+    font-weight: 700;
+  }
+
+  h4 {
+    font-size: 1.15rem;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  p {
+    line-height: 1.75;
+  }
+
+  input, select, textarea, button {
+    font-family: inherit;
   }
 }
 
-html {
-  scroll-behavior: smooth;
-}
+@layer utilities {
+  .font-sans {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
 
-body {
-  background-color: #450a0a;
-  color: #ffffff;
+  .font-arabic {
+    font-family: 'Amiri', 'Scheherazade New', 'Traditional Arabic', serif;
+    font-size: 1.22em;
+    line-height: 2;
+    letter-spacing: 0.02em;
+  }
+
+  .font-urdu {
+    font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Urdu Typesetting', 'Amiri', serif;
+    font-size: 1.15em;
+    line-height: 2.2;
+    letter-spacing: 0;
+  }
+
+  /* Text scale elevators so all text across the entire website is comfortably readable */
+  .text-\[10px\] {
+    font-size: 0.8rem !important; /* 12.8px instead of 10px */
+    line-height: 1.3rem !important;
+  }
+
+  .text-\[11px\] {
+    font-size: 0.85rem !important; /* 13.6px instead of 11px */
+    line-height: 1.4rem !important;
+  }
+
+  .text-xs {
+    font-size: 0.9125rem !important; /* ~14.6px instead of 12px */
+    line-height: 1.48rem !important;
+  }
+
+  .text-sm {
+    font-size: 0.985rem !important; /* ~15.8px instead of 14px */
+    line-height: 1.58rem !important;
+  }
 }
