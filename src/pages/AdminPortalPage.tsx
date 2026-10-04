@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, Save, CheckCircle, CreditCard, Users, BookOpen, MapPin, FileText, Plus, ShieldCheck, DollarSign, ArrowRight, RefreshCw, Briefcase, MessageSquare, Database } from 'lucide-react';
+import { Sparkles, Save, CheckCircle, CreditCard, Users, BookOpen, MapPin, FileText, Plus, ShieldCheck, DollarSign, ArrowRight, RefreshCw, Briefcase, MessageSquare, Database, Smartphone } from 'lucide-react';
 import { useAcademy } from '../context/AcademyContext';
 import { AcademyLogo } from '../components/AcademyLogo';
 
@@ -354,8 +354,66 @@ export const AdminPortalPage: React.FC = () => {
 
         {/* Tab 2: Payments Verification */}
         {activeTab === 'payments' && (
-          <div className="bg-red-900/60 border border-amber-500/30 rounded-3xl p-6 space-y-4">
-            <h2 className="text-xl font-serif font-bold text-amber-200">EasyPaisa Fee Receipts Verification</h2>
+          <div className="bg-red-900/60 border border-amber-500/30 rounded-3xl p-6 space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-red-800 pb-4">
+              <div>
+                <h2 className="text-xl font-serif font-bold text-amber-200">
+                  Fee & Commission Receipts Verification
+                </h2>
+                <p className="text-xs text-red-200">
+                  Official payments received directly via EasyPaisa ({siteSettings.easyPaisaAccountNumber}) & Bank Accounts for Owner {siteSettings.ownerName}
+                </p>
+              </div>
+              <span className="bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 text-xs font-bold px-3 py-1 rounded-full self-start">
+                Total Receipts: {payments.length}
+              </span>
+            </div>
+
+            {/* Metrics Overview Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="bg-red-950/80 p-3.5 rounded-xl border border-amber-500/40 space-y-1">
+                <div className="text-[11px] text-amber-300 font-bold uppercase tracking-wider">
+                  Total Gross Revenue
+                </div>
+                <div className="text-xl font-serif font-black text-white">
+                  Rs. {payments.reduce((acc, p) => acc + (p.amountPKR || 0), 0).toLocaleString()} PKR
+                </div>
+                <div className="text-[10px] text-stone-300">All tuition and tokens</div>
+              </div>
+
+              {/* Special Card for App Download Fees & Commissions */}
+              <div className="bg-gradient-to-br from-emerald-950/80 via-red-950/80 to-amber-950/80 p-3.5 rounded-xl border-2 border-emerald-500/60 space-y-1 shadow-md">
+                <div className="flex items-center justify-between">
+                  <div className="text-[11px] text-emerald-400 font-bold uppercase tracking-wider flex items-center gap-1">
+                    <Smartphone className="w-3.5 h-3.5" />
+                    <span>App Download Commission</span>
+                  </div>
+                  <span className="text-[10px] bg-emerald-500 text-red-950 font-black px-1.5 py-0.5 rounded">
+                    Rs. 100 Token
+                  </span>
+                </div>
+                <div className="text-xl font-serif font-black text-amber-300">
+                  Rs. {payments
+                    .filter((p) => p.courseTitle.toLowerCase().includes('app') || (p.notes && p.notes.toLowerCase().includes('app')))
+                    .reduce((acc, p) => acc + (p.amountPKR || 0), 0)
+                    .toLocaleString()}{' '}
+                  PKR
+                </div>
+                <div className="text-[10px] text-emerald-300 font-medium">
+                  {payments.filter((p) => p.courseTitle.toLowerCase().includes('app') || (p.notes && p.notes.toLowerCase().includes('app'))).length} App Downloads Paid Direct to Owner
+                </div>
+              </div>
+
+              <div className="bg-red-950/80 p-3.5 rounded-xl border border-red-800 space-y-1">
+                <div className="text-[11px] text-stone-300 font-bold uppercase tracking-wider">
+                  Approved Receipts
+                </div>
+                <div className="text-xl font-serif font-black text-emerald-400">
+                  {payments.filter((p) => p.status === 'Approved').length} / {payments.length}
+                </div>
+                <div className="text-[10px] text-stone-400">Verified and active</div>
+              </div>
+            </div>
 
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">

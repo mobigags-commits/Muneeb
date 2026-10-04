@@ -21,7 +21,8 @@ export const AppDownloadBanner: React.FC = () => {
   }
 
   const handleAction = async () => {
-    if (isInstallable) {
+    const hasPaid = typeof window !== 'undefined' && localStorage.getItem('sz_app_fee_paid') === 'true';
+    if (hasPaid && isInstallable) {
       const outcome = await install();
       if (!outcome) {
         setModalOpen(true);
@@ -44,15 +45,20 @@ export const AppDownloadBanner: React.FC = () => {
             className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl shadow-xl border-2 border-amber-400/80 object-cover shrink-0"
           />
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs sm:text-sm font-bold uppercase tracking-wider mb-1">
-              <Sparkles className="w-4 h-4 text-amber-300" />
-              <span>Official Academy App (PWA)</span>
+            <div className="flex flex-wrap items-center gap-2 mb-1">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs sm:text-sm font-bold uppercase tracking-wider">
+                <Sparkles className="w-4 h-4 text-amber-300" />
+                <span>Official Academy App (PWA)</span>
+              </div>
+              <span className="bg-amber-400 text-red-950 font-black text-xs px-2.5 py-0.5 rounded-full shadow">
+                علامتی فیس: صرف 100 روپے (Direct to Owner)
+              </span>
             </div>
             <h3 className="text-xl sm:text-2xl font-black text-amber-100">
               Download Shaheen Quran App
             </h3>
             <p className="text-sm sm:text-base text-stone-200 font-urdu mt-0.5 leading-relaxed">
-              شاہین الزیتون اکیڈمی ایپ اپنے موبائل یا کمپیوٹر پر ڈاؤن لوڈ اور انسٹال کریں!
+              اکیڈمی ایپ ڈاؤن لوڈ کریں — برائے سرور مینٹیننس و ایصالِ ثواب صرف 100 روپے کی علامتی فیس ایزی پیسہ 03447956085 (منیب الرحمن) پر ادا کریں!
             </p>
             <div className="flex flex-wrap items-center gap-3 mt-2 text-xs sm:text-sm text-amber-200 font-medium">
               <span className="flex items-center gap-1.5">

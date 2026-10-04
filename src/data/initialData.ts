@@ -66,6 +66,9 @@ export const initialSiteSettings: SiteSettings = {
   remittanceCity: 'Rawalpindi, Punjab',
   remittanceCountry: 'Pakistan',
   
+  // App Download & Installation Token Fee (Received directly by Owner via EasyPaisa / Bank)
+  appDownloadFeePKR: 100,
+  
   motherMemorialName: 'Zaitoon Bibi',
   motherMemorialUrdu: 'زیتون بی بی',
   heroHeadline: 'Spreading the Light of Holy Quran Worldwide',
@@ -533,6 +536,21 @@ export const initialPayments: PaymentReceipt[] = [
     currency: 'PKR',
     senderBankOrWallet: 'JazzCash App',
     notes: 'Hifz course fee received through JazzCash.',
+  },
+  {
+    id: 'pay-app-101',
+    studentName: 'Usman Ali (Mobile App User)',
+    courseTitle: 'Shaheen Quran App Installation & Download Token Fee (Rs. 100)',
+    amountPKR: 100,
+    amountUSD: 0.80,
+    paymentMethod: 'EasyPaisa',
+    senderAccountOrPhone: '03447956085',
+    transactionId: 'EP-APP10098',
+    date: '2026-08-07',
+    status: 'Approved',
+    currency: 'PKR',
+    senderBankOrWallet: 'EasyPaisa App',
+    notes: 'App Download Commission Fee of Rs. 100 paid directly to Owner Muneeb Ur Rehman',
   },
 ];
 

@@ -22,7 +22,8 @@ import {
   Clock,
   Coins,
   QrCode,
-  DollarSign
+  DollarSign,
+  Smartphone
 } from 'lucide-react';
 import { useAcademy } from '../context/AcademyContext';
 import { Course } from '../types';
@@ -231,6 +232,40 @@ export const FeePaymentPage: React.FC = () => {
           <p className="text-xs sm:text-sm text-red-200 leading-relaxed">
             Choose your preferred domestic or international payment method. Official designated accounts managed by Founder & Owner <strong>{siteSettings.ownerName}</strong> ({siteSettings.headOfficeCity}, Pakistan).
           </p>
+        </div>
+
+        {/* App Download & Installation Token Fee Quick Banner (Rs. 100 PKR) */}
+        <div className="bg-gradient-to-r from-amber-500/20 via-red-900/60 to-emerald-950/60 border-2 border-amber-500/60 rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5 text-left">
+            <div className="w-12 h-12 rounded-xl bg-amber-500 text-red-950 flex items-center justify-center font-black shrink-0 shadow-md">
+              <Smartphone className="w-6 h-6" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-amber-300 font-extrabold text-sm sm:text-base">
+                  App Download & Installation Token Fee (ایپ ڈاؤن لوڈ کمیشن و فیس)
+                </span>
+                <span className="bg-amber-400 text-red-950 font-black text-xs px-2.5 py-0.5 rounded-full shadow">
+                  Rs. 100 Only
+                </span>
+              </div>
+              <p className="text-xs sm:text-sm text-stone-200 font-urdu mt-0.5 leading-relaxed">
+                اکیڈمی ایپ کو ڈاؤن لوڈ اور ایکٹیویٹ کرنے کی کم سے کم علامتی فیس صرف 100 روپے اونر منیب الرحمن ({siteSettings.easyPaisaAccountNumber}) کو ایزی پیسہ یا جاز کیش سے ادا کریں!
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={() => {
+              setSenderBankOrWallet('EasyPaisa');
+              setUserNotes('Shaheen Quran App Installation & Download Token Fee (Rs. 100 PKR)');
+              const formEl = document.getElementById('payment-submission-box');
+              if (formEl) formEl.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-red-950 font-black text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-lg whitespace-nowrap shrink-0 transition"
+          >
+            Pay Rs. 100 App Fee / فیس ادا کریں
+          </button>
         </div>
 
         {/* Live Multi-Currency Tuition Calculator */}

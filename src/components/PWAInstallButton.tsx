@@ -21,14 +21,13 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({
   }
 
   const handleClick = async () => {
-    if (isInstallable) {
+    const hasPaid = typeof window !== 'undefined' && localStorage.getItem('sz_app_fee_paid') === 'true';
+    if (hasPaid && isInstallable) {
       const outcome = await install();
       if (!outcome) {
-        // If user cancelled or prompt failed, open helpful guide modal
         setModalOpen(true);
       }
     } else {
-      // For iOS or browsers without direct prompt event, open modal guide
       setModalOpen(true);
     }
   };

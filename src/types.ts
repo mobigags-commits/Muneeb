@@ -327,6 +327,9 @@ export interface SiteSettings {
   remittanceCity?: string;
   remittanceCountry?: string;
   
+  // App Download & Installation Token Fee (Received directly by Owner)
+  appDownloadFeePKR?: number;
+  
   motherMemorialName: string;
   motherMemorialUrdu: string;
   heroHeadline: string;
