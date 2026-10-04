@@ -4,7 +4,7 @@ import path from 'path';
 import fs from 'fs';
 import { createServer as createViteServer } from 'vite';
 import { GoogleGenAI } from '@google/genai';
-import * as db from './server/database';
+import * as db from './server/database.ts';
 
 dotenv.config();
 
@@ -704,7 +704,7 @@ Respond ONLY with valid JSON.`;
   // Vite Middleware handling frontend app
   if (process.env.NODE_ENV !== 'production') {
     const vite = await createViteServer({
-      server: { middlewareMode: true },
+      server: { middlewareMode: true, hmr: false },
       appType: 'spa',
     });
     app.use(vite.middlewares);
