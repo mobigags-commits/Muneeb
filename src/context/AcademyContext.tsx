@@ -16,6 +16,7 @@ import {
   initialAffiliatePartners,
   initialSocialAccounts,
   initialAdPricingPlans,
+  initialWalletTransactions,
 } from '../data/initialData';
 import {
   Announcement,
@@ -41,6 +42,7 @@ import {
   ContactMessage,
   DonationRecord,
   NewsletterSubscriber,
+  WalletTransaction,
 } from '../types';
 import { getPageFromLocation, getPageUrl } from '../utils/routing';
 import * as api from '../utils/apiClient';
@@ -148,6 +150,15 @@ interface AcademyContextType {
   // Newsletter
   subscribers: NewsletterSubscriber[];
   addNewsletterSubscriber: (email: string) => Promise<boolean>;
+
+  // Digital Wallet, Deposit & Withdraw
+  walletTransactions: WalletTransaction[];
+  userWalletBalance: number;
+  addDeposit: (deposit: Omit<WalletTransaction, 'id' | 'type' | 'date' | 'status'> & Partial<WalletTransaction>) => Promise<boolean>;
+  requestWithdrawal: (withdrawal: Omit<WalletTransaction, 'id' | 'type' | 'date' | 'status'> & Partial<WalletTransaction>) => Promise<boolean>;
+  updateWalletTransactionStatus: (id: string, status: WalletTransaction['status'], adminResponse?: string) => Promise<boolean>;
+  walletTabInitial: 'deposit' | 'withdraw' | 'history';
+  setWalletTabInitial: (tab: 'deposit' | 'withdraw' | 'history') => void;
 }
 
 const AcademyContext = createContext<AcademyContextType | undefined>(undefined);
@@ -327,6 +338,34 @@ export const AcademyProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   const [adPricingPlans] = useState<AdPricingPlan[]>(initialAdPricingPlans);
   const [selectedCourseForEnroll, setSelectedCourseForEnroll] = useState<Course | null>(null);
+
+  // Digital Wallet, Deposits & Withdrawals State
+  const [walletTransactions, setWalletTransactions] = useState<WalletTransaction[]>(() => {
+    try {
+      const saved = localStorage.getItem('sz_wallet_transactions_v1');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {}
+    return initialWalletTransactions;
+  });
+
+  const [walletTabInitial, setWalletTabInitial] = useState<'deposit' | 'withdraw' | 'history'>('deposit');
+
+  // Dynamic user wallet balance based on approved deposits and withdrawals
+  const userWalletBalance = React.useMemo(() => {
+    const baseCredit = 2500; // Starter demo credit balance
+    const deposits = walletTransactions
+      .filter((t) => t.type === 'deposit' && t.status === 'Approved')
+      .reduce((sum, t) => sum + (t.amountPKR || 0), 0);
+    const withdrawals = walletTransactions
+      .filter(
+        (t) =>
+          t.type === 'withdraw' &&
+          (t.status === 'Approved' || t.status === 'Completed' || t.status === 'Processing')
+      )
+      .reduce((sum, t) => sum + (t.amountPKR || 0), 0);
+    const balance = baseCredit + deposits - withdrawals;
+    return balance > 0 ? balance : 0;
+  }, [walletTransactions]);
 
   // =========================================================================
   // CLOUD DATABASE HYDRATION & REFRESH
@@ -723,6 +762,83 @@ export const AcademyProvider: React.FC<{ children: React.ReactNode }> = ({ child
     return false;
   };
 
+  // =========================================================================
+  // DIGITAL WALLET: DEPOSIT & WITHDRAW ACTION HANDLERS
+  // =========================================================================
+  const addDeposit = async (
+    deposit: Omit<WalletTransaction, 'id' | 'type' | 'date' | 'status'> & Partial<WalletTransaction>
+  ): Promise<boolean> => {
+    const newTx: WalletTransaction = {
+      id: `wtx-dep-${Date.now()}`,
+      type: 'deposit',
+      userName: deposit.userName?.trim() || 'Student / Depositor',
+      userPhone: deposit.userPhone?.trim() || siteSettings.contactNumber,
+      userEmail: deposit.userEmail?.trim(),
+      amountPKR: Number(deposit.amountPKR) || 1000,
+      method: deposit.method || 'EasyPaisa',
+      accountTitle: deposit.accountTitle || siteSettings.ownerName,
+      accountNumberOrIban: deposit.accountNumberOrIban || siteSettings.easyPaisaAccountNumber,
+      transactionId: deposit.transactionId?.trim() || `DEP-${Date.now().toString().slice(-6)}`,
+      purpose: deposit.purpose || 'Wallet Topup (اکیڈمی والٹ)',
+      status: 'Pending Verification',
+      date: new Date().toISOString().split('T')[0],
+      notes: deposit.notes?.trim(),
+    };
+    setWalletTransactions((prev) => {
+      const updated = [newTx, ...prev];
+      try {
+        localStorage.setItem('sz_wallet_transactions_v1', JSON.stringify(updated));
+      } catch (e) {}
+      return updated;
+    });
+    return true;
+  };
+
+  const requestWithdrawal = async (
+    withdrawal: Omit<WalletTransaction, 'id' | 'type' | 'date' | 'status'> & Partial<WalletTransaction>
+  ): Promise<boolean> => {
+    const newTx: WalletTransaction = {
+      id: `wtx-wth-${Date.now()}`,
+      type: 'withdraw',
+      userName: withdrawal.userName?.trim() || 'Account Holder',
+      userPhone: withdrawal.userPhone?.trim() || '',
+      userEmail: withdrawal.userEmail?.trim(),
+      amountPKR: Number(withdrawal.amountPKR) || 500,
+      method: withdrawal.method || 'EasyPaisa',
+      accountTitle: withdrawal.accountTitle?.trim() || '',
+      accountNumberOrIban: withdrawal.accountNumberOrIban?.trim() || '',
+      purpose: withdrawal.purpose || 'Earnings & Commission Payout (رقم نکلوائیں)',
+      status: 'Pending Verification',
+      date: new Date().toISOString().split('T')[0],
+      notes: withdrawal.notes?.trim(),
+    };
+    setWalletTransactions((prev) => {
+      const updated = [newTx, ...prev];
+      try {
+        localStorage.setItem('sz_wallet_transactions_v1', JSON.stringify(updated));
+      } catch (e) {}
+      return updated;
+    });
+    return true;
+  };
+
+  const updateWalletTransactionStatus = async (
+    id: string,
+    status: WalletTransaction['status'],
+    adminResponse?: string
+  ): Promise<boolean> => {
+    setWalletTransactions((prev) => {
+      const updated = prev.map((t) =>
+        t.id === id ? { ...t, status, ...(adminResponse ? { adminResponse } : {}) } : t
+      );
+      try {
+        localStorage.setItem('sz_wallet_transactions_v1', JSON.stringify(updated));
+      } catch (e) {}
+      return updated;
+    });
+    return true;
+  };
+
   const handlePageChange = (page: PageId) => {
     setActivePage(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -798,6 +914,13 @@ export const AcademyProvider: React.FC<{ children: React.ReactNode }> = ({ child
         addDonation,
         subscribers,
         addNewsletterSubscriber,
+        walletTransactions,
+        userWalletBalance,
+        addDeposit,
+        requestWithdrawal,
+        updateWalletTransactionStatus,
+        walletTabInitial,
+        setWalletTabInitial,
       }}
     >
       {children}

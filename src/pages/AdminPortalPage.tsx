@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, Save, CheckCircle, CreditCard, Users, BookOpen, MapPin, FileText, Plus, ShieldCheck, DollarSign, ArrowRight, RefreshCw, Briefcase, MessageSquare, Database, Smartphone } from 'lucide-react';
+import { Sparkles, Save, CheckCircle, CreditCard, Users, BookOpen, MapPin, FileText, Plus, ShieldCheck, DollarSign, ArrowRight, RefreshCw, Briefcase, MessageSquare, Database, Smartphone, Wallet, ArrowDownLeft, ArrowUpRight, Clock } from 'lucide-react';
 import { useAcademy } from '../context/AcademyContext';
 import { AcademyLogo } from '../components/AcademyLogo';
 
@@ -23,9 +23,11 @@ export const AdminPortalPage: React.FC = () => {
     cloudSyncStatus,
     refreshFromCloud,
     setActivePage,
+    walletTransactions,
+    updateWalletTransactionStatus,
   } = useAcademy();
 
-  const [activeTab, setActiveTab] = useState<'settings' | 'payments' | 'students' | 'courses' | 'branches' | 'ads' | 'zt' | 'matrimonial' | 'careers' | 'messages'>('settings');
+  const [activeTab, setActiveTab] = useState<'settings' | 'payments' | 'wallet' | 'students' | 'courses' | 'branches' | 'ads' | 'zt' | 'matrimonial' | 'careers' | 'messages'>('settings');
 
   // Site Settings Form
   const [academyName, setAcademyName] = useState(siteSettings.academyName);
@@ -137,6 +139,15 @@ export const AdminPortalPage: React.FC = () => {
             }`}
           >
             Payment Receipts ({payments.length})
+          </button>
+          <button
+            onClick={() => setActiveTab('wallet')}
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+              activeTab === 'wallet' ? 'bg-amber-500 text-red-950 shadow-lg' : 'bg-red-900/60 text-red-200'
+            }`}
+          >
+            <Wallet className="w-3.5 h-3.5" />
+            <span>Deposits & Withdrawals ({walletTransactions.length})</span>
           </button>
           <button
             onClick={() => setActiveTab('students')}
@@ -461,6 +472,207 @@ export const AdminPortalPage: React.FC = () => {
                       </td>
                     </tr>
                   ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* Tab: Digital Wallet Deposits & Withdrawals Manager */}
+        {activeTab === 'wallet' && (
+          <div className="bg-red-900/60 border border-amber-500/30 rounded-3xl p-6 space-y-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-red-800 pb-4">
+              <div>
+                <h2 className="text-xl sm:text-2xl font-serif font-bold text-amber-200 flex items-center gap-2">
+                  <Wallet className="w-5 h-5 text-amber-400" />
+                  <span>Wallet Deposits & Withdrawals Manager</span>
+                </h2>
+                <p className="text-xs text-stone-300 font-urdu mt-0.5">
+                  ڈپازٹ اور ودڈرا درخواستوں کی تصدیق اور آن لائن منظوری
+                </p>
+              </div>
+              <button
+                onClick={() => setActivePage('wallet')}
+                className="bg-amber-500 hover:bg-amber-400 text-red-950 font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow"
+              >
+                <span>Open Public Wallet Page</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Metrics Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="bg-emerald-950/80 p-4 rounded-xl border border-emerald-500/50 space-y-1">
+                <div className="text-[11px] text-emerald-400 font-bold uppercase tracking-wider flex items-center gap-1">
+                  <ArrowDownLeft className="w-3.5 h-3.5" />
+                  <span>Total Deposits</span>
+                </div>
+                <div className="text-xl font-serif font-black text-white">
+                  Rs.{' '}
+                  {walletTransactions
+                    .filter((t) => t.type === 'deposit')
+                    .reduce((acc, t) => acc + (t.amountPKR || 0), 0)
+                    .toLocaleString()}{' '}
+                  PKR
+                </div>
+                <div className="text-[10px] text-stone-300">
+                  {walletTransactions.filter((t) => t.type === 'deposit').length} deposit requests received
+                </div>
+              </div>
+
+              <div className="bg-amber-950/80 p-4 rounded-xl border border-amber-500/50 space-y-1">
+                <div className="text-[11px] text-amber-400 font-bold uppercase tracking-wider flex items-center gap-1">
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                  <span>Total Withdrawals</span>
+                </div>
+                <div className="text-xl font-serif font-black text-white">
+                  Rs.{' '}
+                  {walletTransactions
+                    .filter((t) => t.type === 'withdraw')
+                    .reduce((acc, t) => acc + (t.amountPKR || 0), 0)
+                    .toLocaleString()}{' '}
+                  PKR
+                </div>
+                <div className="text-[10px] text-stone-300">
+                  {walletTransactions.filter((t) => t.type === 'withdraw').length} payout requests submitted
+                </div>
+              </div>
+
+              <div className="bg-red-950/90 p-4 rounded-xl border border-red-800 space-y-1">
+                <div className="text-[11px] text-red-300 font-bold uppercase tracking-wider flex items-center gap-1">
+                  <Clock className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Pending Action</span>
+                </div>
+                <div className="text-xl font-serif font-black text-amber-300">
+                  {
+                    walletTransactions.filter(
+                      (t) => t.status === 'Pending Verification' || t.status === 'Processing'
+                    ).length
+                  }{' '}
+                  Requests
+                </div>
+                <div className="text-[10px] text-stone-400">Needs owner verification / payout</div>
+              </div>
+            </div>
+
+            {/* Transactions Table */}
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-red-950 text-amber-300 uppercase border-b border-red-800">
+                  <tr>
+                    <th className="p-3">Type</th>
+                    <th className="p-3">User & Contact</th>
+                    <th className="p-3">Amount</th>
+                    <th className="p-3">Method & Account</th>
+                    <th className="p-3">TID / Reference</th>
+                    <th className="p-3">Purpose</th>
+                    <th className="p-3">Status</th>
+                    <th className="p-3">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-red-800/80">
+                  {walletTransactions.length === 0 ? (
+                    <tr>
+                      <td colSpan={8} className="p-6 text-center text-stone-400">
+                        No wallet transactions recorded yet.
+                      </td>
+                    </tr>
+                  ) : (
+                    walletTransactions.map((tx) => (
+                      <tr key={tx.id} className="hover:bg-red-900/80">
+                        <td className="p-3 whitespace-nowrap">
+                          {tx.type === 'deposit' ? (
+                            <span className="inline-flex items-center gap-1 bg-emerald-500/20 text-emerald-300 font-bold text-[10px] px-2 py-0.5 rounded-full border border-emerald-500/40">
+                              <ArrowDownLeft className="w-3 h-3" /> Deposit
+                            </span>
+                          ) : (
+                            <span className="inline-flex items-center gap-1 bg-amber-500/20 text-amber-300 font-bold text-[10px] px-2 py-0.5 rounded-full border border-amber-500/40">
+                              <ArrowUpRight className="w-3 h-3" /> Withdraw
+                            </span>
+                          )}
+                          <div className="text-[9px] text-stone-400 mt-0.5">{tx.date}</div>
+                        </td>
+
+                        <td className="p-3">
+                          <div className="font-bold text-white">{tx.userName}</div>
+                          <div className="text-[10px] font-mono text-stone-300">{tx.userPhone}</div>
+                        </td>
+
+                        <td className="p-3 font-bold whitespace-nowrap">
+                          <span className={tx.type === 'deposit' ? 'text-emerald-400' : 'text-amber-300'}>
+                            Rs. {tx.amountPKR.toLocaleString()} PKR
+                          </span>
+                        </td>
+
+                        <td className="p-3">
+                          <div className="font-bold text-stone-200">{tx.method}</div>
+                          <div className="text-[10px] text-stone-400 font-mono">
+                            {tx.accountNumberOrIban}
+                          </div>
+                          {tx.accountTitle && (
+                            <div className="text-[10px] text-amber-200/80">Title: {tx.accountTitle}</div>
+                          )}
+                        </td>
+
+                        <td className="p-3 font-mono text-[11px] text-stone-300">
+                          {tx.transactionId || tx.id}
+                        </td>
+
+                        <td className="p-3">
+                          <div className="text-stone-200 max-w-[150px] truncate">{tx.purpose}</div>
+                          {tx.notes && (
+                            <div className="text-[10px] text-stone-400 max-w-[150px] truncate">
+                              {tx.notes}
+                            </div>
+                          )}
+                        </td>
+
+                        <td className="p-3 whitespace-nowrap">
+                          <span
+                            className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                              tx.status === 'Approved' || tx.status === 'Completed'
+                                ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-400/30'
+                                : tx.status === 'Rejected'
+                                ? 'bg-red-500/20 text-red-300 border border-red-400/30'
+                                : 'bg-amber-500/20 text-amber-300 border border-amber-400/30'
+                            }`}
+                          >
+                            {tx.status}
+                          </span>
+                        </td>
+
+                        <td className="p-3 whitespace-nowrap">
+                          <div className="flex items-center gap-1.5">
+                            {tx.status !== 'Approved' && tx.status !== 'Completed' && (
+                              <button
+                                onClick={() =>
+                                  updateWalletTransactionStatus(
+                                    tx.id,
+                                    tx.type === 'deposit' ? 'Approved' : 'Completed',
+                                    'Approved by Super Admin'
+                                  )
+                                }
+                                className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-2 py-1 rounded text-[10px] transition"
+                              >
+                                {tx.type === 'deposit' ? 'Approve' : 'Mark Paid'}
+                              </button>
+                            )}
+
+                            {tx.status !== 'Rejected' && (
+                              <button
+                                onClick={() =>
+                                  updateWalletTransactionStatus(tx.id, 'Rejected', 'Rejected by admin')
+                                }
+                                className="bg-red-800 hover:bg-red-700 text-stone-200 px-2 py-1 rounded text-[10px] transition"
+                              >
+                                Reject
+                              </button>
+                            )}
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  )}
                 </tbody>
               </table>
             </div>

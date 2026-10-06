@@ -59,6 +59,14 @@ export const pageSeoData: Record<PageId, PageMetadata> = {
     keywordsEn: 'online Quran fee payment, EasyPaisa 03447956085, pay Quran tuition, monthly Quran fees, bank transfer tuition payment',
     keywordsUr: 'فیس ادائیگی ایزی پیسہ, 03447956085, ماہانہ فیس قرآن, رسید اپلوڈ',
   },
+  wallet: {
+    titleEn: 'Digital Wallet, Deposit & Withdraw | Shaheen Al Zaitoon Academy',
+    titleUr: 'اکیڈمی ڈیجیٹل والٹ، ڈپازٹ اور رقم نکلوائیں | شاہین الزیتون اکیڈمی',
+    descriptionEn: 'Deposit funds securely into your Shaheen Academy digital wallet via EasyPaisa, JazzCash or Meezan Bank. Withdraw affiliate earnings, referral commissions, and tuition refunds instantly.',
+    descriptionUr: 'ایزی پیسہ، جاز کیش اور میزان بینک کے ذریعے اکیڈمی والٹ میں رقم جمع (ڈپازٹ) کروائیں اور اپنی کمیشن یا ریفنڈ باآسانی نکلوائیں (ودڈرا کریں۔)',
+    keywordsEn: 'deposit funds EasyPaisa JazzCash, withdraw money Pakistan, online Quran wallet, affiliate withdrawal, referral commission payout, Shaheen Al Zaitoon deposit withdraw',
+    keywordsUr: 'ڈپازٹ فنڈز ایزی پیسہ, رقم نکلوائیں جاز کیش, آن لائن والٹ, کمیشن ودڈرا, شاہین الزیتون ڈپازٹ ودڈرا',
+  },
   'live-classes': {
     titleEn: 'Live Quran Classrooms & Schedule | Shaheen Al Zaitoon',
     titleUr: 'لائیو قرآن کلاس رومز اور شیڈول | شاہین الزیتون',

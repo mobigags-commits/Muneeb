@@ -16,14 +16,23 @@ import {
   ShieldCheck,
   Send,
   Sparkles,
+  Wallet,
 } from 'lucide-react';
 import { useAcademy } from '../context/AcademyContext';
 import { AIMarketingAssistant } from '../components/AIMarketingAssistant';
 import { AdBanner } from '../components/AdBanner';
 
 export const GrowthHubPage: React.FC = () => {
-  const { siteSettings, referrals, addReferral, affiliatePartners, addAffiliatePartner, adCampaigns, setActivePage } =
-    useAcademy();
+  const {
+    siteSettings,
+    referrals,
+    addReferral,
+    affiliatePartners,
+    addAffiliatePartner,
+    adCampaigns,
+    setActivePage,
+    setWalletTabInitial,
+  } = useAcademy();
 
   const [refName, setRefName] = useState('');
   const [refUser, setRefUser] = useState('');
@@ -339,13 +348,25 @@ export const GrowthHubPage: React.FC = () => {
               </button>
             </div>
 
-            <div className="bg-red-950 p-3.5 rounded-xl border border-amber-500/20 text-xs text-amber-200/90 space-y-1">
-              <div className="font-bold text-amber-300 flex items-center gap-1">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                EasyPaisa & Bank Referral Payouts Guaranteed
+            <div className="bg-red-950 p-4 rounded-xl border border-amber-500/20 text-xs text-amber-200/90 space-y-2.5">
+              <div className="flex items-center justify-between">
+                <div className="font-bold text-amber-300 flex items-center gap-1">
+                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                  EasyPaisa & Bank Referral Payouts Guaranteed
+                </div>
+                <button
+                  onClick={() => {
+                    setWalletTabInitial('withdraw');
+                    setActivePage('wallet');
+                  }}
+                  className="bg-amber-500 hover:bg-amber-400 text-red-950 font-extrabold px-3 py-1.5 rounded-lg text-xs flex items-center gap-1 shadow transition"
+                >
+                  <Wallet className="w-3.5 h-3.5" />
+                  <span>Withdraw Earnings (رقم نکلوائیں)</span>
+                </button>
               </div>
               <p className="text-[11px] text-red-200">
-                All referral earnings are credited instantly and paid directly via EasyPaisa ({siteSettings.easyPaisaAccountNumber}) or Bank Transfer every Friday!
+                All referral earnings are credited instantly and paid directly via EasyPaisa ({siteSettings.easyPaisaAccountNumber}) or Bank Transfer!
               </p>
             </div>
           </div>

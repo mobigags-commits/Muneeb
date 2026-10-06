@@ -27,6 +27,7 @@ import {
   Megaphone,
   Facebook,
   Users,
+  Wallet,
 } from 'lucide-react';
 import { useAcademy } from '../context/AcademyContext';
 import { PageId, UserRole } from '../types';
@@ -59,6 +60,7 @@ export const Navbar: React.FC = () => {
     { id: 'marriage-bureau', label: 'Marriage Bureau', labelUrdu: 'رشتہ بیورو', icon: Heart },
     { id: 'growth-hub', label: 'Growth Hub', labelUrdu: 'گروتھ پورٹل', icon: TrendingUp },
     { id: 'fee-payment', label: 'Fee & EasyPaisa', labelUrdu: 'فیس و ایزی پیسہ', icon: CreditCard },
+    { id: 'wallet', label: 'Deposit & Withdraw', labelUrdu: 'ڈپازٹ و ودڈرا', icon: Wallet },
   ];
 
   const allPageLinks: { id: PageId; label: string; group: string; icon: any }[] = [
@@ -90,7 +92,8 @@ export const Navbar: React.FC = () => {
     { id: 'parent-portal', label: '11. Parent Portal', group: 'Portals', icon: Shield },
     { id: 'admissions', label: '12. Online Admissions & Free Trial', group: 'Academic', icon: FileText },
     { id: 'fee-payment', label: '13. Fee & EasyPaisa (03447956085)', group: 'Finance', icon: CreditCard },
-    { id: 'live-classes', label: '14. Live Classes Studio', group: 'Academic', icon: Calendar },
+    { id: 'wallet', label: '14. Wallet: Deposit & Withdraw (ڈپازٹ و ودڈرا)', group: 'Finance', icon: Wallet },
+    { id: 'live-classes', label: '15. Live Classes Studio', group: 'Academic', icon: Calendar },
     { id: 'certificates', label: '15. Certificates Verification', group: 'Academic', icon: Award },
     { id: 'gallery', label: '16. Photo & Video Gallery', group: 'Media', icon: ImageIcon },
     { id: 'blog', label: '17. Islamic Articles & Blog', group: 'Media', icon: FileText },

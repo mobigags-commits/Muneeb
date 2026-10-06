@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, ShoppingBag, Heart, TrendingUp, Phone, ShieldCheck, Megaphone, Facebook, Globe } from 'lucide-react';
+import { BookOpen, ShoppingBag, Heart, TrendingUp, Phone, ShieldCheck, Megaphone, Facebook, Globe, Wallet } from 'lucide-react';
 import { useAcademy } from '../context/AcademyContext';
 import { AcademyLogo } from './AcademyLogo';
 
@@ -103,6 +103,19 @@ export const EcosystemBar: React.FC = () => {
             <Globe className="w-3.5 h-3.5 text-amber-300" />
             <span>9 Sites Google AdSense</span>
             <span className="bg-amber-400 text-red-950 text-[9px] px-1 rounded font-extrabold">9 Sites</span>
+          </button>
+
+          <button
+            onClick={() => setActivePage('wallet')}
+            className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs sm:text-sm font-semibold transition-all ${
+              activePage === 'wallet'
+                ? 'bg-amber-400 text-red-950 font-bold shadow-sm'
+                : 'bg-emerald-950/80 hover:bg-emerald-900 text-emerald-200 border border-emerald-500/50'
+            }`}
+          >
+            <Wallet className="w-3.5 h-3.5 text-emerald-300" />
+            <span>Deposit & Withdraw</span>
+            <span className="bg-emerald-500 text-white text-[9px] px-1.5 py-0.2 rounded font-extrabold">Wallet</span>
           </button>
         </div>
 

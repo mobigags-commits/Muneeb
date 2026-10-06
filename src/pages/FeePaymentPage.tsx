@@ -47,7 +47,7 @@ type PaymentTab =
   | 'paypal';
 
 export const FeePaymentPage: React.FC = () => {
-  const { siteSettings, courses, addPayment, payments } = useAcademy();
+  const { siteSettings, courses, addPayment, payments, setActivePage, userWalletBalance, setWalletTabInitial } = useAcademy();
 
   const [activeTab, setActiveTab] = useState<PaymentTab>('easypaisa');
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
@@ -266,6 +266,50 @@ export const FeePaymentPage: React.FC = () => {
           >
             Pay Rs. 100 App Fee / فیس ادا کریں
           </button>
+        </div>
+
+        {/* Digital Wallet: Deposit & Withdraw Quick Link Card */}
+        <div className="bg-gradient-to-r from-emerald-950/90 via-red-950 to-stone-900 border-2 border-emerald-500/60 rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5 text-left">
+            <div className="w-12 h-12 rounded-xl bg-emerald-500 text-white flex items-center justify-center font-black shrink-0 shadow-md">
+              <Wallet className="w-6 h-6" />
+            </div>
+            <div>
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-emerald-300 font-extrabold text-sm sm:text-base">
+                  Digital Wallet: Deposit & Withdraw Funds (ڈپازٹ و رقم نکلوائیں)
+                </span>
+                <span className="bg-emerald-500 text-white font-black text-xs px-2.5 py-0.5 rounded-full shadow">
+                  Balance: Rs. {userWalletBalance.toLocaleString()} PKR
+                </span>
+              </div>
+              <p className="text-xs sm:text-sm text-stone-200 font-urdu mt-0.5 leading-relaxed">
+                کیا آپ اکیڈمی والٹ میں پیشگی فیس، شاپنگ فنڈز ڈپازٹ کرنا چاہتے ہیں یا کمیشن و ریفرل کی رقم نکالنا چاہتے ہیں؟
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 w-full md:w-auto shrink-0">
+            <button
+              type="button"
+              onClick={() => {
+                setWalletTabInitial('deposit');
+                setActivePage('wallet');
+              }}
+              className="flex-1 md:flex-none bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow transition text-center"
+            >
+              + Deposit Funds (ڈپازٹ)
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setWalletTabInitial('withdraw');
+                setActivePage('wallet');
+              }}
+              className="flex-1 md:flex-none bg-amber-500 hover:bg-amber-400 text-red-950 font-black text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow transition text-center"
+            >
+              ↗ Withdraw Funds (رقم نکلوائیں)
+            </button>
+          </div>
         </div>
 
         {/* Live Multi-Currency Tuition Calculator */}

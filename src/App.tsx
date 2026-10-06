@@ -17,6 +17,7 @@ import { StudentPortalPage } from './pages/StudentPortalPage';
 import { ParentPortalPage } from './pages/ParentPortalPage';
 import { AdmissionsPage } from './pages/AdmissionsPage';
 import { FeePaymentPage } from './pages/FeePaymentPage';
+import { WalletPage } from './pages/WalletPage';
 import { LiveClassesPage } from './pages/LiveClassesPage';
 import { CertificatesPage } from './pages/CertificatesPage';
 import { GalleryPage } from './pages/GalleryPage';
@@ -102,6 +103,8 @@ const AppContent: React.FC = () => {
         return <AdmissionsPage />;
       case 'fee-payment':
         return <FeePaymentPage />;
+      case 'wallet':
+        return <WalletPage />;
       case 'live-classes':
         return <LiveClassesPage />;
       case 'certificates':

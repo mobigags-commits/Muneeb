@@ -7,6 +7,7 @@ export type PageId =
   | 'parent-portal'
   | 'admissions'
   | 'fee-payment'
+  | 'wallet'
   | 'live-classes'
   | 'certificates'
   | 'gallery'
@@ -169,6 +170,34 @@ export interface PaymentReceipt {
   slipImageUrl?: string;
   senderBankOrWallet?: string;
   currency?: 'PKR' | 'USD' | 'GBP' | 'EUR' | 'SAR' | 'AED' | 'CAD' | 'AUD';
+}
+
+export interface WalletTransaction {
+  id: string;
+  type: 'deposit' | 'withdraw';
+  userName: string;
+  userPhone: string;
+  userEmail?: string;
+  amountPKR: number;
+  method:
+    | 'EasyPaisa'
+    | 'JazzCash'
+    | 'Meezan Bank'
+    | 'Bank Alfalah'
+    | 'HBL'
+    | 'SadaPay'
+    | 'NayaPay'
+    | 'Raast'
+    | 'Bank Transfer'
+    | 'Other';
+  accountTitle: string;
+  accountNumberOrIban: string;
+  transactionId?: string; // TID for deposits
+  purpose: string;
+  status: 'Pending Verification' | 'Approved' | 'Rejected' | 'Processing' | 'Completed';
+  date: string;
+  notes?: string;
+  adminResponse?: string;
 }
 
 export interface AdCampaign {
