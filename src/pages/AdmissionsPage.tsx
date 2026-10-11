@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Send, CheckCircle, Sparkles, BookOpen, CreditCard, Shield } from 'lucide-react';
+import { Send, CheckCircle, Sparkles, BookOpen, CreditCard, Shield, Clock, Globe } from 'lucide-react';
 import { useAcademy } from '../context/AcademyContext';
 
 export const AdmissionsPage: React.FC = () => {
@@ -11,7 +11,7 @@ export const AdmissionsPage: React.FC = () => {
   const [age, setAge] = useState('');
   const [gender, setGender] = useState<'male' | 'female'>('male');
   const [selectedCourseId, setSelectedCourseId] = useState(courses[0]?.id || '');
-  const [timeSlot, setTimeSlot] = useState('Evening (4 PM - 8 PM PKT)');
+  const [timeSlot, setTimeSlot] = useState('Shift 2: Evening Shift (04:00 PM – 12:00 AM PKT / 8 Hours)');
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -55,6 +55,31 @@ export const AdmissionsPage: React.FC = () => {
           <p className="text-xs sm:text-sm text-red-200">
             Fill in the form below to enroll yourself or your child. Our admission manager will reach out via WhatsApp for trial scheduling.
           </p>
+
+          {/* 3 SHIFTS OF 8 HOURS INFO CALLOUT */}
+          <div className="bg-gradient-to-r from-red-900/80 via-amber-950/80 to-blue-950/80 border-2 border-amber-500/40 rounded-2xl p-4 text-center max-w-2xl mx-auto shadow-lg space-y-2">
+            <div className="flex items-center justify-center gap-2 text-amber-300 font-bold text-xs uppercase tracking-wider">
+              <Clock className="w-4 h-4 text-amber-400" />
+              <span>24/7 Global Timing • اکیڈمی میں 8 گھنٹے کی 3 شفٹس</span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px] pt-1">
+              <div className="bg-red-950/80 rounded-lg p-2 border border-red-800">
+                <strong className="text-amber-200 block">شفٹ 1: صبح (8 گھنٹے)</strong>
+                <span className="text-red-200">08:00 AM – 04:00 PM PKT</span>
+                <span className="text-emerald-400 block text-[10px]">بچے، ہوم اسکولنگ و خواتین</span>
+              </div>
+              <div className="bg-red-950/80 rounded-lg p-2 border border-emerald-500/40">
+                <strong className="text-emerald-300 block">شفٹ 2: شام (8 گھنٹے)</strong>
+                <span className="text-white">04:00 PM – 12:00 AM PKT</span>
+                <span className="text-emerald-400 block text-[10px]">پاکستان سکول و برطانیہ (UK)</span>
+              </div>
+              <div className="bg-red-950/80 rounded-lg p-2 border border-blue-400/40">
+                <strong className="text-blue-300 block">شفٹ 3: رات (8 گھنٹے)</strong>
+                <span className="text-white">12:00 AM – 08:00 AM PKT</span>
+                <span className="text-blue-200 block text-[10px]">امریکہ (USA) و کینیڈا</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {submitted ? (
@@ -153,18 +178,26 @@ export const AdmissionsPage: React.FC = () => {
 
               <div>
                 <label className="block text-xs font-medium text-amber-200 mb-1">
-                  Class Schedule Preference
+                  Class Schedule Preference (اکیڈمی میں 8 گھنٹے کی 3 شفٹس) *
                 </label>
                 <select
                   value={timeSlot}
                   onChange={(e) => setTimeSlot(e.target.value)}
-                  className="w-full bg-red-950/80 border border-red-700 text-amber-200 rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-amber-400"
+                  className="w-full bg-red-950/80 border border-red-700 text-amber-200 rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-amber-400 font-medium"
                 >
-                  <option>Morning Slot (8 AM - 12 PM PKT)</option>
-                  <option>Afternoon Slot (12 PM - 4 PM PKT)</option>
-                  <option>Evening Slot (4 PM - 8 PM PKT)</option>
-                  <option>Night Slot (8 PM - 12 AM PKT)</option>
+                  <option value="Shift 1: Morning Shift (08:00 AM – 04:00 PM PKT / 8 Hours)">
+                    شفٹ 1: صبح کی شفٹ (08:00 AM – 04:00 PM PKT • 8 گھنٹے)
+                  </option>
+                  <option value="Shift 2: Evening Shift (04:00 PM – 12:00 AM PKT / 8 Hours)">
+                    شفٹ 2: شام کی شفٹ (04:00 PM – 12:00 AM PKT • 8 گھنٹے)
+                  </option>
+                  <option value="Shift 3: Night / Overseas Shift (12:00 AM – 08:00 AM PKT / 8 Hours)">
+                    شفٹ 3: رات و اوورسیز شفٹ (12:00 AM – 08:00 AM PKT • 8 گھنٹے)
+                  </option>
                 </select>
+                <div className="text-[10px] text-emerald-300 mt-1">
+                  ✓ 24 گھنٹے نان اسٹاپ تدریس: آپ کی سہولت کے مطابق 8 گھنٹے کی 3 شفٹس میں کلاسز دستیاب ہیں۔
+                </div>
               </div>
             </div>
 

@@ -30,6 +30,9 @@ import {
   Eye,
   MessageSquare,
   X,
+  Globe,
+  Sun,
+  Moon,
 } from 'lucide-react';
 import { useAcademy } from '../context/AcademyContext';
 import { TeacherApplication, Teacher } from '../types';
@@ -44,10 +47,11 @@ export const TeachersPortalPage: React.FC = () => {
     addApplication,
     language,
     setActivePage,
+    shifts,
   } = useAcademy();
 
-  // Active Tab: 'dashboard' | 'apply' | 'salary-policy' | 'track'
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'apply' | 'salary-policy' | 'track'>('dashboard');
+  // Active Tab: 'dashboard' | 'apply' | 'shifts' | 'salary-policy' | 'track'
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'apply' | 'shifts' | 'salary-policy' | 'track'>('dashboard');
 
   // Selected Faculty Member for Dashboard Workspace
   const [selectedTeacherId, setSelectedTeacherId] = useState<string>(teachers[0]?.id || 't1');
@@ -101,11 +105,11 @@ export const TeachersPortalPage: React.FC = () => {
   const [studentAudience, setStudentAudience] = useState<'Kids & Boys' | 'Ladies & Sisters Only' | 'Adults & General' | 'Any'>('Kids & Boys');
   const [languagesSpoken, setLanguagesSpoken] = useState<string[]>(['Urdu', 'Arabic', 'English']);
 
-  // Technical Setup & Shifts
+  // Technical Setup & Shifts (3 Shifts of 8 Hours Each / 24 Hours Round the Clock)
   const [deviceType, setDeviceType] = useState('Laptop / Desktop PC with HD Webcam');
   const [internetConnection, setInternetConnection] = useState('High-Speed Fiber (20+ Mbps) with UPS/Power Backup');
-  const [teachingShift, setTeachingShift] = useState('Evening Shift (4:00 PM – 10:00 PM PKT)');
-  const [weeklyHours, setWeeklyHours] = useState('30 Hours / Week');
+  const [teachingShift, setTeachingShift] = useState('Shift 2: Evening Shift (04:00 PM – 12:00 AM PKT / 8 Hours)');
+  const [weeklyHours, setWeeklyHours] = useState('48 Hours / Week (8 Hours Daily Shift - 6 Days)');
   const [hasQuietRoom, setHasQuietRoom] = useState(true);
 
   // SALARY & FINANCIAL INFORMATION (MINIMUM 50,000 PKR MANDATORY)
@@ -225,8 +229,7 @@ export const TeachersPortalPage: React.FC = () => {
   // WhatsApp Notification to Founder Muneeb Ur Rehman
   const handleNotifyFounderWhatsApp = () => {
     const rawNumber = siteSettings.whatsappNumber.replace(/[^0-9]/g, '');
-    const cleanNumber = rawNumber.startsWith('92') ? rawNumber : `92${rawNumber.replace(/^0/, '')}`;
-    const message = `السلام علیکم بانی اکیڈمی قاری منیب الرحمن!\n\nمیں نے شاہین الزیتون ٹیچرز پورٹل پر بطور قاری/استاد اپنی تفصیلی رجسٹریشن مکمل کر لی ہے:\n\n• درخواست حوالہ نمبر: ${submittedAppId}\n• نام: ${title} ${fullName}\n• سند/تعلیم: ${qualification}\n• حفظ/تجوید: ${hifzDetails}\n• رابطہ نمبر: ${phone}\n• شہر: ${city}, ${province}\n• مطلوبہ ماہانہ تنخواہ: Rs. ${expectedSalary.toLocaleString()} PKR (کم از کم 50,000 کا معاہدہ)\n• تنخواہ وصولی کا ذریعہ: ${paymentMethod} (${accountNumber})\n• تدریسی اوقات: ${teachingShift}\n\nبراہِ کرم آن لائن آڈیشن اور کلاس شیڈولنگ کے لیے رابطہ فرمائیں۔ جزاک اللہ خیراً!`;
+    const message = `السلام علیکم بانی اکیڈمی قاری منیب الرحمن!\n\nمیں نے شاہین الزیتون ٹیچرز پورٹل پر بطور قاری/استاد اپنی تفصیلی رجسٹریشن مکمل کر لی ہے:\n\n• درخواست حوالہ نمبر: ${submittedAppId}\n• نام: ${title} ${fullName}\n• سند/تعلیم: ${qualification}\n• حفظ/تجوید: ${hifzDetails}\n• رابطہ نمبر: ${phone}\n• شہر: ${city}, ${province}\n• ماہانہ تنخواہ: شروع میں Rs. ${expectedSalary.toLocaleString()} PKR (وقت کے ساتھ اضافہ)\n• تنخواہ وصولی کا ذریعہ: ${paymentMethod} (${accountNumber})\n• تدریسی شفٹ (8 گھنٹے روزانہ): ${teachingShift}\n\nبراہِ کرم آن لائن آڈیشن اور کلاس شیڈولنگ کے لیے رابطہ فرمائیں۔ جزاک اللہ خیراً!`;
 
     window.open(`https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`, '_blank');
   };
@@ -276,19 +279,38 @@ export const TeachersPortalPage: React.FC = () => {
               </p>
             </div>
 
-            {/* MANDATORY SALARY BADGE: STARTING RS. 50,000 FOR ALL TEACHERS, INCREASING OVER TIME */}
-            <div className="bg-gradient-to-b from-red-950 via-amber-950 to-emerald-950 border-2 border-emerald-400/80 rounded-2xl p-4 sm:p-5 text-center shadow-2xl shrink-0 max-w-sm w-full">
-              <div className="flex items-center justify-center gap-1.5 text-emerald-400 text-xs font-black uppercase tracking-wider mb-1">
-                <Sparkles className="w-4 h-4 text-amber-400" />
-                <span>Faculty Honorarium Charter</span>
+            {/* HIGHLIGHT BADGES: 8-HOUR 3 SHIFTS & RS. 50,000 SALARY */}
+            <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-3 w-full lg:w-auto shrink-0">
+              {/* 3 SHIFTS OF 8 HOURS BADGE */}
+              <div className="bg-gradient-to-b from-red-950 via-amber-950 to-blue-950 border-2 border-amber-400/80 rounded-2xl p-4 sm:p-5 text-center shadow-2xl flex-1 min-w-[260px]">
+                <div className="flex items-center justify-center gap-1.5 text-amber-400 text-xs font-black uppercase tracking-wider mb-1">
+                  <Clock className="w-4 h-4 text-amber-400 animate-spin-slow" />
+                  <span>24/7 Academy Operations</span>
+                </div>
+                <div className="text-xs text-amber-200 font-semibold">اکیڈمی تدریسی شیڈول:</div>
+                <div className="text-xl sm:text-2xl font-black font-serif text-amber-300 my-1 drop-shadow-sm">
+                  8 گھنٹے کی 3 شفٹس
+                  <span className="text-xs text-amber-200 block font-normal">(صبح • شام • رات / 24 گھنٹے)</span>
+                </div>
+                <div className="text-[11px] text-red-100 bg-red-900/60 rounded-lg p-2 border border-red-800 leading-tight">
+                  اکیڈمی نظام: <strong>8، 8 گھنٹے کی 3 شفٹس</strong> میں چوبیس گھنٹے پاکستان، یو کے، امریکہ و دنیا بھر کے طلبہ کو لائیو پڑھایا جاتا ہے۔
+                </div>
               </div>
-              <div className="text-xs text-amber-200 font-semibold">شروع میں تمام اساتذہ کی تنخواہ:</div>
-              <div className="text-2xl sm:text-3xl font-black font-serif text-emerald-300 my-1 drop-shadow-sm">
-                Rs. 50,000 PKR
-                <span className="text-xs text-amber-200 block font-normal">/ ماہانہ (ابتدائی فکسڈ مشاہرہ)</span>
-              </div>
-              <div className="text-[11px] text-red-100 bg-red-900/60 rounded-lg p-2 border border-red-800 leading-tight">
-                اکیڈمی پالیسی: <strong>شروع میں تمام اساتذہ کی تنخواہ 50,000 روپے ہی ہو گی</strong>، اور بعد میں وقت، تدریسی مدت اور کارکردگی کے ساتھ باقاعدگی سے بڑھتی جائے گی۔
+
+              {/* MANDATORY SALARY BADGE: STARTING RS. 50,000 FOR ALL TEACHERS */}
+              <div className="bg-gradient-to-b from-red-950 via-amber-950 to-emerald-950 border-2 border-emerald-400/80 rounded-2xl p-4 sm:p-5 text-center shadow-2xl flex-1 min-w-[260px]">
+                <div className="flex items-center justify-center gap-1.5 text-emerald-400 text-xs font-black uppercase tracking-wider mb-1">
+                  <Sparkles className="w-4 h-4 text-amber-400" />
+                  <span>Faculty Honorarium Charter</span>
+                </div>
+                <div className="text-xs text-amber-200 font-semibold">شروع میں تمام اساتذہ کی تنخواہ:</div>
+                <div className="text-2xl sm:text-3xl font-black font-serif text-emerald-300 my-1 drop-shadow-sm">
+                  Rs. 50,000 PKR
+                  <span className="text-xs text-amber-200 block font-normal">/ ماہانہ (ابتدائی فکسڈ مشاہرہ)</span>
+                </div>
+                <div className="text-[11px] text-red-100 bg-red-900/60 rounded-lg p-2 border border-red-800 leading-tight">
+                  اکیڈمی پالیسی: <strong>شروع میں تمام اساتذہ کی تنخواہ 50,000 روپے ہی ہو گی</strong>، اور بعد میں وقت اور کارکردگی کے ساتھ باقاعدگی سے بڑھتی جائے گی۔
+                </div>
               </div>
             </div>
           </div>
@@ -297,7 +319,7 @@ export const TeachersPortalPage: React.FC = () => {
           <div className="mt-8 pt-6 border-t border-red-800/80 flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
             <button
               onClick={() => setActiveTab('dashboard')}
-              className={`flex items-center gap-2 px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-md ${
+              className={`flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-md ${
                 activeTab === 'dashboard'
                   ? 'bg-amber-500 text-red-950 font-black shadow-amber-500/20'
                   : 'bg-red-950/80 text-amber-200 hover:bg-red-900 border border-red-800'
@@ -309,7 +331,7 @@ export const TeachersPortalPage: React.FC = () => {
 
             <button
               onClick={() => setActiveTab('apply')}
-              className={`flex items-center gap-2 px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-md ${
+              className={`flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-md ${
                 activeTab === 'apply'
                   ? 'bg-amber-500 text-red-950 font-black shadow-amber-500/20'
                   : 'bg-red-950/80 text-amber-200 hover:bg-red-900 border border-red-800'
@@ -320,27 +342,39 @@ export const TeachersPortalPage: React.FC = () => {
             </button>
 
             <button
+              onClick={() => setActiveTab('shifts')}
+              className={`flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-md ${
+                activeTab === 'shifts'
+                  ? 'bg-amber-500 text-red-950 font-black shadow-amber-500/20'
+                  : 'bg-red-950/80 text-amber-200 hover:bg-red-900 border border-red-800'
+              }`}
+            >
+              <Clock className="w-4 h-4" />
+              <span>3. 3 Shifts System (8 گھنٹے کی 3 شفٹس • 24h)</span>
+            </button>
+
+            <button
               onClick={() => setActiveTab('salary-policy')}
-              className={`flex items-center gap-2 px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-md ${
+              className={`flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-md ${
                 activeTab === 'salary-policy'
                   ? 'bg-amber-500 text-red-950 font-black shadow-amber-500/20'
                   : 'bg-red-950/80 text-amber-200 hover:bg-red-900 border border-red-800'
               }`}
             >
               <DollarSign className="w-4 h-4" />
-              <span>3. Salary Policy & Scale (تنخواہ پالیسی 50,000+)</span>
+              <span>4. Salary Policy & Scale (شروع 50,000 اور ترقی منشور)</span>
             </button>
 
             <button
               onClick={() => setActiveTab('track')}
-              className={`flex items-center gap-2 px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-md ${
+              className={`flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-md ${
                 activeTab === 'track'
                   ? 'bg-amber-500 text-red-950 font-black shadow-amber-500/20'
                   : 'bg-red-950/80 text-amber-200 hover:bg-red-900 border border-red-800'
               }`}
             >
               <Search className="w-4 h-4" />
-              <span>4. Track Application (اسٹیٹس چیک کریں)</span>
+              <span>5. Track Application (اسٹیٹس چیک کریں)</span>
             </button>
           </div>
         </div>
@@ -428,14 +462,25 @@ export const TeachersPortalPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Monthly Teaching Hours */}
-              <div className="bg-red-900/60 border border-amber-500/30 rounded-2xl p-5 space-y-2">
-                <div className="text-xs text-red-300">Teaching Shift & Hours</div>
-                <div className="text-xl sm:text-2xl font-bold font-serif text-white">
-                  {currentTeacher.teachingShift || 'Evening & Overseas'}
+              {/* Monthly Teaching Shift & 8 Hours Duty */}
+              <div className="bg-gradient-to-br from-red-900/80 to-blue-950/70 border border-amber-500/40 rounded-2xl p-5 space-y-2 relative overflow-hidden">
+                <div className="flex items-center justify-between text-xs text-red-300">
+                  <span className="font-semibold text-amber-200">Official Shift (8 Hours)</span>
+                  <span className="bg-amber-400 text-red-950 text-[10px] font-black px-2 py-0.5 rounded-full">
+                    8 گھنٹے روزانہ
+                  </span>
                 </div>
-                <div className="text-xs text-emerald-300">
-                  Daily 4-6 Hours • Weekly 30 Hours
+                <div className="text-base sm:text-lg font-bold font-serif text-white">
+                  {currentTeacher.teachingShift || 'Evening Shift (04:00 PM – 12:00 AM PKT / 8 Hours)'}
+                </div>
+                <div className="text-xs text-emerald-300 flex items-center justify-between pt-1 border-t border-red-800/60">
+                  <span>8 Hours Duty • 48h Weekly</span>
+                  <button
+                    onClick={() => setActiveTab('shifts')}
+                    className="text-amber-300 hover:text-white underline font-bold cursor-pointer"
+                  >
+                    View 3 Shifts →
+                  </button>
                 </div>
               </div>
 
@@ -1190,33 +1235,39 @@ export const TeachersPortalPage: React.FC = () => {
 
                     <div>
                       <label className="block text-xs font-semibold text-amber-200 mb-1">
-                        Preferred Teaching Shift (پسندیدہ شفٹ) *
+                        Preferred 8-Hour Teaching Shift (اکیڈمی میں 8 گھنٹے کی شفٹ) *
                       </label>
                       <select
                         value={teachingShift}
                         onChange={(e) => setTeachingShift(e.target.value)}
-                        className="w-full bg-red-900/80 border border-red-700 text-white rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-amber-400"
+                        className="w-full bg-red-900/80 border border-red-700 text-white rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-amber-400 font-medium"
                       >
-                        <option>Evening Shift (4:00 PM – 10:00 PM PKT)</option>
-                        <option>Morning Shift (7:00 AM – 1:00 PM PKT)</option>
-                        <option>Afternoon Shift (1:00 PM – 5:00 PM PKT)</option>
-                        <option>US / UK Night Shift (8:00 PM – 3:00 AM PKT)</option>
-                        <option>Weekend Dedicated Shifts (Sat & Sun Full Days)</option>
+                        <option value="Shift 1: Morning Shift (08:00 AM – 04:00 PM PKT / 8 Hours)">
+                          شفٹ 1: صبح کی شفٹ (08:00 AM – 04:00 PM PKT • 8 گھنٹے)
+                        </option>
+                        <option value="Shift 2: Evening Shift (04:00 PM – 12:00 AM PKT / 8 Hours)">
+                          شفٹ 2: شام کی شفٹ (04:00 PM – 12:00 AM PKT • 8 گھنٹے)
+                        </option>
+                        <option value="Shift 3: Night / Overseas Shift (12:00 AM – 08:00 AM PKT / 8 Hours)">
+                          شفٹ 3: رات و اوورسیز شفٹ (12:00 AM – 08:00 AM PKT • 8 گھنٹے)
+                        </option>
                       </select>
+                      <p className="text-[10px] text-emerald-300 mt-1">
+                        ✓ اکیڈمی کا لازمی نظام: 8 گھنٹے کی 3 شفٹس (صبح، شام یا رات)۔
+                      </p>
                     </div>
 
                     <div>
                       <label className="block text-xs font-semibold text-amber-200 mb-1">
-                        Weekly Hours Committed (ہفتہ وار تدریسی گھنٹے)
+                        Weekly Hours Committed (ہفتہ وار تدریسی گھنٹے) *
                       </label>
                       <select
                         value={weeklyHours}
                         onChange={(e) => setWeeklyHours(e.target.value)}
                         className="w-full bg-red-900/80 border border-red-700 text-white rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-amber-400"
                       >
-                        <option>20 Hours / Week (Part-time)</option>
-                        <option>30 Hours / Week (Standard Faculty)</option>
-                        <option>40 Hours / Week (Full-time Senior)</option>
+                        <option>48 Hours / Week (8 Hours Daily • 6 Days Standard Roster)</option>
+                        <option>40 Hours / Week (8 Hours Daily • 5 Days Weekdays Only)</option>
                       </select>
                     </div>
 
@@ -1432,7 +1483,403 @@ export const TeachersPortalPage: React.FC = () => {
         )}
 
         {/* ========================================================================= */}
-        {/* TAB 3: SALARY POLICY & PAY SCALE EXPLANATION                              */}
+        {/* TAB 3: 3 SHIFTS OF 8 HOURS EACH (24/7 ACADEMY OPERATIONS)                 */}
+        {/* ========================================================================= */}
+        {activeTab === 'shifts' && (
+          <div className="space-y-8">
+            {/* Header Banner */}
+            <div className="bg-gradient-to-b from-red-900 via-amber-950 to-red-950 border-2 border-amber-500/50 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+              <div className="border-b border-red-800 pb-4 text-center max-w-3xl mx-auto space-y-3">
+                <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold uppercase tracking-wider border border-amber-400/40">
+                  <Clock className="w-4 h-4 text-amber-400" />
+                  <span>24 Hours Continuous Global Quran Education Model</span>
+                </div>
+                <h2 className="text-3xl sm:text-4xl font-serif font-black text-amber-100">
+                  اکیڈمی کا 24 گھنٹے تدریسی نظام: 8 گھنٹے کی 3 شفٹس
+                </h2>
+                <div className="bg-emerald-950/80 border-2 border-emerald-400/60 rounded-2xl p-4 max-w-2xl mx-auto shadow-inner text-center space-y-1">
+                  <div className="text-xs uppercase tracking-wider font-mono text-emerald-400 font-bold">
+                    Official Academy Schedule Rule • اکیڈمی کا لازمی اصول
+                  </div>
+                  <div className="text-lg sm:text-xl font-serif font-black text-amber-200">
+                    &ldquo;شاہین الزیتون اکیڈمی میں 8، 8 گھنٹے کی 3 مستقل شفٹس ہیں تاکہ چوبیس گھنٹے نان اسٹاپ قرآن کی تعلیم جاری رہے&rdquo;
+                  </div>
+                </div>
+                <p className="text-xs sm:text-sm text-red-200 max-w-2xl mx-auto leading-relaxed">
+                  شاہین الزیتون آن لائن قرآنی اکیڈمی 24 گھنٹے فعال رہتی ہے۔ ہر استاد روزانہ 8 گھنٹے کی ایک مخصوص شفٹ (صبح، شام یا رات) میں تدریسی فرائض سرانجام دیتا ہے، جس پر شروع میں <strong>50,000 روپے ماہانہ تنخواہ</strong> ادا کی جاتی ہے۔
+                </p>
+              </div>
+
+              {/* Dynamic Live Shift Indicator */}
+              {(() => {
+                const now = new Date();
+                const pktHour = (now.getUTCHours() + 5) % 24;
+                let activeId: 'morning' | 'evening' | 'night' = 'morning';
+                let activeName = 'Shift 1: Morning Shift (صبح کی شفٹ)';
+                let activeHours = '08:00 AM – 04:00 PM PKT (8 Hours)';
+                if (pktHour >= 8 && pktHour < 16) {
+                  activeId = 'morning';
+                  activeName = 'Shift 1: Morning Shift (صبح کی شفٹ)';
+                  activeHours = '08:00 AM – 04:00 PM PKT';
+                } else if (pktHour >= 16 && pktHour < 24) {
+                  activeId = 'evening';
+                  activeName = 'Shift 2: Evening Shift (شام کی شفٹ)';
+                  activeHours = '04:00 PM – 12:00 AM PKT';
+                } else {
+                  activeId = 'night';
+                  activeName = 'Shift 3: Night / Overseas Shift (رات و اوورسیز شفٹ)';
+                  activeHours = '12:00 AM – 08:00 AM PKT';
+                }
+
+                return (
+                  <div className="bg-gradient-to-r from-red-950 via-emerald-950 to-red-950 border-2 border-emerald-400/60 rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-400/40 flex items-center justify-center shrink-0">
+                        <Clock className="w-6 h-6 animate-pulse" />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
+                          <span className="text-xs font-bold uppercase tracking-wider text-emerald-300">
+                            Current Live Active Shift Right Now
+                          </span>
+                        </div>
+                        <div className="text-base sm:text-lg font-bold font-serif text-amber-200">
+                          {activeName}
+                        </div>
+                        <div className="text-xs text-red-200">
+                          پاکستان وقت (PKT): {activeHours} • اس وقت کلاسز لائیو جاری ہیں
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3 bg-red-900/60 px-4 py-2.5 rounded-xl border border-red-700">
+                      <div className="text-center">
+                        <span className="text-[10px] text-red-300 block">شفٹ کا دورانیہ</span>
+                        <span className="text-sm font-black text-amber-300">8 Hours</span>
+                      </div>
+                      <div className="h-6 w-px bg-red-700" />
+                      <div className="text-center">
+                        <span className="text-[10px] text-red-300 block">روزانہ کل شفٹس</span>
+                        <span className="text-sm font-black text-emerald-300">3 Shifts (24h)</span>
+                      </div>
+                      <div className="h-6 w-px bg-red-700" />
+                      <div className="text-center">
+                        <span className="text-[10px] text-red-300 block">ابتدائی تنخواہ</span>
+                        <span className="text-sm font-black text-amber-200">Rs. 50,000</span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
+
+              {/* The 3 Shifts Detailed Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+                {/* SHIFT 1: MORNING SHIFT */}
+                <div className="bg-gradient-to-b from-amber-950/70 to-red-950 border-2 border-amber-500/50 rounded-2xl p-5 space-y-4 shadow-xl flex flex-col justify-between hover:border-amber-400 transition-all">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="bg-amber-500 text-red-950 font-black text-xs px-2.5 py-1 rounded-full uppercase tracking-wider">
+                        Shift 1 • شفٹ 1
+                      </span>
+                      <span className="text-xs font-bold text-amber-300 flex items-center gap-1">
+                        <Sun className="w-4 h-4 text-amber-400" />
+                        <span>صبح کی شفٹ</span>
+                      </span>
+                    </div>
+
+                    <h3 className="text-lg font-serif font-black text-amber-100">
+                      Morning 8-Hour Shift
+                    </h3>
+
+                    <div className="bg-red-900/80 rounded-xl p-3 border border-amber-500/30 space-y-1">
+                      <div className="text-xs text-amber-300 font-bold flex items-center justify-between">
+                        <span>تدریسی اوقات:</span>
+                        <span className="font-mono text-white">08:00 AM – 04:00 PM PKT</span>
+                      </div>
+                      <div className="text-[11px] text-emerald-300">
+                        دورانیہ: <strong>پورا 8 گھنٹے</strong> (ہفتہ وار 48 گھنٹے ڈیوٹی)
+                      </div>
+                    </div>
+
+                    <p className="text-xs text-red-100/90 leading-relaxed">
+                      صبح کے پرسکون اوقات میں بچوں، چھوٹی بچیوں، ہوم اسکولنگ طلبہ اور خواتین کے لیے پرائیویٹ قاریہ اساتذہ کے ساتھ خصوصی قرآن کلاسز۔
+                    </p>
+
+                    <div className="space-y-1.5 pt-2 border-t border-red-800 text-xs">
+                      <div className="text-amber-300 font-semibold text-[11px]">موزوں علاقے اور ممالک:</div>
+                      <div className="text-red-200 text-[11px] leading-relaxed">
+                        • پاکستان (ڈے ٹائم طلبہ)<br />
+                        • سعودی عرب و یو اے ای (06:00 AM – 02:00 PM)<br />
+                        • ملائیشیا، سنگاپور و ایشیا پیسیفک
+                      </div>
+                    </div>
+
+                    <div className="bg-red-950/80 rounded-xl p-2.5 border border-red-800 text-xs space-y-1">
+                      <div className="text-emerald-300 font-bold text-[11px]">خصوصی کورسز:</div>
+                      <div className="text-red-200 text-[11px]">
+                        نورانی قاعدہ، حفظ قرآن صبح کا سبق، مسنون دعائیں، خواتین تجوید۔
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-3 border-t border-red-800/80 flex items-center justify-between text-xs">
+                    <span className="text-emerald-300 font-bold">معاہدہ تنخواہ: شروع 50k</span>
+                    <button
+                      onClick={() => {
+                        setTeachingShift('Shift 1: Morning Shift (08:00 AM – 04:00 PM PKT / 8 Hours)');
+                        setActiveTab('apply');
+                      }}
+                      className="bg-amber-500 hover:bg-amber-400 text-red-950 font-black px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
+                    >
+                      Apply for Shift 1 →
+                    </button>
+                  </div>
+                </div>
+
+                {/* SHIFT 2: EVENING SHIFT */}
+                <div className="bg-gradient-to-b from-red-900 to-amber-950/80 border-2 border-emerald-400/60 rounded-2xl p-5 space-y-4 shadow-xl flex flex-col justify-between hover:border-emerald-300 transition-all relative overflow-hidden">
+                  <div className="absolute top-2 right-2 bg-emerald-500 text-red-950 text-[9px] font-black uppercase px-2 py-0.5 rounded-full">
+                    High Demand
+                  </div>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="bg-emerald-500 text-red-950 font-black text-xs px-2.5 py-1 rounded-full uppercase tracking-wider">
+                        Shift 2 • شفٹ 2
+                      </span>
+                      <span className="text-xs font-bold text-emerald-300 flex items-center gap-1">
+                        <Clock className="w-4 h-4 text-emerald-400" />
+                        <span>شام کی شفٹ</span>
+                      </span>
+                    </div>
+
+                    <h3 className="text-lg font-serif font-black text-amber-100">
+                      Evening 8-Hour Shift
+                    </h3>
+
+                    <div className="bg-red-900/80 rounded-xl p-3 border border-emerald-500/30 space-y-1">
+                      <div className="text-xs text-emerald-300 font-bold flex items-center justify-between">
+                        <span>تدریسی اوقات:</span>
+                        <span className="font-mono text-white">04:00 PM – 12:00 AM PKT</span>
+                      </div>
+                      <div className="text-[11px] text-amber-300">
+                        دورانیہ: <strong>پورا 8 گھنٹے</strong> (ہفتہ وار 48 گھنٹے ڈیوٹی)
+                      </div>
+                    </div>
+
+                    <p className="text-xs text-red-100/90 leading-relaxed">
+                      اسکول اور کالج سے فارغ طلبہ اور برطانیہ (UK) و یورپ کے خاندانوں کے لیے لائیو ون آن ون تجوید اور ناظرہ قرآن کی سب سے مصروف شفٹ۔
+                    </p>
+
+                    <div className="space-y-1.5 pt-2 border-t border-red-800 text-xs">
+                      <div className="text-amber-300 font-semibold text-[11px]">موزوں علاقے اور ممالک:</div>
+                      <div className="text-red-200 text-[11px] leading-relaxed">
+                        • پاکستان شام کے طلبہ (سکول واپسی کے بعد)<br />
+                        • برطانیہ UK و آئرلینڈ (11:00 AM – 07:00 PM GMT)<br />
+                        • فرانس، جرمنی و یورپ (12:00 PM – 08:00 PM CET)
+                      </div>
+                    </div>
+
+                    <div className="bg-red-950/80 rounded-xl p-2.5 border border-red-800 text-xs space-y-1">
+                      <div className="text-emerald-300 font-bold text-[11px]">خصوصی کورسز:</div>
+                      <div className="text-red-200 text-[11px]">
+                        ناظرہ قرآن، تجوید و ترتیل، نماز تربیت، تفسیر و ترجمہ قرآن۔
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-3 border-t border-red-800/80 flex items-center justify-between text-xs">
+                    <span className="text-emerald-300 font-bold">معاہدہ تنخواہ: شروع 50k</span>
+                    <button
+                      onClick={() => {
+                        setTeachingShift('Shift 2: Evening Shift (04:00 PM – 12:00 AM PKT / 8 Hours)');
+                        setActiveTab('apply');
+                      }}
+                      className="bg-emerald-500 hover:bg-emerald-400 text-red-950 font-black px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
+                    >
+                      Apply for Shift 2 →
+                    </button>
+                  </div>
+                </div>
+
+                {/* SHIFT 3: NIGHT / OVERSEAS SHIFT */}
+                <div className="bg-gradient-to-b from-blue-950/80 to-red-950 border-2 border-blue-400/50 rounded-2xl p-5 space-y-4 shadow-xl flex flex-col justify-between hover:border-blue-300 transition-all">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="bg-blue-500 text-white font-black text-xs px-2.5 py-1 rounded-full uppercase tracking-wider">
+                        Shift 3 • شفٹ 3
+                      </span>
+                      <span className="text-xs font-bold text-blue-300 flex items-center gap-1">
+                        <Moon className="w-4 h-4 text-blue-300" />
+                        <span>رات و اوورسیز شفٹ</span>
+                      </span>
+                    </div>
+
+                    <h3 className="text-lg font-serif font-black text-amber-100">
+                      Night / Overseas 8-Hour Shift
+                    </h3>
+
+                    <div className="bg-red-900/80 rounded-xl p-3 border border-blue-400/30 space-y-1">
+                      <div className="text-xs text-blue-300 font-bold flex items-center justify-between">
+                        <span>تدریسی اوقات:</span>
+                        <span className="font-mono text-white">12:00 AM – 08:00 AM PKT</span>
+                      </div>
+                      <div className="text-[11px] text-amber-300">
+                        دورانیہ: <strong>پورا 8 گھنٹے</strong> (ہفتہ وار 48 گھنٹے ڈیوٹی)
+                      </div>
+                    </div>
+
+                    <p className="text-xs text-red-100/90 leading-relaxed">
+                      امریکہ (USA)، کینیڈا اور آسٹریلیا میں مقیم مسلم طلبہ کے لیے لائیو رات کی شفٹ۔ روانی سے انگلش بولنے والے اساتذہ کے ساتھ کلاسز۔
+                    </p>
+
+                    <div className="space-y-1.5 pt-2 border-t border-red-800 text-xs">
+                      <div className="text-amber-300 font-semibold text-[11px]">موزوں علاقے اور ممالک:</div>
+                      <div className="text-red-200 text-[11px] leading-relaxed">
+                        • امریکہ ایسٹ کوسٹ (02:00 PM – 10:00 PM EST)<br />
+                        • امریکہ ویسٹ کوسٹ (11:00 AM – 07:00 PM PST)<br />
+                        • کینیڈا و آسٹریلیا (06:00 AM – 02:00 PM AEST)
+                      </div>
+                    </div>
+
+                    <div className="bg-red-950/80 rounded-xl p-2.5 border border-red-800 text-xs space-y-1">
+                      <div className="text-emerald-300 font-bold text-[11px]">خصوصی کورسز:</div>
+                      <div className="text-red-200 text-[11px]">
+                        اوورسیز قرآن، حفظ دہرائی، انگلش میڈیم اسلامی اسٹڈیز، قراءت۔
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-3 border-t border-red-800/80 flex items-center justify-between text-xs">
+                    <span className="text-emerald-300 font-bold">معاہدہ تنخواہ: شروع 50k</span>
+                    <button
+                      onClick={() => {
+                        setTeachingShift('Shift 3: Night / Overseas Shift (12:00 AM – 08:00 AM PKT / 8 Hours)');
+                        setActiveTab('apply');
+                      }}
+                      className="bg-blue-500 hover:bg-blue-400 text-white font-black px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
+                    >
+                      Apply for Shift 3 →
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* 8-Hour Shift Regulations & Faculty Guidelines */}
+              <div className="bg-red-950/90 border border-amber-500/40 rounded-2xl p-6 space-y-4">
+                <div className="flex items-center gap-2 border-b border-red-800 pb-3">
+                  <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0" />
+                  <h3 className="text-base sm:text-lg font-serif font-black text-amber-200">
+                    اکیڈمی کے 8 گھنٹے کی ڈیوٹی کے قواعد و ضوابط (Shift Regulations)
+                  </h3>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                  <div className="p-3.5 bg-red-900/60 rounded-xl border border-red-800 space-y-1">
+                    <div className="text-amber-300 font-bold flex items-center gap-1.5">
+                      <Check className="w-4 h-4 text-emerald-400" />
+                      <span>1. مستقل 8 گھنٹے روزانہ کی حاضری</span>
+                    </div>
+                    <p className="text-red-100/90 leading-relaxed">
+                      ہر منتخب استاد روزانہ مقررہ 8 گھنٹے اپنے کمپیوٹر پر لائیو حاضر رہے گا۔ انٹرنیٹ اور بجلی کے بیک اپ کے لیے یو پی ایس یا لیپ ٹاپ بیٹری کا ہونا لازمی ہے۔
+                    </p>
+                  </div>
+
+                  <div className="p-3.5 bg-red-900/60 rounded-xl border border-red-800 space-y-1">
+                    <div className="text-amber-300 font-bold flex items-center gap-1.5">
+                      <Check className="w-4 h-4 text-emerald-400" />
+                      <span>2. شروع میں 50,000 روپے ماہانہ تنخواہ</span>
+                    </div>
+                    <p className="text-red-100/90 leading-relaxed">
+                      8 گھنٹے کی شفٹ کے تمام اساتذہ کا ابتدائی معاہدہ 50,000 روپے ماہانہ پر ہوتا ہے، جو یکم تاریخ کو ایزی پیسہ یا بینک اکاؤنٹ میں ادا کیا جاتا ہے۔
+                    </p>
+                  </div>
+
+                  <div className="p-3.5 bg-red-900/60 rounded-xl border border-red-800 space-y-1">
+                    <div className="text-amber-300 font-bold flex items-center gap-1.5">
+                      <Check className="w-4 h-4 text-emerald-400" />
+                      <span>3. نماز اور طعام کا 30 منٹ وقفہ</span>
+                    </div>
+                    <p className="text-red-100/90 leading-relaxed">
+                      8 گھنٹے کی شفٹ کے دوران باجماعت نماز اور کھانے کے لیے 30 منٹ کا وقفہ شیڈول کا حصہ ہے، جس کی ایڈمن پورٹل پر انٹری کی جاتی ہے۔
+                    </p>
+                  </div>
+
+                  <div className="p-3.5 bg-red-900/60 rounded-xl border border-red-800 space-y-1">
+                    <div className="text-amber-300 font-bold flex items-center gap-1.5">
+                      <Check className="w-4 h-4 text-emerald-400" />
+                      <span>4. بیک اپ اساتذہ اور متبادل کلاس سسٹم</span>
+                    </div>
+                    <p className="text-red-100/90 leading-relaxed">
+                      کسی استاد کی ناگزیر بیماری یا ایمرجنسی کی صورت میں اسی شفٹ کا متبادل استاد فوری طور پر کلاس کا انتظام سنبھالتا ہے تاکہ طلبہ کا وقت ضائع نہ ہو۔
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Global Timezone Comparison Matrix */}
+              <div className="bg-red-950/80 border border-amber-500/30 rounded-2xl p-5 space-y-3 overflow-x-auto">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Globe className="w-4 h-4 text-amber-400" />
+                    <h4 className="font-serif font-bold text-sm text-amber-200">
+                      بین الاقوامی ٹائم زونز اور شفٹس کا موازنہ (Global Timezones Matrix)
+                    </h4>
+                  </div>
+                  <span className="text-[11px] text-emerald-300 font-bold">24 Hours Non-Stop</span>
+                </div>
+
+                <table className="w-full text-xs text-left text-red-100">
+                  <thead className="bg-red-900/90 text-amber-300 font-bold uppercase text-[10px] tracking-wider border-b border-red-700">
+                    <tr>
+                      <th className="p-3">Shift Name (شفٹ)</th>
+                      <th className="p-3">Pakistan (PKT)</th>
+                      <th className="p-3">UK / London (GMT)</th>
+                      <th className="p-3">USA / New York (EST)</th>
+                      <th className="p-3">Gulf / Dubai (GST)</th>
+                      <th className="p-3">Australia / Sydney</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-red-800/60">
+                    <tr className="hover:bg-red-900/40">
+                      <td className="p-3 font-bold text-amber-200">
+                        Shift 1: Morning (صبح) • 8h
+                      </td>
+                      <td className="p-3 font-mono text-white">08:00 AM – 04:00 PM</td>
+                      <td className="p-3 font-mono text-red-200">03:00 AM – 11:00 AM</td>
+                      <td className="p-3 font-mono text-red-200">10:00 PM – 06:00 AM (Prev)</td>
+                      <td className="p-3 font-mono text-emerald-300">07:00 AM – 03:00 PM</td>
+                      <td className="p-3 font-mono text-red-200">01:00 PM – 09:00 PM</td>
+                    </tr>
+                    <tr className="hover:bg-red-900/40">
+                      <td className="p-3 font-bold text-emerald-300">
+                        Shift 2: Evening (شام) • 8h
+                      </td>
+                      <td className="p-3 font-mono text-white">04:00 PM – 12:00 AM</td>
+                      <td className="p-3 font-mono text-emerald-300">11:00 AM – 07:00 PM</td>
+                      <td className="p-3 font-mono text-red-200">06:00 AM – 02:00 PM</td>
+                      <td className="p-3 font-mono text-emerald-300">03:00 PM – 11:00 PM</td>
+                      <td className="p-3 font-mono text-red-200">09:00 PM – 05:00 AM</td>
+                    </tr>
+                    <tr className="hover:bg-red-900/40">
+                      <td className="p-3 font-bold text-blue-300">
+                        Shift 3: Night / Overseas (رات) • 8h
+                      </td>
+                      <td className="p-3 font-mono text-white">12:00 AM – 08:00 AM</td>
+                      <td className="p-3 font-mono text-red-200">07:00 PM – 03:00 AM</td>
+                      <td className="p-3 font-mono text-blue-300">02:00 PM – 10:00 PM</td>
+                      <td className="p-3 font-mono text-red-200">11:00 PM – 07:00 AM</td>
+                      <td className="p-3 font-mono text-blue-300">05:00 AM – 01:00 PM</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ========================================================================= */}
+        {/* TAB 4: SALARY POLICY & PAY SCALE EXPLANATION                              */}
         {/* ========================================================================= */}
         {activeTab === 'salary-policy' && (
           <div className="space-y-6">

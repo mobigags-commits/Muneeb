@@ -76,11 +76,16 @@ export const HomePage: React.FC = () => {
   const stats = [
     { label: 'Enrolled Students', value: '5,000+', icon: Users },
     { label: 'Certified Qaris & Alimahs', value: '120+', icon: Award },
+    { label: 'Daily Shifts (8h each)', value: '3 Shifts (24/7)', icon: Clock },
     { label: 'Countries Reached', value: '35+', icon: Globe },
-    { label: 'Satisfaction Rate', value: '100%', icon: Star },
   ];
 
   const whyChooseUs = [
+    {
+      title: '3 Shifts of 8 Hours Each (24/7)',
+      desc: 'Round-the-clock live teaching across 3 non-stop 8-hour shifts (Morning, Evening, Night) matching UK, USA, Gulf & Pakistan.',
+      icon: Clock,
+    },
     {
       title: '1-on-1 Live Interactive Classes',
       desc: 'Individual focus on every student with personalized pace and flexible timings for UK, USA, Gulf & Pakistan timezones.',

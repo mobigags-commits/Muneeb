@@ -18,6 +18,7 @@ import {
   initialAdPricingPlans,
   initialWalletTransactions,
   initialTeacherApplications,
+  initialAcademyShifts,
 } from '../data/initialData';
 import {
   Announcement,
@@ -44,6 +45,7 @@ import {
   DonationRecord,
   NewsletterSubscriber,
   WalletTransaction,
+  AcademyShift,
 } from '../types';
 import { getPageFromLocation, getPageUrl } from '../utils/routing';
 import * as api from '../utils/apiClient';
@@ -76,6 +78,9 @@ interface AcademyContextType {
   // Teachers & Staff
   teachers: Teacher[];
   addTeacher: (teacher: Teacher) => void;
+
+  // Academy 3 Shifts System (8 Hours Each / 24 Hours Round the Clock)
+  shifts: AcademyShift[];
 
   // Branches
   branches: Branch[];
@@ -235,6 +240,8 @@ export const AcademyProvider: React.FC<{ children: React.ReactNode }> = ({ child
     } catch (e) {}
     return initialTeachers;
   });
+
+  const [shifts] = useState<AcademyShift[]>(initialAcademyShifts);
 
   const [branches, setBranches] = useState<Branch[]>(() => {
     try {
@@ -872,6 +879,7 @@ export const AcademyProvider: React.FC<{ children: React.ReactNode }> = ({ child
         deleteCourse,
         teachers,
         addTeacher,
+        shifts,
         branches,
         addBranch,
         students,

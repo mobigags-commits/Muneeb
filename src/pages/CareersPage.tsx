@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Briefcase, Send, CheckCircle, Award, Phone, Mail, MapPin, User, FileText, Sparkles } from 'lucide-react';
+import { Briefcase, Send, CheckCircle, Award, Phone, Mail, MapPin, User, FileText, Sparkles, Clock } from 'lucide-react';
 import { useAcademy } from '../context/AcademyContext';
 import { TeacherApplication } from '../types';
 
@@ -13,6 +13,7 @@ export const CareersPage: React.FC = () => {
   const [gender, setGender] = useState<'Male' | 'Female'>('Male');
   const [qualification, setQualification] = useState('Shahadat-ul-Aalamiyyah (Alim / Alimah)');
   const [experienceYears, setExperienceYears] = useState('3-5 Years');
+  const [teachingShift, setTeachingShift] = useState('Shift 2: Evening Shift (04:00 PM – 12:00 AM PKT / 8 Hours)');
   const [bio, setBio] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -34,6 +35,8 @@ export const CareersPage: React.FC = () => {
       gender,
       qualification,
       experienceYears,
+      teachingShift,
+      weeklyHoursAvailable: '48 Hours / Week (8 Hours Daily Shift)',
       bio: bio.trim() || undefined,
       date: new Date().toISOString().split('T')[0],
       appliedDate: new Date().toISOString().split('T')[0],
@@ -52,7 +55,7 @@ export const CareersPage: React.FC = () => {
   };
 
   const handleWhatsAppNotify = () => {
-    const message = `Assalamu Alaikum Founder Muneeb Ur Rehman!\n\nI have submitted my official Teacher / Qari application on the Shaheen Al Zaitoon portal:\n\n• Application Ref: ${submittedAppId}\n• Name: ${fullName}\n• Gender: ${gender}\n• Qualification: ${qualification}\n• Experience: ${experienceYears}\n• Contact: ${phone}\n• City: ${city}\n\nPlease review my credentials for online Quran teaching audition. JazakAllah Khair!`;
+    const message = `Assalamu Alaikum Founder Muneeb Ur Rehman!\n\nI have submitted my official Teacher / Qari application on the Shaheen Al Zaitoon portal:\n\n• Application Ref: ${submittedAppId}\n• Name: ${fullName}\n• Gender: ${gender}\n• Qualification: ${qualification}\n• Experience: ${experienceYears}\n• Contact: ${phone}\n• City: ${city}\n• 8-Hour Shift: ${teachingShift}\n• Starting Salary: Rs. 50,000 PKR (increases over time)\n\nPlease review my credentials for online Quran teaching audition. JazakAllah Khair!`;
     const cleanNumber = siteSettings.whatsappNumber.replace(/[^0-9]/g, '');
     const fullNumber = cleanNumber.startsWith('92') ? cleanNumber : `92${cleanNumber.replace(/^0/, '')}`;
     window.open(`https://wa.me/${fullNumber}?text=${encodeURIComponent(message)}`, '_blank');
@@ -82,8 +85,14 @@ export const CareersPage: React.FC = () => {
               <span>Dedicated Teachers Portal (شروع میں 50,000 روپے • وقت کے ساتھ اضافہ) →</span>
             </button>
           </div>
-          <div className="text-xs text-amber-300 bg-red-950/80 border border-amber-500/30 rounded-xl px-4 py-2 mt-3 inline-block">
-            ★ اکیڈمی کا قانون: <strong>شروع میں تمام اساتذہ کی تنخواہ 50,000 روپے ہی ہو گی</strong>، بعد میں وقت اور کارکردگی کے ساتھ بڑھتی جائے گی۔
+          <div className="flex flex-wrap items-center justify-center gap-2 mt-3 text-xs">
+            <span className="text-amber-300 bg-red-950/80 border border-amber-500/30 rounded-xl px-4 py-2">
+              ★ اکیڈمی کا قانون: <strong>شروع میں تمام اساتذہ کی تنخواہ 50,000 روپے ہی ہو گی</strong>، بعد میں وقت کے ساتھ بڑھتی جائے گی۔
+            </span>
+            <span className="text-emerald-300 bg-emerald-950/80 border border-emerald-500/40 rounded-xl px-4 py-2 font-semibold flex items-center gap-1.5">
+              <Clock className="w-4 h-4 text-amber-400" />
+              <span>اکیڈمی میں <strong>8 گھنٹے کی 3 شفٹس</strong> (صبح • شام • رات / 24 گھنٹے نان اسٹاپ)</span>
+            </span>
           </div>
         </div>
 
@@ -240,6 +249,30 @@ export const CareersPage: React.FC = () => {
                 <option>Dars-e-Nizami Shahadat-ul-Aliyah</option>
                 <option>Tafseer & Hadith Research Graduate</option>
               </select>
+            </div>
+
+            <div>
+              <label className="block text-xs font-medium text-amber-200 mb-1">
+                Preferred 8-Hour Teaching Shift (اکیڈمی میں 8 گھنٹے کی شفٹ کا انتخاب) *
+              </label>
+              <select
+                value={teachingShift}
+                onChange={(e) => setTeachingShift(e.target.value)}
+                className="w-full bg-red-950/80 border border-red-700 text-amber-200 rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-amber-400 font-medium"
+              >
+                <option value="Shift 1: Morning Shift (08:00 AM – 04:00 PM PKT / 8 Hours)">
+                  شفٹ 1: صبح کی شفٹ (08:00 AM – 04:00 PM PKT • 8 گھنٹے)
+                </option>
+                <option value="Shift 2: Evening Shift (04:00 PM – 12:00 AM PKT / 8 Hours)">
+                  شفٹ 2: شام کی شفٹ (04:00 PM – 12:00 AM PKT • 8 گھنٹے)
+                </option>
+                <option value="Shift 3: Night / Overseas Shift (12:00 AM – 08:00 AM PKT / 8 Hours)">
+                  شفٹ 3: رات و اوورسیز شفٹ (12:00 AM – 08:00 AM PKT • 8 گھنٹے)
+                </option>
+              </select>
+              <div className="text-[10px] text-emerald-300 mt-1">
+                ✓ اکیڈمی کا لازمی اصول: 8 گھنٹے کی روزانہ ڈیوٹی • شروع میں فکسڈ تنخواہ 50,000 روپے ماہانہ (وقت کے ساتھ اضافہ)۔
+              </div>
             </div>
 
             <div>

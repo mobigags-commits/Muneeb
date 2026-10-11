@@ -88,9 +88,30 @@ export interface Teacher {
   timeIncrementNote?: string; // Increases over time with tenure & performance
   salaryStatus?: 'Disbursed' | 'Processing' | 'Scheduled on 1st';
   assignedStudentsCount?: number;
-  teachingShift?: string;
+  teachingShift?: string; // 8-hour shift: Morning, Evening, or Night
+  shiftHours?: number; // 8 hours daily
   paymentMethod?: string;
   accountNumber?: string;
+}
+
+export interface AcademyShift {
+  id: 'morning' | 'evening' | 'night';
+  name: string;
+  nameUrdu: string;
+  shiftNumber: number; // 1, 2, or 3
+  durationHours: number; // 8 hours
+  timingPKT: string; // e.g. '08:00 AM – 04:00 PM PKT'
+  startHourPKT: number;
+  endHourPKT: number;
+  targetRegions: string[];
+  targetRegionsUrdu: string;
+  description: string;
+  descriptionUrdu: string;
+  primaryAudience: string;
+  activeTeachersCount: number;
+  maxCapacityStudents: number;
+  enrolledStudentsCount: number;
+  coordinator: string;
 }
 
 export interface Branch {
