@@ -822,7 +822,8 @@ export const AdminPortalPage: React.FC = () => {
                       <th className="p-3">Contact</th>
                       <th className="p-3">Gender</th>
                       <th className="p-3">Qualification</th>
-                      <th className="p-3">Experience</th>
+                      <th className="p-3">Starting Salary (شروع میں 50k)</th>
+                      <th className="p-3">Payment Account</th>
                       <th className="p-3">City</th>
                       <th className="p-3">Date</th>
                       <th className="p-3">Status</th>
@@ -840,9 +841,20 @@ export const AdminPortalPage: React.FC = () => {
                         </td>
                         <td className="p-3">{app.gender}</td>
                         <td className="p-3 text-amber-200 font-medium">{app.qualification}</td>
-                        <td className="p-3 text-red-200">{app.experienceYears}</td>
+                        <td className="p-3">
+                          <div className="space-y-0.5">
+                            <span className="font-serif font-black text-emerald-300 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-500/40 block w-fit">
+                              Rs. {(app.approvedSalaryPKR || app.expectedSalaryPKR || 50000).toLocaleString()}
+                            </span>
+                            <span className="text-[10px] text-amber-300 block">وقت کے ساتھ اضافہ</span>
+                          </div>
+                        </td>
+                        <td className="p-3 text-[11px] text-red-200">
+                          {app.paymentMethod || 'EasyPaisa'}
+                          {app.accountNumber ? ` (${app.accountNumber})` : ''}
+                        </td>
                         <td className="p-3 text-red-200">{app.city}</td>
-                        <td className="p-3 text-red-300">{app.appliedDate}</td>
+                        <td className="p-3 text-red-300">{app.appliedDate || app.date}</td>
                         <td className="p-3">
                           <span className="bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded text-[10px] font-bold border border-amber-400/30">
                             {app.status}

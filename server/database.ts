@@ -69,6 +69,7 @@ function getDefaultData(): AcademyDataPayload {
       {
         id: 'app-sample-1',
         applicantName: 'Qari Muhammad Bilal',
+        fullName: 'Qari Muhammad Bilal',
         phone: '03001234567',
         email: 'bilal.quran@gmail.com',
         qualification: 'Hafiz-e-Quran with Tajweed Sanad',
@@ -77,6 +78,12 @@ function getDefaultData(): AcademyDataPayload {
         city: 'Rawalpindi',
         status: 'Audition Scheduled',
         date: '2026-08-10',
+        appliedDate: '2026-08-10',
+        expectedSalaryPKR: 50000,
+        approvedSalaryPKR: 50000,
+        paymentMethod: 'EasyPaisa',
+        teacherSalaryGrade: 'Grade 1 (Rs. 50,000 Entry)',
+        salaryAgreementAgreed: true,
       },
     ],
     contactMessages: [

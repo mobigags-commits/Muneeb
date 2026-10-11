@@ -3,7 +3,7 @@ import { Award, Star, CheckCircle, MessageSquare, Shield, Sparkles } from 'lucid
 import { useAcademy } from '../context/AcademyContext';
 
 export const TeachersPage: React.FC = () => {
-  const { teachers, setSelectedCourseForEnroll, courses } = useAcademy();
+  const { teachers, setSelectedCourseForEnroll, courses, setActivePage } = useAcademy();
   const [filterGender, setFilterGender] = useState<'all' | 'male' | 'female'>('all');
 
   const filteredTeachers = teachers.filter((t) => filterGender === 'all' || t.gender === filterGender);
@@ -23,6 +23,30 @@ export const TeachersPage: React.FC = () => {
           <p className="text-xs sm:text-sm text-red-200">
             Learn directly from certified Huffaz, Alims, and Qarias holding Sanad certifications in Qira’at Hafs and Islamic theology.
           </p>
+        </div>
+
+        {/* TEACHERS RECRUITMENT CALLOUT BANNER - MINIMUM RS. 50,000 SALARY */}
+        <div className="bg-gradient-to-r from-emerald-950 via-amber-950/80 to-emerald-950 border-2 border-emerald-400/80 rounded-2xl p-4 sm:p-5 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="space-y-1 text-center md:text-left">
+            <div className="flex items-center justify-center md:justify-start gap-2 text-emerald-400 text-xs font-black uppercase tracking-wider">
+              <Sparkles className="w-4 h-4 text-amber-400" />
+              <span>Wanted: Qualified Male & Female Quran Instructors</span>
+            </div>
+            <h3 className="text-lg sm:text-xl font-serif font-black text-white">
+              Join Our Teaching Faculty • شروع میں تمام اساتذہ کی تنخواہ 50,000 روپے (وقت کے ساتھ اضافہ)
+            </h3>
+            <p className="text-xs text-red-100 max-w-2xl">
+              اکیڈمی کے باقاعدہ قانون کے مطابق، <strong>شروع میں تمام اساتذہ کی ماہانہ تنخواہ 50,000 روپے ہو گی</strong>۔ بعد میں وقت، تدریسی مدت اور کارکردگی کے ساتھ تنخواہ میں سالانہ اور ششماہی اضافہ کیا جاتا ہے۔
+            </p>
+          </div>
+
+          <button
+            onClick={() => setActivePage('teacher-portal')}
+            className="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-black text-xs sm:text-sm px-6 py-3 rounded-xl shadow-lg flex items-center gap-2 shrink-0 cursor-pointer transform hover:scale-105 transition-all"
+          >
+            <Award className="w-4 h-4 text-amber-300" />
+            <span>Open Teachers Portal (تنخواہ 50,000+)</span>
+          </button>
         </div>
 
         {/* Gender Filter Buttons */}
@@ -101,6 +125,20 @@ export const TeachersPage: React.FC = () => {
                   </div>
                   <div>
                     <strong className="text-amber-300">Languages:</strong> {teacher.languages.join(', ')}
+                  </div>
+                  <div className="pt-2 border-t border-red-800/60 mt-2 space-y-1">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] text-emerald-300 font-semibold flex items-center gap-1">
+                        <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
+                        Starting Salary (ابتدائی تنخواہ):
+                      </span>
+                      <span className="text-[11px] font-bold text-amber-300 bg-amber-950/70 border border-amber-500/40 px-2 py-0.5 rounded">
+                        Rs. 50,000 PKR / mo
+                      </span>
+                    </div>
+                    <div className="text-[10px] text-emerald-400/90 text-right font-medium">
+                      ★ وقت اور کارکردگی کے ساتھ سالانہ اضافہ
+                    </div>
                   </div>
                 </div>
               </div>

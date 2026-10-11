@@ -242,14 +242,26 @@ async function startServer() {
       const appRecord = db.addTeacherApplication({
         id: req.body.id || `app-${Date.now()}`,
         applicantName,
+        fullName: req.body.fullName || applicantName,
         phone,
+        alternatePhone: req.body.alternatePhone || '',
         email: req.body.email || '',
+        cnic: req.body.cnic || '',
         qualification: qualification || 'Shahadat-ul-Aalamiyyah',
         experienceYears: req.body.experienceYears ? Number(req.body.experienceYears) : 1,
         gender: req.body.gender || 'Male',
         city: req.body.city || 'Rawalpindi',
         status: 'Pending Review',
         date: new Date().toISOString().split('T')[0],
+        appliedDate: new Date().toISOString().split('T')[0],
+        expectedSalaryPKR: req.body.expectedSalaryPKR ? Math.max(Number(req.body.expectedSalaryPKR), 50000) : 50000,
+        approvedSalaryPKR: req.body.approvedSalaryPKR ? Number(req.body.approvedSalaryPKR) : 50000,
+        paymentMethod: req.body.paymentMethod || 'EasyPaisa',
+        accountTitle: req.body.accountTitle || applicantName,
+        accountNumber: req.body.accountNumber || phone,
+        bankName: req.body.bankName || 'EasyPaisa Wallet',
+        teachingShift: req.body.teachingShift || 'Evening Shift',
+        salaryAgreementAgreed: true,
       });
       res.json({ success: true, application: appRecord });
     } catch (error: any) {

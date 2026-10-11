@@ -5,6 +5,8 @@ export type PageId =
   | 'teachers'
   | 'student-portal'
   | 'parent-portal'
+  | 'teacher-portal'
+  | 'teachers-portal'
   | 'admissions'
   | 'fee-payment'
   | 'wallet'
@@ -81,6 +83,14 @@ export interface Teacher {
   bio: string;
   availableDays: string[];
   gender: 'male' | 'female';
+  monthlySalaryPKR?: number; // Starting Rs. 50,000 PKR for all teachers
+  startingSalaryPKR?: number; // Initial fixed Rs. 50,000 PKR
+  timeIncrementNote?: string; // Increases over time with tenure & performance
+  salaryStatus?: 'Disbursed' | 'Processing' | 'Scheduled on 1st';
+  assignedStudentsCount?: number;
+  teachingShift?: string;
+  paymentMethod?: string;
+  accountNumber?: string;
 }
 
 export interface Branch {
@@ -359,6 +369,9 @@ export interface SiteSettings {
   // App Download & Installation Token Fee (Received directly by Owner)
   appDownloadFeePKR?: number;
   
+  // Teachers Faculty Salary Standards (Guaranteed Minimum Rs. 50,000 PKR / month)
+  minimumTeacherSalaryPKR?: number;
+  
   motherMemorialName: string;
   motherMemorialUrdu: string;
   heroHeadline: string;
@@ -438,15 +451,41 @@ export interface TeacherApplication {
   applicantName: string;
   fullName?: string;
   phone: string;
+  alternatePhone?: string;
   email?: string;
+  cnic?: string;
   qualification: string;
+  sanadMadrasa?: string;
+  hifzDetails?: string;
+  tajweedCertification?: string;
+  secularEducation?: string;
   experienceYears?: number | string;
   gender: 'Male' | 'Female';
   city: string;
+  address?: string;
   bio?: string;
   status: 'Pending Review' | 'Audition Scheduled' | 'Accepted' | 'Rejected';
   date: string;
   appliedDate?: string;
+
+  // Minimum Rs. 50,000 Salary & Financial Details
+  expectedSalaryPKR: number; // Minimum 50,000 PKR
+  approvedSalaryPKR?: number;
+  teacherSalaryGrade?: 'Grade 1 (Rs. 50,000 Entry)' | 'Grade 2 (Rs. 65,000 Senior)' | 'Grade 3 (Rs. 85,000+ Master)';
+  paymentMethod?: 'EasyPaisa' | 'JazzCash' | 'Bank Transfer';
+  accountTitle?: string;
+  accountNumber?: string;
+  bankName?: string;
+
+  // Teaching Preferences & Setup
+  specializationCourses?: string[];
+  studentAudiencePreference?: 'Kids & Boys' | 'Ladies & Sisters Only' | 'Adults & General' | 'Any';
+  teachingShift?: string;
+  weeklyHoursAvailable?: string;
+  deviceType?: string;
+  internetConnection?: string;
+  demoRecitationAudioUrl?: string;
+  salaryAgreementAgreed?: boolean;
 }
 
 export interface ContactMessage {

@@ -91,6 +91,20 @@ export const pageSeoData: Record<PageId, PageMetadata> = {
     descriptionEn: 'Track your child Quran recitation progress, attendance, monthly reports and teacher feedback.',
     descriptionUr: 'اپنے بچوں کی روزمرہ تعلیمی رپورٹ اور اساتذہ کے ریمارکس دیکھیں۔',
   },
+  'teacher-portal': {
+    titleEn: 'Teachers Portal & Faculty Recruitment (Starting Rs. 50,000 PKR + Increments) | Shaheen Quran',
+    titleUr: 'اساتذہ پورٹل اور فیکلٹی رجسٹریشن (شروع میں تنخواہ 50,000 روپے • وقت کے ساتھ اضافہ) | شاہین اکیڈمی',
+    descriptionEn: 'Official Faculty Portal for certified Qaris & Qarias. Starting salary guaranteed at Rs. 50,000 PKR/month for all teachers with scheduled performance and tenure increments.',
+    descriptionUr: 'مستند قراء اور معلمات کے لیے آفیشل پورٹل۔ تمام اساتذہ کا باضابطہ آغاز 50,000 روپے ماہانہ تنخواہ سے اور وقت کے ساتھ ساتھ سالانہ اضافہ۔',
+    keywordsEn: 'online Quran teacher jobs, Quran academy teacher salary 50000 PKR, starting salary 50000, female Qaria jobs online, teach Quran online Pakistan, Shaheen Al Zaitoon teachers portal',
+    keywordsUr: 'قرآن ٹیچر نوکری, اساتذہ پورٹل, تنخواہ 50000 روپے, وقت کے ساتھ اضافہ, آن لائن قاری ملازمت, شاہین الزیتون اساتذہ',
+  },
+  'teachers-portal': {
+    titleEn: 'Teachers Portal & Faculty Recruitment (Starting Rs. 50,000 PKR + Increments) | Shaheen Quran',
+    titleUr: 'اساتذہ پورٹل اور فیکلٹی رجسٹریشن (شروع میں تنخواہ 50,000 روپے • وقت کے ساتھ اضافہ) | شاہین اکیڈمی',
+    descriptionEn: 'Official Faculty Portal for certified Qaris & Qarias. Starting salary guaranteed at Rs. 50,000 PKR/month for all teachers with periodic increments.',
+    descriptionUr: 'مستند قراء اور معلمات کے لیے آفیشل پورٹل۔ تمام اساتذہ کا باضابطہ آغاز 50,000 روپے ماہانہ تنخواہ سے اور وقت کے ساتھ ساتھ سالانہ اضافہ۔',
+  },
   'zaitoon-traders': {
     titleEn: 'ZT (Zaitoon Traders) Pure Sidr Honey & Madinah Dates | Rawalpindi',
     titleUr: 'زیتون ٹریڈرز - خالص بیری شہد اور عجوہ کھجور | راولپنڈی',

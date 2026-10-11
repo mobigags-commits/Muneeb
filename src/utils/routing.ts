@@ -7,6 +7,8 @@ export const VALID_PUBLIC_PAGES: PageId[] = [
   'teachers',
   'student-portal',
   'parent-portal',
+  'teacher-portal',
+  'teachers-portal',
   'admissions',
   'fee-payment',
   'wallet',

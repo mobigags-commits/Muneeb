@@ -59,6 +59,7 @@ export const Navbar: React.FC = () => {
     { id: 'zaitoon-traders', label: 'ZT Store', labelUrdu: 'زیطون ٹریڈرز', icon: ShoppingBag },
     { id: 'marriage-bureau', label: 'Marriage Bureau', labelUrdu: 'رشتہ بیورو', icon: Heart },
     { id: 'growth-hub', label: 'Growth Hub', labelUrdu: 'گروتھ پورٹل', icon: TrendingUp },
+    { id: 'teacher-portal', label: 'Teachers Portal', labelUrdu: 'اساتذہ پورٹل (شروع 50k)', icon: Award },
     { id: 'fee-payment', label: 'Fee & EasyPaisa', labelUrdu: 'فیس و ایزی پیسہ', icon: CreditCard },
     { id: 'wallet', label: 'Deposit & Withdraw', labelUrdu: 'ڈپازٹ و ودڈرا', icon: Wallet },
   ];
@@ -88,8 +89,9 @@ export const Navbar: React.FC = () => {
     { id: 'growth-hub', label: '8. Growth & Earning Hub', group: 'Monetization', icon: TrendingUp },
     { id: 'google-ecosystem', label: '9. Google AdSense & 9-Sites Hub', group: 'Monetization', icon: Globe },
     { id: 'ad-manager', label: '10. AI Ad Studio & Social Hub', group: 'Monetization', icon: Megaphone },
-    { id: 'student-portal', label: '10. Student Portal', group: 'Portals', icon: UserCheck },
-    { id: 'parent-portal', label: '11. Parent Portal', group: 'Portals', icon: Shield },
+    { id: 'teacher-portal', label: '★ Teachers Portal (اساتذہ پورٹل • شروع میں 50,000 + وقت کے ساتھ اضافہ)', group: 'Portals', icon: Award },
+    { id: 'student-portal', label: '11. Student Portal', group: 'Portals', icon: UserCheck },
+    { id: 'parent-portal', label: '12. Parent Portal', group: 'Portals', icon: Shield },
     { id: 'admissions', label: '12. Online Admissions & Free Trial', group: 'Academic', icon: FileText },
     { id: 'fee-payment', label: '13. Fee & EasyPaisa (03447956085)', group: 'Finance', icon: CreditCard },
     { id: 'wallet', label: '14. Wallet: Deposit & Withdraw (ڈپازٹ و ودڈرا)', group: 'Finance', icon: Wallet },
@@ -173,13 +175,20 @@ export const Navbar: React.FC = () => {
               <span className="text-red-300 hidden md:inline font-medium">View as:</span>
               <select
                 value={role}
-                onChange={(e) => setRole(e.target.value as UserRole)}
+                onChange={(e) => {
+                  const newRole = e.target.value as UserRole;
+                  setRole(newRole);
+                  if (newRole === 'teacher') setActivePage('teacher-portal');
+                  else if (newRole === 'student') setActivePage('student-portal');
+                  else if (newRole === 'parent') setActivePage('parent-portal');
+                  else if (newRole === 'admin') setActivePage('admin-portal');
+                }}
                 className="bg-red-900 text-amber-200 border border-red-800 rounded px-2 py-1 text-xs sm:text-sm focus:outline-none font-semibold cursor-pointer"
               >
                 <option value="guest">Guest</option>
                 <option value="student">Student</option>
                 <option value="parent">Parent</option>
-                <option value="teacher">Teacher</option>
+                <option value="teacher">Teacher (پورٹل)</option>
                 <option value="admin">Admin Panel</option>
               </select>
             </div>

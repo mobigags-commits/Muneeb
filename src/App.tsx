@@ -13,6 +13,7 @@ import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { CoursesPage } from './pages/CoursesPage';
 import { TeachersPage } from './pages/TeachersPage';
+import { TeachersPortalPage } from './pages/TeachersPortalPage';
 import { StudentPortalPage } from './pages/StudentPortalPage';
 import { ParentPortalPage } from './pages/ParentPortalPage';
 import { AdmissionsPage } from './pages/AdmissionsPage';
@@ -99,6 +100,9 @@ const AppContent: React.FC = () => {
         return <StudentPortalPage />;
       case 'parent-portal':
         return <ParentPortalPage />;
+      case 'teacher-portal':
+      case 'teachers-portal':
+        return <TeachersPortalPage />;
       case 'admissions':
         return <AdmissionsPage />;
       case 'fee-payment':

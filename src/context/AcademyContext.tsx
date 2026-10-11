@@ -17,6 +17,7 @@ import {
   initialSocialAccounts,
   initialAdPricingPlans,
   initialWalletTransactions,
+  initialTeacherApplications,
 } from '../data/initialData';
 import {
   Announcement,
@@ -331,7 +332,13 @@ export const AcademyProvider: React.FC<{ children: React.ReactNode }> = ({ child
     return initialSocialAccounts;
   });
 
-  const [applications, setApplications] = useState<TeacherApplication[]>([]);
+  const [applications, setApplications] = useState<TeacherApplication[]>(() => {
+    try {
+      const saved = localStorage.getItem('sz_teacher_applications');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {}
+    return initialTeacherApplications;
+  });
   const [contactMessages, setContactMessages] = useState<ContactMessage[]>([]);
   const [donations, setDonations] = useState<DonationRecord[]>([]);
   const [subscribers, setSubscribers] = useState<NewsletterSubscriber[]>([]);
@@ -441,8 +448,9 @@ export const AcademyProvider: React.FC<{ children: React.ReactNode }> = ({ child
       localStorage.setItem('sz_zt_products', JSON.stringify(ztProducts));
       localStorage.setItem('sz_matrimonial', JSON.stringify(matrimonialProfiles));
       localStorage.setItem('sz_ads', JSON.stringify(adCampaigns));
+      localStorage.setItem('sz_teacher_applications', JSON.stringify(applications));
     } catch (e) {}
-  }, [siteSettings, courses, students, payments, ztProducts, matrimonialProfiles, adCampaigns]);
+  }, [siteSettings, courses, students, payments, ztProducts, matrimonialProfiles, adCampaigns, applications]);
 
   // =========================================================================
   // ATOMIC MUTATIONS WITH CLOUD API PERSISTENCE

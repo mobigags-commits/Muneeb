@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, ShoppingBag, Heart, TrendingUp, Phone, ShieldCheck, Megaphone, Facebook, Globe, Wallet } from 'lucide-react';
+import { BookOpen, ShoppingBag, Heart, TrendingUp, Phone, ShieldCheck, Megaphone, Facebook, Globe, Wallet, Award } from 'lucide-react';
 import { useAcademy } from '../context/AcademyContext';
 import { AcademyLogo } from './AcademyLogo';
 
@@ -25,6 +25,19 @@ export const EcosystemBar: React.FC = () => {
           >
             <AcademyLogo size="xs" shape="circle" glowEffect={false} />
             <span>Shaheen Quran Academy</span>
+          </button>
+
+          <button
+            onClick={() => setActivePage('teacher-portal')}
+            className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs sm:text-sm font-semibold transition-all ${
+              activePage === 'teacher-portal' || activePage === 'teachers-portal'
+                ? 'bg-amber-400 text-red-950 font-bold shadow-sm'
+                : 'bg-emerald-950/80 hover:bg-emerald-900 text-emerald-200 border border-emerald-500/40'
+            }`}
+          >
+            <Award className="w-3.5 h-3.5 text-amber-300" />
+            <span>Teachers Portal</span>
+            <span className="bg-emerald-500 text-red-950 text-[10px] px-1.5 py-0.2 rounded font-extrabold">Rs. 50k+</span>
           </button>
 
           <button

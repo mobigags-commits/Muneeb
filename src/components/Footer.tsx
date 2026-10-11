@@ -65,6 +65,7 @@ export const Footer: React.FC = () => {
   ];
 
   const secondaryLinks: { id: PageId; label: string }[] = [
+    { id: 'teacher-portal', label: 'Teachers Portal (شروع میں 50,000 • وقت کے ساتھ اضافہ)' },
     { id: 'student-portal', label: 'Student Portal' },
     { id: 'parent-portal', label: 'Parent Portal' },
     { id: 'zaitoon-traders', label: 'Zaitoon Traders Store' },

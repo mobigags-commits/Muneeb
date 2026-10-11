@@ -4,7 +4,7 @@ import { useAcademy } from '../context/AcademyContext';
 import { TeacherApplication } from '../types';
 
 export const CareersPage: React.FC = () => {
-  const { siteSettings, addApplication } = useAcademy();
+  const { siteSettings, addApplication, setActivePage } = useAcademy();
 
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
@@ -38,6 +38,11 @@ export const CareersPage: React.FC = () => {
       date: new Date().toISOString().split('T')[0],
       appliedDate: new Date().toISOString().split('T')[0],
       status: 'Pending Review',
+      expectedSalaryPKR: 50000,
+      approvedSalaryPKR: 50000,
+      paymentMethod: 'EasyPaisa',
+      teacherSalaryGrade: 'Grade 1 (Rs. 50,000 Entry)',
+      salaryAgreementAgreed: true,
     };
 
     await addApplication(newApp);
@@ -67,6 +72,19 @@ export const CareersPage: React.FC = () => {
           <p className="text-xs sm:text-sm text-red-200 max-w-xl mx-auto leading-relaxed">
             We are actively hiring certified Male Qaris, Female Qarias, Huffaz, and Alimahs for international 1-on-1 online Quran teaching sessions.
           </p>
+
+          <div className="pt-2">
+            <button
+              onClick={() => setActivePage('teacher-portal')}
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-black text-xs sm:text-sm px-6 py-2.5 rounded-full shadow-lg border border-emerald-300/40 cursor-pointer"
+            >
+              <Award className="w-4 h-4 text-amber-300" />
+              <span>Dedicated Teachers Portal (شروع میں 50,000 روپے • وقت کے ساتھ اضافہ) →</span>
+            </button>
+          </div>
+          <div className="text-xs text-amber-300 bg-red-950/80 border border-amber-500/30 rounded-xl px-4 py-2 mt-3 inline-block">
+            ★ اکیڈمی کا قانون: <strong>شروع میں تمام اساتذہ کی تنخواہ 50,000 روپے ہی ہو گی</strong>، بعد میں وقت اور کارکردگی کے ساتھ بڑھتی جائے گی۔
+          </div>
         </div>
 
         {submitted ? (
