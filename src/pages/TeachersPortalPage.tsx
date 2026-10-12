@@ -229,6 +229,7 @@ export const TeachersPortalPage: React.FC = () => {
   // WhatsApp Notification to Founder Muneeb Ur Rehman
   const handleNotifyFounderWhatsApp = () => {
     const rawNumber = siteSettings.whatsappNumber.replace(/[^0-9]/g, '');
+    const cleanNumber = rawNumber.startsWith('92') ? rawNumber : `92${rawNumber.replace(/^0/, '')}`;
     const message = `السلام علیکم بانی اکیڈمی قاری منیب الرحمن!\n\nمیں نے شاہین الزیتون ٹیچرز پورٹل پر بطور قاری/استاد اپنی تفصیلی رجسٹریشن مکمل کر لی ہے:\n\n• درخواست حوالہ نمبر: ${submittedAppId}\n• نام: ${title} ${fullName}\n• سند/تعلیم: ${qualification}\n• حفظ/تجوید: ${hifzDetails}\n• رابطہ نمبر: ${phone}\n• شہر: ${city}, ${province}\n• ماہانہ تنخواہ: شروع میں Rs. ${expectedSalary.toLocaleString()} PKR (وقت کے ساتھ اضافہ)\n• تنخواہ وصولی کا ذریعہ: ${paymentMethod} (${accountNumber})\n• تدریسی شفٹ (8 گھنٹے روزانہ): ${teachingShift}\n\nبراہِ کرم آن لائن آڈیشن اور کلاس شیڈولنگ کے لیے رابطہ فرمائیں۔ جزاک اللہ خیراً!`;
 
     window.open(`https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`, '_blank');

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, Award, Shield, Globe, MapPin, BookOpen, Sparkles, CheckCircle } from 'lucide-react';
+import { Heart, Award, Shield, Globe, MapPin, BookOpen, Sparkles, CheckCircle, Clock, Sun, Moon } from 'lucide-react';
 import { useAcademy } from '../context/AcademyContext';
 import { MemorialBanner } from '../components/MemorialBanner';
 import { AcademyLogo } from '../components/AcademyLogo';
@@ -79,6 +79,82 @@ export const AboutPage: React.FC = () => {
             <p className="text-xs text-red-100/90 leading-relaxed">
               To become the world&apos;s most trusted online Quranic institution, bridging geographic boundaries and providing certified Qaris and Alimahs to every Muslim household.
             </p>
+          </div>
+        </div>
+
+        {/* 24/7 ACADEMY OPERATIONS: 3 SHIFTS OF 8 HOURS EACH */}
+        <div className="bg-gradient-to-b from-red-900 via-amber-950 to-red-950 border-2 border-amber-500/60 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold uppercase tracking-wider border border-amber-400/40">
+              <Clock className="w-4 h-4 text-amber-400" />
+              <span>24/7 Global Round-the-Clock Schedule</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-amber-100">
+              اکیڈمی کا تدریسی نظام: 8 گھنٹے کی 3 شفٹس
+            </h2>
+            <p className="text-xs sm:text-sm text-red-200 leading-relaxed">
+              شاہین الزیتون قرآنی اکیڈمی چوبیس گھنٹے فعال رہتی ہے۔ اکیڈمی کا پورا نظام <strong>8، 8 گھنٹے کی 3 مستقل شفٹوں</strong> پر مشتمل ہے تاکہ پاکستان، خلیج، برطانیہ، یورپ اور امریکہ و کینیڈا کے طلبہ کو ان کے اپنے وقت پر معیاری 1-on-1 قرآن کلاسز مل سکیں۔
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+            {/* Shift 1 */}
+            <div className="bg-red-950/80 border border-amber-500/40 rounded-2xl p-5 space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="bg-amber-500 text-red-950 font-black text-xs px-2.5 py-1 rounded-full uppercase">
+                  شفٹ 1 • 8 گھنٹے
+                </span>
+                <Sun className="w-5 h-5 text-amber-400" />
+              </div>
+              <h3 className="font-serif font-bold text-lg text-amber-200">صبح کی شفٹ (Morning Shift)</h3>
+              <div className="text-xs text-amber-300 font-mono font-bold bg-red-900/80 p-2 rounded-lg border border-red-800">
+                08:00 AM – 04:00 PM PKT
+              </div>
+              <p className="text-xs text-red-100/90 leading-relaxed">
+                پاکستان ڈے ٹائم، گلف و مشرق وسطیٰ (06:00 AM – 02:00 PM)۔ بچوں کے نورانی قاعدہ اور خواتین و مستورات کی خصوصی کلاسز۔
+              </p>
+            </div>
+
+            {/* Shift 2 */}
+            <div className="bg-red-950/80 border border-emerald-500/50 rounded-2xl p-5 space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="bg-emerald-500 text-red-950 font-black text-xs px-2.5 py-1 rounded-full uppercase">
+                  شفٹ 2 • 8 گھنٹے
+                </span>
+                <Clock className="w-5 h-5 text-emerald-400" />
+              </div>
+              <h3 className="font-serif font-bold text-lg text-emerald-200">شام کی شفٹ (Evening Shift)</h3>
+              <div className="text-xs text-emerald-300 font-mono font-bold bg-red-900/80 p-2 rounded-lg border border-red-800">
+                04:00 PM – 12:00 AM PKT
+              </div>
+              <p className="text-xs text-red-100/90 leading-relaxed">
+                پاکستان بعد از اسکول طلبہ، برطانیہ UK (11:00 AM – 07:00 PM GMT) اور یورپ۔ تجوید، ناظرہ اور حفظ قرآن کی پرائم شفٹ۔
+              </p>
+            </div>
+
+            {/* Shift 3 */}
+            <div className="bg-red-950/80 border border-blue-500/50 rounded-2xl p-5 space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="bg-blue-500 text-white font-black text-xs px-2.5 py-1 rounded-full uppercase">
+                  شفٹ 3 • 8 گھنٹے
+                </span>
+                <Moon className="w-5 h-5 text-blue-300" />
+              </div>
+              <h3 className="font-serif font-bold text-lg text-blue-200">رات و اوورسیز شفٹ (Night Shift)</h3>
+              <div className="text-xs text-blue-300 font-mono font-bold bg-red-900/80 p-2 rounded-lg border border-red-800">
+                12:00 AM – 08:00 AM PKT
+              </div>
+              <p className="text-xs text-red-100/90 leading-relaxed">
+                امریکہ (USA EST/PST)، کینیڈا اور آسٹریلیا کے اوورسیز مسلم بچوں اور فیملیز کے لیے انگریزی دان مستند حفاظ و قراء کے ساتھ کلاسز۔
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-emerald-950/70 border border-emerald-500/40 rounded-xl p-3 text-center text-xs text-emerald-200 flex flex-col sm:flex-row items-center justify-center gap-2">
+            <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
+            <span>
+              <strong>اساتذہ کی تنخواہ کا قانون:</strong> تمام اساتذہ کو ہر 8 گھنٹے کی روزانہ شفٹ پر <strong>شروع میں 50,000 روپے ماہانہ تنخواہ</strong> دی جاتی ہے، جو کارکردگی اور وقت کے ساتھ بڑھتی جاتی ہے۔
+            </span>
           </div>
         </div>
 

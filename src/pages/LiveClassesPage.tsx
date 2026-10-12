@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Video, Mic, MicOff, Volume2, BookOpen, Users, Play, MessageSquare, CheckCircle } from 'lucide-react';
+import { Video, Mic, MicOff, Volume2, BookOpen, Users, Play, MessageSquare, CheckCircle, Clock, Sun, Moon } from 'lucide-react';
 import { useAcademy } from '../context/AcademyContext';
 
 export const LiveClassesPage: React.FC = () => {
@@ -35,6 +35,67 @@ export const LiveClassesPage: React.FC = () => {
             </button>
           </div>
         </div>
+
+        {/* 24/7 3 SHIFTS LIVE SYSTEM BANNER */}
+        {(() => {
+          const now = new Date();
+          const pktHour = (now.getUTCHours() + 5) % 24;
+          let activeShiftNum = 1;
+          let activeShiftName = 'شفٹ 1: صبح کی شفٹ (Morning)';
+          let activeTiming = '08:00 AM – 04:00 PM PKT (8 Hours)';
+          if (pktHour >= 8 && pktHour < 16) {
+            activeShiftNum = 1;
+            activeShiftName = 'شفٹ 1: صبح کی شفٹ (Morning)';
+            activeTiming = '08:00 AM – 04:00 PM PKT (8 Hours)';
+          } else if (pktHour >= 16 && pktHour < 24) {
+            activeShiftNum = 2;
+            activeShiftName = 'شفٹ 2: شام کی شفٹ (Evening)';
+            activeTiming = '04:00 PM – 12:00 AM PKT (8 Hours)';
+          } else {
+            activeShiftNum = 3;
+            activeShiftName = 'شفٹ 3: رات و اوورسیز شفٹ (Night)';
+            activeTiming = '12:00 AM – 08:00 AM PKT (8 Hours)';
+          }
+
+          return (
+            <div className="bg-gradient-to-r from-red-900 via-amber-950 to-red-900 border-2 border-amber-500/50 rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-400/40 flex items-center justify-center shrink-0">
+                  <Clock className="w-6 h-6 animate-pulse" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
+                    <span className="text-xs font-bold uppercase tracking-wider text-emerald-300">
+                      Live 8-Hour Teaching Shift Active Now
+                    </span>
+                  </div>
+                  <div className="text-sm sm:text-base font-bold font-serif text-amber-100">
+                    {activeShiftName} • {activeTiming}
+                  </div>
+                  <div className="text-xs text-red-200">
+                    اکیڈمی کا شیڈول: 8 گھنٹے کی 3 شفٹس (صبح، شام، رات) چوبیس گھنٹے نان اسٹاپ تدریس۔
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 text-xs font-bold">
+                <span className={`px-3 py-1.5 rounded-lg border flex items-center gap-1 ${activeShiftNum === 1 ? 'bg-amber-500 text-red-950 font-black border-amber-400 shadow' : 'bg-red-950/80 text-amber-200 border-red-800'}`}>
+                  <Sun className="w-3.5 h-3.5" />
+                  <span>Morning (8h)</span>
+                </span>
+                <span className={`px-3 py-1.5 rounded-lg border flex items-center gap-1 ${activeShiftNum === 2 ? 'bg-emerald-500 text-red-950 font-black border-emerald-400 shadow' : 'bg-red-950/80 text-emerald-200 border-red-800'}`}>
+                  <Clock className="w-3.5 h-3.5" />
+                  <span>Evening (8h)</span>
+                </span>
+                <span className={`px-3 py-1.5 rounded-lg border flex items-center gap-1 ${activeShiftNum === 3 ? 'bg-blue-500 text-white font-black border-blue-400 shadow' : 'bg-red-950/80 text-blue-200 border-red-800'}`}>
+                  <Moon className="w-3.5 h-3.5" />
+                  <span>Night (8h)</span>
+                </span>
+              </div>
+            </div>
+          );
+        })()}
 
         {/* Live Classroom Screen Simulation */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">

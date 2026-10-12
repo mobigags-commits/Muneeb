@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, ShoppingBag, Heart, TrendingUp, Phone, ShieldCheck, Megaphone, Facebook, Globe, Wallet, Award } from 'lucide-react';
+import { BookOpen, ShoppingBag, Heart, TrendingUp, Phone, ShieldCheck, Megaphone, Facebook, Globe, Wallet, Award, Clock } from 'lucide-react';
 import { useAcademy } from '../context/AcademyContext';
 import { AcademyLogo } from './AcademyLogo';
 
@@ -38,6 +38,16 @@ export const EcosystemBar: React.FC = () => {
             <Award className="w-3.5 h-3.5 text-amber-300" />
             <span>Teachers Portal</span>
             <span className="bg-emerald-500 text-red-950 text-[10px] px-1.5 py-0.2 rounded font-extrabold">Rs. 50k+</span>
+          </button>
+
+          <button
+            onClick={() => setActivePage('teacher-portal')}
+            className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs sm:text-sm font-semibold transition-all bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 border border-amber-400/40"
+            title="اکیڈمی میں 8 گھنٹے کی 3 شفٹس (صبح، شام، رات)"
+          >
+            <Clock className="w-3.5 h-3.5 text-amber-300" />
+            <span>8h × 3 Shifts</span>
+            <span className="bg-amber-400 text-red-950 text-[10px] px-1.5 py-0.2 rounded font-black">24/7</span>
           </button>
 
           <button

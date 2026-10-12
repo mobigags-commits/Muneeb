@@ -15,6 +15,8 @@ import {
   Star,
   Shield,
   Clock,
+  Sun,
+  Moon,
   ChevronRight,
   ChevronDown,
   ChevronUp,
@@ -420,6 +422,168 @@ export const HomePage: React.FC = () => {
                 </div>
               );
             })}
+          </div>
+        </section>
+
+        {/* 24/7 ACADEMY OPERATIONS: 3 SHIFTS OF 8 HOURS EACH */}
+        <section className="bg-gradient-to-b from-red-900 via-amber-950 to-red-950 border-2 border-amber-500/50 rounded-3xl p-8 sm:p-10 shadow-2xl space-y-8">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold uppercase tracking-wider border border-amber-400/40">
+              <Clock className="w-4 h-4 text-amber-400" />
+              <span>Round-The-Clock Continuous Global Quranic Teaching</span>
+            </div>
+            <h2 className="text-2xl sm:text-4xl font-serif font-bold text-amber-100">
+              اکیڈمی کا تدریسی شیڈول: 8 گھنٹے کی 3 شفٹس
+            </h2>
+            <p className="text-xs sm:text-base text-red-100 max-w-2xl mx-auto leading-relaxed">
+              شاہین الزیتون اکیڈمی میں <strong>8، 8 گھنٹے کی 3 منظم شفٹوں</strong> کے ذریعے دنیا کے تمام ٹائم زونز (پاکستان، خلیج، برطانیہ، یورپ اور امریکہ) کے طلبہ کو چوبیس گھنٹے نان اسٹاپ تعلیم دی جاتی ہے۔
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Shift 1 */}
+            <div className="bg-red-950/80 border-2 border-amber-500/40 rounded-2xl p-6 space-y-4 hover:border-amber-400 transition-all flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="bg-amber-500 text-red-950 font-black text-xs px-3 py-1 rounded-full uppercase tracking-wider">
+                    شفٹ 1 • 8 گھنٹے
+                  </span>
+                  <div className="flex items-center gap-1 text-amber-300 text-xs font-bold">
+                    <Sun className="w-4 h-4 text-amber-400" />
+                    <span>صبح کی شفٹ</span>
+                  </div>
+                </div>
+
+                <h3 className="font-serif font-bold text-xl text-amber-200">
+                  Morning 8-Hour Shift
+                </h3>
+
+                <div className="bg-red-900/80 rounded-xl p-3 border border-amber-500/30">
+                  <div className="text-xs text-amber-300 font-bold flex justify-between">
+                    <span>پاکستان وقت:</span>
+                    <span className="font-mono text-white">08:00 AM – 04:00 PM PKT</span>
+                  </div>
+                  <div className="text-[11px] text-emerald-300 mt-1">
+                    دورانیہ: پورا 8 گھنٹے • روزانہ لائیو سیشنز
+                  </div>
+                </div>
+
+                <p className="text-xs text-red-100/90 leading-relaxed">
+                  چھوٹے بچوں، ہوم اسکولنگ طلبہ اور خواتین کے لیے پردے کے اہتمام کے ساتھ تجربہ کار قاریہ اساتذہ۔ خلیج و سعودی عرب کے صبح کے اوقات کے عین مطابق۔
+                </p>
+              </div>
+
+              <div className="pt-3 border-t border-red-800 flex items-center justify-between">
+                <span className="text-[11px] text-emerald-300 font-bold">ٹیچر تنخواہ: شروع 50,000</span>
+                <button
+                  onClick={() => setActivePage('admissions')}
+                  className="bg-amber-500 hover:bg-amber-400 text-red-950 text-xs font-bold px-3 py-1.5 rounded-lg transition-colors"
+                >
+                  داخلہ لیں →
+                </button>
+              </div>
+            </div>
+
+            {/* Shift 2 */}
+            <div className="bg-red-950/80 border-2 border-emerald-500/50 rounded-2xl p-6 space-y-4 hover:border-emerald-400 transition-all flex flex-col justify-between relative overflow-hidden">
+              <div className="absolute top-2 right-2 bg-emerald-500 text-red-950 text-[9px] font-black uppercase px-2 py-0.5 rounded-full">
+                Most Popular
+              </div>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="bg-emerald-500 text-red-950 font-black text-xs px-3 py-1 rounded-full uppercase tracking-wider">
+                    شفٹ 2 • 8 گھنٹے
+                  </span>
+                  <div className="flex items-center gap-1 text-emerald-300 text-xs font-bold">
+                    <Clock className="w-4 h-4 text-emerald-400" />
+                    <span>شام کی شفٹ</span>
+                  </div>
+                </div>
+
+                <h3 className="font-serif font-bold text-xl text-emerald-200">
+                  Evening 8-Hour Shift
+                </h3>
+
+                <div className="bg-red-900/80 rounded-xl p-3 border border-emerald-500/30">
+                  <div className="text-xs text-emerald-300 font-bold flex justify-between">
+                    <span>پاکستان وقت:</span>
+                    <span className="font-mono text-white">04:00 PM – 12:00 AM PKT</span>
+                  </div>
+                  <div className="text-[11px] text-amber-300 mt-1">
+                    یو کے (UK) و یورپ: 11:00 AM – 07:00 PM GMT
+                  </div>
+                </div>
+
+                <p className="text-xs text-red-100/90 leading-relaxed">
+                  اسکول کے بعد پاکستانی طلبہ اور برطانیہ و یورپ کے خاندانوں کے لیے سب سے مقبول شفٹ۔ 1-on-1 تجوید، ناظرہ اور حفظ قرآن کی کلاسز۔
+                </p>
+              </div>
+
+              <div className="pt-3 border-t border-red-800 flex items-center justify-between">
+                <span className="text-[11px] text-emerald-300 font-bold">ٹیچر تنخواہ: شروع 50,000</span>
+                <button
+                  onClick={() => setActivePage('admissions')}
+                  className="bg-emerald-500 hover:bg-emerald-400 text-red-950 text-xs font-bold px-3 py-1.5 rounded-lg transition-colors"
+                >
+                  داخلہ لیں →
+                </button>
+              </div>
+            </div>
+
+            {/* Shift 3 */}
+            <div className="bg-red-950/80 border-2 border-blue-500/50 rounded-2xl p-6 space-y-4 hover:border-blue-400 transition-all flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="bg-blue-500 text-white font-black text-xs px-3 py-1 rounded-full uppercase tracking-wider">
+                    شفٹ 3 • 8 گھنٹے
+                  </span>
+                  <div className="flex items-center gap-1 text-blue-300 text-xs font-bold">
+                    <Moon className="w-4 h-4 text-blue-300" />
+                    <span>رات و اوورسیز</span>
+                  </div>
+                </div>
+
+                <h3 className="font-serif font-bold text-xl text-blue-200">
+                  Night / Overseas 8-Hour Shift
+                </h3>
+
+                <div className="bg-red-900/80 rounded-xl p-3 border border-blue-400/30">
+                  <div className="text-xs text-blue-300 font-bold flex justify-between">
+                    <span>پاکستان وقت:</span>
+                    <span className="font-mono text-white">12:00 AM – 08:00 AM PKT</span>
+                  </div>
+                  <div className="text-[11px] text-amber-300 mt-1">
+                    امریکہ و کینیڈا: 02:00 PM – 10:00 PM EST
+                  </div>
+                </div>
+
+                <p className="text-xs text-red-100/90 leading-relaxed">
+                  امریکہ (USA)، کینیڈا اور آسٹریلیا میں مقیم مسلم طلبہ کے لیے لائیو رات کی شفٹ۔ روانی سے انگریزی بولنے والے مستند قراء کرام کے ساتھ کلاسز۔
+                </p>
+              </div>
+
+              <div className="pt-3 border-t border-red-800 flex items-center justify-between">
+                <span className="text-[11px] text-emerald-300 font-bold">ٹیچر تنخواہ: شروع 50,000</span>
+                <button
+                  onClick={() => setActivePage('admissions')}
+                  className="bg-blue-500 hover:bg-blue-400 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-colors"
+                >
+                  داخلہ لیں →
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-amber-950/80 border border-amber-500/40 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div className="text-xs text-amber-200">
+              <strong className="text-amber-300">اساتذہ کی بھرتی اور تنخواہ:</strong> تمام اساتذہ کو ہر 8 گھنٹے کی شفٹ کے لیے <strong>شروع میں 50,000 روپے ماہانہ تنخواہ</strong> دی جاتی ہے، جو وقت اور کارکردگی کے ساتھ باقاعدگی سے بڑھتی ہے۔
+            </div>
+            <button
+              onClick={() => setActivePage('teacher-portal')}
+              className="bg-amber-500 hover:bg-amber-400 text-red-950 font-black text-xs px-5 py-2.5 rounded-xl whitespace-nowrap shadow cursor-pointer"
+            >
+              ٹیچرز پورٹل دیکھیں →
+            </button>
           </div>
         </section>
 
