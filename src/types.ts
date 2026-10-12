@@ -100,6 +100,10 @@ export interface AcademyShift {
   nameUrdu: string;
   shiftNumber: number; // 1, 2, or 3
   durationHours: number; // 8 hours
+  teachingHours: number; // 7 active teaching hours
+  breakDurationHours: number; // 1 hour mandatory break for Salah, meal & rest
+  breakTimingPKT: string; // e.g. '01:00 PM – 02:00 PM PKT'
+  breakDetailsUrdu: string; // e.g. 'نماز ظہر، طعام اور آرام کا 1 گھنٹہ وقفہ'
   timingPKT: string; // e.g. '08:00 AM – 04:00 PM PKT'
   startHourPKT: number;
   endHourPKT: number;

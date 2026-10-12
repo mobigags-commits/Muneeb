@@ -185,18 +185,18 @@ export const AdmissionsPage: React.FC = () => {
                   onChange={(e) => setTimeSlot(e.target.value)}
                   className="w-full bg-red-950/80 border border-red-700 text-amber-200 rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-amber-400 font-medium"
                 >
-                  <option value="Shift 1: Morning Shift (08:00 AM – 04:00 PM PKT / 8 Hours)">
-                    شفٹ 1: صبح کی شفٹ (08:00 AM – 04:00 PM PKT • 8 گھنٹے)
+                  <option value="Shift 1: Morning Shift (08:00 AM – 04:00 PM PKT • 8h / 1h Break 1-2 PM)">
+                    شفٹ 1: صبح کی شفٹ (08:00 AM – 04:00 PM PKT • 1 گھنٹہ وقفہ 1 تا 2 PM)
                   </option>
-                  <option value="Shift 2: Evening Shift (04:00 PM – 12:00 AM PKT / 8 Hours)">
-                    شفٹ 2: شام کی شفٹ (04:00 PM – 12:00 AM PKT • 8 گھنٹے)
+                  <option value="Shift 2: Evening Shift (04:00 PM – 12:00 AM PKT • 8h / 1h Break 7:30-8:30 PM)">
+                    شفٹ 2: شام کی شفٹ (04:00 PM – 12:00 AM PKT • 1 گھنٹہ وقفہ 7:30 تا 8:30 PM)
                   </option>
-                  <option value="Shift 3: Night / Overseas Shift (12:00 AM – 08:00 AM PKT / 8 Hours)">
-                    شفٹ 3: رات و اوورسیز شفٹ (12:00 AM – 08:00 AM PKT • 8 گھنٹے)
+                  <option value="Shift 3: Night / Overseas Shift (12:00 AM – 08:00 AM PKT • 8h / 1h Break 3:30-4:30 AM)">
+                    شفٹ 3: رات و اوورسیز شفٹ (12:00 AM – 08:00 AM PKT • 1 گھنٹہ وقفہ 3:30 تا 4:30 AM)
                   </option>
                 </select>
                 <div className="text-[10px] text-emerald-300 mt-1">
-                  ✓ 24 گھنٹے نان اسٹاپ تدریس: آپ کی سہولت کے مطابق 8 گھنٹے کی 3 شفٹس میں کلاسز دستیاب ہیں۔
+                  ✓ 24 گھنٹے نان اسٹاپ تدریس: 8 گھنٹے کی 3 شفٹس (ہر شفٹ میں 1 گھنٹہ نماز و طعام کے وقفے کے ساتھ 7 گھنٹے کلاسز دستیاب ہیں)۔
                 </div>
               </div>
             </div>

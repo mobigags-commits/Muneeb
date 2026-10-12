@@ -108,8 +108,8 @@ export const TeachersPortalPage: React.FC = () => {
   // Technical Setup & Shifts (3 Shifts of 8 Hours Each / 24 Hours Round the Clock)
   const [deviceType, setDeviceType] = useState('Laptop / Desktop PC with HD Webcam');
   const [internetConnection, setInternetConnection] = useState('High-Speed Fiber (20+ Mbps) with UPS/Power Backup');
-  const [teachingShift, setTeachingShift] = useState('Shift 2: Evening Shift (04:00 PM – 12:00 AM PKT / 8 Hours)');
-  const [weeklyHours, setWeeklyHours] = useState('48 Hours / Week (8 Hours Daily Shift - 6 Days)');
+  const [teachingShift, setTeachingShift] = useState('Shift 2: Evening Shift (04:00 PM – 12:00 AM PKT • 8 Hours / 1 Hour Break)');
+  const [weeklyHours, setWeeklyHours] = useState('48 Hours / Week (8 Hours Daily Shift - 6 Days • 1 Hour Daily Break)');
   const [hasQuietRoom, setHasQuietRoom] = useState(true);
 
   // SALARY & FINANCIAL INFORMATION (MINIMUM 50,000 PKR MANDATORY)
@@ -1243,18 +1243,18 @@ export const TeachersPortalPage: React.FC = () => {
                         onChange={(e) => setTeachingShift(e.target.value)}
                         className="w-full bg-red-900/80 border border-red-700 text-white rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-amber-400 font-medium"
                       >
-                        <option value="Shift 1: Morning Shift (08:00 AM – 04:00 PM PKT / 8 Hours)">
-                          شفٹ 1: صبح کی شفٹ (08:00 AM – 04:00 PM PKT • 8 گھنٹے)
+                        <option value="Shift 1: Morning Shift (08:00 AM – 04:00 PM PKT • 8 Hours / 1 Hour Break)">
+                          شفٹ 1: صبح کی شفٹ (08:00 AM – 04:00 PM PKT • 8 گھنٹے • 1 گھنٹہ وقفہ 1-2 PM)
                         </option>
-                        <option value="Shift 2: Evening Shift (04:00 PM – 12:00 AM PKT / 8 Hours)">
-                          شفٹ 2: شام کی شفٹ (04:00 PM – 12:00 AM PKT • 8 گھنٹے)
+                        <option value="Shift 2: Evening Shift (04:00 PM – 12:00 AM PKT • 8 Hours / 1 Hour Break)">
+                          شفٹ 2: شام کی شفٹ (04:00 PM – 12:00 AM PKT • 8 گھنٹے • 1 گھنٹہ وقفہ 7:30-8:30 PM)
                         </option>
-                        <option value="Shift 3: Night / Overseas Shift (12:00 AM – 08:00 AM PKT / 8 Hours)">
-                          شفٹ 3: رات و اوورسیز شفٹ (12:00 AM – 08:00 AM PKT • 8 گھنٹے)
+                        <option value="Shift 3: Night / Overseas Shift (12:00 AM – 08:00 AM PKT • 8 Hours / 1 Hour Break)">
+                          شفٹ 3: رات و اوورسیز شفٹ (12:00 AM – 08:00 AM PKT • 8 گھنٹے • 1 گھنٹہ وقفہ 3:30-4:30 AM)
                         </option>
                       </select>
                       <p className="text-[10px] text-emerald-300 mt-1">
-                        ✓ اکیڈمی کا لازمی نظام: 8 گھنٹے کی 3 شفٹس (صبح، شام یا رات)۔
+                        ✓ اکیڈمی کا لازمی نظام: 8 گھنٹے کی ڈیوٹی میں 1 گھنٹہ باقاعدہ وقفہ شامل ہے (7 گھنٹے پڑھانا + 1 گھنٹہ نماز و طعام کا وقفہ)۔
                       </p>
                     </div>
 
@@ -1554,15 +1554,20 @@ export const TeachersPortalPage: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3 bg-red-900/60 px-4 py-2.5 rounded-xl border border-red-700">
+                    <div className="flex flex-wrap items-center gap-3 bg-red-900/60 px-4 py-2.5 rounded-xl border border-red-700">
                       <div className="text-center">
                         <span className="text-[10px] text-red-300 block">شفٹ کا دورانیہ</span>
                         <span className="text-sm font-black text-amber-300">8 Hours</span>
                       </div>
                       <div className="h-6 w-px bg-red-700" />
                       <div className="text-center">
-                        <span className="text-[10px] text-red-300 block">روزانہ کل شفٹس</span>
-                        <span className="text-sm font-black text-emerald-300">3 Shifts (24h)</span>
+                        <span className="text-[10px] text-emerald-300 block">لازمی وقفہ</span>
+                        <span className="text-sm font-black text-emerald-300">1 Hour Break</span>
+                      </div>
+                      <div className="h-6 w-px bg-red-700" />
+                      <div className="text-center">
+                        <span className="text-[10px] text-amber-300 block">خالص تدریس</span>
+                        <span className="text-sm font-black text-amber-200">7 Hours Classes</span>
                       </div>
                       <div className="h-6 w-px bg-red-700" />
                       <div className="text-center">
@@ -1593,13 +1598,23 @@ export const TeachersPortalPage: React.FC = () => {
                       Morning 8-Hour Shift
                     </h3>
 
-                    <div className="bg-red-900/80 rounded-xl p-3 border border-amber-500/30 space-y-1">
+                    <div className="bg-red-900/80 rounded-xl p-3 border border-amber-500/30 space-y-2">
                       <div className="text-xs text-amber-300 font-bold flex items-center justify-between">
                         <span>تدریسی اوقات:</span>
                         <span className="font-mono text-white">08:00 AM – 04:00 PM PKT</span>
                       </div>
                       <div className="text-[11px] text-emerald-300">
-                        دورانیہ: <strong>پورا 8 گھنٹے</strong> (ہفتہ وار 48 گھنٹے ڈیوٹی)
+                        دورانیہ: <strong>8 گھنٹے</strong> (7 گھنٹے تدریس + 1 گھنٹہ وقفہ)
+                      </div>
+                      {/* 1-Hour Break Details */}
+                      <div className="bg-emerald-950/90 rounded-lg p-2 border border-emerald-500/50 space-y-0.5">
+                        <div className="text-[11px] font-bold text-emerald-300 flex items-center justify-between">
+                          <span>لازمی 1 گھنٹہ وقفہ:</span>
+                          <span className="font-mono text-white">01:00 PM – 02:00 PM PKT</span>
+                        </div>
+                        <div className="text-[10px] text-emerald-200">
+                          نمازِ ظہر، دوپہر کا کھانا اور آرام کا پرسکون وقفہ
+                        </div>
                       </div>
                     </div>
 
@@ -1625,10 +1640,10 @@ export const TeachersPortalPage: React.FC = () => {
                   </div>
 
                   <div className="pt-3 border-t border-red-800/80 flex items-center justify-between text-xs">
-                    <span className="text-emerald-300 font-bold">معاہدہ تنخواہ: شروع 50k</span>
+                    <span className="text-emerald-300 font-bold">معاہدہ: شروع 50k</span>
                     <button
                       onClick={() => {
-                        setTeachingShift('Shift 1: Morning Shift (08:00 AM – 04:00 PM PKT / 8 Hours)');
+                        setTeachingShift('Shift 1: Morning Shift (08:00 AM – 04:00 PM PKT • 8h / 1h Break)');
                         setActiveTab('apply');
                       }}
                       className="bg-amber-500 hover:bg-amber-400 text-red-950 font-black px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
@@ -1658,13 +1673,23 @@ export const TeachersPortalPage: React.FC = () => {
                       Evening 8-Hour Shift
                     </h3>
 
-                    <div className="bg-red-900/80 rounded-xl p-3 border border-emerald-500/30 space-y-1">
+                    <div className="bg-red-900/80 rounded-xl p-3 border border-emerald-500/30 space-y-2">
                       <div className="text-xs text-emerald-300 font-bold flex items-center justify-between">
                         <span>تدریسی اوقات:</span>
                         <span className="font-mono text-white">04:00 PM – 12:00 AM PKT</span>
                       </div>
                       <div className="text-[11px] text-amber-300">
-                        دورانیہ: <strong>پورا 8 گھنٹے</strong> (ہفتہ وار 48 گھنٹے ڈیوٹی)
+                        دورانیہ: <strong>8 گھنٹے</strong> (7 گھنٹے تدریس + 1 گھنٹہ وقفہ)
+                      </div>
+                      {/* 1-Hour Break Details */}
+                      <div className="bg-emerald-950/90 rounded-lg p-2 border border-emerald-500/50 space-y-0.5">
+                        <div className="text-[11px] font-bold text-emerald-300 flex items-center justify-between">
+                          <span>لازمی 1 گھنٹہ وقفہ:</span>
+                          <span className="font-mono text-white">07:30 PM – 08:30 PM PKT</span>
+                        </div>
+                        <div className="text-[10px] text-emerald-200">
+                          نمازِ مغرب و عشاء، رات کا کھانا (عشائیہ) اور ریفریشمنٹ
+                        </div>
                       </div>
                     </div>
 
@@ -1690,10 +1715,10 @@ export const TeachersPortalPage: React.FC = () => {
                   </div>
 
                   <div className="pt-3 border-t border-red-800/80 flex items-center justify-between text-xs">
-                    <span className="text-emerald-300 font-bold">معاہدہ تنخواہ: شروع 50k</span>
+                    <span className="text-emerald-300 font-bold">معاہدہ: شروع 50k</span>
                     <button
                       onClick={() => {
-                        setTeachingShift('Shift 2: Evening Shift (04:00 PM – 12:00 AM PKT / 8 Hours)');
+                        setTeachingShift('Shift 2: Evening Shift (04:00 PM – 12:00 AM PKT • 8h / 1h Break)');
                         setActiveTab('apply');
                       }}
                       className="bg-emerald-500 hover:bg-emerald-400 text-red-950 font-black px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
@@ -1720,13 +1745,23 @@ export const TeachersPortalPage: React.FC = () => {
                       Night / Overseas 8-Hour Shift
                     </h3>
 
-                    <div className="bg-red-900/80 rounded-xl p-3 border border-blue-400/30 space-y-1">
+                    <div className="bg-red-900/80 rounded-xl p-3 border border-blue-400/30 space-y-2">
                       <div className="text-xs text-blue-300 font-bold flex items-center justify-between">
                         <span>تدریسی اوقات:</span>
                         <span className="font-mono text-white">12:00 AM – 08:00 AM PKT</span>
                       </div>
                       <div className="text-[11px] text-amber-300">
-                        دورانیہ: <strong>پورا 8 گھنٹے</strong> (ہفتہ وار 48 گھنٹے ڈیوٹی)
+                        دورانیہ: <strong>8 گھنٹے</strong> (7 گھنٹے تدریس + 1 گھنٹہ وقفہ)
+                      </div>
+                      {/* 1-Hour Break Details */}
+                      <div className="bg-blue-950/90 rounded-lg p-2 border border-blue-400/50 space-y-0.5">
+                        <div className="text-[11px] font-bold text-blue-300 flex items-center justify-between">
+                          <span>لازمی 1 گھنٹہ وقفہ:</span>
+                          <span className="font-mono text-white">03:30 AM – 04:30 AM PKT</span>
+                        </div>
+                        <div className="text-[10px] text-blue-200">
+                          نمازِ تہجد و فجر، سحری/چائے اور پرسکون آرام کا وقفہ
+                        </div>
                       </div>
                     </div>
 
@@ -1752,10 +1787,10 @@ export const TeachersPortalPage: React.FC = () => {
                   </div>
 
                   <div className="pt-3 border-t border-red-800/80 flex items-center justify-between text-xs">
-                    <span className="text-emerald-300 font-bold">معاہدہ تنخواہ: شروع 50k</span>
+                    <span className="text-emerald-300 font-bold">معاہدہ: شروع 50k</span>
                     <button
                       onClick={() => {
-                        setTeachingShift('Shift 3: Night / Overseas Shift (12:00 AM – 08:00 AM PKT / 8 Hours)');
+                        setTeachingShift('Shift 3: Night / Overseas Shift (12:00 AM – 08:00 AM PKT • 8h / 1h Break)');
                         setActiveTab('apply');
                       }}
                       className="bg-blue-500 hover:bg-blue-400 text-white font-black px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
@@ -1799,10 +1834,10 @@ export const TeachersPortalPage: React.FC = () => {
                   <div className="p-3.5 bg-red-900/60 rounded-xl border border-red-800 space-y-1">
                     <div className="text-amber-300 font-bold flex items-center gap-1.5">
                       <Check className="w-4 h-4 text-emerald-400" />
-                      <span>3. نماز اور طعام کا 30 منٹ وقفہ</span>
+                      <span>3. تینوں شفٹوں میں 1 گھنٹہ باقاعدہ وقفہ (1-Hour Paid Break)</span>
                     </div>
                     <p className="text-red-100/90 leading-relaxed">
-                      8 گھنٹے کی شفٹ کے دوران باجماعت نماز اور کھانے کے لیے 30 منٹ کا وقفہ شیڈول کا حصہ ہے، جس کی ایڈمن پورٹل پر انٹری کی جاتی ہے۔
+                      اکیڈمی کی تینوں 8 گھنٹے کی شفٹوں میں اساتذہ کو پورا 1 گھنٹہ باقاعدہ وقفہ دیا جاتا ہے (7 گھنٹے تدریس + 1 گھنٹہ باقاعدہ وقفہ برائے نماز، کھانا اور آرام)۔ یہ وقفہ تنخواہ کا باضابطہ حصہ ہے اور اس کی کوئی کٹوتی نہیں ہوتی۔
                     </p>
                   </div>
 
@@ -1827,7 +1862,7 @@ export const TeachersPortalPage: React.FC = () => {
                       بین الاقوامی ٹائم زونز اور شفٹس کا موازنہ (Global Timezones Matrix)
                     </h4>
                   </div>
-                  <span className="text-[11px] text-emerald-300 font-bold">24 Hours Non-Stop</span>
+                  <span className="text-[11px] text-emerald-300 font-bold">24 Hours Non-Stop • 1h Break in Each Shift</span>
                 </div>
 
                 <table className="w-full text-xs text-left text-red-100">
@@ -1835,6 +1870,7 @@ export const TeachersPortalPage: React.FC = () => {
                     <tr>
                       <th className="p-3">Shift Name (شفٹ)</th>
                       <th className="p-3">Pakistan (PKT)</th>
+                      <th className="p-3 text-emerald-300">1-Hour Break (لازمی وقفہ)</th>
                       <th className="p-3">UK / London (GMT)</th>
                       <th className="p-3">USA / New York (EST)</th>
                       <th className="p-3">Gulf / Dubai (GST)</th>
@@ -1847,6 +1883,9 @@ export const TeachersPortalPage: React.FC = () => {
                         Shift 1: Morning (صبح) • 8h
                       </td>
                       <td className="p-3 font-mono text-white">08:00 AM – 04:00 PM</td>
+                      <td className="p-3 font-semibold text-emerald-300 text-[11px] bg-emerald-950/40">
+                        01:00 PM – 02:00 PM (ظہر و طعام)
+                      </td>
                       <td className="p-3 font-mono text-red-200">03:00 AM – 11:00 AM</td>
                       <td className="p-3 font-mono text-red-200">10:00 PM – 06:00 AM (Prev)</td>
                       <td className="p-3 font-mono text-emerald-300">07:00 AM – 03:00 PM</td>
@@ -1857,6 +1896,9 @@ export const TeachersPortalPage: React.FC = () => {
                         Shift 2: Evening (شام) • 8h
                       </td>
                       <td className="p-3 font-mono text-white">04:00 PM – 12:00 AM</td>
+                      <td className="p-3 font-semibold text-emerald-300 text-[11px] bg-emerald-950/40">
+                        07:30 PM – 08:30 PM (مغرب/عشاء و عشائیہ)
+                      </td>
                       <td className="p-3 font-mono text-emerald-300">11:00 AM – 07:00 PM</td>
                       <td className="p-3 font-mono text-red-200">06:00 AM – 02:00 PM</td>
                       <td className="p-3 font-mono text-emerald-300">03:00 PM – 11:00 PM</td>
@@ -1867,6 +1909,9 @@ export const TeachersPortalPage: React.FC = () => {
                         Shift 3: Night / Overseas (رات) • 8h
                       </td>
                       <td className="p-3 font-mono text-white">12:00 AM – 08:00 AM</td>
+                      <td className="p-3 font-semibold text-blue-300 text-[11px] bg-blue-950/40">
+                        03:30 AM – 04:30 AM (تہجد/فجر و سحری)
+                      </td>
                       <td className="p-3 font-mono text-red-200">07:00 PM – 03:00 AM</td>
                       <td className="p-3 font-mono text-blue-300">02:00 PM – 10:00 PM</td>
                       <td className="p-3 font-mono text-red-200">11:00 PM – 07:00 AM</td>

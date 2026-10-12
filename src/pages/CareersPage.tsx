@@ -91,7 +91,7 @@ export const CareersPage: React.FC = () => {
             </span>
             <span className="text-emerald-300 bg-emerald-950/80 border border-emerald-500/40 rounded-xl px-4 py-2 font-semibold flex items-center gap-1.5">
               <Clock className="w-4 h-4 text-amber-400" />
-              <span>اکیڈمی میں <strong>8 گھنٹے کی 3 شفٹس</strong> (صبح • شام • رات / 24 گھنٹے نان اسٹاپ)</span>
+              <span>اکیڈمی میں <strong>8 گھنٹے کی 3 شفٹس</strong> (تینوں شفٹوں میں 1 گھنٹہ باقاعدہ وقفہ برائے نماز و طعام)</span>
             </span>
           </div>
         </div>
@@ -260,18 +260,18 @@ export const CareersPage: React.FC = () => {
                 onChange={(e) => setTeachingShift(e.target.value)}
                 className="w-full bg-red-950/80 border border-red-700 text-amber-200 rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-amber-400 font-medium"
               >
-                <option value="Shift 1: Morning Shift (08:00 AM – 04:00 PM PKT / 8 Hours)">
-                  شفٹ 1: صبح کی شفٹ (08:00 AM – 04:00 PM PKT • 8 گھنٹے)
+                <option value="Shift 1: Morning Shift (08:00 AM – 04:00 PM PKT • 8 Hours / 1 Hour Break)">
+                  شفٹ 1: صبح کی شفٹ (08:00 AM – 04:00 PM PKT • 8 گھنٹے • 1 گھنٹہ وقفہ 1-2 PM)
                 </option>
-                <option value="Shift 2: Evening Shift (04:00 PM – 12:00 AM PKT / 8 Hours)">
-                  شفٹ 2: شام کی شفٹ (04:00 PM – 12:00 AM PKT • 8 گھنٹے)
+                <option value="Shift 2: Evening Shift (04:00 PM – 12:00 AM PKT • 8 Hours / 1 Hour Break)">
+                  شفٹ 2: شام کی شفٹ (04:00 PM – 12:00 AM PKT • 8 گھنٹے • 1 گھنٹہ وقفہ 7:30-8:30 PM)
                 </option>
-                <option value="Shift 3: Night / Overseas Shift (12:00 AM – 08:00 AM PKT / 8 Hours)">
-                  شفٹ 3: رات و اوورسیز شفٹ (12:00 AM – 08:00 AM PKT • 8 گھنٹے)
+                <option value="Shift 3: Night / Overseas Shift (12:00 AM – 08:00 AM PKT • 8 Hours / 1 Hour Break)">
+                  شفٹ 3: رات و اوورسیز شفٹ (12:00 AM – 08:00 AM PKT • 8 گھنٹے • 1 گھنٹہ وقفہ 3:30-4:30 AM)
                 </option>
               </select>
               <div className="text-[10px] text-emerald-300 mt-1">
-                ✓ اکیڈمی کا لازمی اصول: 8 گھنٹے کی روزانہ ڈیوٹی • شروع میں فکسڈ تنخواہ 50,000 روپے ماہانہ (وقت کے ساتھ اضافہ)۔
+                ✓ اکیڈمی کا لازمی اصول: 8 گھنٹے کی روزانہ ڈیوٹی میں 1 گھنٹہ باقاعدہ وقفہ شامل ہے (7 گھنٹے تدریس + 1 گھنٹہ بریک برائے نماز و طعام) • شروع میں فکسڈ تنخواہ 50,000 روپے ماہانہ (وقت کے ساتھ اضافہ)۔
               </div>
             </div>
 

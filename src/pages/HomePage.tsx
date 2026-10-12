@@ -433,10 +433,10 @@ export const HomePage: React.FC = () => {
               <span>Round-The-Clock Continuous Global Quranic Teaching</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-serif font-bold text-amber-100">
-              اکیڈمی کا تدریسی شیڈول: 8 گھنٹے کی 3 شفٹس
+              اکیڈمی کا تدریسی شیڈول: 8 گھنٹے کی 3 شفٹس (1 گھنٹہ وقفہ)
             </h2>
             <p className="text-xs sm:text-base text-red-100 max-w-2xl mx-auto leading-relaxed">
-              شاہین الزیتون اکیڈمی میں <strong>8، 8 گھنٹے کی 3 منظم شفٹوں</strong> کے ذریعے دنیا کے تمام ٹائم زونز (پاکستان، خلیج، برطانیہ، یورپ اور امریکہ) کے طلبہ کو چوبیس گھنٹے نان اسٹاپ تعلیم دی جاتی ہے۔
+              شاہین الزیتون اکیڈمی میں <strong>8، 8 گھنٹے کی 3 منظم شفٹوں</strong> کے ذریعے دنیا کے تمام ٹائم زونز کے طلبہ کو تعلیم دی جاتی ہے۔ <strong>ہر شفٹ میں 1 گھنٹہ نماز و طعام کا باقاعدہ وقفہ</strong> شامل ہے (7 گھنٹے تدریس + 1 گھنٹہ بریک)۔
             </p>
           </div>
 
@@ -458,13 +458,17 @@ export const HomePage: React.FC = () => {
                   Morning 8-Hour Shift
                 </h3>
 
-                <div className="bg-red-900/80 rounded-xl p-3 border border-amber-500/30">
+                <div className="bg-red-900/80 rounded-xl p-3 border border-amber-500/30 space-y-1.5">
                   <div className="text-xs text-amber-300 font-bold flex justify-between">
-                    <span>پاکستان وقت:</span>
+                    <span>تدریسی اوقات:</span>
                     <span className="font-mono text-white">08:00 AM – 04:00 PM PKT</span>
                   </div>
-                  <div className="text-[11px] text-emerald-300 mt-1">
-                    دورانیہ: پورا 8 گھنٹے • روزانہ لائیو سیشنز
+                  <div className="text-[11px] text-emerald-300 font-bold flex justify-between bg-emerald-950/70 p-1.5 rounded border border-emerald-500/40">
+                    <span>1 گھنٹہ وقفہ:</span>
+                    <span className="font-mono text-white">01:00 PM – 02:00 PM PKT</span>
+                  </div>
+                  <div className="text-[10px] text-amber-200">
+                    7 گھنٹے تدریس + 1 گھنٹہ نمازِ ظہر و دوپہر کا کھانا
                   </div>
                 </div>
 
@@ -474,7 +478,7 @@ export const HomePage: React.FC = () => {
               </div>
 
               <div className="pt-3 border-t border-red-800 flex items-center justify-between">
-                <span className="text-[11px] text-emerald-300 font-bold">ٹیچر تنخواہ: شروع 50,000</span>
+                <span className="text-[11px] text-emerald-300 font-bold">ٹیچر تنخواہ: شروع 50k</span>
                 <button
                   onClick={() => setActivePage('admissions')}
                   className="bg-amber-500 hover:bg-amber-400 text-red-950 text-xs font-bold px-3 py-1.5 rounded-lg transition-colors"
@@ -504,13 +508,17 @@ export const HomePage: React.FC = () => {
                   Evening 8-Hour Shift
                 </h3>
 
-                <div className="bg-red-900/80 rounded-xl p-3 border border-emerald-500/30">
+                <div className="bg-red-900/80 rounded-xl p-3 border border-emerald-500/30 space-y-1.5">
                   <div className="text-xs text-emerald-300 font-bold flex justify-between">
-                    <span>پاکستان وقت:</span>
+                    <span>تدریسی اوقات:</span>
                     <span className="font-mono text-white">04:00 PM – 12:00 AM PKT</span>
                   </div>
-                  <div className="text-[11px] text-amber-300 mt-1">
-                    یو کے (UK) و یورپ: 11:00 AM – 07:00 PM GMT
+                  <div className="text-[11px] text-emerald-300 font-bold flex justify-between bg-emerald-950/70 p-1.5 rounded border border-emerald-500/40">
+                    <span>1 گھنٹہ وقفہ:</span>
+                    <span className="font-mono text-white">07:30 PM – 08:30 PM PKT</span>
+                  </div>
+                  <div className="text-[10px] text-amber-200">
+                    7 گھنٹے تدریس + 1 گھنٹہ نمازِ مغرب/عشاء و عشائیہ
                   </div>
                 </div>
 
@@ -520,7 +528,7 @@ export const HomePage: React.FC = () => {
               </div>
 
               <div className="pt-3 border-t border-red-800 flex items-center justify-between">
-                <span className="text-[11px] text-emerald-300 font-bold">ٹیچر تنخواہ: شروع 50,000</span>
+                <span className="text-[11px] text-emerald-300 font-bold">ٹیچر تنخواہ: شروع 50k</span>
                 <button
                   onClick={() => setActivePage('admissions')}
                   className="bg-emerald-500 hover:bg-emerald-400 text-red-950 text-xs font-bold px-3 py-1.5 rounded-lg transition-colors"
@@ -547,13 +555,17 @@ export const HomePage: React.FC = () => {
                   Night / Overseas 8-Hour Shift
                 </h3>
 
-                <div className="bg-red-900/80 rounded-xl p-3 border border-blue-400/30">
+                <div className="bg-red-900/80 rounded-xl p-3 border border-blue-400/30 space-y-1.5">
                   <div className="text-xs text-blue-300 font-bold flex justify-between">
-                    <span>پاکستان وقت:</span>
+                    <span>تدریسی اوقات:</span>
                     <span className="font-mono text-white">12:00 AM – 08:00 AM PKT</span>
                   </div>
-                  <div className="text-[11px] text-amber-300 mt-1">
-                    امریکہ و کینیڈا: 02:00 PM – 10:00 PM EST
+                  <div className="text-[11px] text-blue-300 font-bold flex justify-between bg-blue-950/70 p-1.5 rounded border border-blue-400/40">
+                    <span>1 گھنٹہ وقفہ:</span>
+                    <span className="font-mono text-white">03:30 AM – 04:30 AM PKT</span>
+                  </div>
+                  <div className="text-[10px] text-amber-200">
+                    7 گھنٹے تدریس + 1 گھنٹہ نمازِ تہجد/فجر و آرام
                   </div>
                 </div>
 
@@ -563,7 +575,7 @@ export const HomePage: React.FC = () => {
               </div>
 
               <div className="pt-3 border-t border-red-800 flex items-center justify-between">
-                <span className="text-[11px] text-emerald-300 font-bold">ٹیچر تنخواہ: شروع 50,000</span>
+                <span className="text-[11px] text-emerald-300 font-bold">ٹیچر تنخواہ: شروع 50k</span>
                 <button
                   onClick={() => setActivePage('admissions')}
                   className="bg-blue-500 hover:bg-blue-400 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-colors"
@@ -576,7 +588,7 @@ export const HomePage: React.FC = () => {
 
           <div className="bg-amber-950/80 border border-amber-500/40 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
             <div className="text-xs text-amber-200">
-              <strong className="text-amber-300">اساتذہ کی بھرتی اور تنخواہ:</strong> تمام اساتذہ کو ہر 8 گھنٹے کی شفٹ کے لیے <strong>شروع میں 50,000 روپے ماہانہ تنخواہ</strong> دی جاتی ہے، جو وقت اور کارکردگی کے ساتھ باقاعدگی سے بڑھتی ہے۔
+              <strong className="text-amber-300">اساتذہ کی بھرتی اور تنخواہ:</strong> تمام اساتذہ کو ہر 8 گھنٹے کی شفٹ کے لیے (جس میں 1 گھنٹہ باقاعدہ وقفہ شامل ہے) <strong>شروع میں 50,000 روپے ماہانہ تنخواہ</strong> دی جاتی ہے، جو وقت اور کارکردگی کے ساتھ باقاعدگی سے بڑھتی ہے۔
             </div>
             <button
               onClick={() => setActivePage('teacher-portal')}

@@ -93,7 +93,7 @@ export const AboutPage: React.FC = () => {
               اکیڈمی کا تدریسی نظام: 8 گھنٹے کی 3 شفٹس
             </h2>
             <p className="text-xs sm:text-sm text-red-200 leading-relaxed">
-              شاہین الزیتون قرآنی اکیڈمی چوبیس گھنٹے فعال رہتی ہے۔ اکیڈمی کا پورا نظام <strong>8، 8 گھنٹے کی 3 مستقل شفٹوں</strong> پر مشتمل ہے تاکہ پاکستان، خلیج، برطانیہ، یورپ اور امریکہ و کینیڈا کے طلبہ کو ان کے اپنے وقت پر معیاری 1-on-1 قرآن کلاسز مل سکیں۔
+              شاہین الزیتون قرآنی اکیڈمی چوبیس گھنٹے فعال رہتی ہے۔ اکیڈمی کا پورا نظام <strong>8، 8 گھنٹے کی 3 مستقل شفٹوں</strong> پر مشتمل ہے۔ <strong>ہر شفٹ میں 1 گھنٹہ باقاعدہ وقفہ برائے نماز و طعام</strong> مختص ہے (7 گھنٹے تدریس + 1 گھنٹہ بریک) تاکہ طلبہ اور اساتذہ یکسوئی سے پڑھا اور سیکھ سکیں۔
             </p>
           </div>
 
@@ -107,8 +107,11 @@ export const AboutPage: React.FC = () => {
                 <Sun className="w-5 h-5 text-amber-400" />
               </div>
               <h3 className="font-serif font-bold text-lg text-amber-200">صبح کی شفٹ (Morning Shift)</h3>
-              <div className="text-xs text-amber-300 font-mono font-bold bg-red-900/80 p-2 rounded-lg border border-red-800">
-                08:00 AM – 04:00 PM PKT
+              <div className="text-xs text-amber-300 font-mono font-bold bg-red-900/80 p-2 rounded-lg border border-red-800 space-y-1">
+                <div>08:00 AM – 04:00 PM PKT</div>
+                <div className="text-[11px] text-emerald-300 font-sans">
+                  لازمی وقفہ: 01:00 PM – 02:00 PM (ظہر و کھانا)
+                </div>
               </div>
               <p className="text-xs text-red-100/90 leading-relaxed">
                 پاکستان ڈے ٹائم، گلف و مشرق وسطیٰ (06:00 AM – 02:00 PM)۔ بچوں کے نورانی قاعدہ اور خواتین و مستورات کی خصوصی کلاسز۔
@@ -124,8 +127,11 @@ export const AboutPage: React.FC = () => {
                 <Clock className="w-5 h-5 text-emerald-400" />
               </div>
               <h3 className="font-serif font-bold text-lg text-emerald-200">شام کی شفٹ (Evening Shift)</h3>
-              <div className="text-xs text-emerald-300 font-mono font-bold bg-red-900/80 p-2 rounded-lg border border-red-800">
-                04:00 PM – 12:00 AM PKT
+              <div className="text-xs text-emerald-300 font-mono font-bold bg-red-900/80 p-2 rounded-lg border border-red-800 space-y-1">
+                <div>04:00 PM – 12:00 AM PKT</div>
+                <div className="text-[11px] text-amber-300 font-sans">
+                  لازمی وقفہ: 07:30 PM – 08:30 PM (مغرب/عشاء و عشائیہ)
+                </div>
               </div>
               <p className="text-xs text-red-100/90 leading-relaxed">
                 پاکستان بعد از اسکول طلبہ، برطانیہ UK (11:00 AM – 07:00 PM GMT) اور یورپ۔ تجوید، ناظرہ اور حفظ قرآن کی پرائم شفٹ۔
@@ -141,8 +147,11 @@ export const AboutPage: React.FC = () => {
                 <Moon className="w-5 h-5 text-blue-300" />
               </div>
               <h3 className="font-serif font-bold text-lg text-blue-200">رات و اوورسیز شفٹ (Night Shift)</h3>
-              <div className="text-xs text-blue-300 font-mono font-bold bg-red-900/80 p-2 rounded-lg border border-red-800">
-                12:00 AM – 08:00 AM PKT
+              <div className="text-xs text-blue-300 font-mono font-bold bg-red-900/80 p-2 rounded-lg border border-red-800 space-y-1">
+                <div>12:00 AM – 08:00 AM PKT</div>
+                <div className="text-[11px] text-blue-200 font-sans">
+                  لازمی وقفہ: 03:30 AM – 04:30 AM (تہجد/فجر و آرام)
+                </div>
               </div>
               <p className="text-xs text-red-100/90 leading-relaxed">
                 امریکہ (USA EST/PST)، کینیڈا اور آسٹریلیا کے اوورسیز مسلم بچوں اور فیملیز کے لیے انگریزی دان مستند حفاظ و قراء کے ساتھ کلاسز۔
@@ -153,7 +162,7 @@ export const AboutPage: React.FC = () => {
           <div className="bg-emerald-950/70 border border-emerald-500/40 rounded-xl p-3 text-center text-xs text-emerald-200 flex flex-col sm:flex-row items-center justify-center gap-2">
             <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
             <span>
-              <strong>اساتذہ کی تنخواہ کا قانون:</strong> تمام اساتذہ کو ہر 8 گھنٹے کی روزانہ شفٹ پر <strong>شروع میں 50,000 روپے ماہانہ تنخواہ</strong> دی جاتی ہے، جو کارکردگی اور وقت کے ساتھ بڑھتی جاتی ہے۔
+              <strong>اساتذہ کی تنخواہ و وقفہ:</strong> 8 گھنٹے کی شفٹ میں 1 گھنٹہ وقفہ تنخواہ میں شامل ہے (7 گھنٹے تدریس + 1 گھنٹہ بریک)۔ <strong>شروع میں تمام اساتذہ کی تنخواہ 50,000 روپے ماہانہ</strong> ہے، جو وقت اور کارکردگی کے ساتھ باقاعدگی سے بڑھتی ہے۔
             </span>
           </div>
         </div>

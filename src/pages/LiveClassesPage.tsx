@@ -43,18 +43,22 @@ export const LiveClassesPage: React.FC = () => {
           let activeShiftNum = 1;
           let activeShiftName = 'شفٹ 1: صبح کی شفٹ (Morning)';
           let activeTiming = '08:00 AM – 04:00 PM PKT (8 Hours)';
+          let activeBreak = '01:00 PM – 02:00 PM PKT (نمازِ ظہر و دوپہر کا کھانا)';
           if (pktHour >= 8 && pktHour < 16) {
             activeShiftNum = 1;
             activeShiftName = 'شفٹ 1: صبح کی شفٹ (Morning)';
             activeTiming = '08:00 AM – 04:00 PM PKT (8 Hours)';
+            activeBreak = '01:00 PM – 02:00 PM PKT (نمازِ ظہر و دوپہر کا کھانا)';
           } else if (pktHour >= 16 && pktHour < 24) {
             activeShiftNum = 2;
             activeShiftName = 'شفٹ 2: شام کی شفٹ (Evening)';
             activeTiming = '04:00 PM – 12:00 AM PKT (8 Hours)';
+            activeBreak = '07:30 PM – 08:30 PM PKT (نمازِ مغرب/عشاء و عشائیہ)';
           } else {
             activeShiftNum = 3;
             activeShiftName = 'شفٹ 3: رات و اوورسیز شفٹ (Night)';
             activeTiming = '12:00 AM – 08:00 AM PKT (8 Hours)';
+            activeBreak = '03:30 AM – 04:30 AM PKT (نمازِ تہجد/فجر و آرام)';
           }
 
           return (
@@ -73,8 +77,11 @@ export const LiveClassesPage: React.FC = () => {
                   <div className="text-sm sm:text-base font-bold font-serif text-amber-100">
                     {activeShiftName} • {activeTiming}
                   </div>
-                  <div className="text-xs text-red-200">
-                    اکیڈمی کا شیڈول: 8 گھنٹے کی 3 شفٹس (صبح، شام، رات) چوبیس گھنٹے نان اسٹاپ تدریس۔
+                  <div className="text-xs text-red-200 flex flex-wrap items-center gap-2 mt-0.5">
+                    <span>اکیڈمی نظام: 8 گھنٹے کی 3 شفٹس (7h تدریس + 1h وقفہ)۔</span>
+                    <span className="bg-emerald-950/80 text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/40 font-mono text-[11px]">
+                      لازمی وقفہ: {activeBreak}
+                    </span>
                   </div>
                 </div>
               </div>

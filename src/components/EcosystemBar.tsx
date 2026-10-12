@@ -43,10 +43,10 @@ export const EcosystemBar: React.FC = () => {
           <button
             onClick={() => setActivePage('teacher-portal')}
             className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs sm:text-sm font-semibold transition-all bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 border border-amber-400/40"
-            title="اکیڈمی میں 8 گھنٹے کی 3 شفٹس (صبح، شام، رات)"
+            title="اکیڈمی میں 8 گھنٹے کی 3 شفٹس (تینوں شفٹوں میں 1 گھنٹہ باقاعدہ وقفہ برائے نماز و طعام)"
           >
             <Clock className="w-3.5 h-3.5 text-amber-300" />
-            <span>8h × 3 Shifts</span>
+            <span>8h × 3 Shifts (1h Break)</span>
             <span className="bg-amber-400 text-red-950 text-[10px] px-1.5 py-0.2 rounded font-black">24/7</span>
           </button>
 
