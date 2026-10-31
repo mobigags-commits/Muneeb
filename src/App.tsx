@@ -29,6 +29,9 @@ import { ContactPage } from './pages/ContactPage';
 import { CareersPage } from './pages/CareersPage';
 import { PrivacyPage } from './pages/PrivacyPage';
 import { TermsPage } from './pages/TermsPage';
+import { DisclaimerPage } from './pages/DisclaimerPage';
+import { CookiePolicyPage } from './pages/CookiePolicyPage';
+import { SecuritySettingsPage } from './pages/SecuritySettingsPage';
 import { DonationsPage } from './pages/DonationsPage';
 import { HelpSupportPage } from './pages/HelpSupportPage';
 import { AdminPortalPage } from './pages/AdminPortalPage';
@@ -48,7 +51,7 @@ import { seoCoursesList } from './data/seoCoursesData';
 import { getPageUrl } from './utils/routing';
 
 const AppContent: React.FC = () => {
-  const { activePage, setActivePage, language } = useAcademy();
+  const { activePage, setActivePage, language, theme } = useAcademy();
 
   // Dynamic SEO & Title Update + Address bar synchronization
   useEffect(() => {
@@ -129,6 +132,12 @@ const AppContent: React.FC = () => {
         return <PrivacyPage />;
       case 'terms':
         return <TermsPage />;
+      case 'disclaimer':
+        return <DisclaimerPage />;
+      case 'cookie-policy':
+        return <CookiePolicyPage />;
+      case 'security-settings':
+        return <SecuritySettingsPage />;
       case 'donations':
         return <DonationsPage />;
       case 'help-support':
@@ -141,7 +150,13 @@ const AppContent: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-red-950 text-white font-sans flex flex-col justify-between selection:bg-amber-400 selection:text-red-950">
+    <div
+      className={`min-h-screen font-sans flex flex-col justify-between transition-colors duration-300 ${
+        theme === 'light'
+          ? 'bg-[#fcfbf7] text-stone-900 selection:bg-red-900 selection:text-amber-200'
+          : 'bg-red-950 text-white selection:bg-amber-400 selection:text-red-950'
+      }`}
+    >
       <Navbar />
       <main className="flex-1">{renderPage()}</main>
       <AppDownloadBanner />

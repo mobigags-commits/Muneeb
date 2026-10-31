@@ -128,7 +128,7 @@ export const PrivacyPage: React.FC = () => {
             <div className="bg-red-950 p-4 rounded-xl border border-red-800 text-xs space-y-1">
               <div><strong>Organization:</strong> {siteSettings.academyName}</div>
               <div><strong>Head Office:</strong> Rawalpindi, Punjab, Pakistan</div>
-              <div><strong>Founder & Director:</strong> {siteSettings.founderName}</div>
+              <div><strong>Founder & Director:</strong> {siteSettings.ownerName}</div>
               <div><strong>Official WhatsApp:</strong> {siteSettings.whatsappNumber}</div>
             </div>
           </section>

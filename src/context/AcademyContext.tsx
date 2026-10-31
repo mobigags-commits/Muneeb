@@ -59,6 +59,8 @@ interface AcademyContextType {
   setLanguage: (lang: Language) => void;
   role: UserRole;
   setRole: (role: UserRole) => void;
+  theme: 'dark' | 'light';
+  toggleTheme: () => void;
   
   // Cloud Database Sync Status
   cloudSyncStatus: CloudSyncStatus;
@@ -210,6 +212,35 @@ export const AcademyProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   const [language, setLanguage] = useState<Language>('en');
   const [role, setRole] = useState<UserRole>('guest');
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = localStorage.getItem('sz_theme_mode');
+        if (saved === 'dark' || saved === 'light') return saved;
+      } catch (e) {}
+    }
+    return 'dark';
+  });
+
+  const toggleTheme = () => {
+    setTheme((prev) => {
+      const nextTheme = prev === 'dark' ? 'light' : 'dark';
+      try {
+        localStorage.setItem('sz_theme_mode', nextTheme);
+      } catch (e) {}
+      if (typeof document !== 'undefined') {
+        document.documentElement.setAttribute('data-theme', nextTheme);
+      }
+      return nextTheme;
+    });
+  };
+
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.documentElement.setAttribute('data-theme', theme);
+    }
+  }, [theme]);
+
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   // Cloud database synchronization indicators
@@ -868,6 +899,8 @@ export const AcademyProvider: React.FC<{ children: React.ReactNode }> = ({ child
         setLanguage,
         role,
         setRole,
+        theme,
+        toggleTheme,
         cloudSyncStatus,
         lastCloudSync,
         refreshFromCloud,

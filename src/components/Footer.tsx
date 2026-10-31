@@ -254,6 +254,33 @@ export const Footer: React.FC = () => {
                   <span>Terms of Service</span>
                 </button>
               </li>
+              <li>
+                <button
+                  onClick={() => setActivePage('disclaimer')}
+                  className="hover:text-amber-300 transition-colors flex items-center gap-2 text-red-200 text-left font-medium"
+                >
+                  <ArrowRight className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                  <span>Legal & Disclaimer</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => setActivePage('cookie-policy')}
+                  className="hover:text-amber-300 transition-colors flex items-center gap-2 text-red-200 text-left font-medium"
+                >
+                  <ArrowRight className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                  <span>Cookie Policy</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => setActivePage('security-settings')}
+                  className="hover:text-amber-300 transition-colors flex items-center gap-2 text-red-200 text-left font-medium"
+                >
+                  <ArrowRight className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                  <span>Security & Account</span>
+                </button>
+              </li>
             </ul>
           </div>
 

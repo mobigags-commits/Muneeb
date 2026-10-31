@@ -28,6 +28,10 @@ import {
   Facebook,
   Users,
   Wallet,
+  Sun,
+  Moon,
+  AlertTriangle,
+  Cookie,
 } from 'lucide-react';
 import { useAcademy } from '../context/AcademyContext';
 import { PageId, UserRole } from '../types';
@@ -44,6 +48,8 @@ export const Navbar: React.FC = () => {
     setLanguage,
     role,
     setRole,
+    theme,
+    toggleTheme,
     siteSettings,
     searchQuery,
     setSearchQuery,
@@ -105,8 +111,11 @@ export const Navbar: React.FC = () => {
     { id: 'careers', label: '21. Teacher Careers Application', group: 'Support', icon: Briefcase },
     { id: 'privacy', label: '22. Privacy Policy', group: 'Legal', icon: Shield },
     { id: 'terms', label: '23. Terms & Conditions', group: 'Legal', icon: FileText },
-    { id: 'donations', label: '24. Sadaqah Jariyah & Donations', group: 'Finance', icon: Heart },
-    { id: 'help-support', label: '25. Help Desk & Support Desk', group: 'Support', icon: MessageSquare },
+    { id: 'disclaimer', label: '24. Legal & Educational Disclaimer', group: 'Legal', icon: AlertTriangle },
+    { id: 'cookie-policy', label: '25. Cookie Policy & Preferences', group: 'Legal', icon: Cookie },
+    { id: 'security-settings', label: '26. Security & Account Settings', group: 'Portals', icon: Shield },
+    { id: 'donations', label: '27. Sadaqah Jariyah & Donations', group: 'Finance', icon: Heart },
+    { id: 'help-support', label: '28. Help Desk & Support Desk', group: 'Support', icon: MessageSquare },
     { id: 'admin-portal', label: '★ Super Admin & Owner CMS', group: 'Management', icon: Sparkles },
   ];
 
@@ -169,6 +178,26 @@ export const Navbar: React.FC = () => {
                 عربي
               </button>
             </div>
+
+            {/* Dark / Light Mode Switcher */}
+            <button
+              onClick={toggleTheme}
+              className="flex items-center gap-1.5 bg-red-900/80 hover:bg-red-800 text-amber-200 border border-red-800 rounded px-2.5 py-1 text-xs font-semibold transition-colors cursor-pointer"
+              title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
+              aria-label="Toggle Dark and Light Mode"
+            >
+              {theme === 'dark' ? (
+                <>
+                  <Sun className="w-3.5 h-3.5 text-amber-300" />
+                  <span className="hidden sm:inline">Light</span>
+                </>
+              ) : (
+                <>
+                  <Moon className="w-3.5 h-3.5 text-amber-300" />
+                  <span className="hidden sm:inline">Dark</span>
+                </>
+              )}
+            </button>
 
             {/* Quick Role Switcher */}
             <div className="flex items-center gap-1.5 text-xs sm:text-sm">

@@ -183,6 +183,24 @@ export const pageSeoData: Record<PageId, PageMetadata> = {
     descriptionEn: 'Academic policies, attendance rules, fee terms, and etiquette for students and parents.',
     descriptionUr: 'اکیڈمی کے قواعد و ضوابط، حاضری اور تدریسی اخلاقیات۔',
   },
+  disclaimer: {
+    titleEn: 'Legal & Educational Disclaimer | Shaheen Al Zaitoon Academy',
+    titleUr: 'قانونی و تعلیمی ڈسکلیمر | شاہین الزیتون اکیڈمی',
+    descriptionEn: 'Official legal, religious, fee payment security (EasyPaisa 03447956085) and advertising disclaimer for Shaheen Al Zaitoon Academy.',
+    descriptionUr: 'اکیڈمی کے سرکاری قانونی، تعلیمی اور مالیاتی ڈسکلیمر اور ایزی پیسہ تصدیقی ہدایات۔',
+  },
+  'cookie-policy': {
+    titleEn: 'Cookie Policy & Consent Settings | Shaheen Al Zaitoon Academy',
+    titleUr: 'کوکیز پالیسی اور ترتیبات | شاہین الزیتون اکیڈمی',
+    descriptionEn: 'Learn how Shaheen Al Zaitoon Academy uses cookies, session data, and Google AdSense DART cookies, with full privacy controls.',
+    descriptionUr: 'ہماری کوکیز پالیسی اور گوگل ایڈسینس کوکیز کی شفاف تفصیلات اور کنٹرول۔',
+  },
+  'security-settings': {
+    titleEn: 'Security & Account Controls | Shaheen Al Zaitoon Academy',
+    titleUr: 'سیکیورٹی اور اکاؤنٹ کی ترتیبات | شاہین الزیتون اکیڈمی',
+    descriptionEn: 'Manage multi-factor authentication (2FA), active device sessions, password security, and GDPR data export.',
+    descriptionUr: 'اکاؤنٹ کی سیکیورٹی، 2FA، فعال ڈیوائسز اور ڈیٹا پروٹیکشن کے اختیارات۔',
+  },
   donations: {
     titleEn: 'Sadaqah Jariyah & Memorial Dedication for Zaitoon Bibi | Shaheen',
     titleUr: 'صدقہ جاریہ اور ایصالِ ثواب برائے زیتون بی بی | شاہین اکیڈمی',

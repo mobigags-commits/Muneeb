@@ -26,6 +26,11 @@
     letter-spacing: -0.01em;
   }
 
+  [data-theme="light"] body {
+    background-color: #fcfbf7;
+    color: #1c1917;
+  }
+
   /* Clear, bold, readable headings */
   h1 {
     font-size: clamp(2rem, 4vw + 1rem, 3.25rem);
