@@ -23,17 +23,20 @@ import { AcademyLogo } from './AcademyLogo';
 import { PWAInstallButton } from './PWAInstallButton';
 
 export const Footer: React.FC = () => {
-  const { siteSettings, setActivePage } = useAcademy();
+  const { siteSettings, setActivePage, addNewsletterSubscriber } = useAcademy();
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [isSubscribing, setIsSubscribing] = useState(false);
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (newsletterEmail) {
-      setSubscribed(true);
-      setTimeout(() => setSubscribed(false), 5000);
-      setNewsletterEmail('');
-    }
+    if (!newsletterEmail || isSubscribing) return;
+    setIsSubscribing(true);
+    await addNewsletterSubscriber(newsletterEmail.trim());
+    setIsSubscribing(false);
+    setSubscribed(true);
+    setTimeout(() => setSubscribed(false), 5000);
+    setNewsletterEmail('');
   };
 
   const quranCourseLinks: { id: PageId; label: string }[] = [

@@ -16,6 +16,7 @@ import {
   initialReferrals,
   initialAffiliatePartners,
   initialSocialAccounts,
+  initialWalletTransactions,
 } from '../src/data/initialData';
 import {
   AcademyDataPayload,
@@ -38,6 +39,7 @@ import {
   Announcement,
   BlogPost,
   CertificateRecord,
+  WalletTransaction,
 } from '../src/types';
 
 const DATA_DIR = path.join(process.cwd(), 'data');
@@ -118,6 +120,7 @@ function getDefaultData(): AcademyDataPayload {
         date: '2026-08-01',
       },
     ],
+    walletTransactions: initialWalletTransactions,
     lastUpdated: new Date().toISOString(),
   };
 }
@@ -140,6 +143,9 @@ export function getDatabase(): AcademyDataPayload {
             ...initialSiteSettings,
             ...(parsed.siteSettings || {}),
           },
+          walletTransactions: parsed.walletTransactions && Array.isArray(parsed.walletTransactions)
+            ? parsed.walletTransactions
+            : initialWalletTransactions,
         };
         return cachedData!;
       }
@@ -435,6 +441,141 @@ export function addNewsletterSubscriber(email: string): NewsletterSubscriber {
   db.subscribers.unshift(sub);
   saveDatabase(db);
   return sub;
+}
+
+export function deleteNewsletterSubscriber(id: string): boolean {
+  const db = getDatabase();
+  const initialLen = db.subscribers.length;
+  db.subscribers = db.subscribers.filter((s) => s.id !== id && s.email !== id);
+  if (db.subscribers.length !== initialLen) {
+    saveDatabase(db);
+    return true;
+  }
+  return false;
+}
+
+// Digital Wallet & Financial Ledger Operations
+export function addWalletTransaction(tx: WalletTransaction): WalletTransaction {
+  const db = getDatabase();
+  // Duplicate transactionId check for deposits
+  if (tx.transactionId) {
+    const existing = db.walletTransactions.find(
+      (t) => t.transactionId && t.transactionId.toLowerCase() === tx.transactionId?.toLowerCase()
+    );
+    if (existing) {
+      return existing;
+    }
+  }
+  db.walletTransactions.unshift(tx);
+  saveDatabase(db);
+  return tx;
+}
+
+export function updateWalletTransactionStatus(
+  id: string,
+  status: WalletTransaction['status'],
+  adminResponse?: string
+): WalletTransaction | null {
+  const db = getDatabase();
+  const tx = db.walletTransactions.find((t) => t.id === id);
+  if (tx) {
+    tx.status = status;
+    if (adminResponse !== undefined) {
+      tx.adminResponse = adminResponse;
+    }
+    saveDatabase(db);
+    return tx;
+  }
+  return null;
+}
+
+export function deleteWalletTransaction(id: string): boolean {
+  const db = getDatabase();
+  const initialLen = db.walletTransactions.length;
+  db.walletTransactions = db.walletTransactions.filter((t) => t.id !== id);
+  if (db.walletTransactions.length !== initialLen) {
+    saveDatabase(db);
+    return true;
+  }
+  return false;
+}
+
+// Complete CRUD Operations for Records
+export function updateStudentRecord(id: string, updated: Partial<StudentRecord>): StudentRecord | null {
+  const db = getDatabase();
+  const idx = db.students.findIndex((s) => s.id === id);
+  if (idx >= 0) {
+    db.students[idx] = { ...db.students[idx], ...updated };
+    saveDatabase(db);
+    return db.students[idx];
+  }
+  return null;
+}
+
+export function deleteStudentRecord(id: string): boolean {
+  const db = getDatabase();
+  const initialLen = db.students.length;
+  db.students = db.students.filter((s) => s.id !== id);
+  if (db.students.length !== initialLen) {
+    saveDatabase(db);
+    return true;
+  }
+  return false;
+}
+
+export function deletePayment(id: string): boolean {
+  const db = getDatabase();
+  const initialLen = db.payments.length;
+  db.payments = db.payments.filter((p) => p.id !== id);
+  if (db.payments.length !== initialLen) {
+    saveDatabase(db);
+    return true;
+  }
+  return false;
+}
+
+export function deleteTeacherApplication(id: string): boolean {
+  const db = getDatabase();
+  const initialLen = db.applications.length;
+  db.applications = db.applications.filter((a) => a.id !== id);
+  if (db.applications.length !== initialLen) {
+    saveDatabase(db);
+    return true;
+  }
+  return false;
+}
+
+export function deleteContactMessage(id: string): boolean {
+  const db = getDatabase();
+  const initialLen = db.contactMessages.length;
+  db.contactMessages = db.contactMessages.filter((m) => m.id !== id);
+  if (db.contactMessages.length !== initialLen) {
+    saveDatabase(db);
+    return true;
+  }
+  return false;
+}
+
+export function updateDonationStatus(id: string, status: DonationRecord['status']): DonationRecord | null {
+  const db = getDatabase();
+  const donation = db.donations.find((d) => d.id === id);
+  if (donation) {
+    donation.status = status;
+    saveDatabase(db);
+    return donation;
+  }
+  return null;
+}
+
+export function deleteDonation(id: string): boolean {
+  const db = getDatabase();
+  const initialLen = db.donations.length;
+  db.donations = db.donations.filter((d) => d.id !== id);
+  if (db.donations.length !== initialLen) {
+    saveDatabase(db);
+    return true;
+  }
+  return false;
 }
 
 export function resetDatabaseToDefaults(): AcademyDataPayload {

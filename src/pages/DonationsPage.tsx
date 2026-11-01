@@ -3,7 +3,7 @@ import { Heart, Sparkles, Send, CheckCircle2, CreditCard, Building, Wallet, Copy
 import { useAcademy } from '../context/AcademyContext';
 
 export const DonationsPage: React.FC = () => {
-  const { siteSettings, addPayment } = useAcademy();
+  const { siteSettings, addPayment, addDonation } = useAcademy();
   const [donorName, setDonorName] = useState('');
   const [amount, setAmount] = useState(5000);
   const [selectedMethod, setSelectedMethod] = useState<'EasyPaisa' | 'JazzCash' | 'Meezan Bank' | 'SadaPay'>('EasyPaisa');
@@ -36,12 +36,26 @@ export const DonationsPage: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!trxId.trim()) return;
+    if (!trxId.trim() || isSubmitting) return;
 
     setIsSubmitting(true);
-    await addPayment({
+    const donationRecord = {
       id: `don-${Date.now()}`,
-      studentName: donorName.trim() || 'Anonymous Sadaqah Donor',
+      donorName: donorName.trim() || 'Anonymous Sadaqah Donor',
+      amountPKR: Number(amount),
+      amountUSD: Math.round(Number(amount) / 280),
+      paymentMethod: selectedMethod,
+      transactionId: trxId.trim().toUpperCase(),
+      purpose: 'Sadaqah Jariyah for Zaitoon Bibi',
+      date: new Date().toISOString().split('T')[0],
+      status: 'Approved' as const,
+    };
+
+    await addDonation(donationRecord);
+
+    await addPayment({
+      id: `pay-${donationRecord.id}`,
+      studentName: donationRecord.donorName,
       courseTitle: 'Sadaqah Jariyah & Orphan Scholarship Fund',
       amountPKR: Number(amount),
       amountUSD: Math.round(Number(amount) / 280),
@@ -49,7 +63,7 @@ export const DonationsPage: React.FC = () => {
       senderAccountOrPhone: '03447956085',
       transactionId: trxId.trim().toUpperCase(),
       date: new Date().toISOString().split('T')[0],
-      status: 'Pending Verification',
+      status: 'Approved',
       senderBankOrWallet: selectedMethod,
       currency: 'PKR',
     });

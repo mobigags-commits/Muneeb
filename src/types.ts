@@ -545,6 +545,14 @@ export interface DonationRecord {
   status: 'Approved' | 'Pending Verification';
 }
 
+export interface AdminSession {
+  token: string;
+  adminName: string;
+  email: string;
+  role: 'owner' | 'admin';
+  expiresAt: string;
+}
+
 export interface AcademyDataPayload {
   siteSettings: SiteSettings;
   courses: Course[];
@@ -565,6 +573,7 @@ export interface AcademyDataPayload {
   contactMessages: ContactMessage[];
   donations: DonationRecord[];
   subscribers: NewsletterSubscriber[];
+  walletTransactions: WalletTransaction[];
   lastUpdated: string;
 }
 

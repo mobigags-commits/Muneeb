@@ -14,6 +14,8 @@ import {
   StudentRecord,
   TeacherApplication,
   ZTProduct,
+  WalletTransaction,
+  AdminSession,
 } from '../types';
 
 const API_BASE = '/api';
@@ -257,4 +259,143 @@ export async function subscribeCloudNewsletter(email: string): Promise<Newslette
     body: JSON.stringify({ email }),
   });
   return res?.success ? res.subscriber : null;
+}
+
+export async function deleteCloudNewsletter(id: string): Promise<boolean> {
+  const res = await safeFetch<{ success: boolean }>(`/newsletter/${encodeURIComponent(id)}`, {
+    method: 'DELETE',
+  });
+  return !!res?.success;
+}
+
+// Digital Wallet CRUD
+export async function saveCloudWalletTransaction(tx: WalletTransaction): Promise<WalletTransaction | null> {
+  const res = await safeFetch<{ success: boolean; transaction: WalletTransaction }>('/wallet', {
+    method: 'POST',
+    body: JSON.stringify(tx),
+  });
+  return res?.success ? res.transaction : null;
+}
+
+export async function updateCloudWalletTransactionStatus(
+  id: string,
+  status: WalletTransaction['status'],
+  adminResponse?: string
+): Promise<WalletTransaction | null> {
+  const res = await safeFetch<{ success: boolean; transaction: WalletTransaction }>(`/wallet/${encodeURIComponent(id)}`, {
+    method: 'PUT',
+    body: JSON.stringify({ status, adminResponse }),
+  });
+  return res?.success ? res.transaction : null;
+}
+
+export async function deleteCloudWalletTransaction(id: string): Promise<boolean> {
+  const res = await safeFetch<{ success: boolean }>(`/wallet/${encodeURIComponent(id)}`, {
+    method: 'DELETE',
+  });
+  return !!res?.success;
+}
+
+// Student CRUD
+export async function updateCloudStudent(id: string, student: Partial<StudentRecord>): Promise<StudentRecord | null> {
+  const res = await safeFetch<{ success: boolean; student: StudentRecord }>(`/students/${encodeURIComponent(id)}`, {
+    method: 'PUT',
+    body: JSON.stringify(student),
+  });
+  return res?.success ? res.student : null;
+}
+
+export async function deleteCloudStudent(id: string): Promise<boolean> {
+  const res = await safeFetch<{ success: boolean }>(`/students/${encodeURIComponent(id)}`, {
+    method: 'DELETE',
+  });
+  return !!res?.success;
+}
+
+// Payment Deletion
+export async function deleteCloudPayment(id: string): Promise<boolean> {
+  const res = await safeFetch<{ success: boolean }>(`/payments/${encodeURIComponent(id)}`, {
+    method: 'DELETE',
+  });
+  return !!res?.success;
+}
+
+// Teacher Application Deletion
+export async function deleteCloudTeacherApplication(id: string): Promise<boolean> {
+  const res = await safeFetch<{ success: boolean }>(`/careers/${encodeURIComponent(id)}`, {
+    method: 'DELETE',
+  });
+  return !!res?.success;
+}
+
+// Contact Message Deletion
+export async function deleteCloudContactMessage(id: string): Promise<boolean> {
+  const res = await safeFetch<{ success: boolean }>(`/contact/${encodeURIComponent(id)}`, {
+    method: 'DELETE',
+  });
+  return !!res?.success;
+}
+
+// Donation CRUD
+export async function updateCloudDonationStatus(
+  id: string,
+  status: DonationRecord['status']
+): Promise<DonationRecord | null> {
+  const res = await safeFetch<{ success: boolean; donation: DonationRecord }>(`/donations/${encodeURIComponent(id)}`, {
+    method: 'PUT',
+    body: JSON.stringify({ status }),
+  });
+  return res?.success ? res.donation : null;
+}
+
+export async function deleteCloudDonation(id: string): Promise<boolean> {
+  const res = await safeFetch<{ success: boolean }>(`/donations/${encodeURIComponent(id)}`, {
+    method: 'DELETE',
+  });
+  return !!res?.success;
+}
+
+// Admin Authentication API
+export async function adminLogin(
+  passwordOrPin: string,
+  email?: string
+): Promise<{ success: boolean; session?: AdminSession; error?: string }> {
+  try {
+    const res = await fetch(`${API_BASE}/admin/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: passwordOrPin, pin: passwordOrPin, email }),
+    });
+    const json = await res.json();
+    if (res.ok && json.success) {
+      const session: AdminSession = {
+        token: json.token,
+        adminName: json.admin.adminName,
+        email: json.admin.email,
+        role: json.admin.role,
+        expiresAt: json.admin.expiresAt,
+      };
+      return { success: true, session };
+    }
+    return { success: false, error: json.error || 'Authentication failed' };
+  } catch (err: any) {
+    return { success: false, error: err?.message || 'Network error during login' };
+  }
+}
+
+export async function adminVerifySession(token: string): Promise<boolean> {
+  try {
+    const res = await fetch(`${API_BASE}/admin/verify`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ token }),
+    });
+    const json = await res.json();
+    return !!json.valid;
+  } catch {
+    return false;
+  }
 }

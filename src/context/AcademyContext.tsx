@@ -46,6 +46,7 @@ import {
   NewsletterSubscriber,
   WalletTransaction,
   AcademyShift,
+  AdminSession,
 } from '../types';
 import { getPageFromLocation, getPageUrl } from '../utils/routing';
 import * as api from '../utils/apiClient';
@@ -165,8 +166,24 @@ interface AcademyContextType {
   addDeposit: (deposit: Omit<WalletTransaction, 'id' | 'type' | 'date' | 'status'> & Partial<WalletTransaction>) => Promise<boolean>;
   requestWithdrawal: (withdrawal: Omit<WalletTransaction, 'id' | 'type' | 'date' | 'status'> & Partial<WalletTransaction>) => Promise<boolean>;
   updateWalletTransactionStatus: (id: string, status: WalletTransaction['status'], adminResponse?: string) => Promise<boolean>;
+  deleteWalletTransaction: (id: string) => Promise<boolean>;
   walletTabInitial: 'deposit' | 'withdraw' | 'history';
   setWalletTabInitial: (tab: 'deposit' | 'withdraw' | 'history') => void;
+
+  // Admin Authentication & Session Management
+  adminSession: AdminSession | null;
+  adminLogin: (passwordOrPin: string, email?: string) => Promise<{ success: boolean; error?: string }>;
+  adminLogout: () => void;
+
+  // Universal Database CRUD Record Management
+  updateStudent: (id: string, updated: Partial<StudentRecord>) => Promise<boolean>;
+  deleteStudent: (id: string) => Promise<boolean>;
+  deletePayment: (id: string) => Promise<boolean>;
+  deleteApplication: (id: string) => Promise<boolean>;
+  deleteContactMessage: (id: string) => Promise<boolean>;
+  updateDonationStatus: (id: string, status: DonationRecord['status']) => Promise<boolean>;
+  deleteDonation: (id: string) => Promise<boolean>;
+  deleteSubscriber: (id: string) => Promise<boolean>;
 }
 
 const AcademyContext = createContext<AcademyContextType | undefined>(undefined);
@@ -212,6 +229,26 @@ export const AcademyProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   const [language, setLanguage] = useState<Language>('en');
   const [role, setRole] = useState<UserRole>('guest');
+  const [adminSession, setAdminSession] = useState<AdminSession | null>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = localStorage.getItem('sza_admin_session_v1');
+        if (saved) {
+          const parsed: AdminSession = JSON.parse(saved);
+          if (new Date(parsed.expiresAt).getTime() > Date.now()) {
+            return parsed;
+          }
+        }
+      } catch {}
+    }
+    return null;
+  });
+
+  useEffect(() => {
+    if (adminSession && role !== 'admin' && role !== 'owner') {
+      setRole('admin');
+    }
+  }, [adminSession, role]);
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
     if (typeof window !== 'undefined') {
       try {
@@ -460,6 +497,10 @@ export const AcademyProvider: React.FC<{ children: React.ReactNode }> = ({ child
         if (cloudData.contactMessages) setContactMessages(cloudData.contactMessages);
         if (cloudData.donations) setDonations(cloudData.donations);
         if (cloudData.subscribers) setSubscribers(cloudData.subscribers);
+        if (cloudData.walletTransactions && Array.isArray(cloudData.walletTransactions)) {
+          setWalletTransactions(cloudData.walletTransactions);
+          localStorage.setItem('sz_wallet_transactions_v1', JSON.stringify(cloudData.walletTransactions));
+        }
 
         setCloudSyncStatus('synced');
         setLastCloudSync(new Date().toLocaleTimeString());
@@ -809,13 +850,13 @@ export const AcademyProvider: React.FC<{ children: React.ReactNode }> = ({ child
   };
 
   // =========================================================================
-  // DIGITAL WALLET: DEPOSIT & WITHDRAW ACTION HANDLERS
+  // DIGITAL WALLET: DEPOSIT & WITHDRAW ACTION HANDLERS WITH CLOUD API
   // =========================================================================
   const addDeposit = async (
     deposit: Omit<WalletTransaction, 'id' | 'type' | 'date' | 'status'> & Partial<WalletTransaction>
   ): Promise<boolean> => {
     const newTx: WalletTransaction = {
-      id: `wtx-dep-${Date.now()}`,
+      id: deposit.id || `wtx-dep-${Date.now()}`,
       type: 'deposit',
       userName: deposit.userName?.trim() || 'Student / Depositor',
       userPhone: deposit.userPhone?.trim() || siteSettings.contactNumber,
@@ -830,13 +871,15 @@ export const AcademyProvider: React.FC<{ children: React.ReactNode }> = ({ child
       date: new Date().toISOString().split('T')[0],
       notes: deposit.notes?.trim(),
     };
-    setWalletTransactions((prev) => {
-      const updated = [newTx, ...prev];
-      try {
-        localStorage.setItem('sz_wallet_transactions_v1', JSON.stringify(updated));
-      } catch (e) {}
-      return updated;
-    });
+    setWalletTransactions((prev) => [newTx, ...prev]);
+    setCloudSyncStatus('syncing');
+    const saved = await api.saveCloudWalletTransaction(newTx);
+    if (saved) {
+      setWalletTransactions((prev) => prev.map((t) => (t.id === newTx.id ? saved : t)));
+      setCloudSyncStatus('synced');
+      setLastCloudSync(new Date().toLocaleTimeString());
+      return true;
+    }
     return true;
   };
 
@@ -844,7 +887,7 @@ export const AcademyProvider: React.FC<{ children: React.ReactNode }> = ({ child
     withdrawal: Omit<WalletTransaction, 'id' | 'type' | 'date' | 'status'> & Partial<WalletTransaction>
   ): Promise<boolean> => {
     const newTx: WalletTransaction = {
-      id: `wtx-wth-${Date.now()}`,
+      id: withdrawal.id || `wtx-wth-${Date.now()}`,
       type: 'withdraw',
       userName: withdrawal.userName?.trim() || 'Account Holder',
       userPhone: withdrawal.userPhone?.trim() || '',
@@ -858,13 +901,15 @@ export const AcademyProvider: React.FC<{ children: React.ReactNode }> = ({ child
       date: new Date().toISOString().split('T')[0],
       notes: withdrawal.notes?.trim(),
     };
-    setWalletTransactions((prev) => {
-      const updated = [newTx, ...prev];
-      try {
-        localStorage.setItem('sz_wallet_transactions_v1', JSON.stringify(updated));
-      } catch (e) {}
-      return updated;
-    });
+    setWalletTransactions((prev) => [newTx, ...prev]);
+    setCloudSyncStatus('syncing');
+    const saved = await api.saveCloudWalletTransaction(newTx);
+    if (saved) {
+      setWalletTransactions((prev) => prev.map((t) => (t.id === newTx.id ? saved : t)));
+      setCloudSyncStatus('synced');
+      setLastCloudSync(new Date().toLocaleTimeString());
+      return true;
+    }
     return true;
   };
 
@@ -873,16 +918,158 @@ export const AcademyProvider: React.FC<{ children: React.ReactNode }> = ({ child
     status: WalletTransaction['status'],
     adminResponse?: string
   ): Promise<boolean> => {
-    setWalletTransactions((prev) => {
-      const updated = prev.map((t) =>
-        t.id === id ? { ...t, status, ...(adminResponse ? { adminResponse } : {}) } : t
-      );
-      try {
-        localStorage.setItem('sz_wallet_transactions_v1', JSON.stringify(updated));
-      } catch (e) {}
-      return updated;
-    });
+    setWalletTransactions((prev) =>
+      prev.map((t) => (t.id === id ? { ...t, status, ...(adminResponse ? { adminResponse } : {}) } : t))
+    );
+    setCloudSyncStatus('syncing');
+    const updated = await api.updateCloudWalletTransactionStatus(id, status, adminResponse);
+    if (updated) {
+      setCloudSyncStatus('synced');
+      setLastCloudSync(new Date().toLocaleTimeString());
+      return true;
+    }
     return true;
+  };
+
+  const deleteWalletTransaction = async (id: string): Promise<boolean> => {
+    setWalletTransactions((prev) => prev.filter((t) => t.id !== id));
+    setCloudSyncStatus('syncing');
+    const ok = await api.deleteCloudWalletTransaction(id);
+    if (ok) {
+      setCloudSyncStatus('synced');
+      setLastCloudSync(new Date().toLocaleTimeString());
+      return true;
+    }
+    return false;
+  };
+
+  // =========================================================================
+  // ADMIN AUTHENTICATION
+  // =========================================================================
+  const adminLogin = async (
+    passwordOrPin: string,
+    email?: string
+  ): Promise<{ success: boolean; error?: string }> => {
+    const res = await api.adminLogin(passwordOrPin, email);
+    if (res.success && res.session) {
+      setAdminSession(res.session);
+      setRole('admin');
+      try {
+        localStorage.setItem('sza_admin_session_v1', JSON.stringify(res.session));
+      } catch (e) {}
+      return { success: true };
+    }
+    return { success: false, error: res.error || 'Authentication failed' };
+  };
+
+  const adminLogout = () => {
+    setAdminSession(null);
+    setRole('guest');
+    try {
+      localStorage.removeItem('sza_admin_session_v1');
+    } catch (e) {}
+  };
+
+  // =========================================================================
+  // COMPLETE RECORD CRUD OPERATIONS (STUDENTS, PAYMENTS, APPLICATIONS, CONTACTS, DONATIONS, SUBSCRIBERS)
+  // =========================================================================
+  const updateStudent = async (id: string, updated: Partial<StudentRecord>): Promise<boolean> => {
+    setStudents((prev) => prev.map((s) => (s.id === id ? { ...s, ...updated } : s)));
+    setCloudSyncStatus('syncing');
+    const res = await api.updateCloudStudent(id, updated);
+    if (res) {
+      setCloudSyncStatus('synced');
+      setLastCloudSync(new Date().toLocaleTimeString());
+      return true;
+    }
+    return false;
+  };
+
+  const deleteStudent = async (id: string): Promise<boolean> => {
+    setStudents((prev) => prev.filter((s) => s.id !== id));
+    setCloudSyncStatus('syncing');
+    const ok = await api.deleteCloudStudent(id);
+    if (ok) {
+      setCloudSyncStatus('synced');
+      setLastCloudSync(new Date().toLocaleTimeString());
+      return true;
+    }
+    return false;
+  };
+
+  const deletePayment = async (id: string): Promise<boolean> => {
+    setPayments((prev) => prev.filter((p) => p.id !== id));
+    setCloudSyncStatus('syncing');
+    const ok = await api.deleteCloudPayment(id);
+    if (ok) {
+      setCloudSyncStatus('synced');
+      setLastCloudSync(new Date().toLocaleTimeString());
+      return true;
+    }
+    return false;
+  };
+
+  const deleteApplication = async (id: string): Promise<boolean> => {
+    setApplications((prev) => prev.filter((a) => a.id !== id));
+    setCloudSyncStatus('syncing');
+    const ok = await api.deleteCloudTeacherApplication(id);
+    if (ok) {
+      setCloudSyncStatus('synced');
+      setLastCloudSync(new Date().toLocaleTimeString());
+      return true;
+    }
+    return false;
+  };
+
+  const deleteContactMessage = async (id: string): Promise<boolean> => {
+    setContactMessages((prev) => prev.filter((m) => m.id !== id));
+    setCloudSyncStatus('syncing');
+    const ok = await api.deleteCloudContactMessage(id);
+    if (ok) {
+      setCloudSyncStatus('synced');
+      setLastCloudSync(new Date().toLocaleTimeString());
+      return true;
+    }
+    return false;
+  };
+
+  const updateDonationStatus = async (
+    id: string,
+    status: DonationRecord['status']
+  ): Promise<boolean> => {
+    setDonations((prev) => prev.map((d) => (d.id === id ? { ...d, status } : d)));
+    setCloudSyncStatus('syncing');
+    const updated = await api.updateCloudDonationStatus(id, status);
+    if (updated) {
+      setCloudSyncStatus('synced');
+      setLastCloudSync(new Date().toLocaleTimeString());
+      return true;
+    }
+    return false;
+  };
+
+  const deleteDonation = async (id: string): Promise<boolean> => {
+    setDonations((prev) => prev.filter((d) => d.id !== id));
+    setCloudSyncStatus('syncing');
+    const ok = await api.deleteCloudDonation(id);
+    if (ok) {
+      setCloudSyncStatus('synced');
+      setLastCloudSync(new Date().toLocaleTimeString());
+      return true;
+    }
+    return false;
+  };
+
+  const deleteSubscriber = async (id: string): Promise<boolean> => {
+    setSubscribers((prev) => prev.filter((s) => s.id !== id && s.email !== id));
+    setCloudSyncStatus('syncing');
+    const ok = await api.deleteCloudNewsletter(id);
+    if (ok) {
+      setCloudSyncStatus('synced');
+      setLastCloudSync(new Date().toLocaleTimeString());
+      return true;
+    }
+    return false;
   };
 
   const handlePageChange = (page: PageId) => {
@@ -917,9 +1104,12 @@ export const AcademyProvider: React.FC<{ children: React.ReactNode }> = ({ child
         addBranch,
         students,
         addStudent,
+        updateStudent,
+        deleteStudent,
         payments,
         addPayment,
         updatePaymentStatus,
+        deletePayment,
         announcements,
         addAnnouncement,
         blogPosts,
@@ -956,25 +1146,35 @@ export const AcademyProvider: React.FC<{ children: React.ReactNode }> = ({ child
         applications,
         addApplication,
         updateApplicationStatus,
+        deleteApplication,
         contactMessages,
         addContactMessage,
         markContactMessageReplied,
+        deleteContactMessage,
         donations,
         addDonation,
+        updateDonationStatus,
+        deleteDonation,
         subscribers,
         addNewsletterSubscriber,
+        deleteSubscriber,
         walletTransactions,
         userWalletBalance,
         addDeposit,
         requestWithdrawal,
         updateWalletTransactionStatus,
+        deleteWalletTransaction,
         walletTabInitial,
         setWalletTabInitial,
+        adminSession,
+        adminLogin,
+        adminLogout,
       }}
     >
       {children}
     </AcademyContext.Provider>
   );
+
 };
 
 export const useAcademy = () => {

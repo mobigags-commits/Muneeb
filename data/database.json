@@ -1,0 +1,1178 @@
+{
+  "siteSettings": {
+    "academyName": "Shaheen Al Zaitoon Online Quran Academy",
+    "ownerName": "Muneeb Ur Rehman",
+    "headOfficeCity": "Rawalpindi",
+    "headOfficeCountry": "Pakistan",
+    "headOfficeAddress": "Shaheen Heights, Main Commercial Area, Rawalpindi, Punjab, Pakistan",
+    "contactNumber": "03447956085",
+    "whatsappNumber": "03447956085",
+    "emailAddress": "info@shaheenalzaitoon.com",
+    "easyPaisaAccountTitle": "Muneeb Ur Rehman",
+    "easyPaisaAccountNumber": "03447956085",
+    "jazzCashAccountTitle": "Muneeb Ur Rehman",
+    "jazzCashAccountNumber": "03447956085",
+    "bankAccountTitle": "Shaheen Al Zaitoon Quran Academy",
+    "bankAccountNumber": "03447956085001",
+    "bankName": "Meezan Islamic Bank Pakistan",
+    "ibanNumber": "PK36MEZN0003447956085001",
+    "swiftCode": "MEZNPKKA",
+    "branchName": "Commercial Market Branch, Satellite Town, Rawalpindi",
+    "branchCode": "0142",
+    "alfalahAccountTitle": "Muneeb Ur Rehman",
+    "alfalahAccountNumber": "551003447956085",
+    "alfalahIban": "PK45ALFH0551003447956085",
+    "hblAccountTitle": "Muneeb Ur Rehman",
+    "hblAccountNumber": "23907956085001",
+    "hblIban": "PK64HABB0023907956085001",
+    "sadaPayAccountTitle": "Muneeb Ur Rehman",
+    "sadaPayNumber": "03447956085",
+    "sadaPayIban": "PK05SADA0000003447956085",
+    "nayaPayId": "@muneebur",
+    "nayaPayNumber": "03447956085",
+    "remittanceReceiverName": "Muneeb Ur Rehman",
+    "remittanceCity": "Rawalpindi, Punjab",
+    "remittanceCountry": "Pakistan",
+    "appDownloadFeePKR": 100,
+    "minimumTeacherSalaryPKR": 50000,
+    "motherMemorialName": "Zaitoon Bibi",
+    "motherMemorialUrdu": "زیتون بی بی",
+    "heroHeadline": "Spreading the Light of Holy Quran Worldwide",
+    "heroSubheadline": "Learn Nazra, Hifz, Tajweed & Islamic Studies with Certified Qaris from the comfort of your home.",
+    "noticeBannerText": "Dedicated as Sadaqah Jariyah & Isal-e-Sawab in loving memory of Zaitoon Bibi.",
+    "facebookGroupUrl": "https://www.facebook.com/groups/REPLACE_WITH_MY_GROUP_LINK",
+    "facebookGroupName": "Shaheen Al Zaitoon Official Facebook Community",
+    "facebookGroupDescription": "Join our official community of 92,400+ online Quran students, parents, Qaris, and Islamic business members worldwide. Connect, share Quranic reflections, participate in daily Tajweed quizzes, and access exclusive learning materials.",
+    "facebookGroupMembers": 92400,
+    "facebookGroupCoverImage": "https://images.unsplash.com/photo-1542816417-0983cbe82752?auto=format&fit=crop&w=1200&q=80"
+  },
+  "courses": [
+    {
+      "id": "c1",
+      "title": "Noorani Qaida for Beginners",
+      "titleUrdu": "نورانی قاعدہ برائے ابتدائی طلباء",
+      "titleArabic": "القاعدة النورانية للمبتدئين",
+      "category": "qaida",
+      "description": "The foundation course for children and adult beginners to master Arabic alphabet pronunciation and basic Tajweed rules.",
+      "duration": "3 Months",
+      "level": "Beginner",
+      "targetAudience": "Children",
+      "feePKR": 19600,
+      "feeUSD": 70,
+      "image": "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=800&q=80",
+      "features": [
+        "Alphabet Recognition",
+        "Makharij Correct Pronunciation",
+        "Joint Letters & Harakat",
+        "1-on-1 Personalized Guidance"
+      ],
+      "syllabus": [
+        "Lesson 1: Arabic Alphabets",
+        "Lesson 2: Compound Letters",
+        "Lesson 3: Harakat (Fatha, Kasra, Damma)",
+        "Lesson 4: Tanween & Sukoon",
+        "Lesson 5: Madd & Shaddah Rules"
+      ]
+    },
+    {
+      "id": "c2",
+      "title": "Nazra Quran with Tajweed Rules",
+      "titleUrdu": "ناظرہ قرآن مع تجوید قواعد",
+      "titleArabic": "قراءة القرآن بالتجويد",
+      "category": "tajweed",
+      "description": "Learn to recite the complete Holy Quran fluently with proper Tajweed rules, correct pronunciation, and beautiful tone.",
+      "duration": "6-12 Months",
+      "level": "Intermediate",
+      "targetAudience": "Everyone",
+      "feePKR": 22400,
+      "feeUSD": 80,
+      "image": "https://images.unsplash.com/photo-1584286595398-a59f21d313f5?auto=format&fit=crop&w=800&q=80",
+      "features": [
+        "Full Quran Recitation",
+        "Ghunnah, Ikhfa, Idgham Rules",
+        "Qira’at Accent Training",
+        "Daily Progress Tracking"
+      ],
+      "syllabus": [
+        "Juz 1-10: Phonetics & Rhythm",
+        "Juz 11-20: Advanced Stop Signals (Waqf)",
+        "Juz 21-30: Melody & Fluency Practice",
+        "Final Examination & Certification"
+      ]
+    },
+    {
+      "id": "c3",
+      "title": "Hifz-ul-Quran (Quran Memorization)",
+      "titleUrdu": "حفظ القرآن الکریم",
+      "titleArabic": "حفظ القرآن الكريم",
+      "category": "hifz",
+      "description": "Comprehensive 1-on-1 Quran memorization program guided by experienced Huffaz with daily revision schedules.",
+      "duration": "2-3 Years",
+      "level": "Advanced",
+      "targetAudience": "Everyone",
+      "feePKR": 26600,
+      "feeUSD": 95,
+      "image": "https://images.unsplash.com/photo-1542816417-0983cbe33577?auto=format&fit=crop&w=800&q=80",
+      "features": [
+        "Daily Sabaq (New Lesson)",
+        "Sabaqi (Recent Lessons)",
+        "Manzil (Old Revision)",
+        "Mental Focus & Retention Techniques"
+      ],
+      "syllabus": [
+        "Phase 1: Selected Surahs (Juz Amma)",
+        "Phase 2: Systematic Juz Memorization",
+        "Phase 3: Daily Intensive Manzil Revision",
+        "Final Complete Sanad Exam"
+      ]
+    },
+    {
+      "id": "c4",
+      "title": "Quran Translation & Tafseer",
+      "titleUrdu": "ترجمہ و تفسیر قرآن",
+      "titleArabic": "ترجمة وتفسير القرآن",
+      "category": "translation",
+      "description": "Understand the profound meanings, historical contexts, and practical life applications of the Divine Quranic revelation.",
+      "duration": "12 Months",
+      "level": "All Levels",
+      "targetAudience": "Adults",
+      "feePKR": 23800,
+      "feeUSD": 85,
+      "image": "https://images.unsplash.com/photo-1585036156171-384164a8c675?auto=format&fit=crop&w=800&q=80",
+      "features": [
+        "Word-by-Word Translation",
+        "Classical & Contemporary Tafseer",
+        "Historical Context of Surahs",
+        "Practical Life Guidance"
+      ],
+      "syllabus": [
+        "Surah Al-Fatiha & Al-Baqarah Study",
+        "Short Surahs Deep Meaning Analysis",
+        "Quranic Grammar Foundations",
+        "Stories of the Prophets in Quran"
+      ]
+    },
+    {
+      "id": "c5",
+      "title": "Special Quran Classes for Ladies by Female Qarias",
+      "titleUrdu": "خواتین کے لیے خصوصاً طالبات و قاریہ کلاسز",
+      "titleArabic": "دروس القرآن الكريم للنساء",
+      "category": "ladies",
+      "description": "Dedicated 1-on-1 online classes conducted exclusively by certified female Qarias and Alimahs in full privacy.",
+      "duration": "Flexible",
+      "level": "All Levels",
+      "targetAudience": "Ladies",
+      "feePKR": 22400,
+      "feeUSD": 80,
+      "image": "https://images.unsplash.com/photo-1564121211835-e88c852648ab?auto=format&fit=crop&w=800&q=80",
+      "features": [
+        "100% Female Instructors",
+        "Privacy & Flexible Schedules",
+        "Tajweed & Fiqh of Purification",
+        "Mother & Daughter Packages"
+      ],
+      "syllabus": [
+        "Noorani Qaida & Tajweed Practice",
+        "Daily Azkar & Masnoon Duas",
+        "Islamic Jurisprudence for Women",
+        "Surah Kahf, Yaseen & Mulk Recitation"
+      ]
+    },
+    {
+      "id": "c6",
+      "title": "Islamic Studies & Daily Masnoon Duas for Kids",
+      "titleUrdu": "اسلامک اسٹڈیز و مسنون دعائیں بچوں کے لیے",
+      "titleArabic": "الدراسات الإسلامية والأدعية للأطفال",
+      "category": "kids",
+      "description": "Interactive character-building program covering Seerah of Prophet Muhammad (PBUH), daily Islamic manners, and essential duas.",
+      "duration": "6 Months",
+      "level": "Beginner",
+      "targetAudience": "Children",
+      "feePKR": 18200,
+      "feeUSD": 65,
+      "image": "https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=800&q=80",
+      "features": [
+        "40 Masnoon Duas with Meaning",
+        "Seerah Stories of Prophets",
+        "Pillars of Islam & Salah Practical",
+        "Islamic Ethics & Good Character"
+      ],
+      "syllabus": [
+        "Salah Method & Wudu Practical",
+        "40 Short Hadith for Kids",
+        "Islamic History & Companions",
+        "Respecting Parents & Teachers"
+      ]
+    },
+    {
+      "id": "c7",
+      "title": "Arabic Language & Quranic Grammar",
+      "titleUrdu": "عربی زبان و قواعد لغت قرآن",
+      "titleArabic": "اللغة العربية وقواعد القرآن",
+      "category": "arabic",
+      "description": "Master spoken Arabic and Quranic Nahw & Sarf grammar to comprehend Quran directly in Arabic language.",
+      "duration": "6 Months",
+      "level": "Intermediate",
+      "targetAudience": "Adults",
+      "feePKR": 23800,
+      "feeUSD": 85,
+      "image": "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80",
+      "features": [
+        "Conversational Spoken Arabic",
+        "Quranic Verb Root Words",
+        "Nahw & Sarf Grammatical Rules",
+        "Sentence Construction"
+      ],
+      "syllabus": [
+        "Nouns, Verbs & Particles in Quran",
+        "Past, Present & Imperative Conjugation",
+        "Direct Comprehension Exercises",
+        "Arabic Speech Practice"
+      ]
+    }
+  ],
+  "teachers": [
+    {
+      "id": "t1",
+      "name": "Qari Muneeb Ur Rehman",
+      "title": "Founder & Head Qari",
+      "qualification": "Shahadat-ul-Aalamiyyah (Islamic Scholar), Hafiz-e-Quran, Master in Tajweed",
+      "experience": "12+ Years Teaching Experience",
+      "languages": [
+        "English",
+        "Urdu",
+        "Arabic",
+        "Punjabi"
+      ],
+      "specialization": "Qira’at Hafs, Hifz-ul-Quran, Advanced Tajweed Mastery",
+      "rating": 5,
+      "reviewsCount": 142,
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
+      "bio": "Founder of Shaheen Al Zaitoon Online Quran Academy in Rawalpindi. Dedicated his life to teaching Holy Quran globally in memory of his mother Zaitoon Bibi.",
+      "availableDays": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "gender": "male",
+      "monthlySalaryPKR": 50000,
+      "startingSalaryPKR": 50000,
+      "timeIncrementNote": "شروع میں 50,000 روپے، وقت اور کارکردگی کے ساتھ سالانہ اضافہ",
+      "salaryStatus": "Disbursed",
+      "assignedStudentsCount": 16,
+      "teachingShift": "Evening Shift (04:00 PM – 12:00 AM PKT / 8 Hours)",
+      "shiftHours": 8,
+      "paymentMethod": "EasyPaisa",
+      "accountNumber": "03447956085"
+    },
+    {
+      "id": "t2",
+      "name": "Qaria Hafsa Fatima",
+      "title": "Senior Female Quran Teacher",
+      "qualification": "Alimah Degree, Hafiza-e-Quran, Qaria Certification",
+      "experience": "9+ Years Teaching Experience",
+      "languages": [
+        "English",
+        "Urdu",
+        "Arabic"
+      ],
+      "specialization": "Ladies Quran Classes, Kids Tajweed, Masnoon Duas",
+      "rating": 4.9,
+      "reviewsCount": 118,
+      "image": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
+      "bio": "Expert female instructor specializing in nurturing young minds and providing comfortable private online sessions for sisters worldwide.",
+      "availableDays": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Sunday"
+      ],
+      "gender": "female",
+      "monthlySalaryPKR": 50000,
+      "startingSalaryPKR": 50000,
+      "timeIncrementNote": "شروع میں 50,000 روپے، وقت اور کارکردگی کے ساتھ سالانہ اضافہ",
+      "salaryStatus": "Disbursed",
+      "assignedStudentsCount": 14,
+      "teachingShift": "Morning Shift (08:00 AM – 04:00 PM PKT / 8 Hours)",
+      "shiftHours": 8,
+      "paymentMethod": "JazzCash",
+      "accountNumber": "03001234567"
+    },
+    {
+      "id": "t3",
+      "name": "Qari Muhammad Abdullah",
+      "title": "Tajweed & Qiraat Specialist",
+      "qualification": "Master of Quranic Sciences (Al-Azhar Certified), Hafiz",
+      "experience": "10+ Years",
+      "languages": [
+        "English",
+        "Arabic",
+        "Urdu"
+      ],
+      "specialization": "Nazra Quran, Accent Correction, Hifz Revision",
+      "rating": 4.9,
+      "reviewsCount": 95,
+      "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
+      "bio": "Passionate Quran teacher known for his gentle demeanor and melodic recitation style that inspires students of all ages.",
+      "availableDays": [
+        "Monday",
+        "Wednesday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "gender": "male",
+      "monthlySalaryPKR": 50000,
+      "startingSalaryPKR": 50000,
+      "timeIncrementNote": "شروع میں 50,000 روپے، وقت اور کارکردگی کے ساتھ سالانہ اضافہ",
+      "salaryStatus": "Disbursed",
+      "assignedStudentsCount": 11,
+      "teachingShift": "Evening Shift (04:00 PM – 12:00 AM PKT / 8 Hours)",
+      "shiftHours": 8,
+      "paymentMethod": "Meezan Bank",
+      "accountNumber": "010101099887766"
+    },
+    {
+      "id": "t4",
+      "name": "Dr. Alim Tariq Mahmood",
+      "title": "Tafseer & Arabic Language Instructor",
+      "qualification": "PhD in Islamic Studies, Master in Arabic Linguistics",
+      "experience": "15+ Years",
+      "languages": [
+        "English",
+        "Urdu",
+        "Arabic"
+      ],
+      "specialization": "Quran Translation, Classical Tafseer, Arabic Grammar",
+      "rating": 5,
+      "reviewsCount": 88,
+      "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600&q=80",
+      "bio": "Distinguished scholar who breaks down complex theological and grammatical concepts into easily digestible lessons for Western and Eastern students.",
+      "availableDays": [
+        "Tuesday",
+        "Thursday",
+        "Saturday",
+        "Sunday"
+      ],
+      "gender": "male",
+      "monthlySalaryPKR": 50000,
+      "startingSalaryPKR": 50000,
+      "timeIncrementNote": "شروع میں 50,000 روپے، وقت اور کارکردگی کے ساتھ سالانہ اضافہ",
+      "salaryStatus": "Disbursed",
+      "assignedStudentsCount": 8,
+      "teachingShift": "Night / Overseas Shift (12:00 AM – 08:00 AM PKT / 8 Hours)",
+      "shiftHours": 8,
+      "paymentMethod": "Bank Alfalah",
+      "accountNumber": "03445566778899"
+    },
+    {
+      "id": "t5",
+      "name": "Qaria Ayesha Siddiqua",
+      "title": "Kids & Beginners Specialist",
+      "qualification": "Hafiza, Tajweed Diploma, Child Psychology Training",
+      "experience": "7+ Years",
+      "languages": [
+        "English",
+        "Urdu"
+      ],
+      "specialization": "Noorani Qaida for Toddlers, Islamic Stories, Duas",
+      "rating": 4.8,
+      "reviewsCount": 76,
+      "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80",
+      "bio": "Uses gamified and playful teaching techniques to make Noorani Qaida and Quran learning an enjoyable habit for kids.",
+      "availableDays": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "gender": "female",
+      "monthlySalaryPKR": 50000,
+      "startingSalaryPKR": 50000,
+      "timeIncrementNote": "شروع میں 50,000 روپے، وقت اور کارکردگی کے ساتھ سالانہ اضافہ",
+      "salaryStatus": "Scheduled on 1st",
+      "assignedStudentsCount": 10,
+      "teachingShift": "Morning Shift (08:00 AM – 04:00 PM PKT / 8 Hours)",
+      "shiftHours": 8,
+      "paymentMethod": "EasyPaisa",
+      "accountNumber": "03459876543"
+    }
+  ],
+  "branches": [
+    {
+      "id": "b1",
+      "name": "Main Head Office Rawalpindi",
+      "country": "Pakistan",
+      "city": "Rawalpindi",
+      "address": "Shaheen Heights, Main Commercial Complex, Rawalpindi, Punjab",
+      "phone": "03447956085",
+      "email": "rawalpindi@shaheenalzaitoon.com",
+      "manager": "Muneeb Ur Rehman",
+      "isHeadquarters": true,
+      "activeStudents": 2450
+    },
+    {
+      "id": "b2",
+      "name": "London UK Suboffice",
+      "country": "United Kingdom",
+      "city": "London",
+      "address": "124 Whitechapel Road, London E1 1BJ, UK",
+      "phone": "+44 20 7946 0912",
+      "email": "uk@shaheenalzaitoon.com",
+      "manager": "Ustadh Bilal Ahmed",
+      "isHeadquarters": false,
+      "activeStudents": 850
+    },
+    {
+      "id": "b3",
+      "name": "Dubai UAE Suboffice",
+      "country": "United Arab Emirates",
+      "city": "Dubai",
+      "address": "Suite 402, Al Tawhidi Building, Mankhool, Dubai, UAE",
+      "phone": "+971 4 321 8765",
+      "email": "uae@shaheenalzaitoon.com",
+      "manager": "Qari Salman Al-Farsi",
+      "isHeadquarters": false,
+      "activeStudents": 620
+    },
+    {
+      "id": "b4",
+      "name": "Toronto Canada Suboffice",
+      "country": "Canada",
+      "city": "Toronto",
+      "address": "255 Morningside Ave, Scarborough, ON M1E 3E6, Canada",
+      "phone": "+1 416 555 0198",
+      "email": "canada@shaheenalzaitoon.com",
+      "manager": "Sister Maryam Khan",
+      "isHeadquarters": false,
+      "activeStudents": 540
+    },
+    {
+      "id": "b5",
+      "name": "Dallas USA Suboffice",
+      "country": "United States",
+      "city": "Dallas, TX",
+      "address": "8811 Forest Ln, Dallas, TX 75243, USA",
+      "phone": "+1 214 555 0142",
+      "email": "usa@shaheenalzaitoon.com",
+      "manager": "Brother Farooq Usman",
+      "isHeadquarters": false,
+      "activeStudents": 780
+    }
+  ],
+  "students": [
+    {
+      "id": "s101",
+      "name": "Zayd Muneeb",
+      "guardianName": "Muneeb Ur Rehman",
+      "courseId": "c2",
+      "teacherId": "t1",
+      "attendanceRate": 98,
+      "progressPercent": 75,
+      "currentPara": 22,
+      "feeStatus": "Paid",
+      "lastClassDate": "2026-08-04",
+      "joinDate": "2025-01-15"
+    },
+    {
+      "id": "s102",
+      "name": "Fatima Zahra",
+      "guardianName": "Tariq Javed",
+      "courseId": "c5",
+      "teacherId": "t2",
+      "attendanceRate": 95,
+      "progressPercent": 60,
+      "currentPara": 18,
+      "feeStatus": "Paid",
+      "lastClassDate": "2026-08-03",
+      "joinDate": "2025-03-10"
+    },
+    {
+      "id": "s103",
+      "name": "Ibrahim Smith (UK)",
+      "guardianName": "David Smith",
+      "courseId": "c1",
+      "teacherId": "t3",
+      "attendanceRate": 92,
+      "progressPercent": 40,
+      "currentPara": 1,
+      "feeStatus": "Paid",
+      "lastClassDate": "2026-08-04",
+      "joinDate": "2026-02-01"
+    },
+    {
+      "id": "s104",
+      "name": "Aisha Al-Mansoori (Dubai)",
+      "guardianName": "Khalid Al-Mansoori",
+      "courseId": "c3",
+      "teacherId": "t2",
+      "attendanceRate": 100,
+      "progressPercent": 88,
+      "currentPara": 26,
+      "feeStatus": "Paid",
+      "lastClassDate": "2026-08-04",
+      "joinDate": "2024-09-01"
+    }
+  ],
+  "payments": [
+    {
+      "id": "pay-701",
+      "studentName": "Zayd Muneeb",
+      "courseTitle": "Nazra Quran with Tajweed Rules",
+      "amountPKR": 5500,
+      "amountUSD": 40,
+      "paymentMethod": "EasyPaisa",
+      "senderAccountOrPhone": "03447956085",
+      "transactionId": "EP-998823104",
+      "date": "2026-08-01",
+      "status": "Approved",
+      "currency": "PKR",
+      "senderBankOrWallet": "EasyPaisa Mobile Wallet",
+      "notes": "Monthly tuition verified via EasyPaisa TID: EP-998823104"
+    },
+    {
+      "id": "pay-702",
+      "studentName": "Ibrahim Smith (UK)",
+      "courseTitle": "Noorani Qaida for Beginners",
+      "amountPKR": 4500,
+      "amountUSD": 30,
+      "paymentMethod": "International Wire",
+      "senderAccountOrPhone": "GB29NWBK60161331926819",
+      "transactionId": "SWIFT-MEZN-UK8821",
+      "date": "2026-08-03",
+      "status": "Approved",
+      "currency": "USD",
+      "senderBankOrWallet": "NatWest Bank UK -> Meezan Bank",
+      "notes": "International direct wire transfer received and cleared."
+    },
+    {
+      "id": "pay-703",
+      "studentName": "Fatima Zahra (Dubai)",
+      "courseTitle": "Special Quran Classes for Ladies by Female Qarias",
+      "amountPKR": 5500,
+      "amountUSD": 40,
+      "paymentMethod": "Meezan Bank",
+      "senderAccountOrPhone": "AE0703312345678901234",
+      "transactionId": "MZ-883902194",
+      "date": "2026-08-05",
+      "status": "Approved",
+      "currency": "USD",
+      "senderBankOrWallet": "Emirates NBD -> Meezan Islamic Bank",
+      "notes": "Ladies 1-on-1 class monthly fee paid via IBAN transfer."
+    },
+    {
+      "id": "pay-704",
+      "studentName": "Muhammad Hamza",
+      "courseTitle": "Hifz-ul-Quran (Quran Memorization)",
+      "amountPKR": 7000,
+      "amountUSD": 55,
+      "paymentMethod": "JazzCash",
+      "senderAccountOrPhone": "03019876543",
+      "transactionId": "JC-550192847",
+      "date": "2026-08-06",
+      "status": "Approved",
+      "currency": "PKR",
+      "senderBankOrWallet": "JazzCash App",
+      "notes": "Hifz course fee received through JazzCash."
+    },
+    {
+      "id": "pay-app-101",
+      "studentName": "Usman Ali (Mobile App User)",
+      "courseTitle": "Shaheen Quran App Installation & Download Token Fee (Rs. 100)",
+      "amountPKR": 100,
+      "amountUSD": 0.8,
+      "paymentMethod": "EasyPaisa",
+      "senderAccountOrPhone": "03447956085",
+      "transactionId": "EP-APP10098",
+      "date": "2026-08-07",
+      "status": "Approved",
+      "currency": "PKR",
+      "senderBankOrWallet": "EasyPaisa App",
+      "notes": "App Download Commission Fee of Rs. 100 paid directly to Owner Muneeb Ur Rehman"
+    }
+  ],
+  "announcements": [
+    {
+      "id": "a1",
+      "title": "Admissions Open for New Quran & Hifz Batches 2026",
+      "content": "Enroll now for 1-on-1 online classes with flexible time slots tailored to UK, USA, Gulf & Pakistan timezones.",
+      "date": "2026-08-01",
+      "isUrgent": true
+    },
+    {
+      "id": "a2",
+      "title": "Isal-e-Sawab Special Monthly Khatam-e-Quran Session",
+      "content": "Dedicated in honor of late Zaitoon Bibi. Students and faculty are invited to join the live Dua session this Sunday.",
+      "date": "2026-07-28",
+      "isUrgent": false
+    },
+    {
+      "id": "a3",
+      "title": "EasyPaisa & Bank Transfer Receipt Verification Portal Live",
+      "content": "Students can now upload payment transaction IDs directly in Fee & Payment portal for instant automated receipt generation.",
+      "date": "2026-07-20",
+      "isUrgent": false
+    }
+  ],
+  "blogPosts": [
+    {
+      "id": "b1",
+      "title": "5 Practical Tips to Improve Your Quranic Tajweed at Home",
+      "slug": "5-tips-improve-tajweed-at-home",
+      "excerpt": "Simple daily habits that can transform your Quran recitation rhythm, Makharij clarity, and confidence.",
+      "content": "Reciting the Holy Quran with proper Tajweed is not only a spiritual fulfillment but also an obligation to preserve the Divine Word as revealed to Prophet Muhammad (PBUH). Here are 5 actionable habits:\n\n1. Listen to Master Qaris (like Sheikh Menshawy or Sheikh Al-Husary) daily for 15 minutes.\n2. Practice Makharij in front of a mirror to observe tongue and mouth positioning.\n3. Slow down your recitation speed (Tarteel style).\n4. Record your recitation on your phone and compare with your Qari.\n5. Practice daily with a dedicated 1-on-1 certified teacher at Shaheen Al Zaitoon Academy.",
+      "author": "Qari Muneeb Ur Rehman",
+      "date": "2026-07-25",
+      "category": "Tajweed Tips",
+      "image": "https://images.unsplash.com/photo-1584286595398-a59f21d313f5?auto=format&fit=crop&w=800&q=80",
+      "readTime": "4 min read"
+    },
+    {
+      "id": "b2",
+      "title": "How to Help Your Child Memorize Quran (Hifz) Without Stress",
+      "slug": "help-child-memorize-quran-without-stress",
+      "excerpt": "Parental strategies to build love for Holy Quran in children through positive reinforcement.",
+      "content": "Quran memorization (Hifz) is a precious gift for any child and parent. However, keeping young learners motivated requires gentle encouragement and systematic structure rather than force.\n\nKey Parent Rules:\n- Establish a fixed 30-minute daily routine instead of irregular long sessions.\n- Celebrate small milestones (like completing half a Juz or Surah Yaseen).\n- Ensure your child receives proper rest and healthy nutrition.\n- Partner with an encouraging online Qari who provides positive daily feedback.",
+      "author": "Qaria Hafsa Fatima",
+      "date": "2026-07-15",
+      "category": "Parenting & Hifz",
+      "image": "https://images.unsplash.com/photo-1542816417-0983cbe33577?auto=format&fit=crop&w=800&q=80",
+      "readTime": "5 min read"
+    }
+  ],
+  "certificates": [
+    {
+      "id": "cert-1001",
+      "studentName": "Zayd Muneeb",
+      "courseName": "Nazra Quran with Tajweed Rules",
+      "issueDate": "2026-06-15",
+      "verificationCode": "SZ-2026-8891",
+      "grade": "Mumtaz (Excellent - 98%)",
+      "instructorName": "Qari Muneeb Ur Rehman"
+    },
+    {
+      "id": "cert-1002",
+      "studentName": "Aisha Al-Mansoori",
+      "courseName": "Noorani Qaida Certification",
+      "issueDate": "2025-12-20",
+      "verificationCode": "SZ-2025-4420",
+      "grade": "Mumtaz (96%)",
+      "instructorName": "Qaria Hafsa Fatima"
+    }
+  ],
+  "ztProducts": [
+    {
+      "id": "zt-101",
+      "name": "Madina Ajwa Dates (VIP Grade 500g)",
+      "category": "Dates & Honey",
+      "pricePKR": 2800,
+      "originalPricePKR": 3400,
+      "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80",
+      "description": "100% authentic Madinah Al-Munawwarah Ajwa dates packed fresh under ZT quality control.",
+      "inStock": true,
+      "isFeatured": true,
+      "rating": 4.9
+    },
+    {
+      "id": "zt-102",
+      "name": "Pure Organic Sidr Honey (Karak 1Kg)",
+      "category": "Dates & Honey",
+      "pricePKR": 4500,
+      "originalPricePKR": 5200,
+      "image": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=800&q=80",
+      "description": "Raw unheated natural Sidr Honey harvested from wild Sidr forests in Karak, Khyber Pakhtunkhwa.",
+      "inStock": true,
+      "isFeatured": true,
+      "rating": 5
+    },
+    {
+      "id": "zt-103",
+      "name": "Handcrafted Wooden Carved Quran Rehal Stand",
+      "category": "Quran Pens & Rehal",
+      "pricePKR": 1950,
+      "originalPricePKR": 2400,
+      "image": "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=800&q=80",
+      "description": "Solid Rosewood traditional folding Rihal holder with intricate Islamic floral carving.",
+      "inStock": true,
+      "isFeatured": false,
+      "rating": 4.8
+    },
+    {
+      "id": "zt-104",
+      "name": "Digital Read Pen Quran with 16 Reciters",
+      "category": "Quran Pens & Rehal",
+      "pricePKR": 6800,
+      "originalPricePKR": 8500,
+      "image": "https://images.unsplash.com/photo-1585036156171-384164a8c675?auto=format&fit=crop&w=800&q=80",
+      "description": "Includes Tajweed color-coded Quran book, translation audio pen, Sahih Bukhari audio & Hajj guide.",
+      "inStock": true,
+      "isFeatured": true,
+      "rating": 4.9
+    },
+    {
+      "id": "zt-105",
+      "name": "Royal Arabian Oud & Rose Alcohol-Free Ittar (12ml)",
+      "category": "Ittar & Fragrances",
+      "pricePKR": 1850,
+      "originalPricePKR": 2200,
+      "image": "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=800&q=80",
+      "description": "Long-lasting concentrated pure fragrance oil crafted for Friday Jumuah & daily wear.",
+      "inStock": true,
+      "isFeatured": false,
+      "rating": 4.9
+    },
+    {
+      "id": "zt-106",
+      "name": "Al-Fiqh Al-Islami & Daily Dua Treasury Book",
+      "category": "Islamic Books",
+      "pricePKR": 1200,
+      "originalPricePKR": 1500,
+      "image": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80",
+      "description": "Authentic compilation of essential daily Masnoon Duas, Morning/Evening Azkar, and basic Fiqh rules.",
+      "inStock": true,
+      "isFeatured": false,
+      "rating": 4.7
+    }
+  ],
+  "matrimonialProfiles": [
+    {
+      "id": "mat-301",
+      "code": "SZA-M-1029",
+      "gender": "Male",
+      "age": 28,
+      "maritalStatus": "Single / Unmarried",
+      "profession": "Software Engineer & Hafiz-e-Quran",
+      "city": "Rawalpindi",
+      "country": "Pakistan",
+      "qualification": "BS Computer Science & Hifz Sanad",
+      "sectSilsila": "Sunni / Hanafi",
+      "verified": true,
+      "description": "Religious, practicing Muslim brother seeking a practicing, educated sister for an honorable Islamic Nikah.",
+      "contactPerson": "Father / Guardian via Marriage Bureau Team"
+    },
+    {
+      "id": "mat-302",
+      "code": "SZA-F-2041",
+      "gender": "Female",
+      "age": 24,
+      "maritalStatus": "Single / Unmarried",
+      "profession": "Aalimah & Online Quran Teacher",
+      "city": "London",
+      "country": "United Kingdom",
+      "qualification": "Shahadat-ul-Aalamiyyah & BA English",
+      "sectSilsila": "Sunni / Hanafi",
+      "verified": true,
+      "description": "Practicing, modest sister from a respected family in London. Seeking a settled religious spouse in UK or Pakistan.",
+      "contactPerson": "Mother / Senior Matchmaker"
+    },
+    {
+      "id": "mat-303",
+      "code": "SZA-M-1088",
+      "gender": "Male",
+      "age": 32,
+      "maritalStatus": "Single / Unmarried",
+      "profession": "Civil Engineer (Govt Sector)",
+      "city": "Islamabad",
+      "country": "Pakistan",
+      "qualification": "MS Civil Engineering",
+      "sectSilsila": "Sunni",
+      "verified": true,
+      "description": "Settled officer in Islamabad with noble family background. Desires a pious, cultured spouse.",
+      "contactPerson": "Shaheen Nikah Bureau Representative"
+    }
+  ],
+  "adCampaigns": [
+    {
+      "id": "ad-01",
+      "title": "3-Day Free Trial Quran Classes - Global Intake",
+      "targetBrand": "Quran Academy",
+      "placement": "Header Banner",
+      "imageUrl": "https://images.unsplash.com/photo-1585036156171-384164a8c675?auto=format&fit=crop&w=1200&q=80",
+      "linkUrl": "admissions",
+      "impressions": 14200,
+      "clicks": 890,
+      "leads": 124,
+      "conversions": 48,
+      "status": "Active",
+      "pkrSpent": 3500,
+      "pkrRevenue": 48500,
+      "campaignType": "Paid Promotion",
+      "budgetPKR": 5000,
+      "adminFeePKR": 500,
+      "ownerCommissionPKR": 750,
+      "paymentStatus": "Paid via EasyPaisa",
+      "platforms": [
+        "Website",
+        "Facebook Page",
+        "Instagram Feed",
+        "WhatsApp Broadcast"
+      ],
+      "headline": "📖 Learn Nazra Quran & Hifz 1-on-1 with Certified Qaris",
+      "description": "Join Shaheen Quran Academy! 3-Day Free Trial, flexible timings for UK/USA/Gulf/Pak. EasyPaisa Fee Available.",
+      "ctaText": "Book Free Trial Now",
+      "targetAudience": {
+        "locations": [
+          "Pakistan",
+          "United Kingdom",
+          "United Arab Emirates",
+          "United States"
+        ],
+        "ageRange": "22-55",
+        "interests": [
+          "Quran Study",
+          "Islamic Education",
+          "Arabic Tajweed"
+        ],
+        "demographics": "Parents & Working Professionals"
+      },
+      "scheduleDate": "2026-08-01",
+      "aiOptimizations": [
+        "Increase budget by 15% on weekends for higher UK/US conversion",
+        "Use high-contrast gold badge on image to boost CTR by ~12%"
+      ],
+      "createdAt": "2026-08-01"
+    },
+    {
+      "id": "ad-02",
+      "title": "ZT Sidr Honey & Ajwa Dates Jumuah Discount (20% OFF)",
+      "targetBrand": "ZT Traders",
+      "placement": "In-feed Featured",
+      "imageUrl": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=1200&q=80",
+      "linkUrl": "zaitoon-traders",
+      "impressions": 9800,
+      "clicks": 640,
+      "leads": 92,
+      "conversions": 35,
+      "status": "Active",
+      "pkrSpent": 2200,
+      "pkrRevenue": 32000,
+      "campaignType": "Paid Promotion",
+      "budgetPKR": 3000,
+      "adminFeePKR": 450,
+      "ownerCommissionPKR": 480,
+      "paymentStatus": "Paid via EasyPaisa",
+      "platforms": [
+        "Website",
+        "Facebook Group",
+        "Instagram Feed"
+      ],
+      "headline": "🍇 Pure Karak Sidr Honey & VIP Madina Ajwa Dates",
+      "description": "100% Guaranteed Pure & Unheated. Cash on Delivery across Pakistan & Worldwide Shipping!",
+      "ctaText": "Order Direct on WhatsApp",
+      "targetAudience": {
+        "locations": [
+          "Rawalpindi",
+          "Islamabad",
+          "Lahore",
+          "Karachi"
+        ],
+        "ageRange": "25-60",
+        "interests": [
+          "Halal Food",
+          "Organic Honey",
+          "Sunnah Nutrition"
+        ],
+        "demographics": "Health-conscious families & gifting buyers"
+      },
+      "scheduleDate": "2026-08-03",
+      "aiOptimizations": [
+        "Highlight 100% money-back guarantee to boost trust"
+      ],
+      "createdAt": "2026-08-03"
+    },
+    {
+      "id": "ad-03",
+      "title": "Shaheen Nikah Bureau - Respectful Islamic Rishta Service",
+      "targetBrand": "Marriage Bureau",
+      "placement": "Sidebar Ad",
+      "imageUrl": "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80",
+      "linkUrl": "marriage-bureau",
+      "impressions": 7400,
+      "clicks": 410,
+      "leads": 65,
+      "conversions": 18,
+      "status": "Active",
+      "pkrSpent": 1800,
+      "pkrRevenue": 22500,
+      "campaignType": "Free Social Post",
+      "budgetPKR": 0,
+      "adminFeePKR": 0,
+      "ownerCommissionPKR": 0,
+      "paymentStatus": "Free",
+      "platforms": [
+        "Website",
+        "WhatsApp Broadcast"
+      ],
+      "headline": "💍 Confidential & Verified Islamic Family Matchmaking",
+      "description": "Practicing Muslim grooms & brides in Pakistan, Gulf & Overseas. Managed by elders.",
+      "ctaText": "View Verified Profiles",
+      "targetAudience": {
+        "locations": [
+          "Global Overseas Pakistanis",
+          "Rawalpindi",
+          "Islamabad"
+        ],
+        "ageRange": "22-45",
+        "interests": [
+          "Islamic Nikah",
+          "Family Values",
+          "Muslim Matrimony"
+        ],
+        "demographics": "Eligible candidates & parents"
+      },
+      "scheduleDate": "2026-08-04",
+      "aiOptimizations": [
+        "Schedule posts post-Isha prayer for maximum family response"
+      ],
+      "createdAt": "2026-08-04"
+    }
+  ],
+  "referrals": [
+    {
+      "id": "ref-101",
+      "referrerName": "Muneeb Ur Rehman",
+      "referralCode": "SZA-REF-998",
+      "referredUser": "Usman Ghani (UK)",
+      "brand": "Quran Academy",
+      "rewardStatus": "Earned",
+      "rewardAmountPKR": 1500,
+      "date": "2026-08-02"
+    },
+    {
+      "id": "ref-102",
+      "referrerName": "Qari Abdullah",
+      "referralCode": "SZA-REF-412",
+      "referredUser": "Tariq Mehmood (Dubai)",
+      "brand": "ZT Traders",
+      "rewardStatus": "Claimed",
+      "rewardAmountPKR": 800,
+      "date": "2026-08-04"
+    }
+  ],
+  "affiliatePartners": [
+    {
+      "id": "aff-01",
+      "name": "Islamic Wisdom Network (YouTube)",
+      "websiteOrChannel": "youtube.com/c/IslamicWisdomOfficial",
+      "commissionTier": "Gold 15%",
+      "totalEarnedPKR": 45000,
+      "status": "Active"
+    },
+    {
+      "id": "aff-02",
+      "name": "Deen & Education Blog (Facebook Page)",
+      "websiteOrChannel": "facebook.com/DeenEducationPak",
+      "commissionTier": "Standard 10%",
+      "totalEarnedPKR": 18500,
+      "status": "Active"
+    }
+  ],
+  "socialAccounts": [
+    {
+      "id": "soc-fb-page-1",
+      "platform": "Facebook Page",
+      "name": "Shaheen Al Zaitoon Online Quran Academy",
+      "handleOrId": "@ShaheenQuranAcademyOfficial",
+      "followersOrMembers": 48500,
+      "isConnected": true,
+      "autoPostEnabled": true,
+      "avatarUrl": "https://images.unsplash.com/photo-1585036156171-384164a8c675?auto=format&fit=crop&w=200&q=80",
+      "category": "Islamic Education & Academy"
+    },
+    {
+      "id": "soc-fb-group-1",
+      "platform": "Facebook Group",
+      "name": "Pakistan & Overseas Online Quran Students",
+      "handleOrId": "groups/quranstudentspak",
+      "followersOrMembers": 92400,
+      "isConnected": true,
+      "autoPostEnabled": true,
+      "avatarUrl": "https://images.unsplash.com/photo-1542816417-0983cbe82752?auto=format&fit=crop&w=200&q=80",
+      "category": "Public Education Group"
+    },
+    {
+      "id": "soc-fb-group-2",
+      "platform": "Facebook Group",
+      "name": "Rawalpindi & Islamabad Islamic Rishta & Business Hub",
+      "handleOrId": "groups/rwpislamicbusiness",
+      "followersOrMembers": 64100,
+      "isConnected": true,
+      "autoPostEnabled": false,
+      "avatarUrl": "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=200&q=80",
+      "category": "Community Buy/Sell & Rishta"
+    },
+    {
+      "id": "soc-ig-1",
+      "platform": "Instagram",
+      "name": "@shaheen_quran_academy",
+      "handleOrId": "@shaheen_quran_academy",
+      "followersOrMembers": 21800,
+      "isConnected": true,
+      "autoPostEnabled": true,
+      "avatarUrl": "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=200&q=80",
+      "category": "Instagram Business Profile"
+    },
+    {
+      "id": "soc-wa-1",
+      "platform": "WhatsApp Channel",
+      "name": "Shaheen Quran & ZT Traders Official Broadcast (24/7)",
+      "handleOrId": "channel/shaheen247",
+      "followersOrMembers": 15300,
+      "isConnected": true,
+      "autoPostEnabled": true,
+      "avatarUrl": "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?auto=format&fit=crop&w=200&q=80",
+      "category": "WhatsApp Official Channel"
+    },
+    {
+      "id": "soc-gg-1",
+      "platform": "Google Ads",
+      "name": "Shaheen Quran Global Ads Account",
+      "handleOrId": "act-940-112-9081",
+      "followersOrMembers": 0,
+      "isConnected": false,
+      "autoPostEnabled": false,
+      "avatarUrl": "https://images.unsplash.com/photo-1572021335469-31706a17aaef?auto=format&fit=crop&w=200&q=80",
+      "category": "PPC Search & Display"
+    }
+  ],
+  "applications": [
+    {
+      "id": "app-sample-1",
+      "applicantName": "Qari Muhammad Bilal",
+      "fullName": "Qari Muhammad Bilal",
+      "phone": "03001234567",
+      "email": "bilal.quran@gmail.com",
+      "qualification": "Hafiz-e-Quran with Tajweed Sanad",
+      "experienceYears": 4,
+      "gender": "Male",
+      "city": "Rawalpindi",
+      "status": "Audition Scheduled",
+      "date": "2026-08-10",
+      "appliedDate": "2026-08-10",
+      "expectedSalaryPKR": 50000,
+      "approvedSalaryPKR": 50000,
+      "paymentMethod": "EasyPaisa",
+      "teacherSalaryGrade": "Grade 1 (Rs. 50,000 Entry)",
+      "salaryAgreementAgreed": true
+    }
+  ],
+  "contactMessages": [
+    {
+      "id": "msg-sample-1",
+      "name": "Dr. Tariq Mahmood",
+      "email": "tariq.uk@yahoo.com",
+      "phone": "+44 7700 900077",
+      "subject": "Quran Classes for my 2 children in London",
+      "message": "Assalamu Alaikum, we need UK time zone evening classes (5 PM BST) for Noorani Qaida.",
+      "date": "2026-08-12",
+      "status": "Replied"
+    }
+  ],
+  "donations": [
+    {
+      "id": "don-sample-1",
+      "donorName": "Overseas Pakistani Brother (Dubai)",
+      "amountPKR": 25000,
+      "amountUSD": 90,
+      "paymentMethod": "Meezan Bank Raast",
+      "transactionId": "RST9817264510",
+      "purpose": "Orphan Quran Student Sponsorship",
+      "date": "2026-08-01",
+      "status": "Approved"
+    }
+  ],
+  "subscribers": [
+    {
+      "id": "sub-sample-1",
+      "email": "info@shaheenalzaitoon.com",
+      "date": "2026-08-01"
+    }
+  ],
+  "walletTransactions": [
+    {
+      "id": "wtx-dep-101",
+      "type": "deposit",
+      "userName": "Usman Ali (Student Parent)",
+      "userPhone": "03001234567",
+      "userEmail": "usman.ali@example.com",
+      "amountPKR": 5000,
+      "method": "EasyPaisa",
+      "accountTitle": "Muneeb Ur Rehman (Owner)",
+      "accountNumberOrIban": "03447956085",
+      "transactionId": "EP-DEP88201",
+      "purpose": "Course Fee Advance (پیشگی ٹیوشن فیس)",
+      "status": "Approved",
+      "date": "2026-08-05",
+      "notes": "Advance tuition deposit for 2 months Nazra Quran class.",
+      "adminResponse": "Verified & Credited to Student Wallet Balance."
+    },
+    {
+      "id": "wtx-dep-102",
+      "type": "deposit",
+      "userName": "Aisha Noor",
+      "userPhone": "03215554321",
+      "amountPKR": 3500,
+      "method": "Meezan Bank",
+      "accountTitle": "Shaheen Al Zaitoon Quran Academy",
+      "accountNumberOrIban": "03447956085001",
+      "transactionId": "MZ-DEP99120",
+      "purpose": "ZT Traders Credit (زیتون شاپنگ کریڈٹ)",
+      "status": "Approved",
+      "date": "2026-08-06",
+      "notes": "Pre-payment deposit for Madina Ajwa dates and Quran Pen.",
+      "adminResponse": "Approved. Available for instant store checkout."
+    },
+    {
+      "id": "wtx-dep-103",
+      "type": "deposit",
+      "userName": "Bilal Tariq",
+      "userPhone": "03339876543",
+      "amountPKR": 2000,
+      "method": "JazzCash",
+      "accountTitle": "Muneeb Ur Rehman",
+      "accountNumberOrIban": "03447956085",
+      "transactionId": "JC-DEP30192",
+      "purpose": "Wallet Topup (اکیڈمی والٹ بیلنس)",
+      "status": "Pending Verification",
+      "date": "2026-08-07",
+      "notes": "Online JazzCash deposit for future class bookings."
+    },
+    {
+      "id": "wtx-wth-201",
+      "type": "withdraw",
+      "userName": "Qari Abdul Rasheed (Senior Teacher & Referrer)",
+      "userPhone": "03029988776",
+      "userEmail": "qari.rasheed@shaheenalzaitoon.com",
+      "amountPKR": 4500,
+      "method": "JazzCash",
+      "accountTitle": "Abdul Rasheed",
+      "accountNumberOrIban": "03029988776",
+      "purpose": "Teacher Honorarium / Commission (ٹیچر معاوضہ و کمیشن)",
+      "status": "Completed",
+      "date": "2026-08-04",
+      "notes": "Withdrawal of student referral commission and teaching bonus.",
+      "adminResponse": "Transferred via JazzCash TID: JC-OUT44810. Receipt sent on WhatsApp."
+    },
+    {
+      "id": "wtx-wth-202",
+      "type": "withdraw",
+      "userName": "Hafiz Muhammad Bilal (Affiliate Partner)",
+      "userPhone": "03129876543",
+      "amountPKR": 3000,
+      "method": "EasyPaisa",
+      "accountTitle": "Muhammad Bilal",
+      "accountNumberOrIban": "03129876543",
+      "purpose": "Affiliate Earning Payout (افیلی ایٹ کمیشن نکلوائیں)",
+      "status": "Pending Verification",
+      "date": "2026-08-07",
+      "notes": "Monthly social referral bonus withdrawal request."
+    }
+  ],
+  "lastUpdated": "2026-11-01T07:22:39.011Z"
+}

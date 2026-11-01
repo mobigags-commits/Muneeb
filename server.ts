@@ -83,6 +83,70 @@ async function startServer() {
   }
 
   // =========================================================================
+  // ADMIN AUTHENTICATION & SECURITY ENDPOINTS
+  // =========================================================================
+  const validAdminTokens = new Set<string>();
+
+  app.post('/api/admin/login', (req, res) => {
+    try {
+      const { password, pin, email } = req.body;
+      const cleanEmail = (email || '').trim().toLowerCase();
+      const inputCredential = (password || pin || '').trim();
+
+      // Accepted Owner credentials:
+      // - PIN / EasyPaisa: 03447956085
+      // - Master admin passwords: Shaheen2026!, ShaheenAdmin#1, Admin@2026, or 03447956085
+      const isOwnerPin = inputCredential === '03447956085';
+      const isOwnerPass = inputCredential === 'Shaheen2026!' || inputCredential === 'ShaheenAdmin#1' || inputCredential === 'Admin@2026';
+      const isEmailValid = cleanEmail === '' || cleanEmail === 'mobigags@gmail.com' || cleanEmail.includes('admin') || cleanEmail.includes('shaheen');
+
+      if ((isOwnerPin || isOwnerPass) && isEmailValid) {
+        const token = `sza_adm_${Date.now()}_${Math.random().toString(36).substring(2, 10)}`;
+        validAdminTokens.add(token);
+        const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
+        return res.json({
+          success: true,
+          token,
+          admin: {
+            adminName: 'Muneeb Ur Rehman',
+            email: cleanEmail || 'mobigags@gmail.com',
+            role: 'owner',
+            expiresAt,
+          },
+        });
+      }
+
+      return res.status(401).json({
+        success: false,
+        error: 'Invalid Admin PIN or Password. Enter 03447956085 or Shaheen2026!',
+      });
+    } catch (err: any) {
+      res.status(500).json({ success: false, error: err?.message || 'Login failed' });
+    }
+  });
+
+  app.post('/api/admin/verify', (req, res) => {
+    try {
+      const authHeader = req.headers.authorization;
+      const token = (req.body?.token || (authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : '')).trim();
+      if (token && validAdminTokens.has(token)) {
+        return res.json({
+          success: true,
+          valid: true,
+          admin: {
+            adminName: 'Muneeb Ur Rehman',
+            email: 'mobigags@gmail.com',
+            role: 'owner',
+          },
+        });
+      }
+      return res.json({ success: true, valid: false });
+    } catch (err: any) {
+      res.status(500).json({ success: false, error: err?.message });
+    }
+  });
+
+  // =========================================================================
   // CLOUD DATABASE & PERSISTENCE REST API ENDPOINTS
   // =========================================================================
 
@@ -169,6 +233,15 @@ async function startServer() {
     }
   });
 
+  app.delete('/api/payments/:id', (req, res) => {
+    try {
+      const deleted = db.deletePayment(req.params.id);
+      res.json({ success: deleted });
+    } catch (error: any) {
+      res.status(500).json({ success: false, error: error?.message || 'Failed to delete payment' });
+    }
+  });
+
   // 5. Students / Admissions API
   app.post('/api/students', (req, res) => {
     try {
@@ -192,6 +265,27 @@ async function startServer() {
       res.json({ success: true, student });
     } catch (error: any) {
       res.status(500).json({ success: false, error: error?.message || 'Failed to add student' });
+    }
+  });
+
+  app.put('/api/students/:id', (req, res) => {
+    try {
+      const updated = db.updateStudentRecord(req.params.id, req.body);
+      if (!updated) {
+        return res.status(404).json({ success: false, error: 'Student not found' });
+      }
+      res.json({ success: true, student: updated });
+    } catch (error: any) {
+      res.status(500).json({ success: false, error: error?.message || 'Failed to update student' });
+    }
+  });
+
+  app.delete('/api/students/:id', (req, res) => {
+    try {
+      const deleted = db.deleteStudentRecord(req.params.id);
+      res.json({ success: deleted });
+    } catch (error: any) {
+      res.status(500).json({ success: false, error: error?.message || 'Failed to delete student' });
     }
   });
 
@@ -281,6 +375,15 @@ async function startServer() {
     }
   });
 
+  app.delete('/api/careers/:id', (req, res) => {
+    try {
+      const deleted = db.deleteTeacherApplication(req.params.id);
+      res.json({ success: deleted });
+    } catch (error: any) {
+      res.status(500).json({ success: false, error: error?.message || 'Failed to delete application' });
+    }
+  });
+
   // 8. Contact & Help Desk Messages API
   app.post('/api/contact', (req, res) => {
     try {
@@ -316,6 +419,15 @@ async function startServer() {
     }
   });
 
+  app.delete('/api/contact/:id', (req, res) => {
+    try {
+      const deleted = db.deleteContactMessage(req.params.id);
+      res.json({ success: deleted });
+    } catch (error: any) {
+      res.status(500).json({ success: false, error: error?.message || 'Failed to delete message' });
+    }
+  });
+
   // 9. Donations & Sadaqah Jariyah API
   app.post('/api/donations', (req, res) => {
     try {
@@ -337,6 +449,27 @@ async function startServer() {
       res.json({ success: true, donation });
     } catch (error: any) {
       res.status(500).json({ success: false, error: error?.message || 'Failed to record donation' });
+    }
+  });
+
+  app.put('/api/donations/:id', (req, res) => {
+    try {
+      const updated = db.updateDonationStatus(req.params.id, req.body.status);
+      if (!updated) {
+        return res.status(404).json({ success: false, error: 'Donation not found' });
+      }
+      res.json({ success: true, donation: updated });
+    } catch (error: any) {
+      res.status(500).json({ success: false, error: error?.message || 'Failed to update donation' });
+    }
+  });
+
+  app.delete('/api/donations/:id', (req, res) => {
+    try {
+      const deleted = db.deleteDonation(req.params.id);
+      res.json({ success: deleted });
+    } catch (error: any) {
+      res.status(500).json({ success: false, error: error?.message || 'Failed to delete donation' });
     }
   });
 
@@ -523,6 +656,73 @@ async function startServer() {
       res.json({ success: true, subscriber: sub });
     } catch (error: any) {
       res.status(500).json({ success: false, error: error?.message || 'Failed to subscribe' });
+    }
+  });
+
+  app.delete('/api/newsletter/:id', (req, res) => {
+    try {
+      const deleted = db.deleteNewsletterSubscriber(req.params.id);
+      res.json({ success: deleted });
+    } catch (error: any) {
+      res.status(500).json({ success: false, error: error?.message || 'Failed to delete subscriber' });
+    }
+  });
+
+  // 16. Digital Wallet Deposits & Withdrawals API
+  app.post('/api/wallet', (req, res) => {
+    try {
+      const { userName, userPhone, amountPKR, type, method } = req.body;
+      if (!userName || !userPhone || !amountPKR || !type) {
+        return res.status(400).json({
+          success: false,
+          error: 'Missing required fields: userName, userPhone, amountPKR and type are required',
+        });
+      }
+      const tx = db.addWalletTransaction({
+        id: req.body.id || `wtx-${Date.now()}`,
+        type,
+        userName,
+        userPhone,
+        userEmail: req.body.userEmail || '',
+        amountPKR: Number(amountPKR),
+        method: method || 'EasyPaisa',
+        accountTitle: req.body.accountTitle || userName,
+        accountNumberOrIban: req.body.accountNumberOrIban || userPhone,
+        transactionId: req.body.transactionId || (type === 'deposit' ? `DEP-${Date.now().toString().slice(-6)}` : undefined),
+        purpose: req.body.purpose || (type === 'deposit' ? 'Wallet Deposit' : 'Commission Withdrawal'),
+        status: req.body.status || 'Pending Verification',
+        date: new Date().toISOString().split('T')[0],
+        notes: req.body.notes || '',
+        adminResponse: req.body.adminResponse || '',
+      });
+      res.json({ success: true, transaction: tx });
+    } catch (error: any) {
+      res.status(500).json({ success: false, error: error?.message || 'Failed to record wallet transaction' });
+    }
+  });
+
+  app.put('/api/wallet/:id', (req, res) => {
+    try {
+      const { status, adminResponse } = req.body;
+      if (!status) {
+        return res.status(400).json({ success: false, error: 'Status is required' });
+      }
+      const updated = db.updateWalletTransactionStatus(req.params.id, status, adminResponse);
+      if (!updated) {
+        return res.status(404).json({ success: false, error: 'Wallet transaction not found' });
+      }
+      res.json({ success: true, transaction: updated });
+    } catch (error: any) {
+      res.status(500).json({ success: false, error: error?.message || 'Failed to update wallet transaction' });
+    }
+  });
+
+  app.delete('/api/wallet/:id', (req, res) => {
+    try {
+      const deleted = db.deleteWalletTransaction(req.params.id);
+      res.json({ success: deleted });
+    } catch (error: any) {
+      res.status(500).json({ success: false, error: error?.message || 'Failed to delete wallet transaction' });
     }
   });
 
